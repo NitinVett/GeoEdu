@@ -15,7 +15,7 @@ public class FullScreenUI extends JFrame {
 
 
         // Set up the JFrame
-        setUndecorated(true); // Remove window decorations (title bar, borders)
+        setUndecorated(false); // Remove window decorations (title bar, borders)
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Set JFrame to fullscreen
         setResizable(false); // Disable resizing
 
@@ -57,6 +57,8 @@ public class FullScreenUI extends JFrame {
         // Add any UI components or game elements here
         // For now, let's just display a message in the center of the screen
 
+        GameSound test = new GameSound("test.wav");
+        test.play();
         JLabel messageLabel = new JLabel("Fullscreen UI");
         messageLabel.setFont(new Font("Arial", Font.BOLD, 24));
         messageLabel.setForeground(Color.WHITE);
