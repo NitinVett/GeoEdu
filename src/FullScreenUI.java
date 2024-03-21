@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 public class FullScreenUI extends JFrame {
     BufferedImage backgroundImage = null;
     JLabel backgroundLabel;
+    BufferedImage sunsetImage = null;
     public FullScreenUI() {
 
 
@@ -23,31 +24,33 @@ public class FullScreenUI extends JFrame {
 
         // Load the background image
 
-        BufferedImage sunsetImage = null;
+
         try {
             backgroundImage = ImageIO.read(new File("background.jpg")); // Replace "background.jpg" with your image file path
-            sunsetImage = ImageIO.read(new File("sunset.jpeg"));
+            sunsetImage = ImageIO.read(new File("sunset2.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Create a JLabel to display the background image
 
-        backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+        backgroundLabel = new JLabel(new ImageIcon(sunsetImage));
         backgroundLabel.setBounds(0, 0, screenSize.width, screenSize.height);
 
         // Add the background label to the content pane
         getContentPane().add(backgroundLabel);
-
+        getContentPane().setLayout(null);
         JButton newImage = new JButton();
-        newImage.setSize(new Dimension(300,300));
+        newImage.setBounds(300,300,300,300);
         getContentPane().add(newImage);
 
 
         newImage.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+                System.out.println("Yay");
+                backgroundLabel = new JLabel(new ImageIcon(sunsetImage));
                 getContentPane().add(backgroundLabel);
+                getContentPane().repaint();
             }
         });
 
