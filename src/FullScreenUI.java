@@ -13,7 +13,7 @@ public class FullScreenUI extends JFrame {
     public FullScreenUI() {
 
 
-
+        System.out.println("nittinimtesting");
         // Set up the JFrame
         setUndecorated(false); // Remove window decorations (title bar, borders)
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Set JFrame to fullscreen
