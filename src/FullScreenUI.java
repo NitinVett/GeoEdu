@@ -7,7 +7,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class FullScreenUI extends JFrame {
+    BufferedImage backgroundImage = null;
+    JLabel backgroundLabel;
     public FullScreenUI() {
+
+
+
         // Set up the JFrame
         setUndecorated(true); // Remove window decorations (title bar, borders)
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Set JFrame to fullscreen
@@ -17,19 +22,34 @@ public class FullScreenUI extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         // Load the background image
-        BufferedImage backgroundImage = null;
+
+        BufferedImage sunsetImage = null;
         try {
             backgroundImage = ImageIO.read(new File("background.jpg")); // Replace "background.jpg" with your image file path
+            sunsetImage = ImageIO.read(new File("sunset.jpeg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Create a JLabel to display the background image
-        JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+
+        backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setBounds(0, 0, screenSize.width, screenSize.height);
 
         // Add the background label to the content pane
         getContentPane().add(backgroundLabel);
+
+        JButton newImage = new JButton();
+        newImage.setSize(new Dimension(300,300));
+        getContentPane().add(newImage);
+
+
+        newImage.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+                getContentPane().add(backgroundLabel);
+            }
+        });
 
         // Add any UI components or game elements here
         // For now, let's just display a message in the center of the screen
