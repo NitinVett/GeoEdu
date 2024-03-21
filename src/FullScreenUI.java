@@ -34,7 +34,7 @@ public class FullScreenUI extends JFrame {
 
         // Create a JLabel to display the background image
 
-        backgroundLabel = new JLabel(new ImageIcon(sunsetImage));
+        backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setBounds(0, 0, screenSize.width, screenSize.height);
 
         // Add the background label to the content pane
@@ -48,7 +48,7 @@ public class FullScreenUI extends JFrame {
         newImage.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Yay");
-                backgroundLabel = new JLabel(new ImageIcon(sunsetImage));
+                backgroundLabel.setIcon(new ImageIcon(sunsetImage));
                 getContentPane().add(backgroundLabel);
                 getContentPane().repaint();
             }
