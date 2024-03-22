@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 .idea/workspace.xml
 .idea/shelf/
+.idea
 
 ### Eclipse ###
 .apt_generated
