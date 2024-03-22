@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="I added some classes of Jobjects to simplfy code, code is buggy and does not work">
-      <change afterPath="$PROJECT_DIR$/Maps/Global/0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maps/Global/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maps/Global/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maps/Global/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pseudocode for mapicture array" afterDir="false" />
+    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="&quot;I am learning meow&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FullScreenUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FullScreenUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapPictureArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapPictureArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +45,6 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Third-branch",
-    "last_opened_file_path": "C:/Users/amanq/IdeaProjects/Geocraft v1/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,9 +54,6 @@
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\amanq\IdeaProjects\Geocraft v1\src" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nitin\Downloads\SocialNetworking\group28" />
     </key>
@@ -97,9 +82,6 @@
       <option name="presentableId" value="Default" />
       <updated>1711049120859</updated>
       <workItem from="1711049121868" duration="2102000" />
-      <workItem from="1711055301952" duration="1306000" />
-      <workItem from="1711065968963" duration="2647000" />
-      <workItem from="1711143056369" duration="4552000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;I am learning&quot;">
       <option name="closed" value="true" />
@@ -117,57 +99,24 @@
       <option name="project" value="LOCAL" />
       <updated>1711050338229</updated>
     </task>
-    <task id="LOCAL-00003" summary="third branch&#10; testing">
+    <task id="LOCAL-00003" summary="&quot;I am learning meow&quot;">
       <option name="closed" value="true" />
-      <created>1711055455020</created>
+      <created>1711053886007</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1711055455021</updated>
+      <updated>1711053886007</updated>
     </task>
-    <task id="LOCAL-00004" summary="I added some classes of Jobjects to simplfy code">
-      <option name="closed" value="true" />
-      <created>1711083012034</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1711083012034</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="Third-branch" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="&quot;I am learning&quot;" />
     <MESSAGE value="&quot;I am learning meow&quot;" />
-    <MESSAGE value="third branch&#10; testing" />
-    <MESSAGE value="I added some classes of Jobjects to simplfy code" />
-    <option name="LAST_COMMIT_MESSAGE" value="I added some classes of Jobjects to simplfy code" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;I am learning meow&quot;" />
   </component>
 </project>
