@@ -1,11 +1,19 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-00
 public class FullScreenUI extends JFrame {
     BufferedImage backgroundImage = null;
     JLabel backgroundLabel;
-    JLabel newback;
-    BufferedImage sunsetImage = null;
-    BufferedImage gifd = null;
+
+    private MapPictureArray picArray;
 
     private BufferedImage[] backgroundImages; // Array to store background images
     private int currentBackgroundIndex = 0; // Index of the current background image
@@ -14,19 +22,9 @@ public class FullScreenUI extends JFrame {
 
         // Get the size of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        picArray = new MapPictureArray("Global");
 
-        // Load the background image
-
-
-        try {
-            backgroundImage = ImageIO.read(new File("background.jpg")); // Replace "background.jpg" with your image file path
-            sunsetImage = ImageIO.read(new File("sunset2.jpg"));
-            gifd = ImageIO.read(new File("l.gif"));
-
-            backgroundImages = new BufferedImage[]{backgroundImage, sunsetImage, gifd};
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        backgroundImages = picArray.getBackgroundImages();
 
         // Create a JLabel to display the background image
 
@@ -36,21 +34,13 @@ public class FullScreenUI extends JFrame {
         // Add the background label to the content pane
         getContentPane().add(backgroundLabel);
         getContentPane().setLayout(null);
-
-
         MyButton testbutton = new MyButton();
-
         getContentPane().add(testbutton);
 
 
         testbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundImages.length;
-//                getContentPane().remove(backgroundLabel); // Remove the previous background
-//                newback = new JLabel(new ImageIcon(sunsetImage));
-//                newback.setBounds(0, 0, screenSize.width, screenSize.height); // Set bounds to cover the entire screen
-//                getContentPane().add(newback);
-//                getContentPane().repaint();
                 backgroundLabel.setIcon(new ImageIcon(backgroundImages[currentBackgroundIndex]));
             }
 
@@ -89,6 +79,6 @@ public class FullScreenUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(FullScreenUI::new);
+        new FullScreenUI();
     }
 }

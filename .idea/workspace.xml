@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="third branch&#10; testing part 2">
-      <change afterPath="$PROJECT_DIR$/l.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MapPictureArray.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MyButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MyFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MyPanel.java" afterDir="false" />
+    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="I added some classes of Jobjects to simplfy code, code is buggy and does not work">
+      <change afterPath="$PROJECT_DIR$/Maps/Global/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Maps/Global/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Maps/Global/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Maps/Global/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pseudocode for mapicture array" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FullScreenUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FullScreenUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MapPictureArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapPictureArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,22 +49,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Third-branch&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Third-branch",
+    "last_opened_file_path": "C:/Users/amanq/IdeaProjects/Geocraft v1/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\amanq\IdeaProjects\Geocraft v1\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nitin\Downloads\SocialNetworking\group28" />
     </key>
@@ -90,7 +98,8 @@
       <updated>1711049120859</updated>
       <workItem from="1711049121868" duration="2102000" />
       <workItem from="1711055301952" duration="1306000" />
-      <workItem from="1711065968963" duration="2570000" />
+      <workItem from="1711065968963" duration="2647000" />
+      <workItem from="1711143056369" duration="4552000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;I am learning&quot;">
       <option name="closed" value="true" />
@@ -116,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711055455021</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="I added some classes of Jobjects to simplfy code">
+      <option name="closed" value="true" />
+      <created>1711083012034</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711083012034</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +167,7 @@
     <MESSAGE value="&quot;I am learning&quot;" />
     <MESSAGE value="&quot;I am learning meow&quot;" />
     <MESSAGE value="third branch&#10; testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="third branch&#10; testing" />
+    <MESSAGE value="I added some classes of Jobjects to simplfy code" />
+    <option name="LAST_COMMIT_MESSAGE" value="I added some classes of Jobjects to simplfy code" />
   </component>
 </project>
