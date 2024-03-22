@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="third branch&#10; testing">
+    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="third branch&#10; testing part 2">
+      <change afterPath="$PROJECT_DIR$/l.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MapPictureArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MyButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MyFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MyPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FullScreenUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FullScreenUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +90,7 @@
       <updated>1711049120859</updated>
       <workItem from="1711049121868" duration="2102000" />
       <workItem from="1711055301952" duration="1306000" />
+      <workItem from="1711065968963" duration="2570000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;I am learning&quot;">
       <option name="closed" value="true" />

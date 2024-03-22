@@ -1,23 +1,16 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
+00
 public class FullScreenUI extends JFrame {
     BufferedImage backgroundImage = null;
     JLabel backgroundLabel;
+    JLabel newback;
     BufferedImage sunsetImage = null;
+    BufferedImage gifd = null;
+
+    private BufferedImage[] backgroundImages; // Array to store background images
+    private int currentBackgroundIndex = 0; // Index of the current background image
+
     public FullScreenUI() {
-
-
-
-        // Set up the JFrame
-        setUndecorated(false); // Remove window decorations (title bar, borders)
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Set JFrame to fullscreen
-        setResizable(false); // Disable resizing
 
         // Get the size of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -28,37 +21,49 @@ public class FullScreenUI extends JFrame {
         try {
             backgroundImage = ImageIO.read(new File("background.jpg")); // Replace "background.jpg" with your image file path
             sunsetImage = ImageIO.read(new File("sunset2.jpg"));
+            gifd = ImageIO.read(new File("l.gif"));
+
+            backgroundImages = new BufferedImage[]{backgroundImage, sunsetImage, gifd};
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Create a JLabel to display the background image
 
-        backgroundLabel = new JLabel(new ImageIcon(sunsetImage));
+        backgroundLabel = new JLabel(new ImageIcon(backgroundImages[currentBackgroundIndex]));
         backgroundLabel.setBounds(0, 0, screenSize.width, screenSize.height);
 
         // Add the background label to the content pane
         getContentPane().add(backgroundLabel);
         getContentPane().setLayout(null);
-        JButton newImage = new JButton();
-        newImage.setBounds(300,300,300,300);
-        getContentPane().add(newImage);
 
 
-        newImage.addActionListener(new ActionListener() {
+        MyButton testbutton = new MyButton();
+
+        getContentPane().add(testbutton);
+
+
+        testbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Yay");
-                backgroundLabel = new JLabel(new ImageIcon(sunsetImage));
-                getContentPane().add(backgroundLabel);
-                getContentPane().repaint();
+                currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundImages.length;
+//                getContentPane().remove(backgroundLabel); // Remove the previous background
+//                newback = new JLabel(new ImageIcon(sunsetImage));
+//                newback.setBounds(0, 0, screenSize.width, screenSize.height); // Set bounds to cover the entire screen
+//                getContentPane().add(newback);
+//                getContentPane().repaint();
+                backgroundLabel.setIcon(new ImageIcon(backgroundImages[currentBackgroundIndex]));
             }
+
         });
+
 
         // Add any UI components or game elements here
         // For now, let's just display a message in the center of the screen
 
         GameSound test = new GameSound("test.wav");
         test.play();
+
+
         JLabel messageLabel = new JLabel("Fullscreen UI");
         messageLabel.setFont(new Font("Arial", Font.BOLD, 24));
         messageLabel.setForeground(Color.WHITE);
