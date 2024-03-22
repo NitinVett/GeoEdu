@@ -3,8 +3,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea/workspace.xml
+.idea/shelf/
 .idea
-.idea/shelf
 
 ### Eclipse ###
 .apt_generated
