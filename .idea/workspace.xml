@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="&quot;I am learning meow&quot;">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="Deleting garbage and starting fresh" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,7 +82,7 @@
       <updated>1711049120859</updated>
       <workItem from="1711049121868" duration="2102000" />
       <workItem from="1711150928852" duration="73000" />
-      <workItem from="1711169558689" duration="462000" />
+      <workItem from="1711169558689" duration="772000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;I am learning&quot;">
       <option name="closed" value="true" />
@@ -118,7 +116,23 @@
       <option name="project" value="LOCAL" />
       <updated>1711149885620</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="&quot;I am learning meow&quot;">
+      <option name="closed" value="true" />
+      <created>1711170373588</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711170373588</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Deleting garbage and starting fresh">
+      <option name="closed" value="true" />
+      <created>1711170455272</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711170455272</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,9 +141,10 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="&quot;I am learning&quot;" />
-    <MESSAGE value="&quot;I am learning meow&quot;" />
     <MESSAGE value="trying" />
     <MESSAGE value="testingagain" />
-    <option name="LAST_COMMIT_MESSAGE" value="testingagain" />
+    <MESSAGE value="&quot;I am learning meow&quot;" />
+    <MESSAGE value="Deleting garbage and starting fresh" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleting garbage and starting fresh" />
   </component>
 </project>
