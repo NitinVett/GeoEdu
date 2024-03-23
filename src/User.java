@@ -3,7 +3,7 @@ public class User {
     private String password;
 
     /**
-     * This method sets the username for a user object.
+     * This method.
      * @param username
      */
 
