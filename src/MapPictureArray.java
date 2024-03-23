@@ -8,6 +8,8 @@ import java.io.IOException;
  * This class returns a buffered images array
  * To load image, simply specify the game type in string form.
  * Sample usage is in fullscreenUI java file
+ * Each game type would have a folder, with n number of images, labelled from 0 to n
+ * I am still working on deciding formats and stuff, so this is an experimental file.
  */
 public class MapPictureArray extends JFrame {
 
