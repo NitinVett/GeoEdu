@@ -3,7 +3,7 @@ public class User {
     private String password;
 
     /**
-     * This method is blah blah.
+     * This method is bad.
      * @param username
      */
 
@@ -11,6 +11,10 @@ public class User {
         this.username = username;
     }
 
+    /**
+     * setter for password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
