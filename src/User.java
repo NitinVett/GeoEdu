@@ -3,7 +3,7 @@ public class User {
     private String password;
 
     /**
-     * This method is bad.
+     * This method sets the username.
      * @param username
      */
 
