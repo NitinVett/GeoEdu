@@ -1,17 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenu extends JPanel {
+public class MainMenu extends Screen{
 
     //Image image;
     JButton login;
     JButton register;
     JButton exit;
     MainMenu() {
-
-        //image = new ImageIcon("sky.png").getImage();
-        this.setLayout(null);
-        this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         login = new JButton();
         register = new JButton();
@@ -44,6 +40,7 @@ public class MainMenu extends JPanel {
         login.setBounds(mainButtonX, mainButtonY, width/5, height/12);
         register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width/5, height/12);
         exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement*2, width/5, height/12);
+        revalidate();
 
     }
 
@@ -60,10 +57,11 @@ public class MainMenu extends JPanel {
     public void exitButton(){
 
     }
+
     public void paint(Graphics g) {
 
         Graphics2D g2D = (Graphics2D) g;
-
+        drawTitle(g2D);
         updateButtonPositions();
 
 
