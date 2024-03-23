@@ -2,6 +2,10 @@ public class User {
     private String username;
     private String password;
 
+    /**
+     * This method sets the username for a user object.
+     * @param username
+     */
 
     public void setUsername(String username) {
         this.username = username;
