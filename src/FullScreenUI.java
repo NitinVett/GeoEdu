@@ -79,6 +79,12 @@ public class FullScreenUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new FullScreenUI();
+        JFrame main = new JFrame();
+        main.setUndecorated(true);
+        main.setVisible(true);
+        main.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        main.requestFocus();
+        main.setContentPane(new MainMenu());
+
     }
 }
