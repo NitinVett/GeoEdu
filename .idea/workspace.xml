@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="&quot;I am learning meow&quot;" />
+    <list default="true" id="d5202f5c-b243-4c05-a037-4b68b6033c63" name="Changes" comment="&quot;I am learning meow&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Third-branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,7 +44,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Third-branch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -68,6 +70,7 @@
       <list>
         <item itemvalue="Application.FullScreenUI" />
         <item itemvalue="Application.FullScreenUI" />
+        <item itemvalue="Application.FullScreenUI" />
       </list>
     </recent_temporary>
   </component>
@@ -80,6 +83,8 @@
       <option name="presentableId" value="Default" />
       <updated>1711049120859</updated>
       <workItem from="1711049121868" duration="2102000" />
+      <workItem from="1711150928852" duration="73000" />
+      <workItem from="1711169558689" duration="462000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;I am learning&quot;">
       <option name="closed" value="true" />
@@ -124,6 +129,7 @@
     <MESSAGE value="&quot;I am learning&quot;" />
     <MESSAGE value="&quot;I am learning meow&quot;" />
     <MESSAGE value="trying" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying" />
+    <MESSAGE value="testingagain" />
+    <option name="LAST_COMMIT_MESSAGE" value="testingagain" />
   </component>
 </project>
