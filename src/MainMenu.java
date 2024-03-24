@@ -7,7 +7,8 @@ public class MainMenu extends Screen{
     JButton login;
     JButton register;
     JButton exit;
-    MainMenu() {
+    MainMenu(JFrame frame) {
+        super(frame);
 
         login = new JButton();
         register = new JButton();
@@ -42,28 +43,29 @@ public class MainMenu extends Screen{
         exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement*2, width/5, height/12);
         revalidate();
 
+
     }
 
 
 
     public void loginButton(){
-
+        swapScreens(new LoginScreen(frame));
     }
 
     public void registerButton(){
-
+        swapScreens(new RegisterScreen(frame));
     }
 
     public void exitButton(){
-
+        frame.dispose();
     }
 
-    public void paint(Graphics g) {
-
+    @Override
+    protected void paintComponent(Graphics g) {
+        System.out.println("xx");
+        super.paintComponent(g); // Paints the background
         Graphics2D g2D = (Graphics2D) g;
         drawTitle(g2D);
-        updateButtonPositions();
-
-
+        updateButtonPositions(); // Consider calling this elsewhere if it causes issues
     }
 }

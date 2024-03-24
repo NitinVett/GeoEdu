@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Screen extends JPanel {
-
-    public Screen(){
+    JFrame frame;
+    public Screen(JFrame frame){
+        this.frame = frame;
         //set the background for our screens here
         //this.setBackground();
         JButton settings = new JButton();
@@ -14,13 +15,25 @@ public class Screen extends JPanel {
         //setting button location here
         //settings.setBounds();
 
+
+        this.setVisible(true);
         settings.addActionListener(e -> settingsButton());
         this.setLayout(null);
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        frame.setVisible(true);
+        frame.revalidate();
+        frame.repaint();
+
+    }
+
+    public void swapScreens(JPanel panel){
+
+        frame.setVisible(true);
+        frame.requestFocus();
     }
 
     //add functionality for setting button
-    public void settingsButton(){
+    public void settingsButton() {
 
     }
 
