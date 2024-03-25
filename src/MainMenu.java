@@ -16,15 +16,12 @@ public class MainMenu extends Screen{
 
         login.addActionListener(e -> loginButton());
         login.setText("LOGIN");
-        login.setBounds(getWidth()/2,getHeight()/3 + (getHeight()/10),getWidth()/5,getHeight()/10);
 
         register.addActionListener(e -> registerButton());
         register.setText("REGISTER");
-        login.setBounds(getWidth()/2,getHeight()/3 + (getHeight()/10)*2,getWidth()/5,getHeight()/10);
 
         exit.addActionListener(e -> exitButton());
         exit.setText("EXIT");
-        login.setBounds(getWidth()/2,getHeight()/3 + (getHeight()/10)*3,getWidth()/5,getHeight()/10);
 
 
         this.add(login);

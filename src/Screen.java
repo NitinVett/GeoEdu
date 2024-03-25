@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Screen extends JPanel {
     JFrame frame;
@@ -27,7 +29,7 @@ public class Screen extends JPanel {
     }
 
     public void swapScreens(JPanel panel){
-
+        frame.setContentPane(panel);
         frame.setVisible(true);
         frame.requestFocus();
     }
@@ -46,6 +48,24 @@ public class Screen extends JPanel {
         int yPosition = getHeight()/10;
 
         g.drawString("GEOCRAFT", xPosition, yPosition);
+    }
+
+    public void setFocusListeners(JTextField textField,String placeholder){
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeholder);
+                }
+            }
+        });
     }
 
 
