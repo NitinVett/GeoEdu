@@ -137,7 +137,7 @@ public class FullScreenUI extends JFrame {
         JFrame main = new JFrame();
         main.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main.setUndecorated(true);
-        main.setContentPane(new GameMainMenu(main));
+        main.setContentPane(new GamemodeSelector(main));
         main.setVisible(true);
         main.requestFocus();
 
