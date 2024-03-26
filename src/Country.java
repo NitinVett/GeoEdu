@@ -20,13 +20,29 @@ public class Country {
     private String name;
     private JLabel hints;
     private JLabel countryMap;
+    private int ID;
 
-    public Country(String nameOfCountry) {
-        this.name = nameOfCountry;
+    //Provide class with name of country
+
+    public Country (int IDno){
+        //Add logic here that receives an ID number, opens a text file, finds out the name, and returns a country object.
     }
-
     public JLabel getFlag() {
-        return this.flag;
+
+        BufferedImage flag = null;
+        try {
+            String folderPath = "Country Data/Flags";
+            String imagePath = folderPath + "/" + this.getName() + ".png";
+            flag = ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        if (flag != null) {
+            this.flag = new JLabel(new ImageIcon(flag));
+            this.flag.setBounds(0, 0, screenSize.width, screenSize.height);
+        }
+        return this.countryMap;
     }
 
     public JLabel getCountryMap() {

@@ -42,10 +42,10 @@ public class FullScreenUI extends JFrame {
         getContentPane().add(backgroundLabel);
 
         // Conducted test to ensure country objects can present their own Jlabels succesfully.
-        Country pk = new Country("Pakistan");
-        Country uk = new Country("UnitedKingdom");
-        Country cn = new Country("China");
-        Country ca = new Country("Canada");
+        Country pk = new Country(1);
+        Country uk = new Country(0);
+        Country cn = new Country(2);
+        Country ca = new Country(4);
 
         Country[] countries = new Country[]{pk, uk, cn, ca};
         countryLabels = new JLabel[4];
@@ -137,7 +137,7 @@ public class FullScreenUI extends JFrame {
         JFrame main = new JFrame();
         main.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main.setUndecorated(true);
-        main.setContentPane(new GameMainMenu(main));
+        main.setContentPane(new GamemodeSelector(main));
         main.setVisible(true);
         main.requestFocus();
 

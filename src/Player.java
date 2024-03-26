@@ -2,10 +2,10 @@ public class Player extends User {
 
     private int highScore;
     private float accuracy;
-
     private int numGames;
 
-    public Player() {
+    public Player(String username, String password, int highScore, float accuracy, int numGames) {
+        super(username, password);
         this.accuracy = 100;
         this.highScore = 0;
         this.numGames = 0;
