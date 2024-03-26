@@ -83,8 +83,8 @@ public class GameMainMenu extends Screen {
     protected void paintComponent(Graphics g) {
         System.out.println("xx");
         super.paintComponent(g); // Paints the background
-        Graphics2D g2D = (Graphics2D) g;
-        drawTitle(g2D);
+//        Graphics2D g2D = (Graphics2D) g;
+//        drawTitle(g2D);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
     }
 }
