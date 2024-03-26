@@ -133,6 +133,13 @@ public class FullScreenUI extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
-        new FullScreenUI();
+        //new FullScreenUI();
+        JFrame main = new JFrame();
+        main.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        main.setUndecorated(true);
+        main.setContentPane(new GameMainMenu(main));
+        main.setVisible(true);
+        main.requestFocus();
+
     }
 }

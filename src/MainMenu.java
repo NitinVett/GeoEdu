@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenu extends Screen{
+public class MainMenu extends Screen {
 
     //Image image;
     JButton login;
     JButton register;
     JButton exit;
+
     MainMenu(JFrame frame) {
         super(frame);
 
@@ -32,28 +33,27 @@ public class MainMenu extends Screen{
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
-        int mainButtonX = width/2 - width/10;
-        int mainButtonY =  height/3;
-        int mainButtonYIncrement = height/10;
-        login.setBounds(mainButtonX, mainButtonY, width/5, height/12);
-        register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width/5, height/12);
-        exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement*2, width/5, height/12);
+        int mainButtonX = width / 2 - width / 10;
+        int mainButtonY = height / 3;
+        int mainButtonYIncrement = height / 10;
+        login.setBounds(mainButtonX, mainButtonY, width / 5, height / 12);
+        register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
+        exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         revalidate();
 
 
     }
 
 
-
-    public void loginButton(){
+    public void loginButton() {
         swapScreens(new LoginScreen(frame));
     }
 
-    public void registerButton(){
+    public void registerButton() {
         swapScreens(new RegisterScreen(frame));
     }
 
-    public void exitButton(){
+    public void exitButton() {
         frame.dispose();
     }
 
