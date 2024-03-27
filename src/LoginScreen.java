@@ -40,7 +40,7 @@ public class LoginScreen extends Screen{
 
 
     public void loginButton(){
-        // functionality for login button
+        swapScreens(new GameMainMenu(frame));
     }
 
 

@@ -40,7 +40,7 @@ public class RegisterScreen extends Screen{
 
     }
     public void registerButton(){
-        //Register functionality
+        swapScreens(new MainMenu(frame));
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
