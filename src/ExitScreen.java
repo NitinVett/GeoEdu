@@ -28,7 +28,7 @@ public class ExitScreen extends Screen{
     }
     public void noButton() {
         //have it bring u back to previous screen
-        swapScreens(new MainMenu(frame));
+        swapScreens(new SettingScreen(frame));
     }
     public void yesButton() {
         frame.dispose();

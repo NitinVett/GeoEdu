@@ -16,7 +16,6 @@ public class DebugScreen extends Screen{
         login.addActionListener(e -> loginButton());
         setFocusListeners(password,"Enter Password");
         repaint();
-
     }
     public void setComponents(){
         int width = getWidth();
