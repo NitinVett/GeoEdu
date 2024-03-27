@@ -24,7 +24,6 @@ public class MainMenu extends Screen {
         exit.addActionListener(e -> exitButton());
         exit.setText("EXIT");
 
-
         this.add(login);
         this.add(register);
         this.add(exit);
@@ -40,8 +39,6 @@ public class MainMenu extends Screen {
         register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         revalidate();
-
-
     }
 
 
