@@ -68,6 +68,7 @@ public class Screen extends JPanel {
         int width = getWidth();
         int height = getHeight();
         settings.setBounds(width-width/8, height/22, width / 10, height / 12);
+        settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
 
     }
 
