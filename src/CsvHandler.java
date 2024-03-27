@@ -215,6 +215,9 @@ public class CsvHandler {
             e.printStackTrace();
         }
     }
+    {
+        System.out.println("Hello world!");
+    }
     public static void main(String[] args) {
           printAllUsers();
 //        System.out.println("Password for ahafeez7: " + getPassword("ahafeez7"));
