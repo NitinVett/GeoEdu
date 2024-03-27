@@ -194,37 +194,43 @@ public class CsvHandler {
         return false; // User does not exist
     }
 
-    public static int addUser(String userName, String password) {
+    public static String addUser(String userName, String password) {
         if (isDuplicateUser(userName)) {
-            System.out.println("Error: User already exists.");
-            return 1;
+            return "User already exists.";
+
         }
-
-        try {
-            FileWriter writer = new FileWriter(CSV_FILE_PATH, true); // Append mode to add new entry
-            CSVWriter csvWriter = new CSVWriter(writer);
-
-            String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
-            newUser[0] = userName; // Set the username
-            newUser[1] = password;
-            newUser[2] = "0";
-            newUser[3] = "N";
-            newUser[4] = "100%";
-            newUser[6] = "0";
-
-
-            csvWriter.writeNext(newUser);
-            csvWriter.close();
-            return 0;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return 1;
+        if((userName.length() > 16 || userName.length() < 4) || (password.length() > 16 || password.length() < 4)){
+            System.out.println(userName.isEmpty());
+            return "password and username must be between 4-16 characters";
         }
+        else if(!userName.matches("^[a-zA-Z0-9]+$")){
+            return "password and username must only contain alphanumeric characters";
+        }
+        else {
 
+            try {
+                FileWriter writer = new FileWriter(CSV_FILE_PATH, true); // Append mode to add new entry
+                CSVWriter csvWriter = new CSVWriter(writer);
+
+                String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
+                newUser[0] = userName; // Set the username
+                newUser[1] = password;
+                newUser[2] = "0";
+                newUser[3] = "N";
+                newUser[4] = "100%";
+                newUser[6] = "0";
+
+
+                csvWriter.writeNext(newUser);
+                csvWriter.close();
+                return "APPROVED";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Unknown error occured";
+            }
+        }
     }
-    {
-        System.out.println("Hello world!");
-    }
+
     public static void main(String[] args) {
           printAllUsers();
 //        System.out.println("Password for ahafeez7: " + getPassword("ahafeez7"));
