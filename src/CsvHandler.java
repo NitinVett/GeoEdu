@@ -25,6 +25,7 @@ public class CsvHandler {
             while ((row = reader.readMap()) != null) {
                 String userName = row.get("user_name");
 
+
                 Map<String, String> userValues = new HashMap<>();
                 for (Map.Entry<String, String> entry : row.entrySet()) {
                     if (!entry.getKey().equals("user_name")) {
@@ -193,10 +194,10 @@ public class CsvHandler {
         return false; // User does not exist
     }
 
-    public static void addUser(String userName) {
+    public static int addUser(String userName, String password) {
         if (isDuplicateUser(userName)) {
             System.out.println("Error: User already exists.");
-            return;
+            return 1;
         }
 
         try {
@@ -205,15 +206,24 @@ public class CsvHandler {
 
             String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
             newUser[0] = userName; // Set the username
+            newUser[1] = password;
+            newUser[2] = "0";
+            newUser[3] = "N";
+            newUser[4] = "100%";
+            newUser[6] = "0";
+
             for (int i = 1; i < newUser.length; i++) {
                 newUser[i] = ""; // Set other fields to default value
             }
 
             csvWriter.writeNext(newUser);
             csvWriter.close();
+            return 0;
         } catch (IOException e) {
             e.printStackTrace();
+            return 1;
         }
+
     }
     public static void main(String[] args) {
           printAllUsers();

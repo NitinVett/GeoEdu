@@ -40,7 +40,11 @@ public class RegisterScreen extends Screen{
 
     }
     public void registerButton(){
-        swapScreens(new MainMenu(frame));
+        int error = CsvHandler.addUser(username.getText());
+        if(error == 0) {
+
+            swapScreens(new MainMenu(frame));
+        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

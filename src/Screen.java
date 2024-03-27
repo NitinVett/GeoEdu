@@ -8,7 +8,9 @@ public class Screen extends JPanel {
     JFrame frame;
     private Image backgroundImage;
 
+
     public Screen(JFrame frame) {
+
         this.frame = frame;
         //set the background for our screens here
         //this.setBackground();
