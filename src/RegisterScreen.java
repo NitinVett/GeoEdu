@@ -40,13 +40,14 @@ public class RegisterScreen extends Screen{
 
     }
     public void registerButton(){
-        int error = CsvHandler.addUser(username.getText(),password.getText());
-        if(error == 0) {
-            swapScreens(new MainMenu(frame));
-        }
-        else {
-            System.out.println("invalid username/password");
-        }
+        swapScreens(new SettingScreen(frame));
+//        int error = CsvHandler.addUser(username.getText(),password.getText());
+//        if(error == 0) {
+//            swapScreens(new MainMenu(frame));
+//        }
+//        else {
+//            System.out.println("invalid username/password");
+//        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

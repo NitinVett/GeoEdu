@@ -12,8 +12,6 @@ public class Screen extends JPanel {
     public Screen(JFrame frame) {
 
         this.frame = frame;
-        //set the background for our screens here
-        //this.setBackground();
         JButton settings = new JButton();
         loadBackgroundImage();
         //settings image here
@@ -21,6 +19,7 @@ public class Screen extends JPanel {
 
         //setting button location here
         //settings.setBounds();
+
 
 
         this.setVisible(true);
