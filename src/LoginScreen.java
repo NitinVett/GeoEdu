@@ -46,7 +46,7 @@ public class LoginScreen extends Screen{
         if(Objects.nonNull(pass) && pass.equals(password.getText())) {
             swapScreens(new GameMainMenu(frame));
         }else {
-            System.out.println("error");
+            displayErrorMessage("Incorrect username/password");
         }
     }
 

@@ -8,11 +8,14 @@ public class Screen extends JPanel {
     JFrame frame;
     JButton settings;
     private Image backgroundImage;
+    private JLabel errorMessageLabel;
 
     public Screen(JFrame frame) {
         this.frame = frame;
         loadBackgroundImage();
         settings = new JButton();
+        errorMessageLabel = new JLabel();
+
         this.add(settings);
         //settings image here
 
@@ -51,7 +54,7 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-       // swapScreens(new SettingsScreen(frame));
+       swapScreens(new SettingScreen(frame));
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -65,6 +68,7 @@ public class Screen extends JPanel {
         int width = getWidth();
         int height = getHeight();
         settings.setBounds(width-width/8, height/22, width / 10, height / 12);
+
     }
 
     public void drawTitle(Graphics2D g) {
@@ -78,6 +82,39 @@ public class Screen extends JPanel {
         int yPosition = getHeight() / 10;
 
         g.drawString("GEOCRAFT", xPosition, yPosition);
+    }
+
+    public void displayErrorMessage(String message) {
+        int width = getWidth();
+        int messageHeight = 30;
+
+        errorMessageLabel.setBounds(0, messageHeight/2, width, messageHeight);
+        errorMessageLabel.setText(message);
+        errorMessageLabel.setHorizontalAlignment(JLabel.CENTER);
+
+
+        errorMessageLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+
+        errorMessageLabel.setBackground(Color.WHITE);
+        errorMessageLabel.setOpaque(true);
+
+        errorMessageLabel.setForeground(Color.RED);
+        errorMessageLabel.setVisible(true);
+
+        this.add(errorMessageLabel);
+        revalidate();
+        repaint();
+
+        int delay = 5000;
+        Timer timer = new Timer(delay, e -> {
+            System.out.println("here");
+            errorMessageLabel.setVisible(false); // Hide the message
+            revalidate();
+            repaint();
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     public void setFocusListeners(JTextField textField, String placeholder) {
