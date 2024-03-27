@@ -5,19 +5,23 @@ import java.awt.event.FocusEvent;
 import java.util.Objects;
 
 public class ChangePasswordScreen extends Screen{
-    JTextField password, username;
-    JButton login;
+    JTextField oldPassword, newPassword, confirmPassword;
+    JButton save;
     public ChangePasswordScreen(JFrame frame) {
         super(frame);
-        password = new JTextField("Enter Password", 16);
-        username = new JTextField("Enter Username", 16);
-        login = new JButton("LOGIN");
-        this.add(password);
-        this.add(username);
-        this.add(login);
-        login.addActionListener(e -> loginButton());
-        setFocusListeners(password,"Enter Password");
-        setFocusListeners(username,"Enter Username");
+        oldPassword = new JTextField("Enter Old Password", 16);
+        newPassword = new JTextField("Enter New Password", 16);
+        confirmPassword = new JTextField("Confirm Password", 16);
+
+        save = new JButton("SAVE");
+        this.add(oldPassword);
+        this.add(newPassword);
+        this.add(confirmPassword);
+        this.add(save);
+        save.addActionListener(e -> loginButton());
+        setFocusListeners(oldPassword,"Enter Old Password");
+        setFocusListeners(newPassword,"Enter New Password");
+        setFocusListeners(confirmPassword,"Confirm Password");
         repaint();
 
     }
@@ -28,11 +32,16 @@ public class ChangePasswordScreen extends Screen{
         int mainButtonX = width/2 - width/10;
         int mainButtonY =  height/3;
 
-        username.setBounds(mainButtonX, mainButtonY, width/5, height/20);
-        password.setBounds(mainButtonX,mainButtonY + height/10,width/5,height/20);
-        login.setBounds(mainButtonX,mainButtonY + (height/10)*2,width/5,height/20);
-        username.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        password.setFont(new Font("SansSerif", Font.PLAIN, 24));
+
+        oldPassword.setBounds(mainButtonX ,mainButtonY+ height/10, width/5, height/20);
+        newPassword.setBounds(mainButtonX, mainButtonY, width/5, height/20);
+        confirmPassword.setBounds(mainButtonX,mainButtonY+ (height/10)*2,width/5,height/20);
+        save.setBounds(mainButtonX,mainButtonY+ (height/10)*4,width/5,height/20);
+        oldPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        newPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        confirmPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        save.setFont(new Font("SansSerif", Font.PLAIN, 24));
+
         revalidate();
 
 
@@ -42,8 +51,8 @@ public class ChangePasswordScreen extends Screen{
 
     public void loginButton(){
 
-        String pass = CsvHandler.getPassword(username.getText());
-        if(Objects.nonNull(pass) && pass.equals(password.getText())) {
+        String pass = CsvHandler.getPassword(newPassword.getText());
+        if(Objects.nonNull(pass) && pass.equals(confirmPassword.getText())) {
             swapScreens(new GameMainMenu(frame));
         }else {
             displayErrorMessage("Incorrect username/password");
