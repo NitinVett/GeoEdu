@@ -6,24 +6,23 @@ import java.net.URL;
 
 public class Screen extends JPanel {
     JFrame frame;
+    JButton settings;
     private Image backgroundImage;
 
-
     public Screen(JFrame frame) {
-
         this.frame = frame;
-        JButton settings = new JButton();
         loadBackgroundImage();
+        settings = new JButton();
+        this.add(settings);
         //settings image here
+
         //settings.setIcon();
 
         //setting button location here
-        //settings.setBounds();
 
-
-
-        this.setVisible(true);
         settings.addActionListener(e -> settingsButton());
+        settings.setText("SETTINGS");
+        this.setVisible(true);
         this.setLayout(null);
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setVisible(true);
@@ -52,7 +51,7 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-
+       // swapScreens(new SettingsScreen(frame));
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -63,6 +62,9 @@ public class Screen extends JPanel {
             g.drawImage(backgroundImage, x, y, this);
         }
         drawTitle((Graphics2D) g);
+        int width = getWidth();
+        int height = getHeight();
+        settings.setBounds(width-width/8, height/22, width / 10, height / 12);
     }
 
     public void drawTitle(Graphics2D g) {
