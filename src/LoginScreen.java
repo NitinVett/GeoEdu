@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.Objects;
 
 public class LoginScreen extends Screen{
     JTextField password, username;
@@ -40,7 +41,13 @@ public class LoginScreen extends Screen{
 
 
     public void loginButton(){
-        swapScreens(new GameMainMenu(frame));
+
+        String pass = CsvHandler.getPassword(username.getText());
+        if(Objects.nonNull(pass) && pass.equals(password.getText())) {
+            swapScreens(new GameMainMenu(frame));
+        }else {
+            System.out.println("error");
+        }
     }
 
 

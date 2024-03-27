@@ -212,9 +212,6 @@ public class CsvHandler {
             newUser[4] = "100%";
             newUser[6] = "0";
 
-            for (int i = 1; i < newUser.length; i++) {
-                newUser[i] = ""; // Set other fields to default value
-            }
 
             csvWriter.writeNext(newUser);
             csvWriter.close();
