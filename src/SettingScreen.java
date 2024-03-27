@@ -12,12 +12,30 @@ public class SettingScreen extends Screen{
         repaint();
     }
 
-    public void setComponents(){
+    public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
 
+        Font font = new Font("SansSerif", Font.BOLD, 36);
+        g.setFont(font);
 
-        audio.setBounds(width/2 - width/10,height/3,width/3,height/15);
+        FontMetrics metrics = g.getFontMetrics(font);
+        int textWidth = metrics.stringWidth("GEOCRAFT");
+        int textHeight = metrics.getHeight();
+
+
+        int sliderX = width/2 - width/10;
+        int sliderY = height/3;
+        int sliderWidth = width/3;
+        int sliderHeight = height/15;
+        audio.setBounds(sliderX, sliderY, sliderWidth, sliderHeight);
+
+
+        int textX = sliderX - textWidth;
+        int textY = sliderY + (sliderHeight - textHeight) / 2 + metrics.getAscent();
+
+        g.drawString("AUDIO", textX, textY);
+
         revalidate();
 
     }
@@ -25,10 +43,9 @@ public class SettingScreen extends Screen{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2D = (Graphics2D) g;
 
-        drawTitle(g2D);
-        setComponents();
+
+        setComponents(g);
 
 
     }
