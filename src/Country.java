@@ -24,8 +24,9 @@ public class Country {
 
     //Provide class with name of country
 
-    public Country (int IDno){
+    public Country (String name,int IDno){
         //Add logic here that receives an ID number, opens a text file, finds out the name, and returns a country object.
+        this.name = name;
     }
     public JLabel getFlag() {
 

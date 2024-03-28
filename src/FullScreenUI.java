@@ -42,10 +42,10 @@ public class FullScreenUI extends JFrame {
         getContentPane().add(backgroundLabel);
 
         // Conducted test to ensure country objects can present their own Jlabels succesfully.
-        Country pk = new Country(1);
-        Country uk = new Country(0);
-        Country cn = new Country(2);
-        Country ca = new Country(4);
+        Country pk = new Country("Pakistan",1);
+        Country uk = new Country("Pakistan",0);
+        Country cn = new Country("Pakistan",2);
+        Country ca = new Country("Pakistan",4);
 
         Country[] countries = new Country[]{pk, uk, cn, ca};
         countryLabels = new JLabel[4];

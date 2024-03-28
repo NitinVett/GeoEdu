@@ -63,7 +63,7 @@ public class Screen extends JPanel {
             int y = (getHeight() - backgroundImage.getHeight(null)) / 2;
             g.drawImage(backgroundImage, x, y, this);
         }
-        drawTitle((Graphics2D) g);
+        //drawTitle((Graphics2D) g);
     }
 
     public void drawTitle(Graphics2D g) {
