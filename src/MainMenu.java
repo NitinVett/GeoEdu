@@ -51,7 +51,8 @@ public class MainMenu extends Screen {
     }
 
     public void exitButton() {
-        frame.dispose();
+        swapScreens(new ExitScreen(frame));
+
     }
 
     @Override
