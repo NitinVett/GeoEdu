@@ -4,11 +4,11 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.Objects;
 
-public class LoginScreen extends Screen{
+public class CreditsScreen extends Screen{
     JTextField password, username;
     JButton login;
-    public LoginScreen(FullScreenUI frame,JPanel previous) {
-        super(frame, previous);
+    public CreditsScreen(FullScreenUI frame,JPanel previous) {
+        super(frame,previous);
         password = new JTextField("Enter Password", 16);
         username = new JTextField("Enter Username", 16);
         login = new JButton("LOGIN");
@@ -49,7 +49,6 @@ public class LoginScreen extends Screen{
             displayErrorMessage("Incorrect username/password");
         }
     }
-
 
 
     public void paintComponent(Graphics g) {

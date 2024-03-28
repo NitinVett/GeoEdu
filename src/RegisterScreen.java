@@ -4,8 +4,8 @@ import java.awt.*;
 public class RegisterScreen extends Screen{
     JTextField password, username, password_2;
     JButton register;
-    public RegisterScreen(JFrame frame) {
-        super(frame);
+    public RegisterScreen(FullScreenUI frame,JPanel previous) {
+        super(frame,previous);
         password = new JTextField("Enter Password", 16);
         username = new JTextField("Enter Username", 16);
         password_2 = new JTextField("Re-enter Password", 16);
@@ -40,14 +40,22 @@ public class RegisterScreen extends Screen{
 
     }
     public void registerButton(){
-        int error = CsvHandler.addUser(username.getText(),password.getText());
-        if(error == 0) {
-            swapScreens(new MainMenu(frame));
-        }
-        else {
-            System.out.println("invalid username/password");
-        }
+       if(password.getText().equals(password_2.getText())) {
+           String error = CsvHandler.addUser(username.getText(), password.getText());
+           if(error.equals("APPROVED")) {
+               swapScreens(new MainMenu(frame));
+           }
+           else {
+               displayErrorMessage(error);
+           }
+       }else {
+           displayErrorMessage("You passwords do not match");
+       }
+
+
     }
+
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 

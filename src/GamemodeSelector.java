@@ -9,8 +9,8 @@ public class GamemodeSelector extends Screen{
     JButton esc;
     //JButton highScore;
 
-    public GamemodeSelector(JFrame frame) {
-        super(frame);
+    public GamemodeSelector(FullScreenUI frame, JPanel previous) {
+        super(frame,previous);
         global = new JButton();
         continental = new JButton();
         microNations = new JButton();
@@ -66,19 +66,21 @@ public class GamemodeSelector extends Screen{
 
     public void globalButton() {
 
-        swapScreens(new GameTypeSelector(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
     public void continentalButton() {
-        swapScreens(new ContinentalModeSelector(frame));
-    }
-
-    public void microNationButton() {
-        swapScreens(new GameTypeSelector(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void escButton() {
-        swapScreens(new GameMainMenu(frame));
+        swapScreens(new GameMainMenu(frame,this));
+    }
+
+    public void microNationButton() {
+        TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
+        frame.addKeyListener(tutorialScreen);
+        swapScreens(tutorialScreen);
     }
 
     public void logOutButton() {
@@ -93,7 +95,7 @@ public class GamemodeSelector extends Screen{
         int mainButtonX = width / 3 - width / 7;
         int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
-        /*Font font = null;
+        /** Font font = null;
         try {
             File fontStyle = new File("resources/RubikScribble-Regular.ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(44f);
