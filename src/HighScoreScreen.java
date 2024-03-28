@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class HighScoreScreen extends Screen {
 
     ArrayList<String> users;
-    JButton next,previous;
+
     ArrayList<JLabel> playerList;
     int page;
-    public HighScoreScreen(JFrame frame,int page) {
-        super(frame);
+    JPanel prev;
+    public HighScoreScreen(FullScreenUI frame,int page,JPanel previous) {
+        super(frame,previous);
+        this.prev = previous;
         this.page = page;
         users = CsvHandler.getHighScoreOrder();
         playerList = new ArrayList<>();
-        next = new JButton("NEXT PAGE");
-        previous = new JButton("PREVIOUS PAGE");
         for (int i = this.page*7;i<(this.page+1)*7;i++){
             if(!(i>=users.size())){
                 playerList.add(new JLabel(users.get(i)));
@@ -88,10 +88,10 @@ public class HighScoreScreen extends Screen {
     }
 
     public void next(){
-        swapScreens(new HighScoreScreen(frame,this.page+1));
+        swapScreens(new HighScoreScreen(frame,this.page+1,prev));
     }
     public void previous(){
-        swapScreens(new HighScoreScreen(frame,this.page-1));
+        swapScreens(new HighScoreScreen(frame,this.page-1,prev));
     }
 
     @Override

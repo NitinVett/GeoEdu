@@ -7,8 +7,8 @@ public class TutorialScreen extends Screen implements KeyListener {
 
     private final Screen previousScreen;
 
-    public TutorialScreen(JFrame frame, Screen previousScreen) {
-        super(frame);
+    public TutorialScreen(FullScreenUI frame, Screen previousScreen) {
+        super(frame,previousScreen);
         this.previousScreen = previousScreen;
         setFocusable(true);
         requestFocusInWindow();

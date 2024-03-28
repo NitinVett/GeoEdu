@@ -7,8 +7,8 @@ import java.util.Objects;
 public class DebugScreen extends Screen{
     JTextField password, username;
     JButton login;
-    public DebugScreen(JFrame frame) {
-        super(frame);
+    public DebugScreen(FullScreenUI frame,JPanel previous) {
+        super(frame, previous);
         password = new JTextField("Enter Password", 16);
         login = new JButton("LOGIN");
         this.add(password);
@@ -33,7 +33,7 @@ public class DebugScreen extends Screen{
     public void loginButton(){
         String pass = "1029384756";
         if(pass.equals(password.getText())) {
-            swapScreens(new GameMainMenu(frame));
+            swapScreens(new GameMainMenu(frame,this));
         }else {
             displayErrorMessage("Wrong Password");
         }

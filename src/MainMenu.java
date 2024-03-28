@@ -8,8 +8,8 @@ public class MainMenu extends Screen {
     JButton register;
     JButton exit;
 
-    MainMenu(JFrame frame) {
-        super(frame);
+    MainMenu(FullScreenUI frame) {
+        super(frame,null);
 
         login = new JButton();
         register = new JButton();
@@ -43,17 +43,19 @@ public class MainMenu extends Screen {
 
 
     public void loginButton() {
-        swapScreens(new LoginScreen(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
     public void registerButton() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void exitButton() {
-        swapScreens(new ExitScreen(frame));
+        swapScreens(new ExitScreen(frame,this));
 
     }
+
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -61,6 +63,9 @@ public class MainMenu extends Screen {
         super.paintComponent(g); // Paints the background
         Graphics2D g2D = (Graphics2D) g;
         drawTitle(g2D);
+
+        revalidate();
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
+
     }
 }

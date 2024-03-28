@@ -9,8 +9,8 @@ public class GameMainMenu extends Screen {
     JButton highScores;
     JButton logout;
 
-    public GameMainMenu(JFrame frame) {
-        super(frame);
+    public GameMainMenu(FullScreenUI frame,JPanel previous) {
+        super(frame,previous);
         newGame = new JButton();
         continue_ = new JButton();
         tutorial = new JButton();
@@ -58,15 +58,15 @@ public class GameMainMenu extends Screen {
 
     public void newGameButton() {
 
-        swapScreens(new LoginScreen(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
     public void continue_Button() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void highScoreButton() {
-        swapScreens(new HighScoreScreen(frame,0));
+        swapScreens(new HighScoreScreen(frame,0,this));
     }
 
     public void tutorialButton() {
