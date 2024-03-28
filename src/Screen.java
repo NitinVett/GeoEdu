@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class Screen extends JPanel {
@@ -9,7 +11,7 @@ public class Screen extends JPanel {
     JButton settings;
     private Image backgroundImage;
     private JLabel errorMessageLabel;
-
+    Font rubikScribble;
     public Screen(FullScreenUI frame,JPanel previous) {
         this.frame = frame;
         loadBackgroundImage();
@@ -139,6 +141,17 @@ public class Screen extends JPanel {
                 }
             }
         });
+    }
+
+    public Font loadFont(String link, float size){
+        Font font = null;
+        try {
+            File fontStyle = new File(link);
+            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(size);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return font;
     }
 
 

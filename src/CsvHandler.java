@@ -258,9 +258,9 @@ public class CsvHandler {
     }
 
     public static void main(String[] args) {
-          printAllUsers();
-//        System.out.println("Password for ahafeez7: " + getPassword("ahafeez7"));
-//        System.out.println("Number of games played for ahafeez7: " + getNumGamesPlayed("ahafeez7"));
+          //printAllUsers();
+           System.out.println("Password for jam: " + getPassword("jam"));
+        System.out.println("Number of games played for jam: " + getNumGamesPlayed("jam"));
 //        System.out.println("Saved game for ahafeez7: " + getSavedGame("ahafeez7"));
 //        System.out.println("Accuracy rate for ahafeez7: " + getAccuracyRate("ahafeez7"));
 //        System.out.println("List of countries for ahafeez7: " + getListOfCountry("ahafeez7"));
