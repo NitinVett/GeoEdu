@@ -18,8 +18,9 @@ public class ExitScreen extends Screen{
         int width = getWidth();
         int height = getHeight();
         int mainButtonY =  height/3;
-        no.setBounds(width/2-width/15,mainButtonY+ (height/10)*4,width/20,height/20);
-        yes.setBounds(width/3+width/6,mainButtonY+ (height/10)*4,width/20,height/20);
+
+        no.setBounds(width/3+width/6,mainButtonY+ (height/10)*4,width/20,height/20);
+        yes.setBounds(width/2-width/15,mainButtonY+ (height/10)*4,width/20,height/20);
         no.setFont(new Font("SansSerif", Font.PLAIN, 24));
         yes.setFont(new Font("SansSerif", Font.PLAIN, 24));
 

@@ -54,8 +54,6 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-
-
        swapScreens(frame.getSettings(this));
 
     }

@@ -23,7 +23,7 @@ public class FullScreenUI extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
-        FullScreenUI main = new FullScreenUI();
+        new FullScreenUI();
 
     }
 }
