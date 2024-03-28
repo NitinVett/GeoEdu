@@ -11,7 +11,8 @@ public class HighScoreScreen extends Screen {
         super(frame);
         users = CsvHandler.getHighScoreOrder();
         playerList = new ArrayList<>();
-
+        next = new JButton("NEXT PAGE");
+        previous = new JButton("PREVIOUS PAGE");
         for (int i = page*7;i<(page+1)*7;i++){
             if(!(i>users.size())){
                 playerList.add(new JLabel(users.get(i)));
