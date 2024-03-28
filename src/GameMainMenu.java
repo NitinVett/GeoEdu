@@ -9,7 +9,7 @@ public class GameMainMenu extends Screen {
     JButton highScores;
     JButton logout;
 
-    public GameMainMenu(FullScreenUI frame,JPanel previous) {
+    public GameMainMenu(FullScreenUI frame,Screen previous) {
         super(frame,previous);
         newGame = new JButton();
         continue_ = new JButton();

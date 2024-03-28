@@ -7,7 +7,7 @@ import java.util.Objects;
 public class DebugScreen extends Screen{
     JTextField password, username;
     JButton login;
-    public DebugScreen(FullScreenUI frame,JPanel previous) {
+    public DebugScreen(FullScreenUI frame,Screen previous) {
         super(frame, previous);
         password = new JTextField("Enter Password", 16);
         login = new JButton("LOGIN");

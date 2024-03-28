@@ -4,7 +4,7 @@ import java.awt.*;
 public class RegisterScreen extends Screen{
     JTextField password, username, password_2;
     JButton register;
-    public RegisterScreen(FullScreenUI frame,JPanel previous) {
+    public RegisterScreen(FullScreenUI frame,Screen previous) {
         super(frame,previous);
         password = new JTextField("Enter Password", 16);
         username = new JTextField("Enter Username", 16);

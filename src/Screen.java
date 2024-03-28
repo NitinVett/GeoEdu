@@ -11,13 +11,14 @@ public class Screen extends JPanel {
     JButton settings;
     private Image backgroundImage;
     private JLabel errorMessageLabel;
+    private Screen prev;
     Font rubikScribble;
-    public Screen(FullScreenUI frame,JPanel previous) {
+    public Screen(FullScreenUI frame,Screen previous) {
         this.frame = frame;
         loadBackgroundImage();
         settings = new JButton();
         errorMessageLabel = new JLabel();
-
+        prev = previous;
         this.add(settings);
         //settings image here
 
@@ -56,7 +57,7 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-       swapScreens(frame.getSettings(this));
+       swapScreens(frame.getSettings(prev));
 
     }
     @Override
