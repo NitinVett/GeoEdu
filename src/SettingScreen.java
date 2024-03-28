@@ -47,17 +47,17 @@ public class SettingScreen extends Screen{
         int sliderY = height/3;
         int sliderWidth = width/3;
         int sliderHeight = height/15;
-        audio.setBounds(sliderX, sliderY, sliderWidth, sliderHeight);
+        audio.setBounds(width/3, height/2, width/3, sliderHeight);
 
 
         int textX = sliderX - textWidth;
         int textY = sliderY + (sliderHeight - textHeight) / 2 + metrics.getAscent();
 
-        g.drawString("AUDIO", textX, textY);
+        g.drawString("AUDIO",width/3, textY);
 
         exit.setBounds(width / 30, height/22, width / 10, height / 12);
         exit.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        muteButton.setBounds(width-width/4,height/3,width/10,height/12);
+        muteButton.setBounds(width/2+width/15,height/3,width/10,height/12);
         muteButton.setFont(new Font("SansSerif", Font.PLAIN, 24));
         highContrast.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         highContrast.setFont(new Font("SansSerif", Font.PLAIN, 24));
