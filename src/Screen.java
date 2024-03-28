@@ -2,12 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class Screen extends JPanel {
     JFrame frame;
     private Image backgroundImage;
 
+    Font rubikScribble;
 
     public Screen(JFrame frame) {
 
@@ -63,7 +66,8 @@ public class Screen extends JPanel {
             int y = (getHeight() - backgroundImage.getHeight(null)) / 2;
             g.drawImage(backgroundImage, x, y, this);
         }
-        //drawTitle((Graphics2D) g);
+        drawTitle((Graphics2D) g);
+
     }
 
     public void drawTitle(Graphics2D g) {
@@ -95,6 +99,17 @@ public class Screen extends JPanel {
                 }
             }
         });
+    }
+
+    public Font loadFont(String link, float size){
+        Font font = null;
+        try {
+            File fontStyle = new File(link);
+            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(size);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return font;
     }
 
 
