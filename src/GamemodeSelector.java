@@ -9,7 +9,7 @@ public class GamemodeSelector extends Screen{
     JButton esc;
     //JButton highScore;
 
-    public GamemodeSelector(FullScreenUI frame, JPanel previous) {
+    public GamemodeSelector(FullScreenUI frame, Screen previous) {
         super(frame,previous);
         global = new JButton();
         continental = new JButton();

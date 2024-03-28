@@ -7,7 +7,7 @@ import java.util.Objects;
 public class LoginScreen extends Screen{
     JTextField password, username;
     JButton login;
-    public LoginScreen(FullScreenUI frame,JPanel previous) {
+    public LoginScreen(FullScreenUI frame,Screen previous) {
         super(frame, previous);
         password = new JTextField("Enter Password", 16);
         username = new JTextField("Enter Username", 16);

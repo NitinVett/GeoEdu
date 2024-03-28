@@ -7,7 +7,7 @@ import java.util.Objects;
 public class ChangePasswordScreen extends Screen{
     JTextField oldPassword, newPassword, confirmPassword;
     JButton save;
-    public ChangePasswordScreen(FullScreenUI frame,JPanel previous) {
+    public ChangePasswordScreen(FullScreenUI frame,Screen previous) {
         super(frame,previous);
         oldPassword = new JTextField("Enter Old Password", 16);
         newPassword = new JTextField("Enter New Password", 16);

@@ -6,7 +6,7 @@ public class SettingScreen extends Screen{
     private JSlider audio;
     private JButton changePassword, debug, credits, muteButton, highContrast, exit;
     private JPanel prev;
-    public SettingScreen(FullScreenUI frame,JPanel previous) {
+    public SettingScreen(FullScreenUI frame,Screen previous) {
         super(frame,previous);
         prev = previous;
         audio = new JSlider();
