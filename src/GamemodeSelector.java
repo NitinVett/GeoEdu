@@ -6,8 +6,8 @@ public class GamemodeSelector extends Screen{
     JButton microNations;
     JButton Esc;
 
-    public GamemodeSelector(JFrame frame) {
-        super(frame);
+    public GamemodeSelector(FullScreenUI frame, JPanel previous) {
+        super(frame,previous);
         global = new JButton();
         continental = new JButton();
         microNations = new JButton();
@@ -48,15 +48,15 @@ public class GamemodeSelector extends Screen{
 
     public void global_button() {
 
-        swapScreens(new LoginScreen(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
     public void continental_button() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void Esc_button() {
-        swapScreens(new GameMainMenu(frame));
+        swapScreens(new GameMainMenu(frame,this));
     }
 
     public void microNation_Button() {

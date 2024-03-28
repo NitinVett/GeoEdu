@@ -5,12 +5,12 @@ import java.awt.event.FocusEvent;
 import java.net.URL;
 
 public class Screen extends JPanel {
-    JFrame frame;
+    FullScreenUI frame;
     JButton settings;
     private Image backgroundImage;
     private JLabel errorMessageLabel;
 
-    public Screen(JFrame frame) {
+    public Screen(FullScreenUI frame,JPanel previous) {
         this.frame = frame;
         loadBackgroundImage();
         settings = new JButton();
@@ -54,7 +54,8 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-       swapScreens(new SettingScreen(frame));
+       swapScreens(frame.getSettings(this));
+
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -116,6 +117,10 @@ public class Screen extends JPanel {
         });
         timer.setRepeats(false);
         timer.start();
+    }
+
+    public void setGameSettings(){
+
     }
 
     public void setFocusListeners(JTextField textField, String placeholder) {

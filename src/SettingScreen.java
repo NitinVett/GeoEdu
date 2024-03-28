@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class SettingScreen extends Screen{
-    JSlider audio;
-    JButton changePassword, debug, credits, muteButton, highContrast, exit;
-
-    public SettingScreen(JFrame frame) {
-        super(frame);
+    private JSlider audio;
+    private JButton changePassword, debug, credits, muteButton, highContrast, exit;
+    private JPanel prev;
+    public SettingScreen(FullScreenUI frame,JPanel previous) {
+        super(frame,previous);
+        prev = previous;
         audio = new JSlider();
         audio.setOpaque(false);
         changePassword = new JButton("CHANGE PASSWORD");
@@ -21,14 +23,24 @@ public class SettingScreen extends Screen{
         muteButton.addActionListener(e -> muteButton());
         highContrast.addActionListener(e -> muteButton());
         exit.addActionListener(e -> exitButton());
-        this.add(changePassword);
-        this.add(debug);
+
         this.add(credits);
         this.add(muteButton);
         this.add(highContrast);
         this.add(exit);
         this.add(audio);
-        repaint();
+
+    }
+
+    public void setPrev(Screen prev){
+        this.prev = prev;
+        System.out.println(this.prev.getClass().getName());
+        if(Objects.nonNull(this.prev)) {
+            if (!(this.prev.getClass().getName().equals("MainMenu") || this.prev.getClass().getName().equals("LoginScreen") || this.prev.getClass().getName().equals("RegisterScreen"))) {
+                this.add(changePassword);
+                this.add(debug);
+            }
+        }
     }
 
     public void setComponents(Graphics g){
@@ -70,16 +82,23 @@ public class SettingScreen extends Screen{
         repaint();
     }
     public void changePasswordButton() {
-        swapScreens(new ChangePasswordScreen(frame));
+        swapScreens(new ChangePasswordScreen(frame,this));
     }
     public void debugButton() {
-        swapScreens(new DebugScreen(frame));
+
+        swapScreens(new DebugScreen(frame,this));
     }
     public void creditsButton() {
-        swapScreens(new CreditsScreen(frame));
+        swapScreens(new CreditsScreen(frame,this));
     }
     public void exitButton() {
-        swapScreens(new ExitScreen(frame));
+        swapScreens(new ExitScreen(frame,this));
+    }
+
+    public void setGameSettings(){
+        this.remove(changePassword);
+        this.remove(debug);
+        revalidate();
     }
     public void audioSlider() {
         // mute function
@@ -90,9 +109,7 @@ public class SettingScreen extends Screen{
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-
-
+        this.remove(settings);
         setComponents(g);
 
 

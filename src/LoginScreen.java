@@ -7,8 +7,8 @@ import java.util.Objects;
 public class LoginScreen extends Screen{
     JTextField password, username;
     JButton login;
-    public LoginScreen(JFrame frame) {
-        super(frame);
+    public LoginScreen(FullScreenUI frame,JPanel previous) {
+        super(frame, previous);
         password = new JTextField("Enter Password", 16);
         username = new JTextField("Enter Username", 16);
         login = new JButton("LOGIN");
@@ -44,11 +44,12 @@ public class LoginScreen extends Screen{
 
         String pass = CsvHandler.getPassword(username.getText());
         if(Objects.nonNull(pass) && pass.equals(password.getText())) {
-            swapScreens(new GameMainMenu(frame));
+            swapScreens(new GameMainMenu(frame,this));
         }else {
             displayErrorMessage("Incorrect username/password");
         }
     }
+
 
 
     public void paintComponent(Graphics g) {
