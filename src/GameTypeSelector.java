@@ -9,8 +9,8 @@ public class GameTypeSelector extends Screen{
     JButton esc;
     //JButton highScore;
 
-    public GameTypeSelector(JFrame frame) {
-        super(frame);
+    public GameTypeSelector(FullScreenUI frame, Screen previous) {
+        super(frame,previous);
         marathon = new JButton();
         timed = new JButton();
         exploration = new JButton();
@@ -55,11 +55,11 @@ public class GameTypeSelector extends Screen{
     }
 
     public void marathonButton() {
-        swapScreens(new LoginScreen(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
     public void timedButton() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void explorationButton() {
@@ -69,7 +69,7 @@ public class GameTypeSelector extends Screen{
     }
 
     public void escButton() {
-        swapScreens(new GamemodeSelector(frame));
+        swapScreens(new GamemodeSelector(frame,this));
     }
 
 

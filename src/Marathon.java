@@ -35,8 +35,8 @@ public class Marathon extends Screen {
     private JLabel highScoreLabel;
     private Image resizedImage;
 
-    public Marathon(JFrame frame, String username) throws IOException {
-        super(frame);
+    public Marathon(FullScreenUI frame,Screen previous, Player username) throws IOException {
+        super(frame,previous);
         newGame = new JButton();
         continue_ = new JButton();
         tutorial = new JButton();
@@ -153,15 +153,15 @@ public class Marathon extends Screen {
 
     public void newGameButton() {
 
-        swapScreens(new LoginScreen(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
     public void continue_Button() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void highScoreButton() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new RegisterScreen(frame,this));
     }
 
     public void tutorialButton() {

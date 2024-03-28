@@ -7,7 +7,7 @@ public class ScreenTester {
         JFrame main = new JFrame();
         main.setExtendedState(JFrame.MAXIMIZED_BOTH);
         main.setUndecorated(true);
-        main.setContentPane(new Marathon(main,"hi"));
+       // main.setContentPane(new Marathon( main,"hi",null));
         main.setVisible(true);
         main.requestFocus();
 

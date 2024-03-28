@@ -8,8 +8,8 @@ public class ContinentalModeSelector extends Screen{
     JButton esc;
     //JButton highScore;
 
-    public ContinentalModeSelector(JFrame frame) {
-        super(frame);
+    public ContinentalModeSelector(FullScreenUI frame,Screen previous) {
+        super(frame,previous);
         americas = new JButton();
         asia = new JButton();
         europe = new JButton();
@@ -55,19 +55,19 @@ public class ContinentalModeSelector extends Screen{
 
     public void americasButton() {
 
-        swapScreens(new GameTypeSelector(frame));
+        swapScreens(new GameTypeSelector(frame,this));
     }
 
     public void asiaButton() {
-        swapScreens(new GameTypeSelector(frame));
+        swapScreens(new GameTypeSelector(frame,this));
     }
 
     public void europeButton() {
-        swapScreens(new GameTypeSelector(frame));
+        swapScreens(new GameTypeSelector(frame,this));
     }
 
     public void escButton() {
-        swapScreens(new GamemodeSelector(frame));
+        swapScreens(new GamemodeSelector(frame,this));
     }
 
 
