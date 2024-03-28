@@ -66,7 +66,7 @@ public class GameMainMenu extends Screen {
     }
 
     public void highScoreButton() {
-        swapScreens(new RegisterScreen(frame));
+        swapScreens(new HighScoreScreen(frame,0));
     }
 
     public void tutorialButton() {

@@ -43,7 +43,33 @@ public class CsvHandler {
         return userValuesMap;
     }
 
+    public static ArrayList<String> getAllUsers(){
+        ArrayList<String> Users = new ArrayList<>();
+        try {
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            Map<String, String> row;
+            while ((row = reader.readMap()) != null) {
+                Users.add(row.get("user_name"));
+
+            }
+            } catch (CsvValidationException | IOException e) {
+            e.printStackTrace();
+        }
+        return Users;
+    }
+
+    public static ArrayList<String> getHighScoreOrder(){
+        ArrayList<String> users = getAllUsers();
+        users.sort((user1, user2) -> {
+            int score1 = Integer.parseInt(getHighScore(user1));
+            int score2 = Integer.parseInt(getHighScore(user2));
+            // For descending order, swap user1 and user2 comparison
+            return Integer.compare(score2, score1);
+        });
+        return users;
+    }
     public static String getPassword(String userName) {
+
         return getField(userName, "password");
     }
 
