@@ -43,7 +43,33 @@ public class CsvHandler {
         return userValuesMap;
     }
 
+    public static ArrayList<String> getAllUsers(){
+        ArrayList<String> Users = new ArrayList<>();
+        try {
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            Map<String, String> row;
+            while ((row = reader.readMap()) != null) {
+                Users.add(row.get("user_name"));
+
+            }
+            } catch (CsvValidationException | IOException e) {
+            e.printStackTrace();
+        }
+        return Users;
+    }
+
+    public static ArrayList<String> getHighScoreOrder(){
+        ArrayList<String> users = getAllUsers();
+        users.sort((user1, user2) -> {
+            int score1 = Integer.parseInt(getHighScore(user1));
+            int score2 = Integer.parseInt(getHighScore(user2));
+            // For descending order, swap user1 and user2 comparison
+            return Integer.compare(score2, score1);
+        });
+        return users;
+    }
     public static String getPassword(String userName) {
+
         return getField(userName, "password");
     }
 
@@ -194,38 +220,47 @@ public class CsvHandler {
         return false; // User does not exist
     }
 
-    public static int addUser(String userName, String password) {
+    public static String addUser(String userName, String password) {
         if (isDuplicateUser(userName)) {
-            System.out.println("Error: User already exists.");
-            return 1;
+            return "User already exists.";
+
         }
-
-        try {
-            FileWriter writer = new FileWriter(CSV_FILE_PATH, true); // Append mode to add new entry
-            CSVWriter csvWriter = new CSVWriter(writer);
-
-            String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
-            newUser[0] = userName; // Set the username
-            newUser[1] = password;
-            newUser[2] = "0";
-            newUser[3] = "N";
-            newUser[4] = "100%";
-            newUser[6] = "0";
-
-
-            csvWriter.writeNext(newUser);
-            csvWriter.close();
-            return 0;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return 1;
+        if((userName.length() > 16 || userName.length() < 4) || (password.length() > 16 || password.length() < 4)){
+            System.out.println(userName.isEmpty());
+            return "password and username must be between 4-16 characters";
         }
+        else if(!userName.matches("^[a-zA-Z0-9]+$")){
+            return "password and username must only contain alphanumeric characters";
+        }
+        else {
 
+            try {
+                FileWriter writer = new FileWriter(CSV_FILE_PATH, true); // Append mode to add new entry
+                CSVWriter csvWriter = new CSVWriter(writer);
+
+                String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
+                newUser[0] = userName; // Set the username
+                newUser[1] = password;
+                newUser[2] = "0";
+                newUser[3] = "N";
+                newUser[4] = "100%";
+                newUser[6] = "0";
+
+
+                csvWriter.writeNext(newUser);
+                csvWriter.close();
+                return "APPROVED";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Unknown error occured";
+            }
+        }
     }
+
     public static void main(String[] args) {
-          printAllUsers();
-//        System.out.println("Password for ahafeez7: " + getPassword("ahafeez7"));
-//        System.out.println("Number of games played for ahafeez7: " + getNumGamesPlayed("ahafeez7"));
+          //printAllUsers();
+           System.out.println("Password for jam: " + getPassword("jam"));
+        System.out.println("Number of games played for jam: " + getNumGamesPlayed("jam"));
 //        System.out.println("Saved game for ahafeez7: " + getSavedGame("ahafeez7"));
 //        System.out.println("Accuracy rate for ahafeez7: " + getAccuracyRate("ahafeez7"));
 //        System.out.println("List of countries for ahafeez7: " + getListOfCountry("ahafeez7"));

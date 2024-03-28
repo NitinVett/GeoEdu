@@ -17,4 +17,8 @@ public class GameSound {
     public void play() {
         clip.start();
     }
+
+    public void setVolume(){
+
+    }
 }

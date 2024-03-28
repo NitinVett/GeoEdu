@@ -2,29 +2,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class Screen extends JPanel {
-    JFrame frame;
+    FullScreenUI frame;
+    JButton settings;
     private Image backgroundImage;
-
-
-    public Screen(JFrame frame) {
-
+    private JLabel errorMessageLabel;
+    Font rubikScribble;
+    public Screen(FullScreenUI frame,JPanel previous) {
         this.frame = frame;
-        //set the background for our screens here
-        //this.setBackground();
-        JButton settings = new JButton();
         loadBackgroundImage();
+        settings = new JButton();
+        errorMessageLabel = new JLabel();
+
+        this.add(settings);
         //settings image here
+
         //settings.setIcon();
 
         //setting button location here
-        //settings.setBounds();
 
-
-        this.setVisible(true);
         settings.addActionListener(e -> settingsButton());
+        settings.setText("SETTINGS");
+        this.setVisible(true);
         this.setLayout(null);
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setVisible(true);
@@ -53,6 +56,7 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
+       swapScreens(frame.getSettings(this));
 
     }
     @Override
@@ -64,6 +68,11 @@ public class Screen extends JPanel {
             g.drawImage(backgroundImage, x, y, this);
         }
         drawTitle((Graphics2D) g);
+        int width = getWidth();
+        int height = getHeight();
+        settings.setBounds(width-width/8, height/22, width / 10, height / 12);
+        settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
+
     }
 
     public void drawTitle(Graphics2D g) {
@@ -77,6 +86,43 @@ public class Screen extends JPanel {
         int yPosition = getHeight() / 10;
 
         g.drawString("GEOCRAFT", xPosition, yPosition);
+    }
+
+    public void displayErrorMessage(String message) {
+        int width = getWidth();
+        int messageHeight = 30;
+
+        errorMessageLabel.setBounds(0, messageHeight/2, width, messageHeight);
+        errorMessageLabel.setText(message);
+        errorMessageLabel.setHorizontalAlignment(JLabel.CENTER);
+
+
+        errorMessageLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+
+        errorMessageLabel.setBackground(Color.WHITE);
+        errorMessageLabel.setOpaque(true);
+
+        errorMessageLabel.setForeground(Color.RED);
+        errorMessageLabel.setVisible(true);
+
+        this.add(errorMessageLabel);
+        revalidate();
+        repaint();
+
+        int delay = 5000;
+        Timer timer = new Timer(delay, e -> {
+            System.out.println("here");
+            errorMessageLabel.setVisible(false); // Hide the message
+            revalidate();
+            repaint();
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
+
+    public void setGameSettings(){
+
     }
 
     public void setFocusListeners(JTextField textField, String placeholder) {
@@ -95,6 +141,17 @@ public class Screen extends JPanel {
                 }
             }
         });
+    }
+
+    public Font loadFont(String link, float size){
+        Font font = null;
+        try {
+            File fontStyle = new File(link);
+            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(size);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return font;
     }
 
 

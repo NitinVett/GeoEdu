@@ -1,65 +1,83 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+
 public class GamemodeSelector extends Screen{
     JButton global;
     JButton continental;
     JButton microNations;
-    JButton Esc;
+    JButton esc;
+    //JButton highScore;
 
-    public GamemodeSelector(JFrame frame) {
-        super(frame);
+    public GamemodeSelector(FullScreenUI frame, JPanel previous) {
+        super(frame,previous);
         global = new JButton();
         continental = new JButton();
         microNations = new JButton();
-        Esc = new JButton();
+        esc = new JButton();
 
-        global.addActionListener(e -> global_button());
+        //highScore = new JButton();
+        /*
+        Font font = null;
+        try {
+            File fontStyle = new File("resources/RubikScribble-Regular.ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(44f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        global.addActionListener(e -> globalButton());
         global.setText("Global");
+        global.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
-        continental.addActionListener(e -> continental_button());
+        continental.addActionListener(e -> continentalButton());
         continental.setText("Continental");
+        continental.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
-        microNations.addActionListener(e -> microNation_Button());
+        microNations.addActionListener(e -> microNationButton());
         microNations.setText("Micro-nations");
+        microNations.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
-        Esc.addActionListener(e -> Esc_button());
-        Esc.setText("Esc");
+        esc.addActionListener(e -> escButton());
+        esc.setText("Esc");
+        esc.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
+
 
         this.add(global);
         this.add(continental);
         this.add(microNations);
-        this.add(Esc);
+        this.add(esc);
     }
 
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
         int mainButtonX = width / 3 - width / 5;
-        int mainButtonY = height / 3;
+        int mainButtonY = height / 3 + height / 11;
         int mainButtonYIncrement = height / 10;
-        global.setBounds(mainButtonX, mainButtonY, width / 5, height / 12);
-        continental.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
-        microNations.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
-        Esc.setBounds(mainButtonX - width / 8, (mainButtonY + height / 50) - 370, (width / 10) - 30, height / 12);
+        global.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
+        continental.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
+        microNations.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
+        esc.setBounds(mainButtonX/mainButtonX, mainButtonY/mainButtonY, (width / 10) - 30, height / 12);
         //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
 
     }
 
-    public void global_button() {
+    public void globalButton() {
 
-        swapScreens(new LoginScreen(frame));
+        swapScreens(new LoginScreen(frame,this));
     }
 
-    public void continental_button() {
-        swapScreens(new RegisterScreen(frame));
+    public void continentalButton() {
+        swapScreens(new RegisterScreen(frame,this));
     }
 
-    public void Esc_button() {
-        swapScreens(new GameMainMenu(frame));
+    public void escButton() {
+        swapScreens(new GameMainMenu(frame,this));
     }
 
-    public void microNation_Button() {
+    public void microNationButton() {
         TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
         frame.addKeyListener(tutorialScreen);
         swapScreens(tutorialScreen);
@@ -69,12 +87,23 @@ public class GamemodeSelector extends Screen{
         frame.dispose();
     }
 
+
     @Override
     protected void paintComponent(Graphics g) {
-        System.out.println("xx");
+        int width = getWidth();
+        int height = getHeight();
+        int mainButtonX = width / 3 - width / 7;
+        int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
-//        Graphics2D g2D = (Graphics2D) g;
-//        drawTitle(g2D);
+        /** Font font = null;
+        try {
+            File fontStyle = new File("resources/RubikScribble-Regular.ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(44f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        g.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
+        g.drawString("Select a game mode!", mainButtonX, mainButtonY);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
     }
 }
