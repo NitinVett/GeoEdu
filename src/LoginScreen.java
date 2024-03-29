@@ -44,7 +44,9 @@ public class LoginScreen extends Screen{
 
         String pass = CsvHandler.getPassword(username.getText());
         if(Objects.nonNull(pass) && pass.equals(password.getText())) {
-            swapScreens(new GameMainMenu(frame,this));
+            Player user = new Player(username.getText(),password.getText());
+            swapScreens(new GameMainMenu(frame,this,user));
+
         }else {
             displayErrorMessage("Incorrect username/password");
         }

@@ -5,9 +5,11 @@ import java.util.Objects;
 public class SettingScreen extends Screen{
     private JSlider audio;
     private JButton changePassword, debug, credits, muteButton, highContrast, exit;
-    private JPanel prev;
-    public SettingScreen(FullScreenUI frame,Screen previous) {
-        super(frame,previous);
+
+    Player user;
+    public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
+        super(frame,previous,user);
+
         prev = previous;
         audio = new JSlider();
         audio.setOpaque(false);
@@ -32,15 +34,19 @@ public class SettingScreen extends Screen{
 
     }
 
+
+
     public void setPrev(Screen prev){
         this.prev = prev;
-        System.out.println(this.prev.getClass().getName());
         if(Objects.nonNull(this.prev)) {
             if (!(this.prev.getClass().getName().equals("MainMenu") || this.prev.getClass().getName().equals("LoginScreen") || this.prev.getClass().getName().equals("RegisterScreen"))) {
                 this.add(changePassword);
                 this.add(debug);
             }
         }
+    }
+    public void setUser(Player user){
+        this.user = user;
     }
 
     public void setComponents(Graphics g){
@@ -82,7 +88,7 @@ public class SettingScreen extends Screen{
         repaint();
     }
     public void changePasswordButton() {
-        swapScreens(new ChangePasswordScreen(frame,this));
+        swapScreens(new ChangePasswordScreen(frame,this,user));
     }
     public void debugButton() {
 
@@ -95,11 +101,7 @@ public class SettingScreen extends Screen{
         swapScreens(new ExitScreen(frame,this));
     }
 
-    public void setGameSettings(){
-        this.remove(changePassword);
-        this.remove(debug);
-        revalidate();
-    }
+
     public void audioSlider() {
         // mute function
     }

@@ -7,8 +7,8 @@ import java.util.Objects;
 public class ChangePasswordScreen extends Screen{
     JTextField oldPassword, newPassword, confirmPassword;
     JButton save;
-    public ChangePasswordScreen(FullScreenUI frame,Screen previous) {
-        super(frame,previous);
+    public ChangePasswordScreen(FullScreenUI frame,Screen previous,Player user) {
+        super(frame,previous,user);
         oldPassword = new JTextField("Enter Old Password", 16);
         newPassword = new JTextField("Enter New Password", 16);
         confirmPassword = new JTextField("Confirm Password", 16);
@@ -53,7 +53,7 @@ public class ChangePasswordScreen extends Screen{
 
         String pass = CsvHandler.getPassword(newPassword.getText());
         if(Objects.nonNull(pass) && pass.equals(confirmPassword.getText())) {
-            swapScreens(new GameMainMenu(frame,this));
+            swapScreens(new GameMainMenu(frame,this,user));
         }else {
             displayErrorMessage("Incorrect username/password");
         }
