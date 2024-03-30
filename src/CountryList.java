@@ -2,6 +2,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
+// Returns a list of country object specified by the mode
+// can recieve one or two parameters
 public class CountryList {
     public static Country[] getCountries(String mode) {
         return getCountries(mode, null);

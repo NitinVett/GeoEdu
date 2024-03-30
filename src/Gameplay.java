@@ -8,17 +8,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-/// make this the parent class for game mode
-// one class that  contians common elements, choice 1.
-// Make a custom high score panel class so that i can add trophy graphic
-// Proof of concept
+
+
+// ACtually drawing on the screen, it receives three countries, one correct and two incorrect, it receives an instance of
+// the class that called it, it has action listeners,
 public class Gameplay extends Screen {
 
-    // basic structure, indivual classes will do timer and lives,
-    // text needs to be dynamic, which is country name, so i want to have a randomizer. first find the list of country
-    // text file, 0...pakistan, 1...china.... then its going to create an array of how many country objects. then
-    // that selects a random country, removes it from the array, gets the map and hints and the flag, then its puts that
-    // name as a choice button and then it reads any two other country but doesnt remove them, just gets the name.
     private JButton choice1Button;
     private JButton choice2Button;
     private JButton choice3Button;
@@ -37,6 +32,11 @@ public class Gameplay extends Screen {
     private String user;
     private GameTesting gameTesting;
     private JToggleButton toggleButton;
+
+
+    // Three country objects, through them you can pull all the information necessary (flag,mao,hints)
+    // When we feed this program, we give it one correct country (this is the country whose data we load )
+    // The two incorrect countries (we just use them to pull the names of the country)
 
 
     public Gameplay(GameTesting gameTesting, Screen previous, String user, Country correctCountry, Country incorrect1, Country incorrect2) throws IOException {
@@ -85,6 +85,8 @@ public class Gameplay extends Screen {
         ArrayList<Integer> visitedIndices = new ArrayList<>();
 
         // Creating choice buttons
+        // it puts the country names into an array, 0,1,2
+        // it puts the names in another array, but the order of insertion is rando,.
         for (int i = 0; i < 3; i++) {
             index = ThreadLocalRandom.current().nextInt(0, 3);
             while (visitedIndices.contains(index)) {
@@ -220,12 +222,15 @@ public class Gameplay extends Screen {
 
     }
 
-    private void clickHandling(JButton choice1Button) {
+    private void clickHandling(JButton choiceButton) {
         int highscore = Integer.parseInt(CsvHandler.getHighScore(user));
-        if (Objects.equals(choice1Button.getText(), correctCountry.getName())) {
+        if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
             highscore = highscore + 5;
             CsvHandler.changeHighScore(user, String.valueOf(highscore));
             highScoreLabel.setText("High Score: " + highscore);
+
+
+            //Returns exceution, this class only deals with three countries, 50 countries
             gameTesting.startNextIteration();
             // Go back to where it was called
         } else {
