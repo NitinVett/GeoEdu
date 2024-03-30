@@ -13,6 +13,7 @@ public class Screen extends JPanel {
     private JLabel errorMessageLabel;
     Screen prev;
     Player user;
+    
     Font rubikScribble;
     public Screen(FullScreenUI frame,Screen previous) {
 
