@@ -1,7 +1,7 @@
 "user_name","password","num_games_played","saved_game?","accuracy_rate","ListOfCountry","highScore"
 "123","1","0","N","100%","listOfCountry","10"
 "1234","1","0","N","100%","listOfCountry","11"
-"jam","1","0","N","100%","listOfCountry","0"
+"jam","1","0","N","100%","listOfCountry","390"
 "j","1","0","N","100%","listOfCountry","0"
 "boba","jaja","0","N","100%","listOfCountry","0"
 "bobb","aaaa","0","N","100%","listOfCountry","0"
@@ -10,3 +10,4 @@
 "sfsasd","jam12","0","N","100%","listOfCountry","0"
 "Nitin","umbrella","0","N","100%","listOfCountry","0"
 "logi","eat4","0","N","100%","listOfCountry","0"
+"meow1","meow2","0","N","100%","listOfCountry","0"

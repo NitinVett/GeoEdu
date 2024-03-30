@@ -1,0 +1,304 @@
+ID,Country Name,Continent Mode,Continent Name,Global Mode,Micro Nation Mode,Hints
+0,United States of America,Yes,Americas,Yes,No,"The Statue of Liberty stands as a symbol of freedom and democracy.
+Home of Hollywood, the historic center of movie studios and stars.
+A melting pot of cultures with a rich history in jazz music."
+1,China,Yes,Asia,Yes,No,"The Great Wall winds like a dragon through the country's northern borders.
+Rapidly growing global superpower with a deep history of dynasties.
+Famous for panda conservation efforts and traditional Chinese medicine"
+2,Germany,Yes,Europe,Yes,No,"Known for its engineering excellence and the world-famous Oktoberfest.
+Berlin Wall remnants stand as a historical lesson in unity.
+The Autobahn showcases a passion for cars and no speed limits."
+3,Japan,Yes,Asia,Yes,No,"Land of the Rising Sun, where ancient traditions meet futuristic technology.
+Famous for Mount Fuji, cherry blossoms, and a unique anime culture.
+Culinary excellence symbolized by sushi and meticulous food preparation."
+4,India,Yes,Asia,Yes,No,"The Taj Mahal in Agra is a monument of enduring love.
+A vast nation where Bollywood movies and spicy cuisine thrive.
+Rich in diversity, from the Himalayas to the Indian Ocean coastlines."
+5,United Kindom,Yes,Europe,Yes,No,"The British monarchy captivates many with centuries of royal history.
+Iconic double-decker buses and the Big Ben clock are London staples.
+A literary goldmine, the birthplace of Shakespeare and modern English."
+6,France,Yes,Europe,Yes,No,"The Louvre Museum holds the world-renowned Mona Lisa painting.
+French cuisine is celebrated globally, from fine wines to delicate pastries.
+Paris, the city of love, is famed for fashion, art, and the Eiffel Tower."
+7,Italy,Yes,Europe,Yes,No,"The Louvre Museum holds the world-renowned Mona Lisa painting.
+French cuisine is celebrated globally, from fine wines to delicate pastries.
+Paris, the city of love, is famed for fashion, art, and the Eiffel Tower."
+8,Brazil,Yes,Americas,Yes,No,"The Amazon Rainforest breathes life as the planet's lungs.
+Celebrated for the spirited carnival and the iconic Christ the Redeemer.
+Football is a way of life, producing many of the world's best players."
+9,Canada,Yes,Americas,Yes,No,"Expansive natural landscapes with the majestic Rocky Mountains.
+The cultural mosaic is celebrated through bilingualism and multicultural cities.
+Renowned for friendly locals, maple syrup, and harsh winters."
+10,Russia,Yes,Europe,Yes,No,"The vast expanse of Siberia and the cultural richness of the Kremlin.
+Ballet, classical music, and literature are pillars of cultural heritage.
+The Trans-Siberian Railway spans across continents from Europe to Asia."
+11,Mexico,Yes,Americas,Yes,No,"Rich pre-Columbian history manifesting in Mayan and Aztec ruins.
+Vibrant traditions, Dia de los Muertos, and spicy street food.
+Cancun's beaches and the bustling metropolis of Mexico City captivate tourists."
+12,South Korea,Yes,Asia,Yes,No,"A tech-savvy nation known for K-pop, Samsung, and skincare innovations.
+The demilitarized zone stands as a reminder of a country divided.
+Traditional Hanok villages contrast with Seoul’s futuristic skyline."
+13,Australia,No,Oceania,Yes,No,"The Outback's red deserts contrast with the Great Barrier Reef's blue waters.
+Unique wildlife includes kangaroos, koalas, and venomous species.
+Indigenous Aboriginal culture weaves a rich tapestry of the country’s heritage."
+14,Spain,Yes,Europe,Yes,No,"Flamenco music and dance embody the vibrant Spanish culture.
+Home to historical cities like Barcelona and Madrid, rich in art and life.
+Culinary treats from paella to tapas are integral to social life."
+15,Indonesia,Yes,Asia,Yes,No,"An archipelago with over seventeen thousand islands, including Bali.
+Rich biodiversity including orangutans and ancient Komodo dragons.
+A cultural mosaic with hundreds of ethnic groups and languages."
+16,Turkey,Yes,Europe,Yes,No,"A historic crossroads of civilizations, bridging Asia and Europe.
+Istanbul's Grand Bazaar, ancient Hagia Sophia, and the Bosphorus Strait.
+Renowned for its flavorful cuisine, Turkish coffee, and delight."
+17,Netherlands,Yes,Europe,Yes,No,"Famous for tulips, windmills, and an extensive network of canals.
+A leading advocate for human rights and international law.
+Bicycle-friendly cities with a rich art history including Van Gogh"
+18,Saudi Arabia,Yes,Asia,Yes,No,"The birthplace of Islam, housing the holy cities of Mecca and Medina.
+An oil-rich kingdom rapidly diversifying its economy and culture.
+Red Sea coral reefs and the ancient Nabatean city of Hegra."
+19,Switzerland,Yes,Europe,Yes,No,"Neutral ground with a tradition of diplomacy and international peacekeeping.
+Famous for the Alps, luxury watches, and quality chocolate.
+A financial hub with a reputation for privacy and efficiency."
+20,Poland,Yes,Europe,Yes,No,"Historical resilience shown through cities like Warsaw and Krakow.
+Rich in medieval architecture and modern post-communist transformation.
+Traditional cuisine like pierogi and kielbasa enjoyed nationwide"
+21,Taiwan,Yes,Asia,Yes,No,"A democratic success story known for electronics and vibrant democracy.
+The towering Taipei 101 reflects a modern face amid traditional culture.
+Night markets buzz with delicious street food and lively atmosphere."
+22,Belgium,Yes,Europe,Yes,No,"Enchanting medieval towns and Renaissance architecture dot the country.
+Renowned for crafting fine chocolates, beers, and diamond trading.
+Headquarters of the European Union and NATO in the heart of Europe."
+23,Argentina,Yes,Americas,Yes,No,"The land of the tango, pampas, and the passionate dance of soccer.
+Dramatic landscapes from the Iguazu Falls to the Patagonian glaciers.
+Cultural heritage shines in Buenos Aires, the Paris of South America."
+24,Sweden,Yes,Europe,Yes,No,"Known for a high quality of life and a strong welfare state.
+The natural beauty of the Northern Lights and vast Arctic wilderness.
+A global music powerhouse, from ABBA to modern pop producers."
+25,Ireland,Yes,Europe,Yes,No,"A land of myths and legends, from leprechauns to literary giants.
+Rolling green hills, rugged coastlines, and the Giant's Causeway.
+The warmth of Irish pubs and the joy of traditional folk music."
+26,Norway,Yes,Europe,Yes,No,"Famed for stunning fjords, polar explorers, and Viking history.
+Oil wealth funds a comprehensive social welfare system and cultural projects.
+Winter sports thrive here, set against the backdrop of the Northern Lights."
+27,Austria,Yes,Europe,Yes,No,"Birthplace of classical music legends like Mozart and Schubert.
+Alpine skiing destinations and the cultural grandeur of Vienna.
+Known for its historic castles, palaces, and the Vienna Opera Ball."
+28,Venezuela,Yes,Americas,Yes,No,
+29,Thailand,Yes,Asia,Yes,No,"Tropical beaches, ornate temples, and the vibrant streets of Bangkok.
+A culinary paradise with dishes like Pad Thai and Tom Yum Goong.
+Celebrated for its warm hospitality and colorful cultural festivals."
+30,United Arab Emirates,Yes,Asia,Yes,No,"A federation known for luxury shopping, ultramodern architecture, and a vibrant expat community.
+The towering Burj Khalifa in Dubai and the rich art of the Louvre Abu Dhabi.
+Advances in technology, renewable energy, and space exploration signify its ambitions."
+31,Singapore,Yes,Asia,Yes,Yes,"A city-state known for its rigorous governance and lush garden landscapes.
+The iconic Marina Bay Sands and the enchanting Gardens by the Bay.
+A melting pot of cultures with a reputation for cleanliness and safety."
+32,Bangladesh,Yes,Asia,Yes,No,"The Sundarbans mangrove forest is home to the royal Bengal tiger.
+A land of rivers, with the Ganges delta creating fertile landscapes.
+Rapid economic growth driven by the textile and garments industry."
+33,Philippines,Yes,Asia,Yes,No,"Over seven thousand islands featuring stunning beaches and biodiversity.
+Heartwarming hospitality and a vibrant blend of Asian and Spanish cultures.
+The colorful jeepney is a symbol of resourcefulness and artistry."
+34,Vietnam,Yes,Asia,Yes,No,"Known for the lush Mekong Delta, bustling Hanoi, and scenic Halong Bay.
+A rich history from ancient dynasties to the Vietnam War.
+Culinary fame with dishes like pho, banh mi, and fresh spring rolls."
+35,Malaysia,Yes,Asia,Yes,No,"Known for the lush Mekong Delta, bustling Hanoi, and scenic Halong Bay.
+A rich history from ancient dynasties to the Vietnam War.
+Culinary fame with dishes like pho, banh mi, and fresh spring rolls."
+36,Denmark,Yes,Europe,Yes,No,"Known for the lush Mekong Delta, bustling Hanoi, and scenic Halong Bay.
+A rich history from ancient dynasties to the Vietnam War.
+Culinary fame with dishes like pho, banh mi, and fresh spring rolls."
+37,Egypt,No,Africa,Yes,No,"Millennia-old monuments sit along the fertile Nile River Valley.
+The Great Pyramids of Giza and the Sphinx are symbols of ancient marvels.
+A cultural melting pot, with influences from Africa, the Middle East, and the Mediterranean."
+38,Nigeria,No,Africa,Yes,No,"The Giant of Africa with a booming population and rich cultural diversity.
+Nollywood's film industry is a beacon of African storytelling.
+Diverse ecosystems, from mangroves and rainforests to the Sahel savannas."
+39,South Africa,No,Africa,Yes,No,"The Rainbow Nation, celebrated for its diversity and Mandela's legacy.
+Kruger National Park offers one of the finest African safari experiences.
+A land where oceans meet at the Cape of Good Hope and Table Mountain looms large."
+40,Iran,Yes,Asia,Yes,No,"The rich heritage of ancient Persia lives on in architecture and traditions.
+Poetic legacy with works from Rumi and Hafez treasured globally.
+Landscapes ranging from snow-capped mountains to desert plateaus."
+41,Colombia,Yes,Americas,Yes,No,"The rich heritage of ancient Persia lives on in architecture and traditions.
+Poetic legacy with works from Rumi and Hafez treasured globally.
+Landscapes ranging from snow-capped mountains to desert plateaus."
+42,Romania,Yes,Europe,Yes,No,"The rich heritage of ancient Persia lives on in architecture and traditions.
+Poetic legacy with works from Rumi and Hafez treasured globally.
+Landscapes ranging from snow-capped mountains to desert plateaus."
+43,Chile,Yes,Americas,Yes,No,"The rich heritage of ancient Persia lives on in architecture and traditions.
+Poetic legacy with works from Rumi and Hafez treasured globally.
+Landscapes ranging from snow-capped mountains to desert plateaus."
+44,Pakistan,Yes,Asia,Yes,No,"The rich heritage of ancient Persia lives on in architecture and traditions.
+Poetic legacy with works from Rumi and Hafez treasured globally.
+Landscapes ranging from snow-capped mountains to desert plateaus."
+45,Finland,Yes,Europe,Yes,No,"Land of a thousand lakes and the northern lights' ethereal beauty.
+Known for high-tech industries, design, and the Moomins' whimsical tales.
+The Finnish sauna is a national pastime, emblematic of Nordic wellbeing."
+46,Iraq,Yes,Asia,Yes,No,"The cradle of civilization, home to ancient Babylon and Mesopotamian history.
+A country rebuilding, rich in oil and the memory of ancient glories.
+The Tigris and Euphrates rivers nourish the land in the heart of the Middle East."
+47,Portugal,Yes,Europe,Yes,No,"Maritime explorers who charted unknown waters during the Age of Discovery.
+Picturesque landscapes with historic towns, vineyards, and the Tagus River.
+Fado music tells stories of the sea, love, and longing in melodic tones."
+48,Kazakhstan,Yes,Asia,No,No,"The vast steppes are home to the Baikonur Cosmodrome and nomadic traditions.
+A rich blend of Turkic and Russian cultures with futuristic capital Nur-Sultan.
+Economic powerhouse of Central Asia, rich in minerals and oil."
+49,Qatar,Yes,Asia,No,No,"Wealth built on oil and natural gas funds its futuristic skyline in Doha.
+A cultural hub in the Gulf with the Museum of Islamic Art and Al Jazeera.
+Preparing for the global stage as host of the 2022 FIFA World Cup."
+50,Kuwait,Yes,Asia,No,No,"Known for its significant oil reserves and modern architecture.
+A cultural oasis with the Grand Mosque and Kuwait Towers.
+Despite the desert climate, it boasts beautiful seaside promenades."
+51,Oman,Yes,Asia,No,No,"A sultanate with diverse terrain from deserts to maritime cliffs.
+Muscat showcases rich Islamic architecture and vibrant public markets.
+Ancient maritime traditions and the sweet scent of frankincense."
+52,Uzbekistan,Yes,Asia,No,No,"A sultanate with diverse terrain from deserts to maritime cliffs.
+Muscat showcases rich Islamic architecture and vibrant public markets.
+Ancient maritime traditions and the sweet scent of frankincense."
+53,Turkmenistan,Yes,Asia,No,No,"The Karakum Desert's Door to Hell is a fiery crater of natural gas.
+A hermit kingdom with grand monuments and a love for horse breeds.
+The ancient city of Merv whispers tales from the Silk Road era."
+54,Sri Lanka,Yes,Asia,No,No,"The teardrop island of the Indian Ocean, rich in tea plantations and biodiversity.
+Ancient ruins in cities like Anuradhapura tell of a long and storied history.
+Pristine beaches and warm waters invite exploration and relaxation."
+55,Greece,Yes,Europe,Yes,No,"The cradle of Western civilization, philosophy, and the Olympic Games.
+The Parthenon stands as a testament to ancient architectural prowess.
+Islands like Santorini and Mykonos offer stunning vistas and sunsets."
+56,Ukraine,Yes,Europe,No,No,"A country defined by its resilient spirit and rich agricultural lands.
+Chernobyl's ghost town and the Black Sea's beaches tell diverse tales.
+Kyiv's golden-domed churches reflect a deep Orthodox Christian heritage."
+57,Hungary,Yes,Europe,No,No,"Budapest, the Danube's pearl, with its historic thermal baths and castles.
+The Magyar spirit alive in traditional music, horseback archery, and paprika.
+The Great Plain and Lake Balaton showcase Hungary's natural beauty."
+58,Slovakia,Yes,Europe,No,No,"The High Tatras mountains offer breathtaking hikes and alpine vistas.
+Bratislava's charming old town and castles tell tales of a crossroads of empires.
+Folk traditions thrive in villages, with vibrant costumes and wooden churches."
+59,Peru,Yes,Americas,No,No,"The Inca Empire's legacy is enshrined in Machu Picchu's mystic ruins.
+A culinary powerhouse with dishes like ceviche reflecting a fusion of cultures.
+The Amazon basin's biodiversity contrasts with the Andean highlands."
+60,Ecuador,Yes,Americas,No,No,"The Galápagos Islands, where Darwin's theory of evolution took shape.
+Straddling the equator, it boasts diverse ecosystems from the Andes to the Amazon.
+Quito and Cuenca, cities rich in colonial history and indigenous cultures.
+"
+61,Dominican Republic,Yes,Americas,No,No,"The Caribbean's rhythms pulse in merengue and bachata.
+Pristine beaches and the first European settlement in the Americas.
+The peak of Pico Duarte and the depths of Lake Enriquillo bookend its landscapes."
+62,Puerto Rico,Yes,Americas,No,No,"A vibrant blend of Spanish, African, and Taino cultures under the Caribbean sun.
+Old San Juan tells tales of pirates and colonialism amidst cobblestone streets.
+The El Yunque Rainforest is a lush, tropical haven for diverse wildlife."
+63,Cuba,Yes,Americas,No,No,"The spirit of the revolution echoes through Havana's colorful streets.
+Classic cars and historic architecture transport visitors back in time.
+Tobacco fields and sugar-white beaches define its rural and coastal landscapes."
+64,Guatemala,Yes,Americas,No,No,"The heart of the Maya civilization, with Tikal's ancient ruins standing tall.
+Volcanoes and lakes dot the landscape, reflecting Guatemala's fiery and serene sides.
+Colorful textiles and vibrant markets showcase a rich indigenous heritage."
+65,Panama,Yes,Americas,No,No,"The Panama Canal, an engineering marvel, unites two vast oceans.
+A biodiversity hotspot with rainforests, beaches, and coral reefs teeming with life.
+A cultural crossroads, Panama City blends colonial history with modern vibrancy."
+66,Uruguay,Yes,Americas,No,No,"A bastion of democracy and progressive policies in South America.
+Montevideo's laid-back charm contrasts with Punta del Este's upscale resorts.
+Gaucho culture persists in the countryside, with mate as a symbol of unity."
+67,Costa Rica,Yes,Americas,No,No,"Pura Vida encapsulates a lifestyle of happiness and environmental stewardship.
+Cloud forests, volcanic hot springs, and a commitment to conservation.
+A haven for ecotourism, inviting exploration of its rich ecosystems."
+68,Bolivia,Yes,Americas,No,No,"The Uyuni Salt Flats offer an otherworldly landscape like no other.
+Indigenous cultures thrive, from the Andes to the Amazon.
+The political and cultural capital La Paz sits high in the mountains."
+69,Paraguay,Yes,Americas,No,No,"Landlocked yet water-rich, with the Paraguay and Paraná rivers shaping its land.
+Jesuit missions and Guarani culture blend in a unique historical tapestry.
+The Chaco, a vast wilderness, challenges the adventurous at heart."
+70,El Salvador,Yes,Americas,No,No,"Known as the Land of Volcanoes, with a landscape sculpted by seismic forces.
+A turbulent history gives way to surf beaches and coffee plantations.
+The smallest Central American country with a heart full of culture and resilience."
+71,Honduras,Yes,Americas,No,No,"The ancient Copán ruins stand as a testament to the Maya civilization.
+Lush rainforests and the Mesoamerican Barrier Reef beckon nature lovers.
+A blend of indigenous, African, and Spanish influences in its people and traditions."
+72,Trinidad and Tobago,Yes,Americas,No,No,"The birthplace of steelpan and calypso music, echoing through the Caribbean.
+A dual-island nation where diverse ecosystems meet vibrant cultural festivals.
+Tobago offers serene beaches and coral reefs, a stark contrast to Trinidad's energy."
+73,Haiti,Yes,Americas,No,No,"A resilient spirit defines the first black republic and the second oldest in the Americas.
+Rich in history and art, despite facing significant challenges.
+The Citadelle Laferrière stands as a symbol of freedom and endurance."
+74,Jamaica,Yes,Americas,No,No,"The homeland of reggae music, Bob Marley, and a rich Rastafarian heritage.
+Stunning beaches, Blue Mountains, and vibrant Afro-Caribbean culture.
+Known for its athletic prowess, especially in sprinting and track events."
+75,Nicaragua,Yes,Americas,No,No,"Land of lakes and volcanoes, with Granada showcasing colonial architecture.
+Poetry and revolution intertwine in the nation's turbulent and creative history.
+Rich biodiversity from the Pacific to the Caribbean, with lush rainforests in between."
+76,Guyana,Yes,Americas,No,No,"An English-speaking country in South America, with a Caribbean vibe.
+Vast rainforests are home to Kaieteur Falls, one of the world's most powerful waterfalls.
+A melting pot of East Indian, African, and indigenous cultures."
+77,Vatican City,No,Europe,No,Yes,"The spiritual and administrative center of the Roman Catholic Church.
+St. Peter's Basilica and the Sistine Chapel are masterpieces of Renaissance art.
+A city-state enclaved within Rome, it's the smallest independent state in the world by both area and population."
+78,Monaco,No,Europe,No,Yes,"A haven for the wealthy, known for its upscale casinos, yacht-lined harbor, and the prestigious Grand Prix.
+Despite its size, Monaco boasts a rich cultural scene and lush public gardens.
+The Prince's Palace and the Oceanographic Museum highlight its regal and maritime heritage."
+79,Nauru,No,Oceania,No,Yes,"Once known for its phosphate riches, it's facing challenges of sustainability and economic dependence.
+The smallest island nation in the world, with a tight-knit community and unique traditions.
+Efforts are underway to recover from environmental degradation and explore sustainable development paths."
+80,Tuvalu,No,Oceania,No,Yes,"Once known for its phosphate riches, it's facing challenges of sustainability and economic dependence.
+The smallest island nation in the world, with a tight-knit community and unique traditions.
+Efforts are underway to recover from environmental degradation and explore sustainable development paths."
+81,San Marino,No,Europe,No,Yes,"Claimed to be the world's oldest republic, it cherishes its independence and heritage.
+Surrounded by Italy, its mountaintop setting offers stunning views and medieval architecture.
+Known for its historic towers, stamps, and coins among collectors.
+"
+82,Liechtenstein,No,Europe,No,Yes,"A microstate between Switzerland and Austria, known for its medieval castles, alpine landscapes, and banking sector.
+Despite its size, it has a vibrant economy and is one of the world's wealthiest countries per capita.
+A haven for outdoor enthusiasts with its hiking trails and winter sports."
+83,Marshall Islands,No,Oceania,No,Yes,"Comprised of atolls and islands, it's known for its marine life and WWII history.
+The Bikini Atoll's nuclear tests left a legacy of environmental and health impacts.
+Navigational traditions of the Marshallese are recognized as a UNESCO Intangible Cultural Heritage."
+84,Saint Kitts and Kevis,No,Americas,No,Yes,"Known for its sugar plantation history and scenic railway tours.
+The federation is the smallest sovereign state in the Western Hemisphere in both area and population.
+Brimstone Hill Fortress is a UNESCO World Heritage Site, showcasing British military engineering."
+85,Maldives,No,Asia,No,Yes,"Known for its sugar plantation history and scenic railway tours.
+The federation is the smallest sovereign state in the Western Hemisphere in both area and population.
+Brimstone Hill Fortress is a UNESCO World Heritage Site, showcasing British military engineering."
+86,Malta,No,Europe,No,Yes,"Rich in history, from Neolithic temples to the Knights of Saint John.
+A strategic naval base throughout history, due to its central Mediterranean location.
+Maltese cuisine reflects Sicilian and Middle Eastern influences, with unique dishes and flavors."
+87,Grenada,No,Americas,No,Yes,"Known as the ""Island of Spice,"" Grenada is one of the world's largest exporters of nutmeg and mace.
+The underwater sculpture park in Molinere Bay is a unique snorkeling and diving site.
+The island's lush interior is home to rainforests, waterfalls, and rare wildlife."
+88,Saint Vincent and The Grenadines,No,Americas,No,Yes,"An archipelago known for its sailing destinations, volcanic landscapes, and vibrant marine ecosystems.
+La Soufrière volcano is a dramatic feature and popular hiking destination.
+The culture is a vibrant mix of African, Carib, and European influences."
+89,Barbados,No,Americas,No,Yes,"Renowned for its pristine beaches, rum distilleries, and vibrant crop over festival.
+The birthplace of Rihanna, it has a rich musical tradition including calypso and soca.
+Harrison's Cave and the historic Garrison area are key attractions."
+90,Antigua and Barbuda,No,Americas,No,Yes,"Known for 365 beaches, ""one for every day of the year.""
+Sailing Week is a premier event, attracting yachts from around the globe.
+The twin islands boast a rich history and stunning coral reefs"
+91,Seychelles,No,Africa,No,Yes,"An archipelago of 115 islands, known for its pristine beaches and rare wildlife.
+The Vallée de Mai Nature Reserve is thought to be the original Garden of Eden.
+Conservation efforts focus on protecting its unique flora and fauna."
+92,Palau,No,Oceania,No,Yes,"Renowned for its marine biodiversity, including the famous Jellyfish Lake.
+Rock Islands Southern Lagoon is a UNESCO World Heritage site, known for its mushroom-shaped islets.
+A leader in environmental conservation, establishing one of the world's first shark sanctuaries."
+93,Andorra,No,Europe,No,Yes,"Nestled in the Pyrenees between France and Spain, known for its ski resorts and duty-free shopping.
+The capital, Andorra la Vella, is the highest capital city in Europe.
+A history of neutrality and a haven for hikers in the summer."
+94,Saint Lucia,No,Americas,No,Yes,"Iconic for the Pitons, two volcanic spires rising side by side from the sea.
+A blend of French and British influences, reflected in its cuisine and cultural festivals.
+The Sulphur Springs Park, known as the ""world's only drive-in volcano."""
+95,Federated States of Micronesia,No,Oceania,No,Yes,"Consists of over 600 islands scattered across the Western Pacific Ocean.
+Known for its ancient stone cities, like Nan Madol, and traditional navigation.
+The diverse cultures and languages reflect a complex history of settlement and trade."
+96,Tonga,No,Oceania,No,Yes,"Consists of over 600 islands scattered across the Western Pacific Ocean.
+Known for its ancient stone cities, like Nan Madol, and traditional navigation.
+The diverse cultures and languages reflect a complex history of settlement and trade."
+97,Dominica,No,Americas,No,Yes,"The ""Nature Island"" with lush rainforests, hot springs, and rare bird species.
+Boiling Lake is one of the world's largest hot springs, nestled amidst an active volcanic area.
+A commitment to becoming the world's first climate-resilient nation after Hurricane Maria's impact."
+98,Bahrain,No,Asia,No,Yes,"A financial hub in the Middle East, known for its pearl diving heritage.
+The Bahrain Grand Prix is a highlight in the Formula 1 calendar.
+A rich history dating back to ancient Dilmun, with UNESCO sites like Qal’at al-Bahrain."
+99,Kiribati,No,Oceania,No,Yes,"Consists of 33 atolls spread over a vast area in the central Pacific.
+Known for its significant WWII history, particularly on Tarawa Atoll.
+Faces existential threats from climate change and rising sea levels."
+100,Sao Tome and Principe,No,Africa,No,Yes,"A small island nation off the west coast of Africa, known for cocoa production.
+The Obo National Park offers lush rainforests and diverse ecosystems.
+A peaceful country with a laid-back lifestyle and Portuguese colonial heritage."

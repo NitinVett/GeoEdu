@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class Country {
     private JLabel flag;
     private String name;
@@ -24,10 +25,12 @@ public class Country {
 
     //Provide class with name of country
 
-    public Country (String name,int IDno){
+    public Country(String name) {
         //Add logic here that receives an ID number, opens a text file, finds out the name, and returns a country object.
         this.name = name;
+
     }
+
     public JLabel getFlag() {
 
         BufferedImage flag = null;
@@ -40,10 +43,11 @@ public class Country {
         }
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         if (flag != null) {
-            this.flag = new JLabel(new ImageIcon(flag));
-            this.flag.setBounds(0, 0, screenSize.width, screenSize.height);
+            Image resizedImage = flag.getScaledInstance(100, 60, Image.SCALE_SMOOTH);
+            this.flag = new JLabel(new ImageIcon(resizedImage));
+
         }
-        return this.countryMap;
+        return this.flag;
     }
 
     public JLabel getCountryMap() {
@@ -56,10 +60,10 @@ public class Country {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
         if (backgroundImage != null) {
-            countryMap = new JLabel(new ImageIcon(backgroundImage));
-            countryMap.setBounds(0, 0, screenSize.width, screenSize.height);
+            Image resizedImage = backgroundImage.getScaledInstance(450, 450, Image.SCALE_SMOOTH);
+            countryMap = new JLabel(new ImageIcon(resizedImage));
         }
         return this.countryMap;
     }
@@ -70,20 +74,19 @@ public class Country {
 
     public JLabel getHints() {
         JLabel hints = new JLabel();
-
+        String hintString = CountryDatabase.hints(name);
+        System.out.println(hintString);
         try {
-            String filePath = "Country Data/Hints/" + this.getName() + ".txt";
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String line;
+            String[] lines = hintString.split("\n");
             StringBuilder content = new StringBuilder();
             int lineCount = 0;
-            while ((line = reader.readLine()) != null && lineCount < 3) { // Read only 3 lines
+            for (String line : lines) {
+                if (lineCount >= 3) break; // Read only 3 lines
                 content.append(line).append("<br>");
                 lineCount++;
             }
-            reader.close();
             hints.setText("<html>" + content.toString() + "</html>");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
