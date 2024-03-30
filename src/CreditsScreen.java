@@ -44,7 +44,7 @@ public class CreditsScreen extends Screen{
 
         String pass = CsvHandler.getPassword(username.getText());
         if(Objects.nonNull(pass) && pass.equals(password.getText())) {
-            swapScreens(new GameMainMenu(frame,this));
+            //swapScreens(new GameMainMenu(frame,this));
         }else {
             displayErrorMessage("Incorrect username/password");
         }

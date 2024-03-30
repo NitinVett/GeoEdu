@@ -1,37 +1,51 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class Screen extends JPanel {
     FullScreenUI frame;
     JButton settings;
     private Image backgroundImage;
     private JLabel errorMessageLabel;
-    private Screen prev;
+    Screen prev;
+    Player user;
     Font rubikScribble;
     public Screen(FullScreenUI frame,Screen previous) {
+
         this.frame = frame;
+        prev = previous;
+        setUp();
+
+    }
+    public Screen(FullScreenUI frame,Screen previous,Player user) {
+        this.frame = frame;
+        this.prev = previous;
+        this.user = user;
+        setUp();
+
+    }
+
+    public void setUp(){
         loadBackgroundImage();
         settings = new JButton();
         errorMessageLabel = new JLabel();
-        prev = previous;
+
         this.add(settings);
-        //settings image here
-
-        //settings.setIcon();
-
-        //setting button location here
 
         settings.addActionListener(e -> settingsButton());
         settings.setText("SETTINGS");
+
         this.setVisible(true);
         this.setLayout(null);
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+
         frame.setVisible(true);
+        this.requestFocusInWindow(true);
+        setUpKeyBindings();
         frame.revalidate();
         frame.repaint();
 
@@ -47,7 +61,17 @@ public class Screen extends JPanel {
             System.err.println("Resource not found: " + "src/video.gif");
         }
     }
-
+    public void setUpKeyBindings() {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESCAPE");
+        this.getActionMap().put("ESCAPE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Objects.nonNull(prev)) {
+                    swapScreens(prev);
+                }
+            }
+        });
+    }
 
     public void swapScreens(JPanel panel) {
         frame.setContentPane(panel);
@@ -57,7 +81,7 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-       swapScreens(frame.getSettings(prev));
+       swapScreens(frame.getSettings(this,user));
 
     }
     @Override
@@ -73,6 +97,9 @@ public class Screen extends JPanel {
         int height = getHeight();
         settings.setBounds(width-width/8, height/22, width / 10, height / 12);
         settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
+
+
+
 
     }
 
@@ -113,7 +140,6 @@ public class Screen extends JPanel {
 
         int delay = 5000;
         Timer timer = new Timer(delay, e -> {
-            System.out.println("here");
             errorMessageLabel.setVisible(false); // Hide the message
             revalidate();
             repaint();
@@ -122,9 +148,8 @@ public class Screen extends JPanel {
         timer.start();
     }
 
-    public void setGameSettings(){
 
-    }
+
 
     public void setFocusListeners(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {
