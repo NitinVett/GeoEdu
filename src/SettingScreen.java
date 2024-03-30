@@ -4,8 +4,10 @@ import java.util.Objects;
 
 public class SettingScreen extends Screen{
     private JSlider audio;
-    private JButton changePassword, debug, credits, muteButton, highContrast, exit;
+    private JButton changePassword, debug, credits, highContrast, exit, changeFont;
     private JPanel prev;
+    private ImageIcon mutedIMG, unMutedIMG;
+    private JToggleButton muteButton;
     public SettingScreen(FullScreenUI frame,JPanel previous) {
         super(frame,previous);
         prev = previous;
@@ -14,19 +16,29 @@ public class SettingScreen extends Screen{
         changePassword = new JButton("CHANGE PASSWORD");
         debug = new JButton("DEBUG");
         credits = new JButton("CREDITS");
-        muteButton = new JButton("MUTE");
+        muteButton = new JToggleButton("MUTE");
         highContrast = new JButton("High Contrast");
+        changeFont = new JButton("Change Font");
         exit = new JButton("EXIT");
         changePassword.addActionListener(e -> changePasswordButton());
         debug.addActionListener(e -> debugButton());
         credits.addActionListener(e -> creditsButton());
         muteButton.addActionListener(e -> muteButton());
-        highContrast.addActionListener(e -> muteButton());
+        highContrast.addActionListener(e -> highContrast());
+        changeFont.addActionListener(e -> changeFont());
         exit.addActionListener(e -> exitButton());
+
+        //images
+        mutedIMG = new ImageIcon("muted.png");
+        unMutedIMG = new ImageIcon("unMuted.png");
+
+
+        muteButton.setIcon(unMutedIMG);
 
         this.add(credits);
         this.add(muteButton);
         this.add(highContrast);
+        this.add(changeFont);
         this.add(exit);
         this.add(audio);
 
@@ -73,6 +85,8 @@ public class SettingScreen extends Screen{
         muteButton.setFont(new Font("SansSerif", Font.PLAIN, 24));
         highContrast.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         highContrast.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        changeFont.setBounds(width/3+width/12,height - height/3,width/6,height/12);
+        changeFont.setFont(new Font("SansSerif", Font.PLAIN, 24));
         changePassword.setBounds(width/3, height - height/6, width/6, height/12);
         debug.setBounds(width-width/2,height - height/6,width/6,height/12);
         credits.setBounds(width-width/8,height - height/8,width/10,height/12);
@@ -85,7 +99,6 @@ public class SettingScreen extends Screen{
         swapScreens(new ChangePasswordScreen(frame,this));
     }
     public void debugButton() {
-
         swapScreens(new DebugScreen(frame,this));
     }
     public void creditsButton() {
@@ -93,6 +106,13 @@ public class SettingScreen extends Screen{
     }
     public void exitButton() {
         swapScreens(new ExitScreen(frame,this));
+    }
+    //only changes background
+    public void highContrast() {
+        swapScreens(new ExitScreen(frame,this));
+    }
+    public void changeFont(){
+        //
     }
 
     public void setGameSettings(){
@@ -104,7 +124,12 @@ public class SettingScreen extends Screen{
         // mute function
     }
     public void muteButton() {
-        // mute function;
+        if (muteButton.isSelected()){
+            muteButton.setIcon(unMutedIMG);
+        }
+        else {
+            muteButton.setIcon(mutedIMG);
+        }
     }
 
     public void paintComponent(Graphics g) {
