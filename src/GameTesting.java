@@ -14,6 +14,9 @@ public class GameTesting extends FullScreenUI {
     private ArrayList<Integer> visitedIndices = new ArrayList<>();
     private ArrayList<Integer> randomizerStack = new ArrayList<>();
 
+
+    // Randomizes the countries, and feeds it to the game play class.
+    //
     public GameTesting(Screen previous, String username, String mode, String continent) throws IOException {
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -22,12 +25,15 @@ public class GameTesting extends FullScreenUI {
         this.user = username;
         this.setVisible(true);
         this.requestFocus();
+        //Static class that loads all the countries in a specific mode
+        // For global it would be 50 country objects of type global
         this.countries = CountryList.getCountries(mode);
         this.curIndex = 0;
 
         startNextIteration();
     }
 
+    // Game loop
     public void startNextIteration() {
         Country correctCountry;
         Country incorrectCountry1;
@@ -43,9 +49,13 @@ public class GameTesting extends FullScreenUI {
             while (visitedIndices.contains(index)) {
                 index = randomNumber(totalCountries);
             }
+
+            //All the countries visited, correct countries
             visitedIndices.add(index);
 
+            // index is a rand number, so the country being chosen also random
             correctCountry = countries[index];
+
             // By keeping track of the random number, we can avoid duplicates and ensure randomness.
             int random = getRandomIntWithAvoidance(totalCountries, index);
             incorrectCountry1 = countries[random];
