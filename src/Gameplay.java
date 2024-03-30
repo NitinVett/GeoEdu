@@ -2,21 +2,17 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 /// make this the parent class for game mode
 // one class that  contians common elements, choice 1.
 // Make a custom high score panel class so that i can add trophy graphic
 // Proof of concept
 public class Gameplay extends Screen {
-    JButton newGame;
-    JButton continue_;
-    JButton tutorial;
-    private JLabel hintLabel;
-    private JLabel flagLabel;
 
     // basic structure, indivual classes will do timer and lives,
     // text needs to be dynamic, which is country name, so i want to have a randomizer. first find the list of country
@@ -31,66 +27,89 @@ public class Gameplay extends Screen {
 
     private JPanel highScorePanel;
     JButton highScores;
-    JButton logout;
-    int desiredWidth = 400;
-    int desiredHeight = 400;
+    JButton escButton;
     private JLabel countryLabel;
     private JLabel highScoreLabel;
 
-
-    public Gameplay(FullScreenUI frame,Screen previous, Player username) throws IOException {
-        super(frame,previous);
-        newGame = new JButton();
-        continue_ = new JButton();
-        tutorial = new JButton();
-        highScores = new JButton();
-        logout = new JButton();
-
-        BufferedImage backgroundImage = ImageIO.read(new File("Country Data/Maps/Peru.png"));
-
-//        int desiredWidth = 350; // Set your desired width here
-//        int desiredHeight = 350; // Set your desired height here
+    private Country correctCountry;
+    private Country incorrect1;
+    private Country incorrect2;
+    private String user;
+    private GameTesting gameTesting;
+    private JToggleButton toggleButton;
 
 
-        logout.addActionListener(e -> logOutButton());
-//        logout.setText("Kill");
+    public Gameplay(GameTesting gameTesting, Screen previous, String user, Country correctCountry, Country incorrect1, Country incorrect2) throws IOException {
+        super(gameTesting, previous);
+        this.gameTesting = gameTesting;
+        this.correctCountry = correctCountry;
+        this.incorrect1 = incorrect1;
+        this.incorrect2 = incorrect2;
+        this.user = user;
+
+        // Create toggle button
+        toggleButton = new JToggleButton("Show Flag");
+        toggleButton.addActionListener(e -> toggleFlag());
+
+
+        //Escape button
+        escButton = new JButton();
+        escButton.addActionListener(e -> logOutButton());
         BufferedImage escIcon = ImageIO.read(new File("src/escape.png"));
         Image resizedEsc = escIcon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        logout.setIcon(new ImageIcon(resizedEsc));
+        escButton.setIcon(new ImageIcon(resizedEsc));
+        this.add(escButton);
 
-        hintPanel = new JPanel(new BorderLayout());
-        //hintPanel.setBackground(Color.WHITE); // Set background color
-        hintPanel.setOpaque(false);
-        //hintPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        // Create hint label and load text from file
-        // load from a text file.
-        Country china = new Country("China");
-        hintLabel = new JLabel(china.getHints().getText());
+        JLabel hintLabel = new JLabel(correctCountry.getHints().getText());
         hintLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
         hintLabel.setForeground(Color.BLACK); // Set text color
+        hintPanel = new JPanel(new BorderLayout());
+        hintPanel.setBackground(Color.WHITE); // Set background color
+        hintPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        hintPanel.setOpaque(false);
         hintPanel.add(hintLabel, BorderLayout.CENTER);
 
+
+        JLabel flagLabel = correctCountry.getFlag();
         flagPanel = new JPanel(new BorderLayout());
         flagPanel.setOpaque(false);
-        flagLabel = china.getFlag();
         flagPanel.add(flagLabel);
+        flagPanel.setVisible(false);
+        countryLabel = correctCountry.getCountryMap();
 
-
-
+        // This handles randomization once the three countries have been received, otherwie the buttons would always
+        // indicate which answer is correct.
+        int index;
+        String[] countryNames = {correctCountry.getName(), incorrect1.getName(), incorrect2.getName()};
+        String[] randomizedNames = new String[3];
+        ArrayList<Integer> visitedIndices = new ArrayList<>();
 
         // Creating choice buttons
-        choice1Button = new JButton("Choice 1");
-        choice2Button = new JButton("Choice 2");
-        choice3Button = new JButton("Choice 3");
+        for (int i = 0; i < 3; i++) {
+            index = ThreadLocalRandom.current().nextInt(0, 3);
+            while (visitedIndices.contains(index)) {
+                index = ThreadLocalRandom.current().nextInt(0, 3);
+            }
+            randomizedNames[i] = countryNames[index];
+            visitedIndices.add(index);
+        }
+
+        choice1Button = new JButton(randomizedNames[0]);
+        choice2Button = new JButton(randomizedNames[1]);
+        choice3Button = new JButton(randomizedNames[2]);
+
+        choice1Button.addActionListener(e -> setChoice1Button());
+        choice2Button.addActionListener(e -> setChoice2Button());
+        choice3Button.addActionListener(e -> setChoice3Button());
 
         highScorePanel = new JPanel(new BorderLayout());
         highScorePanel.setOpaque(false);
 
         highScoreLabel = new JLabel();
-        highScoreLabel.setForeground(Color.RED);
+        highScoreLabel.setForeground(Color.BLACK);
         highScoreLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
-        String userName = "ahafeez7";
-        String highScore = CsvHandler.getHighScore(userName);
+
+        String highScore = CsvHandler.getHighScore(user);
         if (highScore != null) {
             highScoreLabel.setText("High Score: " + highScore);
         } else {
@@ -101,93 +120,125 @@ public class Gameplay extends Screen {
         this.add(highScorePanel);
 
 
-        Image resizedImage = backgroundImage.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_SMOOTH);
-        countryLabel = china.getCountryMap();
-
         this.add(flagPanel);
 
         this.add(countryLabel);
-        this.add(logout);
+
         this.add(hintPanel);
 
         this.add(choice1Button);
         this.add(choice2Button);
         this.add(choice3Button);
+        this.add(toggleButton);
     }
 
+    private void toggleFlag() {
+        boolean showFlag = toggleButton.isSelected();
+        flagPanel.setVisible(showFlag);
+        updateButtonPositions();
+        // Update toggle button text
+        if (showFlag) {
+            toggleButton.setText("Hide Flag");
+        } else {
+            toggleButton.setText("Show Flag");
+        }
+    }
 
 
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
 
-        double gapPercentage = 0.05; // Adjust this value as needed
-        int gap = (int) (height * gapPercentage);
-
-        // Centering the image label to the top
-        int imageLabelWidth = desiredWidth;
-        int imageLabelHeight = desiredHeight;
-        int imageLabelX = (width - imageLabelWidth) / 2;
-        int imageLabelY = gap;
-
-        countryLabel.setBounds(imageLabelX, imageLabelY, imageLabelWidth, imageLabelHeight);
-        flagPanel.setBounds((int) (getWidth() * 0.9), (int) (getHeight()*0.7), 100, 100);
+        // Positioning country panel
+        double xValue = (width - 450) / 2; // Adjust this value as needed
+        double yValue = height * 0.05;
+        countryLabel.setBounds((int) xValue, (int) yValue, 450, 450);
 
 
         // Positioning hint panel
         int hintPanelWidth = 400;
-        int hintPanelHeight = 200;
-        int hintPanelX = (width - hintPanelWidth) ;
-        int hintPanelY = imageLabelY + imageLabelHeight + 20; // Adjust the gap as needed
-        hintPanel.setBounds(hintPanelX, hintPanelY, hintPanelWidth, hintPanelHeight);
+        xValue = width * 0.03;
+        yValue = height * 0.6;
+        hintPanel.setBounds((int) xValue, (int) yValue, 400, 200);
 
-        gapPercentage = 0.04; // Adjust this value as needed
-        gap = (int) (height * gapPercentage); //4% total
-        double gapPercentagex = 0.7; // Adjust this value as needed
-        int gapx = (int) (height * gapPercentagex);
+        // Positioning flag panel
+        if (flagPanel.isVisible()) {
+            xValue = width * 0.8;
+            yValue = height * 0.649;
+            flagPanel.setBounds((int) xValue, (int) (yValue), 100, 60);
+        }
+
         // Positioning choice buttons
-        int choiceButtonWidth = 130;
-        int choiceButtonHeight = 50;
-        int choiceButtonY = gapx; // Adjust the gap as needed
-        int choiceButtonX = (width/2)-65;
-        choice1Button.setBounds(choiceButtonX, choiceButtonY, choiceButtonWidth, choiceButtonHeight);
-        choice2Button.setBounds(choiceButtonX , choiceButtonY+(2*gap), choiceButtonWidth, choiceButtonHeight);
-        choice3Button.setBounds(choiceButtonX , choiceButtonY+(4*gap), choiceButtonWidth, choiceButtonHeight);
-        highScorePanel.setBounds((int) (getWidth() * 0.7), (int) (getHeight()*0.05), 200, 20);
-        logout.setBounds((int) (getWidth() * 0.02), (int) (getHeight()*0.03), 50, 50);
+        xValue = width / 2 - 65;
+        yValue = height * 0.7;
+        int gap = (int) (height * 0.03); //4% total
+
+        choice1Button.setBounds((int) xValue, (int) yValue, 130, 50);
+        choice2Button.setBounds((int) xValue, (int) (yValue + 50 + (gap)), 130, 50);
+        choice3Button.setBounds((int) xValue, (int) (yValue + 100 + (2 * gap)), 130, 50);
+
+        // Positioning high score panel
+        xValue = width * 0.7;
+        yValue = height * 0.05;
+        highScorePanel.setBounds((int) xValue, (int) yValue, 200, 20);
+
+        // Positioning log out
+        xValue = width * 0.02;
+        yValue = height * 0.03;
+        escButton.setBounds((int) xValue, (int) yValue, 50, 50);
+
+
+        int toggleButtonWidth = 100;
+        int toggleButtonHeight = 30;
+        double toggleButtonX = width * 0.8; // Adjust as needed
+        double toggleButtonY = height * 0.75; // Adjust as needed
+        toggleButton.setBounds((int) toggleButtonX, (int) toggleButtonY, toggleButtonWidth, toggleButtonHeight);
+
         revalidate();
 
-    }
-
-    public void newGameButton() {
-
-        swapScreens(new LoginScreen(frame,this));
-    }
-
-    public void continue_Button() {
-        swapScreens(new RegisterScreen(frame,this));
-    }
-
-    public void highScoreButton() {
-        swapScreens(new RegisterScreen(frame,this));
-    }
-
-    public void tutorialButton() {
-        TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
-        frame.addKeyListener(tutorialScreen);
-        swapScreens(tutorialScreen);
     }
 
     public void logOutButton() {
         frame.dispose();
     }
 
+    public void setChoice1Button() {
+        clickHandling(choice1Button);
+
+
+    }
+
+    public void setChoice2Button() {
+
+        clickHandling(choice2Button);
+
+    }
+
+    public void setChoice3Button() {
+
+        clickHandling(choice3Button);
+
+    }
+
+    private void clickHandling(JButton choice1Button) {
+        int highscore = Integer.parseInt(CsvHandler.getHighScore(user));
+        if (Objects.equals(choice1Button.getText(), correctCountry.getName())) {
+            highscore = highscore + 5;
+            CsvHandler.changeHighScore(user, String.valueOf(highscore));
+            highScoreLabel.setText("High Score: " + highscore);
+            gameTesting.startNextIteration();
+            // Go back to where it was called
+        } else {
+            highscore = highscore - 5;
+            CsvHandler.changeHighScore(user, String.valueOf(highscore));
+            highScoreLabel.setText("High Score: " + highscore);
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
-        System.out.println("xx");
+
         super.paintComponent(g); // Paints the background
-//        Graphics2D g2D = (Graphics2D) g;
-//        drawTitle(g2D);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
     }
 }

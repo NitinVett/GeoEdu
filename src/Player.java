@@ -32,6 +32,9 @@ public class Player extends User {
     }
 
     public void setHighScore(int highScore) {
+
         this.highScore = highScore;
     }
+    public void increaseHighScore() {
+        }
 }

@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class Country {
     private JLabel flag;
     private String name;
@@ -24,11 +25,12 @@ public class Country {
 
     //Provide class with name of country
 
-    public Country (String name){
+    public Country(String name) {
         //Add logic here that receives an ID number, opens a text file, finds out the name, and returns a country object.
         this.name = name;
 
     }
+
     public JLabel getFlag() {
 
         BufferedImage flag = null;
@@ -41,8 +43,9 @@ public class Country {
         }
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         if (flag != null) {
-            this.flag = new JLabel(new ImageIcon(flag));
-            this.flag.setBounds(0, 0, screenSize.width, screenSize.height);
+            Image resizedImage = flag.getScaledInstance(100, 60, Image.SCALE_SMOOTH);
+            this.flag = new JLabel(new ImageIcon(resizedImage));
+
         }
         return this.flag;
     }
@@ -57,10 +60,10 @@ public class Country {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
         if (backgroundImage != null) {
-            countryMap = new JLabel(new ImageIcon(backgroundImage));
-            countryMap.setBounds(0, 0, screenSize.width, screenSize.height);
+            Image resizedImage = backgroundImage.getScaledInstance(450, 450, Image.SCALE_SMOOTH);
+            countryMap = new JLabel(new ImageIcon(resizedImage));
         }
         return this.countryMap;
     }
