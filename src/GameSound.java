@@ -6,9 +6,11 @@ public class GameSound {
 
     public GameSound(String path) {
         try {
-            AudioInputStream audio = AudioSystem.getAudioInputStream(new File(path));
+            File file = new File("test.wav");
+            AudioInputStream audio = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(audio);
+            clip.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

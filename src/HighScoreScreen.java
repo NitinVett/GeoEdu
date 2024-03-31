@@ -8,8 +8,8 @@ public class HighScoreScreen extends Screen {
 
     ArrayList<JLabel> playerList;
     int page;
-    JPanel prev;
-    public HighScoreScreen(FullScreenUI frame,int page,JPanel previous) {
+    Screen prev;
+    public HighScoreScreen(FullScreenUI frame,int page,Screen previous) {
         super(frame,previous);
         this.prev = previous;
         this.page = page;

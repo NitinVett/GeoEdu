@@ -4,7 +4,7 @@ import java.awt.*;
 public class ExitScreen extends Screen{
     JButton no, yes;
 
-    public ExitScreen(FullScreenUI frame, JPanel previous) {
+    public ExitScreen(FullScreenUI frame, Screen previous) {
         super(frame,previous);
         no = new JButton(" No");
         yes = new JButton("Yes");
@@ -29,7 +29,7 @@ public class ExitScreen extends Screen{
     }
     public void noButton() {
         //have it bring u back to previous screen
-        swapScreens(new SettingScreen(frame,this));
+        //swapScreens(new SettingScreen(frame,this));
     }
     public void yesButton() {
         frame.dispose();
