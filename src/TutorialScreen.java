@@ -10,7 +10,7 @@ import java.io.IOException;
 public class TutorialScreen extends Screen implements KeyListener {
 
     private final Screen previousScreen;
-    private JPanel scrollPanel;
+    //private JPanel scrollPanel;
     private JLabel scrollLabel;
     private JButton explorationButton;
 
@@ -19,6 +19,7 @@ public class TutorialScreen extends Screen implements KeyListener {
         this.previousScreen = previousScreen;
         setFocusable(true);
         requestFocusInWindow();
+        loadBackgroundImage("wallpaper1.gif");
 
         explorationButton = new JButton();
 
@@ -28,19 +29,21 @@ public class TutorialScreen extends Screen implements KeyListener {
 
         this.add(explorationButton);
 
-
+        int height = getHeight();
         scrollLabel = getHints();
         BufferedImage scrollImage = null;
         try {
-            scrollImage = ImageIO.read(new File("resources/scroll.png"));
+            scrollImage = ImageIO.read(new File("resources/scroll2.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Image resizedScroll = scrollImage.getScaledInstance(1500, 1300, Image.SCALE_SMOOTH);
+        Image resizedScroll = scrollImage.getScaledInstance(1900, 1400, Image.SCALE_SMOOTH);
         scrollLabel.setIcon(new ImageIcon(resizedScroll));
+
 
         scrollLabel.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
         scrollLabel.setVerticalTextPosition(SwingConstants.CENTER);
+        //scrollLabel.setVerticalAlignment(SwingConstants.TOP);
         scrollLabel.setFont(new Font("Arial", Font.BOLD, 14));
         scrollLabel.setForeground(Color.BLACK);
         this.add(scrollLabel);
@@ -65,11 +68,11 @@ public class TutorialScreen extends Screen implements KeyListener {
     public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
-        int mainButtonY = height/100;
+        //int mainButtonY = height/5;
 
-        scrollLabel.setBounds(width/5 - width/10,mainButtonY - height/15,1500,1300);
+        scrollLabel.setBounds(width/5 - width/5,height/25 - height/7,1900,1400);
 
-        scrollLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        scrollLabel.setFont(new Font("SansSerif", Font.PLAIN, 19));
 
 
         repaint();
@@ -174,6 +177,7 @@ public class TutorialScreen extends Screen implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         setComponents(g);
+        //drawTitle((Graphics2D) g);
         updateButtonPositions();
         /*Graphics2D g2D = (Graphics2D) g;
         try {
