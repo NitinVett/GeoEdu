@@ -15,6 +15,7 @@ public class ExitScreen extends Screen{
         repaint();
     }
     public void setComponents(Graphics g){
+
         int width = getWidth();
         int height = getHeight();
         int mainButtonY =  height/3;
@@ -34,13 +35,10 @@ public class ExitScreen extends Screen{
     public void yesButton() {
         frame.dispose();
     }
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-
-
         setComponents(g);
-
-
     }
 }

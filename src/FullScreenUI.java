@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -8,13 +7,16 @@ import java.io.IOException;
 //
 public class FullScreenUI extends JFrame {
     SettingScreen settings;
+
     public FullScreenUI() throws IOException {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         this.setContentPane(new MainMenu(this));
         this.setVisible(true);
         this.requestFocus();
-        settings = new SettingScreen(this,null,null);
+        settings = new SettingScreen(this, null, null);
+
+
 
         addWindowFocusListener(new WindowFocusListener() {
             @Override
@@ -32,13 +34,12 @@ public class FullScreenUI extends JFrame {
     }
 
 
-    public Screen getSettings(Screen prev,Player user){
+    public Screen getSettings(Screen prev, Player user) {
 
         settings.setPrev(prev);
         settings.setUser(user);
         return settings;
     }
-
 
 
     public static void main(String[] args) throws IOException {

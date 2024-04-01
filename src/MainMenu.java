@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class MainMenu extends Screen {
 
@@ -11,12 +12,19 @@ public class MainMenu extends Screen {
 
     MainMenu(FullScreenUI frame) {
 
-        super(frame,null);
+        super(frame, null);
+        initializeButtons();
+    }
 
-        BufferedImage backgroundImage = null;
+    private void initializeButtons() {
+        //playMusic();
+        ImageIcon imgIcon = new ImageIcon("resources/hamburger.png");
+        Image image = imgIcon.getImage();
+        Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon buttonBackground = new ImageIcon(newImage);
 
         ImageIcon icon = new ImageIcon("src/shade.png");
-        login = new JButton("Login",icon);
+        login = new JButton("Login", icon);
         login.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
         login.setVerticalTextPosition(SwingConstants.CENTER);
         login.setFont(new Font("Arial", Font.BOLD, 14));
@@ -39,8 +47,8 @@ public class MainMenu extends Screen {
         this.add(register);
         this.add(exit);
     }
-
     private void updateButtonPositions() {
+
         int width = getWidth();
         int height = getHeight();
         int mainButtonX = width / 2 - width / 10;
@@ -49,23 +57,24 @@ public class MainMenu extends Screen {
         login.setBounds(mainButtonX, mainButtonY, width / 5, height / 12);
         register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
+
         revalidate();
+
     }
 
 
     public void loginButton() {
-        swapScreens(new LoginScreen(frame,this));
+        swapScreens(new LoginScreen(frame, this));
     }
 
     public void registerButton() {
-        swapScreens(new RegisterScreen(frame,this));
+        swapScreens(new RegisterScreen(frame, this));
     }
 
     public void exitButton() {
-        swapScreens(new ExitScreen(frame,this));
+        swapScreens(new ExitScreen(frame, this));
 
     }
-
 
 
     @Override
@@ -76,7 +85,7 @@ public class MainMenu extends Screen {
         drawTitle(g2D);
 
         revalidate();
-        updateButtonPositions(); // Consider calling this elsewhere if it causes issues
-
+        updateButtonPositions();
+        //disableSettingButton();
     }
 }
