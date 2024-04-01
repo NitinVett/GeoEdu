@@ -1,5 +1,9 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class SettingScreen extends Screen{
@@ -18,7 +22,17 @@ public class SettingScreen extends Screen{
         credits = new JButton("CREDITS");
         muteButton = new JButton("MUTE");
         highContrast = new JButton("High Contrast");
-        exit = new JButton("EXIT");
+        exit = new JButton();
+        BufferedImage escIcon = null;
+        try {
+            escIcon = ImageIO.read(new File("resources/escape.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Image resizedEsc = escIcon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        exit.setIcon(new ImageIcon(resizedEsc));
+
+
         changePassword.addActionListener(e -> changePasswordButton());
         debug.addActionListener(e -> debugButton());
         credits.addActionListener(e -> creditsButton());
@@ -73,8 +87,7 @@ public class SettingScreen extends Screen{
 
         g.drawString("AUDIO",width/3, textY);
 
-        exit.setBounds(width / 30, height/22, width / 10, height / 12);
-        exit.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        exit.setBounds(width / 30, height/22, 50, 50);
         muteButton.setBounds(width/2+width/15,height/3,width/10,height/12);
         muteButton.setFont(new Font("SansSerif", Font.PLAIN, 24));
         highContrast.setBounds(width/3+width/12,height - height/4,width/6,height/12);
@@ -98,7 +111,7 @@ public class SettingScreen extends Screen{
         swapScreens(new CreditsScreen(frame,this));
     }
     public void exitButton() {
-        swapScreens(new ExitScreen(frame,this));
+        swapScreens(prev);
     }
 
 

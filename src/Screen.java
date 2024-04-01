@@ -1,10 +1,11 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+
 
 public class Screen extends JPanel {
     FullScreenUI frame;
@@ -14,14 +15,15 @@ public class Screen extends JPanel {
     Screen prev;
     Player user;
     Font rubikScribble;
-    public Screen(FullScreenUI frame,Screen previous) {
 
+
+    public Screen(FullScreenUI frame, Screen previous) {
         this.frame = frame;
         prev = previous;
         setUp();
-
     }
-    public Screen(FullScreenUI frame,Screen previous,Player user) {
+
+    public Screen(FullScreenUI frame, Screen previous, Player user) {
         this.frame = frame;
         this.prev = previous;
         this.user = user;
@@ -29,15 +31,20 @@ public class Screen extends JPanel {
 
     }
 
-    public void setUp(){
+    public void setUp() {
         loadBackgroundImage();
         settings = new JButton();
         errorMessageLabel = new JLabel();
 
         this.add(settings);
 
+        ImageIcon imgIcon = new ImageIcon("resources/hamburger.png");
+        Image image = imgIcon.getImage();
+        Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon settingsIcon = new ImageIcon(newImage);
         settings.addActionListener(e -> settingsButton());
-        settings.setText("SETTINGS");
+        settings.setIcon(settingsIcon);
+        //settings.setText("SETTINGS");
 
         this.setVisible(true);
         this.setLayout(null);
@@ -52,21 +59,23 @@ public class Screen extends JPanel {
     }
 
     private void loadBackgroundImage() {
-        URL imageURL = getClass().getClassLoader().getResource("video.gif");
+        // only works if gif is in src folder, aka class path
+        URL imageURL = getClass().getClassLoader().getResource("wallpaper5.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
 
         } else {
-            System.err.println("Resource not found: " + "src/video.gif");
+            System.err.println("Resource not found: meow " + "wallpaper5.gif");
         }
     }
+
     public void setUpKeyBindings() {
         this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESCAPE");
         this.getActionMap().put("ESCAPE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Objects.nonNull(prev)) {
+                if (Objects.nonNull(prev)) {
                     swapScreens(prev);
                 }
             }
@@ -81,9 +90,10 @@ public class Screen extends JPanel {
 
     //add functionality for setting button
     public void settingsButton() {
-       swapScreens(frame.getSettings(this,user));
+        swapScreens(frame.getSettings(this, user));
 
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -92,48 +102,55 @@ public class Screen extends JPanel {
             int y = (getHeight() - backgroundImage.getHeight(null)) / 2;
             g.drawImage(backgroundImage, x, y, this);
         }
+        // remove this from
         drawTitle((Graphics2D) g);
         int width = getWidth();
         int height = getHeight();
-        settings.setBounds(width-width/8, height/22, width / 10, height / 12);
-        settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
-
-
-
+        settings.setBounds(width - width / 15, height / 22, 50, 50);
+//        settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        settings.setBorder(BorderFactory.createEmptyBorder());
+        settings.setContentAreaFilled(false); // Make button transparent
+        settings.setVisible(true);
 
     }
 
+    //Call this function to disable settings button where u want
+    public void disableSettingButton() {
+        settings.setVisible(false);
+    }
+
     public void drawTitle(Graphics2D g) {
+
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-
-        g.setFont(new Font("SansSerif", Font.BOLD, 48));
-
+        g.setFont(loadFont("resources/Viner.ttf",96));
         FontMetrics fm = g.getFontMetrics();
         int titleWidth = fm.stringWidth("GEOCRAFT");
-        int xPosition = getWidth() / 2 - titleWidth / 2;
-        int yPosition = getHeight() / 10;
+        int width = getWidth();
+        int height = getHeight();
 
+        // Positioning country panel
+        double xValue = (width - 450) / 2; // Adjust this value as needed
+        double yValue = height * 0.20;
+
+
+
+        int xPosition = getWidth() / 2 - titleWidth / 2;
+        int yPosition = (int) yValue;
         g.drawString("GEOCRAFT", xPosition, yPosition);
+
     }
 
     public void displayErrorMessage(String message) {
         int width = getWidth();
         int messageHeight = 30;
-
-        errorMessageLabel.setBounds(0, messageHeight/2, width, messageHeight);
+        errorMessageLabel.setBounds(0, messageHeight / 2, width, messageHeight);
         errorMessageLabel.setText(message);
         errorMessageLabel.setHorizontalAlignment(JLabel.CENTER);
-
-
         errorMessageLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
-
         errorMessageLabel.setBackground(Color.WHITE);
         errorMessageLabel.setOpaque(true);
-
         errorMessageLabel.setForeground(Color.RED);
         errorMessageLabel.setVisible(true);
-
         this.add(errorMessageLabel);
         revalidate();
         repaint();
@@ -148,8 +165,10 @@ public class Screen extends JPanel {
         timer.start();
     }
 
-
-
+    public void playMusic() {
+        GameSound gsound = new GameSound(null);
+        gsound.play();
+    }
 
     public void setFocusListeners(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {
@@ -169,7 +188,7 @@ public class Screen extends JPanel {
         });
     }
 
-    public Font loadFont(String link, float size){
+    public Font loadFont(String link, float size) {
         Font font = null;
         try {
             File fontStyle = new File(link);
