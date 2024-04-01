@@ -13,7 +13,6 @@ public class Screen extends JPanel {
     private JLabel errorMessageLabel;
     Screen prev;
     Player user;
-    
     Font rubikScribble;
     public Screen(FullScreenUI frame,Screen previous) {
 
@@ -98,10 +97,6 @@ public class Screen extends JPanel {
         int height = getHeight();
         settings.setBounds(width-width/8, height/22, width / 10, height / 12);
         settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
-
-
-
-
     }
 
     public void drawTitle(Graphics2D g) {

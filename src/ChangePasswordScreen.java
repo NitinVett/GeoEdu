@@ -33,8 +33,8 @@ public class ChangePasswordScreen extends Screen{
         int mainButtonY =  height/3;
 
 
-        oldPassword.setBounds(mainButtonX ,mainButtonY, width/5, height/20);
-        newPassword.setBounds(mainButtonX, mainButtonY+height/10, width/5, height/20);
+        oldPassword.setBounds(mainButtonX ,mainButtonY+ height/10, width/5, height/20);
+        newPassword.setBounds(mainButtonX, mainButtonY, width/5, height/20);
         confirmPassword.setBounds(mainButtonX,mainButtonY+ (height/10)*2,width/5,height/20);
         save.setBounds(mainButtonX,mainButtonY+ (height/10)*4,width/5,height/20);
         oldPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));

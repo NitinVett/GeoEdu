@@ -12,26 +12,28 @@ import java.util.concurrent.ThreadLocalRandom;
 
 // ACtually drawing on the screen, it receives three countries, one correct and two incorrect, it receives an instance of
 // the class that called it, it has action listeners,
-public class Gameplay extends Screen {
+public class GameplayScreen extends Screen {
 
     private JButton choice1Button;
     private JButton choice2Button;
     private JButton choice3Button;
-    private JPanel hintPanel;
     private JPanel flagPanel;
 
-    private JPanel highScorePanel;
-    JButton highScores;
     JButton escButton;
-    private JLabel countryLabel;
+    private JLabel countryLabel,hintBox,hintLabel;
     private JLabel highScoreLabel;
+    int guesses = 0;
+    int correctGuesses = 0;
+    int accuracyRate = 0;
 
-    private Country correctCountry;
+    public Country correctCountry;
     private Country incorrect1;
     private Country incorrect2;
-    private String user;
+    private Player user;
     private GameTesting gameTesting;
     private JToggleButton toggleButton;
+    private Image hintBoxIMG;
+
 
 
     // Three country objects, through them you can pull all the information necessary (flag,mao,hints)
@@ -39,18 +41,17 @@ public class Gameplay extends Screen {
     // The two incorrect countries (we just use them to pull the names of the country)
 
 
-    public Gameplay(GameTesting gameTesting, Screen previous, String user, Country correctCountry, Country incorrect1, Country incorrect2) throws IOException {
+    public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2) throws IOException {
         super(gameTesting, previous);
         this.gameTesting = gameTesting;
         this.correctCountry = correctCountry;
         this.incorrect1 = incorrect1;
         this.incorrect2 = incorrect2;
-        this.user = user;
+        this.user = player;
 
         // Create toggle button
         toggleButton = new JToggleButton("Show Flag");
         toggleButton.addActionListener(e -> toggleFlag());
-
 
         //Escape button
         escButton = new JButton();
@@ -60,14 +61,18 @@ public class Gameplay extends Screen {
         escButton.setIcon(new ImageIcon(resizedEsc));
         this.add(escButton);
 
-        JLabel hintLabel = new JLabel(correctCountry.getHints().getText());
+
+        //hint
+        hintLabel = new JLabel(correctCountry.getHints().getText());
+        hintLabel.setForeground(Color.BLACK);
         hintLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
-        hintLabel.setForeground(Color.BLACK); // Set text color
-        hintPanel = new JPanel(new BorderLayout());
-        hintPanel.setBackground(Color.WHITE); // Set background color
-        hintPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        hintPanel.setOpaque(false);
-        hintPanel.add(hintLabel, BorderLayout.CENTER);
+        this.add(hintLabel);
+
+        //hint background
+        hintBoxIMG = ImageIO.read(new File("hintBox.png"));
+        hintBox = new JLabel();
+        hintBox.setIcon(new ImageIcon(hintBoxIMG));
+        this.add(hintBox);
 
 
         JLabel flagLabel = correctCountry.getFlag();
@@ -99,35 +104,21 @@ public class Gameplay extends Screen {
         choice1Button = new JButton(randomizedNames[0]);
         choice2Button = new JButton(randomizedNames[1]);
         choice3Button = new JButton(randomizedNames[2]);
-
         choice1Button.addActionListener(e -> setChoice1Button());
         choice2Button.addActionListener(e -> setChoice2Button());
         choice3Button.addActionListener(e -> setChoice3Button());
 
-        highScorePanel = new JPanel(new BorderLayout());
-        highScorePanel.setOpaque(false);
 
+        //highScore
         highScoreLabel = new JLabel();
         highScoreLabel.setForeground(Color.BLACK);
         highScoreLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
-
-        String highScore = CsvHandler.getHighScore(user);
-        if (highScore != null) {
-            highScoreLabel.setText("High Score: " + highScore);
-        } else {
-            highScoreLabel.setText("High Score: N/A");
-        }
-        highScorePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        highScorePanel.add(highScoreLabel, BorderLayout.CENTER);
-        this.add(highScorePanel);
-
-
+        int highScore = player.getHighScore();
+        highScoreLabel.setText("High Score: " + highScore);
+        //highScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        this.add(highScoreLabel);
         this.add(flagPanel);
-
         this.add(countryLabel);
-
-        this.add(hintPanel);
-
         this.add(choice1Button);
         this.add(choice2Button);
         this.add(choice3Button);
@@ -150,54 +141,28 @@ public class Gameplay extends Screen {
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
-
         // Positioning country panel
-        double xValue = (width - 450) / 2; // Adjust this value as needed
-        double yValue = height * 0.05;
-        countryLabel.setBounds((int) xValue, (int) yValue, 450, 450);
+        countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
+        //hintBox label
+        hintBox.setBounds(width/25,height/3,width/4,height/5);
 
-
-        // Positioning hint panel
-        int hintPanelWidth = 400;
-        xValue = width * 0.03;
-        yValue = height * 0.6;
-        hintPanel.setBounds((int) xValue, (int) yValue, 400, 200);
-
+        // Positioning hint label
+        hintLabel.setBounds(width/25,height/3,width/4,height/5);
         // Positioning flag panel
         if (flagPanel.isVisible()) {
-            xValue = width * 0.8;
-            yValue = height * 0.649;
-            flagPanel.setBounds((int) xValue, (int) (yValue), 100, 60);
+            flagPanel.setBounds(width/2+width/4,height/2,width/6,height/6);;
         }
-
         // Positioning choice buttons
-        xValue = width / 2 - 65;
-        yValue = height * 0.7;
-        int gap = (int) (height * 0.03); //4% total
-
-        choice1Button.setBounds((int) xValue, (int) yValue, 130, 50);
-        choice2Button.setBounds((int) xValue, (int) (yValue + 50 + (gap)), 130, 50);
-        choice3Button.setBounds((int) xValue, (int) (yValue + 100 + (2 * gap)), 130, 50);
-
+        choice1Button.setBounds(width/3+width/12,height - height/3,width/6,height/12);
+        choice2Button.setBounds(width/3+width/12,height - height/4,width/6,height/12);
+        choice3Button.setBounds(width/3+width/12,height - height/6,width/6,height/12);
         // Positioning high score panel
-        xValue = width * 0.7;
-        yValue = height * 0.05;
-        highScorePanel.setBounds((int) xValue, (int) yValue, 200, 20);
-
+        highScoreLabel.setBounds(width/2+width/6,height/25,width/10,height/14);
         // Positioning log out
-        xValue = width * 0.02;
-        yValue = height * 0.03;
-        escButton.setBounds((int) xValue, (int) yValue, 50, 50);
-
-
-        int toggleButtonWidth = 100;
-        int toggleButtonHeight = 30;
-        double toggleButtonX = width * 0.8; // Adjust as needed
-        double toggleButtonY = height * 0.75; // Adjust as needed
-        toggleButton.setBounds((int) toggleButtonX, (int) toggleButtonY, toggleButtonWidth, toggleButtonHeight);
-
+        escButton.setBounds(width / 30, height/22, width / 31, height / 19);
+        //show flag button
+        toggleButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
         revalidate();
-
     }
 
     public void logOutButton() {
@@ -222,11 +187,12 @@ public class Gameplay extends Screen {
 
     }
 
-    private void clickHandling(JButton choiceButton) {
-        int highscore = Integer.parseInt(CsvHandler.getHighScore(user));
+    public void clickHandling(JButton choiceButton) {
+        int highscore = user.getHighScore();
+        guesses += 1;
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
+            correctGuesses += 1;
             highscore = highscore + 5;
-            CsvHandler.changeHighScore(user, String.valueOf(highscore));
             highScoreLabel.setText("High Score: " + highscore);
 
 
@@ -235,8 +201,20 @@ public class Gameplay extends Screen {
             // Go back to where it was called
         } else {
             highscore = highscore - 5;
-            CsvHandler.changeHighScore(user, String.valueOf(highscore));
             highScoreLabel.setText("High Score: " + highscore);
+        }
+        user.setHighScore(highscore);
+    }
+    public void endGame(){
+        if (guesses == 0) {
+            // Handle the case where no guesses were made
+            System.out.println("No guesses were made. Accuracy rate is 0%.");
+        } else {
+            // Calculate the accuracy rate
+            float accuracyRate = ((float) correctGuesses / guesses) * 100;
+            accuracyRate = (user.getAccuracy()*user.getNumGames()+accuracyRate)/user.getNumGames()+1;
+            user.setAccuracy(accuracyRate);
+            user.setNumGames(user.getNumGames() + 1);
         }
     }
 

@@ -1,15 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
-public class GamemodeSelector extends Screen{
+public class GamemodeSelectorScreen extends Screen{
     JButton global;
     JButton continental;
     JButton microNations;
     JButton esc;
     //JButton highScore;
 
-    public GamemodeSelector(FullScreenUI frame, Screen previous) {
+    public GamemodeSelectorScreen(FullScreenUI frame, Screen previous) {
         super(frame,previous);
         global = new JButton();
         continental = new JButton();
@@ -60,14 +59,13 @@ public class GamemodeSelector extends Screen{
         microNations.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
 
         //redo these bounds
-        esc.setBounds(mainButtonX, mainButtonY, (width / 10) - 30, height / 12);
+        esc.setBounds(mainButtonX/mainButtonX, mainButtonY/mainButtonY, (width / 10) - 30, height / 12);
         //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
 
     }
 
     public void globalButton() {
-
         swapScreens(new LoginScreen(frame,this));
     }
 
@@ -75,14 +73,13 @@ public class GamemodeSelector extends Screen{
         swapScreens(new RegisterScreen(frame,this));
     }
 
-    public void escButton() {
-        //swapScreens(new GameMainMenu(frame,this));
-    }
-
     public void microNationButton() {
         TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
         frame.addKeyListener(tutorialScreen);
         swapScreens(tutorialScreen);
+    }
+    public void escButton() {
+        //swapScreens(new GameMainMenu(frame,this));
     }
 
     public void logOutButton() {

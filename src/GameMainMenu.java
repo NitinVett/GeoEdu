@@ -57,8 +57,7 @@ public class GameMainMenu extends Screen {
     }
 
     public void newGameButton() {
-
-        swapScreens(new LoginScreen(frame,this));
+        swapScreens(new GamemodeSelectorScreen(frame,this));
     }
 
     public void continue_Button() {

@@ -1,13 +1,11 @@
-import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-// This is the class that distributes the countries, basically gameplay loop
-public class GameTesting extends FullScreenUI {
 
-    private String user;
+public class GameTesting extends FullScreenUI{
+
+    private Player user;
     private Country[] countries;
     private int curIndex;
 
@@ -17,14 +15,12 @@ public class GameTesting extends FullScreenUI {
 
     // Randomizes the countries, and feeds it to the game play class.
     //
-    public GameTesting(Screen previous, String username, String mode, String continent) throws IOException {
+    public GameTesting(Screen previous, Player user, String mode, String continent) throws IOException {
 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        this.setUndecorated(true);
 
-        this.user = username;
-        this.setVisible(true);
-        this.requestFocus();
+
+        this.user = user;
+
         //Static class that loads all the countries in a specific mode
         // For global it would be 50 country objects of type global
         this.countries = CountryList.getCountries(mode);
@@ -38,6 +34,7 @@ public class GameTesting extends FullScreenUI {
         Country correctCountry;
         Country incorrectCountry1;
         Country incorrectCountry2;
+
 
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
@@ -70,7 +67,7 @@ public class GameTesting extends FullScreenUI {
 
             try {
                 // Create a new Gameplay instance for the current iteration
-                this.setContentPane(new Gameplay(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
+                this.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
 //                setContentPane(gameplay);
                 revalidate(); // Refresh the UI
             } catch (IOException e) {
@@ -100,7 +97,7 @@ public class GameTesting extends FullScreenUI {
     }
 
     public static void main(String[] args) throws IOException {
-        new GameTesting(null, "jam", "Global Mode", null);
+        new GameTesting(null, new Player("jam","1"), "Global Mode", null);
 
     }
 
