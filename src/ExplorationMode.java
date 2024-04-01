@@ -10,10 +10,6 @@ public class ExplorationMode extends GameplayScreen {
     //buttons
 
 
-    //Labels
-
-    protected GameTesting gameTesting;
-
     //images
     private Image hintBoxIMG;
 

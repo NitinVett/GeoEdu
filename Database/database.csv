@@ -1,6 +1,7 @@
 "user_name","password","num_games_played","saved_game?","accuracy_rate","listOfCountry","highScore"
 "123","1","0","N","100%","listOfCountry","10"
 "1234","1","0","N","100%","listOfCountry","11"
+"jam","1","0","N","100%","visitedIndices:8-4-1;timeLeft:60;lives:3;type:Exploration;correctCountry:Portugal;incorrectCountry1:Poland;incorrectCountry2:Indonesia","188"
 "j","1","0","N","100%","listOfCountry","0"
 "boba","jaja","0","N","100%","listOfCountry","0"
 "bobb","aaaa","0","N","100%","listOfCountry","0"
@@ -10,5 +11,3 @@
 "Nitin","umbrella","0","N","100%","listOfCountry","0"
 "logi","eat4","0","N","100%","listOfCountry","0"
 "meow1","meow2","0","N","100%","listOfCountry","0"
-"meoww1","meow2","0","N","100%","listOfCountry","0"
-"than66","123456","0","N","100%","listOfCountry","01"

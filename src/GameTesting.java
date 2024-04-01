@@ -225,7 +225,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
     }
     public void startNextIteration() {
         if(type.equals("Timed")){
-            startNextIterationExploration();
+            startNextIterationTimed();
         } else if(type.equals("Marathon")){
             startNextIterationMarathon();
         }
@@ -255,7 +255,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
     public static void main(String[] args) throws IOException {
         Player a = new Player("jam","1");
         String gameData = CsvHandler.getListOfCountry(a.getUsername());
-        GameTesting z = new GameTesting(null, a, "Global Mode",null,gameData.split(";")[3].split(":")[1]);
+        GameTesting z = new GameTesting(null, a, "Global Mode",null,"Exploration");
         //z.loadFile(gameData);
     }
 }
