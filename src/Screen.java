@@ -59,7 +59,7 @@ public class Screen extends JPanel {
     }
 
     private void loadBackgroundImage() {
-        URL imageURL = getClass().getClassLoader().getResource("video.gif");
+        URL imageURL = getClass().getClassLoader().getResource("wallpaper3.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
