@@ -1,11 +1,15 @@
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public class Screen extends JPanel {
     FullScreenUI frame;
@@ -14,13 +18,16 @@ public class Screen extends JPanel {
     private JLabel errorMessageLabel;
     Screen prev;
     Player user;
-    Font rubikScribble;
+
+    Cursor defaultCursor;
+    Cursor customCursor;
 
 
     public Screen(FullScreenUI frame, Screen previous) {
         this.frame = frame;
         prev = previous;
         setUp();
+        loadCustomCursors();
     }
 
     public Screen(FullScreenUI frame, Screen previous, Player user) {
@@ -28,7 +35,7 @@ public class Screen extends JPanel {
         this.prev = previous;
         this.user = user;
         setUp();
-
+        loadCustomCursors();
     }
 
     public void setUp() {
@@ -55,12 +62,39 @@ public class Screen extends JPanel {
         setUpKeyBindings();
         frame.revalidate();
         frame.repaint();
+        this.addMouseListener(new CursorMouseListener());
+    }
 
+    private void loadCustomCursors() {
+        try {
+            BufferedImage cursorImg = ImageIO.read(getClass().getResource("click.png"));
+            Image resizedImage1 = cursorImg.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+            defaultCursor = Toolkit.getDefaultToolkit().createCustomCursor(resizedImage1, new Point(0, 0), "DefaultCursor");
+
+            BufferedImage cursorImg2 = ImageIO.read(getClass().getResource("cursor.png"));
+            Image resizedImage2 = cursorImg2.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+            customCursor = Toolkit.getDefaultToolkit().createCustomCursor(resizedImage2, new Point(0, 0), "CustomCursor");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCustomCursor() {
+        frame.setCursor(customCursor);
+    }
+
+    private void setDefaultCursor() {
+        frame.setCursor(defaultCursor);
+    }
+
+    private void addMouseListeners(JButton button) {
+        button.addMouseListener(new ButtonMouseListener(button));
     }
 
     private void loadBackgroundImage() {
         // only works if gif is in src folder, aka class path
-        URL imageURL = getClass().getClassLoader().getResource("wallpaper5.gif");
+        //no: 3, 4 is too busy cannon, 5 cutting into geocraft,
+        URL imageURL = getClass().getClassLoader().getResource("wallpaper1.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
@@ -122,7 +156,7 @@ public class Screen extends JPanel {
     public void drawTitle(Graphics2D g) {
 
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        g.setFont(loadFont("resources/Viner.ttf",96));
+        g.setFont(loadFont("resources/Viner.ttf", 96));
         FontMetrics fm = g.getFontMetrics();
         int titleWidth = fm.stringWidth("GEOCRAFT");
         int width = getWidth();
@@ -131,7 +165,6 @@ public class Screen extends JPanel {
         // Positioning country panel
         double xValue = (width - 450) / 2; // Adjust this value as needed
         double yValue = height * 0.20;
-
 
 
         int xPosition = getWidth() / 2 - titleWidth / 2;
@@ -199,5 +232,41 @@ public class Screen extends JPanel {
         return font;
     }
 
+    // Inner class to handle cursor change
+    private class CursorMouseListener extends MouseAdapter {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            setCustomCursor();
+        }
 
+        @Override
+        public void mouseExited(MouseEvent e) {
+            setDefaultCursor();
+        }
+    }
+
+    // Inner class to handle button mouse events
+    class ButtonMouseListener extends MouseAdapter {
+        private JButton button;
+
+        ButtonMouseListener(JButton button) {
+            this.button = button;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            button.setForeground(Color.YELLOW); // Change text color
+
+            setDefaultCursor();
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            button.setForeground(Color.BLACK); // Restore text color
+            setCustomCursor(); // Change cursor
+        }
+
+    }
 }
+
+

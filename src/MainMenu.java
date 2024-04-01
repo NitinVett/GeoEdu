@@ -1,67 +1,73 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class MainMenu extends Screen {
 
-    //Image image;
     JButton login;
     JButton register;
     JButton exit;
 
     MainMenu(FullScreenUI frame) {
-
         super(frame, null);
         initializeButtons();
+//        loadCustomCursors();
     }
+
 
     private void initializeButtons() {
         //playMusic();
-        ImageIcon imgIcon = new ImageIcon("resources/hamburger.png");
-        Image image = imgIcon.getImage();
-        Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-        ImageIcon buttonBackground = new ImageIcon(newImage);
 
-        ImageIcon icon = new ImageIcon("src/shade.png");
-        login = new JButton("Login", icon);
+//        ImageIcon icon = new ImageIcon("src/shade.png");
+        login = new JButton("Login");
         login.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
         login.setVerticalTextPosition(SwingConstants.CENTER);
-        login.setFont(new Font("Arial", Font.BOLD, 14));
-        login.setForeground(Color.WHITE);
-        login.setContentAreaFilled(false); // Make button transparent
-        register = new JButton();
-        exit = new JButton();
-
+        login.setFont(loadFont("resources/Viner.ttf", 26));
+        //login.setForeground(Color.WHITE);
+        login.setContentAreaFilled(false);
+        login.setBorder(null);
         login.addActionListener(e -> loginButton());
-        //login.setIcon(icon);
-        //login.setText("Login");
+        login.addMouseListener(new ButtonMouseListener(login));
 
+        // Make button transparent
+        register = new JButton();
         register.addActionListener(e -> registerButton());
-        register.setText("REGISTER");
+        register.setText("Register");
+        register.setFont(loadFont("resources/Viner.ttf", 26));
+        register.setContentAreaFilled(false); // Make button transparent
+        register.setBorder(null);
+        register.addMouseListener(new ButtonMouseListener(register));
 
+        // Exit
+        exit = new JButton();
         exit.addActionListener(e -> exitButton());
-        exit.setText("EXIT");
+        exit.setText("Exit");
+        exit.setFont(loadFont("resources/Viner.ttf", 26));
+        exit.setContentAreaFilled(false); // Make button transparent
+        exit.setBorder(null);
+        exit.addMouseListener(new ButtonMouseListener(exit));
 
         this.add(login);
         this.add(register);
         this.add(exit);
     }
+
+
     private void updateButtonPositions() {
 
         int width = getWidth();
         int height = getHeight();
-        int mainButtonX = width / 2 - width / 10;
+        int mainButtonX = width / 2 - width / 17;
         int mainButtonY = height / 3;
         int mainButtonYIncrement = height / 10;
-        login.setBounds(mainButtonX, mainButtonY, width / 5, height / 12);
-        register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
-        exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
+
+        login.setBounds(mainButtonX, mainButtonY, (int) (width / 8.5), height / 13);
+        register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, (int) (width / 8.5), height / 13);
+        exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, (int) (width / 8.5), height / 13);
 
         revalidate();
 
     }
-
 
     public void loginButton() {
         swapScreens(new LoginScreen(frame, this));
