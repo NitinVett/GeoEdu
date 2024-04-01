@@ -189,11 +189,11 @@ public class GameplayScreen extends Screen {
             highScoreLabel.setText("High Score: " + highscore);
             highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
             user.setHighScore(highscore);
-
-            scoreUpdateTimer = new Timer(2000, e -> gameTesting.startNextIteration());
+            scoreUpdateTimer = new Timer(1000, e -> gameTesting.startNextIteration());
             scoreUpdateTimer.setRepeats(false);
             scoreUpdateTimer.start();
         } else {
+            choiceButton.setBackground(Color.RED);
             highscore = highscore - highScoreLossAmount;
             highScoreLabel.setText("High Score: " + highscore);
             highScoreLabel.setText("High Score: " + highscore + "  -" + highScoreLossAmount);
