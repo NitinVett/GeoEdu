@@ -11,7 +11,7 @@ public class FullScreenUI extends JFrame {
     public FullScreenUI() throws IOException {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
-        this.setContentPane(new MainMenu(this));
+        this.setContentPane(new TutorialScreen(this,null));
         this.setVisible(true);
         this.requestFocus();
         settings = new SettingScreen(this,null,null);
