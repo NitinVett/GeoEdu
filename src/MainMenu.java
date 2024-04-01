@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class MainMenu extends Screen {
 
@@ -9,14 +10,24 @@ public class MainMenu extends Screen {
     JButton exit;
 
     MainMenu(FullScreenUI frame) {
+
         super(frame,null);
 
-        login = new JButton();
+        BufferedImage backgroundImage = null;
+
+        ImageIcon icon = new ImageIcon("src/shade.png");
+        login = new JButton("Login",icon);
+        login.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
+        login.setVerticalTextPosition(SwingConstants.CENTER);
+        login.setFont(new Font("Arial", Font.BOLD, 14));
+        login.setForeground(Color.WHITE);
+        login.setContentAreaFilled(false); // Make button transparent
         register = new JButton();
         exit = new JButton();
 
         login.addActionListener(e -> loginButton());
-        login.setText("LOGIN");
+        //login.setIcon(icon);
+        //login.setText("Login");
 
         register.addActionListener(e -> registerButton());
         register.setText("REGISTER");
