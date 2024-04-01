@@ -12,12 +12,22 @@ public class TutorialScreen extends Screen implements KeyListener {
     private final Screen previousScreen;
     private JPanel scrollPanel;
     private JLabel scrollLabel;
+    private JButton explorationButton;
 
     public TutorialScreen(FullScreenUI frame, Screen previousScreen) {
         super(frame,previousScreen);
         this.previousScreen = previousScreen;
         setFocusable(true);
         requestFocusInWindow();
+
+        explorationButton = new JButton();
+
+        explorationButton.addActionListener(e -> explorationButton());
+        explorationButton.setText("Exploration Mode");
+        explorationButton.setFont(loadFont("resources/RubikScribble-Regular.ttf", 17));
+
+        this.add(explorationButton);
+
 
         scrollLabel = getHints();
         BufferedImage scrollImage = null;
@@ -26,7 +36,7 @@ public class TutorialScreen extends Screen implements KeyListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Image resizedScroll = scrollImage.getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+        Image resizedScroll = scrollImage.getScaledInstance(1500, 1300, Image.SCALE_SMOOTH);
         scrollLabel.setIcon(new ImageIcon(resizedScroll));
 
         scrollLabel.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
@@ -38,14 +48,28 @@ public class TutorialScreen extends Screen implements KeyListener {
         repaint();
     }
 
+    private void updateButtonPositions() {
+        int width = getWidth();
+        int height = getHeight();
+        double xValue = width / 2 - ((height/15)*2);
+        double yValue = height * 0.75;
+        explorationButton.setBounds((int) xValue, (int) yValue, width / 9, height / 15);
+        revalidate();
+
+    }
+
+    public void explorationButton() {
+        //code here
+    }
+
     public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
-        int mainButtonY =  height/3;
+        int mainButtonY = height/100;
 
-        scrollLabel.setBounds(width/3+width/6,mainButtonY+ (height/10)*4,200,300);
+        scrollLabel.setBounds(width/5 - width/10,mainButtonY - height/15,1500,1300);
 
-        scrollLabel.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        scrollLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
 
 
         repaint();
@@ -87,7 +111,7 @@ public class TutorialScreen extends Screen implements KeyListener {
 
         return hints;
     }
-    public void displayTutorial(Graphics2D g2D) {
+    /*public void displayTutorial(Graphics2D g2D) {
         String[] tutorialText = {
                 "Welcome to Geocraft",
                 "",
@@ -115,7 +139,7 @@ public class TutorialScreen extends Screen implements KeyListener {
         for (int i = 0; i < tutorialText.length; i++) {
             g2D.drawString(tutorialText[i], 100, startY + i * lineHeight);
         }
-    }
+    }*/
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -150,6 +174,7 @@ public class TutorialScreen extends Screen implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         setComponents(g);
+        updateButtonPositions();
         /*Graphics2D g2D = (Graphics2D) g;
         try {
             displayTutorial(g2D);

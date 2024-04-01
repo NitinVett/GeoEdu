@@ -97,13 +97,7 @@ public class GamemodeSelector extends Screen{
         int mainButtonX = width / 3 - width / 7;
         int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
-        /** Font font = null;
-        try {
-            File fontStyle = new File("resources/RubikScribble-Regular.ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(44f);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
         g.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
         g.drawString("Select a game mode!", mainButtonX, mainButtonY);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
