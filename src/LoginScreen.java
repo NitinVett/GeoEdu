@@ -59,8 +59,9 @@ public class LoginScreen extends Screen {
 
 
     public void loginButton() {
-
+        System.out.println(username.getText());
         String pass = CsvHandler.getPassword(username.getText());
+        System.out.println(pass);
         if (Objects.nonNull(pass) && pass.equals(password.getText())) {
             Player user = new Player(username.getText(), password.getText());
             swapScreens(new GameMainMenu(frame, this, user));
