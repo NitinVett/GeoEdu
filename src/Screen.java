@@ -51,13 +51,13 @@ public class Screen extends JPanel {
     }
 
     private void loadBackgroundImage() {
-        URL imageURL = getClass().getClassLoader().getResource("wallpaper5.gif");
+        URL imageURL = getClass().getClassLoader().getResource("resources/wallpaper5.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
 
         } else {
-            System.err.println("Resource not found: " + "src/video.gif");
+            System.err.println("Resource not found: " + "resources/wallpaper5.gif");
         }
     }
     public void setUpKeyBindings() {

@@ -1,25 +1,95 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class TutorialScreen extends Screen implements KeyListener {
 
     private final Screen previousScreen;
-    private JLabel scroll;
+    private JPanel scrollPanel;
+    private JLabel scrollLabel;
 
     public TutorialScreen(FullScreenUI frame, Screen previousScreen) {
         super(frame,previousScreen);
         this.previousScreen = previousScreen;
-        scroll = new JLabel();
         setFocusable(true);
         requestFocusInWindow();
+
+        scrollLabel = getHints();
+        BufferedImage scrollImage = null;
+        try {
+            scrollImage = ImageIO.read(new File("resources/scroll.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Image resizedScroll = scrollImage.getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+        scrollLabel.setIcon(new ImageIcon(resizedScroll));
+
+        scrollLabel.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
+        scrollLabel.setVerticalTextPosition(SwingConstants.CENTER);
+        scrollLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        scrollLabel.setForeground(Color.BLACK);
+        this.add(scrollLabel);
+
         repaint();
     }
 
+    public void setComponents(Graphics g){
+        int width = getWidth();
+        int height = getHeight();
+        int mainButtonY =  height/3;
+
+        scrollLabel.setBounds(width/3+width/6,mainButtonY+ (height/10)*4,200,300);
+
+        scrollLabel.setFont(new Font("SansSerif", Font.PLAIN, 24));
+
+
+        repaint();
+
+    }
+
+    private JLabel getHints(){
+        JLabel hints = new JLabel();
+        String textHint = "Welcome to Geocraft,\n" +
+                "\n" +
+                "1. Select a game mode (Global, Continental or Micro-Nations)\n" +
+                "2. Select a game type (Timed, Marathon or Exploration)\n" +
+                "\n" +
+                "In timed mode, you have 3 minutes to score as many points as you can\n" +
+                "You earn 10 points for a correct answer and lose 5 incorrect answer\n" +
+                "\n" +
+                "In marathon mode, you have 3 lives to score as many points as you can, 10 points per correct answer\n" +
+                "You will lose a life for each wrong answer you get. The game is over when you are out of lives\n" +
+                "\n" +
+                "In both timed and marathon mode, 2 points will be deducted if you choose to view a flag hint\n" +
+                "4 points will be deducted if you choose to view a text hint\n" +
+                "\n" +
+                "In exploration, you have no time limit, lives or high score. This mode is purely for you to learn and explore.\n" +
+                "\n" +
+                "Click the button below to start exploration mode\n" +
+                "Good luck and have fun!";
+
+        try {
+            String[] lines = textHint.split("\n");
+            StringBuilder content = new StringBuilder();
+
+            for (String line : lines) {
+                content.append(line).append("<br>");
+            }
+            hints.setText("<html>" + content.toString() + "</html>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hints;
+    }
     public void displayTutorial(Graphics2D g2D) {
         String[] tutorialText = {
-                "Welcome to Geocraft,",
+                "Welcome to Geocraft",
                 "",
                 "1. Select a game mode (Global, Continental or Micro-Nations)",
                 "2. Select a game type (Timed, Marathon or Exploration)",
@@ -33,13 +103,8 @@ public class TutorialScreen extends Screen implements KeyListener {
                 "In both timed and marathon mode, 2 points will be deducted if you choose to view a flag hint",
                 "4 points will be deducted if you choose to view a text hint",
                 "",
-                "In exploration, you have no time limit, lives or high score. This mode is purely for you to learn and explore.",
-                "",
-                "Click the button below to start exploration mode",
                 "Good luck and have fun!"
         };
-
-
 
         g2D.setFont(new Font("SansSerif", Font.PLAIN, 24));
         g2D.setColor(Color.BLACK);
@@ -84,7 +149,13 @@ public class TutorialScreen extends Screen implements KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2D = (Graphics2D) g;
-        displayTutorial(g2D);
+        setComponents(g);
+        /*Graphics2D g2D = (Graphics2D) g;
+        try {
+            displayTutorial(g2D);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
+
     }
 }
