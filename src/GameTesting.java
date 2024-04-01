@@ -81,8 +81,6 @@ public class GameTesting extends FullScreenUI implements Serializable {
             revalidate();
             this.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,lives));
             curIndex++;
-        } else {
-
         }
     }
     public void startNextIterationExploration() {
@@ -115,8 +113,6 @@ public class GameTesting extends FullScreenUI implements Serializable {
             revalidate();
             this.setContentPane(new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
             curIndex++;
-        } else {
-
         }
     }
 
@@ -229,9 +225,12 @@ public class GameTesting extends FullScreenUI implements Serializable {
     }
     public void startNextIteration() {
         if(type.equals("Timed")){
-            startNextIterationTimed();
+            startNextIterationExploration();
         } else if(type.equals("Marathon")){
             startNextIterationMarathon();
+        }
+        else if (type.equals("Exploration")){
+            startNextIterationExploration();
         }
         CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
     }
@@ -256,10 +255,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
     public static void main(String[] args) throws IOException {
         Player a = new Player("jam","1");
         String gameData = CsvHandler.getListOfCountry(a.getUsername());
-        GameTesting z = new GameTesting(null, a, "Micro Nation Mode",null,"Marathon");
-       // z.loadFile(gameData);
-        System.out.println(CsvHandler.getListOfCountry("jam"));
-
-
+        GameTesting z = new GameTesting(null, a, "Global Mode",null,gameData.split(";")[3].split(":")[1]);
+        //z.loadFile(gameData);
     }
 }

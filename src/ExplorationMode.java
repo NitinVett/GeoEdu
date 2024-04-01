@@ -8,32 +8,38 @@ import java.util.Objects;
 
 public class ExplorationMode extends GameplayScreen {
     //buttons
-    private JButton choice1Button;
-    private JButton choice2Button;
-    private JButton choice3Button;
-    private JButton showFlagButton;
+
 
     //Labels
-    private JLabel countryLabel, hintBoxLabel,hintLabel,highScoreLabel, flagLabel;
 
-    public Country correctCountry;
-    private Country incorrect1;
-    private Country incorrect2;
-    private Player user;
     protected GameTesting gameTesting;
 
     //images
     private Image hintBoxIMG;
 
+    private boolean hintWasClicked, flagWasClicked;
+
     public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2){
         super(gameTesting, previous, user, correctCountry, incorrect1, incorrect2);
 
     }
-
     @Override
     public void showFlag(){
         flagLabel.setVisible(true);
         updateButtonPositions();
+        if (!flagWasClicked) {
+            showFlagButton.setEnabled(false);
+        }
+        flagWasClicked =true;
+    }
+    @Override
+    public void showHints(){
+        hintLabel.setVisible(true);
+        updateButtonPositions();
+        if (!hintWasClicked) {
+            showHintButton.setEnabled(false);
+        }
+        hintWasClicked =true;
     }
     @Override
     public void updateButtonPositions() {
@@ -42,9 +48,10 @@ public class ExplorationMode extends GameplayScreen {
         // Positioning country panel
         countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
         //hintBox label
-        hintBoxLabel.setBounds(width/25,height/2+height/5,width/2,height/5);
-        // Positioning hint label
-        hintLabel.setBounds(width/25,height/2+height/5,width/3,height/5);
+        if (hintLabel.isVisible()) {
+            hintBackgroundLabel.setBounds(width / 8, height / 2, width / 6, height / 6);
+            hintLabel.setBounds(width / 8, height / 2, width / 6, height / 6);
+        }
         // Positioning flag panel
         if (flagLabel.isVisible()) {
             flagLabel.setBounds(width/2+width/4,height/2,width/6,height/6);;
@@ -56,12 +63,29 @@ public class ExplorationMode extends GameplayScreen {
         // Positioning high score panel
         //show flag button
         showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
+        showHintButton.setBounds(width/8,height - height/4,width/6,height/12);
         revalidate();
+    }
+    public void setChoice1Button() {
+        clickHandling(choice1Button);
+    }
+    public void setChoice2Button() {
+        clickHandling(choice2Button);
+    }
+    public void setChoice3Button() {
+        clickHandling(choice3Button);
     }
     @Override
     public void clickHandling(JButton choiceButton) {
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
-            gameTesting.startNextIteration();
+            choiceButton.setBackground(Color.GREEN);
+            scoreUpdateTimer = new Timer(1000, e -> gameTesting.startNextIteration());
+            scoreUpdateTimer.setRepeats(false);
+            scoreUpdateTimer.start();
+        }
+        else {
+            choiceButton.setBackground(Color.RED);
+            choiceButton.setEnabled(false);
         }
     }
     @Override
