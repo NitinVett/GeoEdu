@@ -20,8 +20,8 @@ public class TimedMode extends GameplayScreen {
         g.setFont(new Font("Arial", Font.BOLD, getHeight() / 40));
         String timerText = "Time left: " + game.getTime() + "s";
         FontMetrics metrics = g.getFontMetrics();
-        int x = (getWidth() - metrics.stringWidth(timerText)) / 2;
-        int y = getHeight() / 50;
+        int x = (getWidth() - metrics.stringWidth(timerText)) / 20;
+        int y = getHeight() / 15;
         g.drawString(timerText, x, y);
         repaint();
     }

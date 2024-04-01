@@ -11,8 +11,6 @@ public class ExplorationMode extends GameplayScreen {
 
 
     //images
-    private Image hintBoxIMG;
-
     private boolean hintWasClicked, flagWasClicked;
 
     public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2){
@@ -75,6 +73,7 @@ public class ExplorationMode extends GameplayScreen {
     public void clickHandling(JButton choiceButton) {
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
             choiceButton.setBackground(Color.GREEN);
+            disableChoiceButtons();
             scoreUpdateTimer = new Timer(1000, e -> gameTesting.startNextIteration());
             scoreUpdateTimer.setRepeats(false);
             scoreUpdateTimer.start();
@@ -83,6 +82,9 @@ public class ExplorationMode extends GameplayScreen {
             choiceButton.setBackground(Color.RED);
             choiceButton.setEnabled(false);
         }
+    }
+    public void disableChoiceButtons(){
+        super.disableChoiceButtons();
     }
     @Override
     protected void paintComponent(Graphics g) {

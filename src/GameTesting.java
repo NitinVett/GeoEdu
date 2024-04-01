@@ -53,7 +53,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
     public void startNextIterationMarathon() {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
-        int index;
+        int index=0;
 
         if (curIndex < countries.length) { // Check if there are more countries to display
             index = randomNumber(totalCountries);
@@ -86,7 +86,8 @@ public class GameTesting extends FullScreenUI implements Serializable {
     public void startNextIterationExploration() {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
-        int index;
+        int index=0;
+
         if (curIndex < countries.length) { // Check if there are more countries to display
             index = randomNumber(totalCountries);
             // loop until unique index is found
@@ -116,13 +117,6 @@ public class GameTesting extends FullScreenUI implements Serializable {
         }
     }
 
-    public int getTime(){
-        return timeLeft;
-    }
-    public void reduceLives(){
-        lives =lives-1;
-    }
-
     public void startNextIterationTimed() {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
@@ -150,10 +144,15 @@ public class GameTesting extends FullScreenUI implements Serializable {
             random = getRandomIntWithAvoidance(totalCountries, index);
         }
         incorrectCountry2 = countries[random];
-
         randomizerStack.clear();
         this.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
         curIndex++;
+    }
+    public int getTime(){
+        return timeLeft;
+    }
+    public void reduceLives(){
+        lives =lives-1;
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -224,15 +223,13 @@ public class GameTesting extends FullScreenUI implements Serializable {
 
     }
     public void startNextIteration() {
-        if(type.equals("Timed")){
-            startNextIterationTimed();
-        } else if(type.equals("Marathon")){
-            startNextIterationMarathon();
-        }
-        else if (type.equals("Exploration")){
-            startNextIterationExploration();
+        switch (type) {
+            case "Exploration" -> startNextIterationExploration();
+            case "Timed" -> startNextIterationTimed();
+            case "Marathon" -> startNextIterationMarathon();
         }
         CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
+        System.out.println("ji");
     }
 
     private int randomNumber(int max) {
@@ -248,10 +245,11 @@ public class GameTesting extends FullScreenUI implements Serializable {
         do {
             randomNum = ThreadLocalRandom.current().nextInt(0, max);
         } while (randomNum == avoidValue);
-
         return randomNum;
     }
 
+    //modes are Global Mode, Continental Mode, Micro Nations Mode
+    //types are Exploration, Marathon, Timed
     public static void main(String[] args) throws IOException {
         Player a = new Player("jam","1");
         String gameData = CsvHandler.getListOfCountry(a.getUsername());
