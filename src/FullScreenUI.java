@@ -30,7 +30,6 @@ public class FullScreenUI extends JFrame {
                 // Handle window losing focus if necessary
             }
         });
-
     }
 
 

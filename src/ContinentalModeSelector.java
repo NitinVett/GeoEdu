@@ -67,7 +67,7 @@ public class ContinentalModeSelector extends Screen{
     }
 
     public void escButton() {
-        swapScreens(new GamemodeSelector(frame,this));
+        swapScreens(new GamemodeSelectorScreen(frame,this));
     }
 
 

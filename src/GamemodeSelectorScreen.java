@@ -1,15 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
-public class GamemodeSelector extends Screen{
+public class GamemodeSelectorScreen extends Screen{
     JButton global;
     JButton continental;
     JButton microNations;
     JButton esc;
     //JButton highScore;
 
-    public GamemodeSelector(FullScreenUI frame, Screen previous) {
+    public GamemodeSelectorScreen(FullScreenUI frame, Screen previous) {
         super(frame,previous);
         global = new JButton();
         continental = new JButton();
@@ -67,7 +66,6 @@ public class GamemodeSelector extends Screen{
     }
 
     public void globalButton() {
-
         swapScreens(new LoginScreen(frame,this));
     }
 
@@ -75,14 +73,13 @@ public class GamemodeSelector extends Screen{
         swapScreens(new RegisterScreen(frame,this));
     }
 
-    public void escButton() {
-        //swapScreens(new GameMainMenu(frame,this));
-    }
-
     public void microNationButton() {
         TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
         frame.addKeyListener(tutorialScreen);
         swapScreens(tutorialScreen);
+    }
+    public void escButton() {
+        //swapScreens(new GameMainMenu(frame,this));
     }
 
     public void logOutButton() {

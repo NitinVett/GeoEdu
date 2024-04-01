@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class GameTypeSelector extends Screen{
     JButton marathon;
@@ -69,7 +68,7 @@ public class GameTypeSelector extends Screen{
     }
 
     public void escButton() {
-        swapScreens(new GamemodeSelector(frame,this));
+        swapScreens(new GamemodeSelectorScreen(frame,this));
     }
 
 
