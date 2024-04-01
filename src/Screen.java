@@ -119,13 +119,24 @@ public class Screen extends JPanel {
     }
 
     public void drawTitle(Graphics2D g) {
+
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        g.setFont(new Font("SansSerif", Font.BOLD, 48));
+        g.setFont(loadFont("resources/Viner.ttf",96));
         FontMetrics fm = g.getFontMetrics();
         int titleWidth = fm.stringWidth("GEOCRAFT");
+        int width = getWidth();
+        int height = getHeight();
+
+        // Positioning country panel
+        double xValue = (width - 450) / 2; // Adjust this value as needed
+        double yValue = height * 0.20;
+
+
+
         int xPosition = getWidth() / 2 - titleWidth / 2;
-        int yPosition = getHeight() / 10;
+        int yPosition = (int) yValue;
         g.drawString("GEOCRAFT", xPosition, yPosition);
+
     }
 
     public void displayErrorMessage(String message) {
