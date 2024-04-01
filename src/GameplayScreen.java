@@ -30,7 +30,7 @@ public class GameplayScreen extends Screen {
     private Country incorrect1;
     private Country incorrect2;
     private Player user;
-    private GameTesting gameTesting;
+    protected GameTesting gameTesting;
     private JToggleButton toggleButton;
     private Image hintBoxIMG;
 

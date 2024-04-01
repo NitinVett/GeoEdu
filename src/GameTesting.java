@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GameTesting extends FullScreenUI{
 
+    private int lives = 3;
     private Player user;
     private Country[] countries;
     private int curIndex;
@@ -29,6 +30,9 @@ public class GameTesting extends FullScreenUI{
         startNextIteration();
     }
 
+    public void reduceLives(){
+        lives = lives - 1;
+    }
     // Game loop
     public void startNextIteration() {
         Country correctCountry;
@@ -67,7 +71,7 @@ public class GameTesting extends FullScreenUI{
 
             try {
                 // Create a new Gameplay instance for the current iteration
-                this.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
+                this.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,lives));
 //                setContentPane(gameplay);
                 revalidate(); // Refresh the UI
             } catch (IOException e) {

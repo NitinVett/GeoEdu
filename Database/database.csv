@@ -1,7 +1,7 @@
 "user_name","password","num_games_played","saved_game?","accuracy_rate","ListOfCountry","highScore"
 "123","1","0","N","100%","listOfCountry","10"
 "1234","1","0","N","100%","listOfCountry","11"
-"jam","1","0","N","100%","listOfCountry","290"
+"jam","1","0","N","100%","listOfCountry","-80"
 "j","1","0","N","100%","listOfCountry","0"
 "boba","jaja","0","N","100%","listOfCountry","0"
 "bobb","aaaa","0","N","100%","listOfCountry","0"
