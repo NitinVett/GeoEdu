@@ -22,6 +22,7 @@ public class GameplayScreen extends Screen {
     private JLabel countryLabel, hintBackgroundLabel,hintLabel,highScoreLabel, flagLabel;
     int highScoreWinAmount= 5;
     int highScoreLossAmount= 5;
+    int delay=5000;
 
     public Country correctCountry;
     private Country incorrect1;
@@ -31,7 +32,6 @@ public class GameplayScreen extends Screen {
     private Image hintBackgroundIMG;
     private  Timer timer;
     public  int highscore;
-    int delay=5000;
     private boolean flagWasClicked =false;
     private boolean hintWasClicked=false;
 
@@ -146,24 +146,23 @@ public class GameplayScreen extends Screen {
     public void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
-        // Positioning country panel
+        // Positioning country
         countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
         //hintBox label
-        hintBackgroundLabel.setBounds(width/25,height/2+height/5,width/3,height/5);
         // Positioning hint label
-        hintLabel.setBounds(width/25,height/2+height/5,width/3,height/5);
-        // Positioning flag panel
+        // Positioning flag
         if (flagLabel.isVisible()) {
             flagLabel.setBounds(width/2+width/4,height/2,width/6,height/6);;
         }
         if (hintLabel.isVisible()) {
+            hintBackgroundLabel.setBounds(width/8,height/2,width/6,height/6);
             hintLabel.setBounds(width/8,height/2,width/6,height/6);;
         }
         // Positioning choice buttons
         choice1Button.setBounds(width/3+width/12,height - height/3,width/6,height/12);
         choice2Button.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         choice3Button.setBounds(width/3+width/12,height - height/6,width/6,height/12);
-        // Positioning high score panel
+        // Positioning high score
         highScoreLabel.setBounds(width/2+width/10,height/25,width,height/14);
         //show flag button
         showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
@@ -184,10 +183,10 @@ public class GameplayScreen extends Screen {
     public void clickHandling(JButton choiceButton) {
         highscore = user.getHighScore();
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
+            choiceButton.setBackground(Color.GREEN);
             highscore = highscore + highScoreWinAmount;
             highScoreLabel.setText("High Score: " + highscore);
             highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
-            setTimer();
             user.setHighScore(highscore);
             gameTesting.startNextIteration();
         } else {
@@ -198,6 +197,7 @@ public class GameplayScreen extends Screen {
             user.setHighScore(highscore);
         }
     }
+
     public void setTimer(){
         delay = 2000;
         timer = new Timer(delay, e -> {
