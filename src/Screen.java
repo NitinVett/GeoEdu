@@ -15,11 +15,9 @@ public class Screen extends JPanel {
     Player user;
     Font rubikScribble;
     public Screen(FullScreenUI frame,Screen previous) {
-
         this.frame = frame;
         prev = previous;
         setUp();
-
     }
     public Screen(FullScreenUI frame,Screen previous,Player user) {
         this.frame = frame;

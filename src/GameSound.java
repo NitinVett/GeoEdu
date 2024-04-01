@@ -15,7 +15,6 @@ public class GameSound {
             e.printStackTrace();
         }
     }
-
     public void play() {
         clip.start();
     }

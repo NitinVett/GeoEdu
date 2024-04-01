@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,38 +9,33 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 
-// ACtually drawing on the screen, it receives three countries, one correct and two incorrect, it receives an instance of
+// Actually drawing on the screen, it receives three countries, one correct and two incorrect, it receives an instance of
 // the class that called it, it has action listeners,
 public class GameplayScreen extends Screen {
-
     private JButton choice1Button;
     private JButton choice2Button;
     private JButton choice3Button;
-    private JPanel flagPanel;
 
-    JButton escButton;
-    private JLabel countryLabel,hintBox,hintLabel;
-    private JLabel highScoreLabel;
+    private JLabel countryLabel, hintBoxLabel,hintLabel,highScoreLabel, flagLabel;
     int guesses = 0;
     int correctGuesses = 0;
     int accuracyRate = 0;
+    int highScoreWinAmount= 5;
+    int highScoreLossAmount= 5;
 
     public Country correctCountry;
     private Country incorrect1;
     private Country incorrect2;
     private Player user;
     protected GameTesting gameTesting;
-    private JToggleButton toggleButton;
+    private JButton showFlagButton;
     private Image hintBoxIMG;
+    private  Timer timer;
+    public  int highscore;
+    int delay=5000;
+    private boolean wasClicked=false;
 
-
-
-    // Three country objects, through them you can pull all the information necessary (flag,mao,hints)
-    // When we feed this program, we give it one correct country (this is the country whose data we load )
-    // The two incorrect countries (we just use them to pull the names of the country)
-
-
-    public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2) throws IOException {
+    public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2){
         super(gameTesting, previous);
         this.gameTesting = gameTesting;
         this.correctCountry = correctCountry;
@@ -50,17 +44,8 @@ public class GameplayScreen extends Screen {
         this.user = player;
 
         // Create toggle button
-        toggleButton = new JToggleButton("Show Flag");
-        toggleButton.addActionListener(e -> toggleFlag());
-
-        //Escape button
-        escButton = new JButton();
-        escButton.addActionListener(e -> logOutButton());
-        BufferedImage escIcon = ImageIO.read(new File("src/escape.png"));
-        Image resizedEsc = escIcon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        escButton.setIcon(new ImageIcon(resizedEsc));
-        this.add(escButton);
-
+        showFlagButton = new JButton("Show Flag");
+        showFlagButton.addActionListener(e -> showFlag());
 
         //hint
         hintLabel = new JLabel(correctCountry.getHints().getText());
@@ -69,17 +54,18 @@ public class GameplayScreen extends Screen {
         this.add(hintLabel);
 
         //hint background
-        hintBoxIMG = ImageIO.read(new File("hintBox.png"));
-        hintBox = new JLabel();
-        hintBox.setIcon(new ImageIcon(hintBoxIMG));
-        this.add(hintBox);
+        try {
+            hintBoxIMG = ImageIO.read(new File("hintBox.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        hintBoxLabel = new JLabel();
+        hintBoxLabel.setIcon(new ImageIcon(hintBoxIMG));
+        this.add(hintBoxLabel);
 
 
-        JLabel flagLabel = correctCountry.getFlag();
-        flagPanel = new JPanel(new BorderLayout());
-        flagPanel.setOpaque(false);
-        flagPanel.add(flagLabel);
-        flagPanel.setVisible(false);
+        flagLabel = correctCountry.getFlag();
+        flagLabel.setVisible(false);
         countryLabel = correctCountry.getCountryMap();
 
         // This handles randomization once the three countries have been received, otherwie the buttons would always
@@ -117,93 +103,98 @@ public class GameplayScreen extends Screen {
         highScoreLabel.setText("High Score: " + highScore);
         //highScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         this.add(highScoreLabel);
-        this.add(flagPanel);
+        this.add(flagLabel);
         this.add(countryLabel);
         this.add(choice1Button);
         this.add(choice2Button);
         this.add(choice3Button);
-        this.add(toggleButton);
+        this.add(showFlagButton);
     }
 
-    private void toggleFlag() {
-        boolean showFlag = toggleButton.isSelected();
-        flagPanel.setVisible(showFlag);
+    public void showFlag() {
+        highscore = user.getHighScore();
+        flagLabel.setVisible(true);
         updateButtonPositions();
         // Update toggle button text
-        if (showFlag) {
-            toggleButton.setText("Hide Flag");
+        if (!wasClicked) {
+            highscore=highscore-2;
+            highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
+            setTimer();
+            user.setHighScore(highscore);
         } else {
-            toggleButton.setText("Show Flag");
+            this.showFlagButton.setText("Show Flag");
         }
+        wasClicked=true;
     }
 
 
-    private void updateButtonPositions() {
+    public void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
         // Positioning country panel
         countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
         //hintBox label
-        hintBox.setBounds(width/25,height/3,width/4,height/5);
-
+        hintBoxLabel.setBounds(width/25,height/2+height/5,width/2,height/5);
         // Positioning hint label
-        hintLabel.setBounds(width/25,height/3,width/4,height/5);
+        hintLabel.setBounds(width/25,height/2+height/5,width/3,height/5);
         // Positioning flag panel
-        if (flagPanel.isVisible()) {
-            flagPanel.setBounds(width/2+width/4,height/2,width/6,height/6);;
+        if (flagLabel.isVisible()) {
+            flagLabel.setBounds(width/2+width/4,height/2,width/6,height/6);;
         }
         // Positioning choice buttons
         choice1Button.setBounds(width/3+width/12,height - height/3,width/6,height/12);
         choice2Button.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         choice3Button.setBounds(width/3+width/12,height - height/6,width/6,height/12);
         // Positioning high score panel
-        highScoreLabel.setBounds(width/2+width/6,height/25,width/10,height/14);
-        // Positioning log out
-        escButton.setBounds(width / 30, height/22, width / 31, height / 19);
+        highScoreLabel.setBounds(width/2+width/10,height/25,width,height/14);
         //show flag button
-        toggleButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
+        showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
         revalidate();
-    }
-
-    public void logOutButton() {
-        frame.dispose();
     }
 
     public void setChoice1Button() {
         clickHandling(choice1Button);
-
-
     }
 
     public void setChoice2Button() {
-
         clickHandling(choice2Button);
-
     }
 
     public void setChoice3Button() {
-
         clickHandling(choice3Button);
-
     }
-
+    //doesn't take in correct values highsScore
     public void clickHandling(JButton choiceButton) {
-        int highscore = user.getHighScore();
+        highscore = user.getHighScore();
         guesses += 1;
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
             correctGuesses += 1;
-            highscore = highscore + 5;
+            highscore = highscore + highScoreWinAmount;
+            System.out.println(highScoreWinAmount);
+            System.out.println(highscore);
+            highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
             highScoreLabel.setText("High Score: " + highscore);
 
-
-            //Returns exceution, this class only deals with three countries, 50 countries
+            //Returns exception, this class only deals with three countries, 50 countries
             gameTesting.startNextIteration();
             // Go back to where it was called
         } else {
-            highscore = highscore - 5;
+            highscore = highscore - highScoreLossAmount;
             highScoreLabel.setText("High Score: " + highscore);
+            highScoreLabel.setText("High Score: " + highscore + "  -" + highScoreLossAmount);
+            setTimer();
+            user.setHighScore(highscore);
         }
-        user.setHighScore(highscore);
+    }
+    public void setTimer(){
+        delay = 2000;
+        timer = new Timer(delay, e -> {
+            highScoreLabel.setText("High Score: " + highscore);
+            revalidate();
+            repaint();
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
     public void endGame(){
         if (guesses == 0) {
