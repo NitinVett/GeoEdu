@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 // the class that called it, it has action listeners,
 public class GameplayScreen extends Screen {
     //buttons
+    private Timer scoreUpdateTimer;
     private JButton choice1Button;
     private JButton choice2Button;
     private JButton choice3Button;
@@ -188,7 +189,10 @@ public class GameplayScreen extends Screen {
             highScoreLabel.setText("High Score: " + highscore);
             highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
             user.setHighScore(highscore);
-            gameTesting.startNextIteration();
+
+            scoreUpdateTimer = new Timer(2000, e -> gameTesting.startNextIteration());
+            scoreUpdateTimer.setRepeats(false);
+            scoreUpdateTimer.start();
         } else {
             highscore = highscore - highScoreLossAmount;
             highScoreLabel.setText("High Score: " + highscore);
