@@ -20,7 +20,7 @@ public class ExitScreen extends Screen {
         esc = new JButton();
         BufferedImage escIcon = null;
         try {
-            escIcon = ImageIO.read(new File("src/escape.png"));
+            escIcon = ImageIO.read(new File("resources/escape.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
