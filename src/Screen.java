@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -52,7 +51,7 @@ public class Screen extends JPanel {
     }
 
     private void loadBackgroundImage() {
-        URL imageURL = getClass().getClassLoader().getResource("wallpaper3.gif");
+        URL imageURL = getClass().getClassLoader().getResource("wallpaper5.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();

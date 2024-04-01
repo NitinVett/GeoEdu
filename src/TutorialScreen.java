@@ -6,10 +6,12 @@ import java.awt.event.KeyListener;
 public class TutorialScreen extends Screen implements KeyListener {
 
     private final Screen previousScreen;
+    private JLabel scroll;
 
     public TutorialScreen(FullScreenUI frame, Screen previousScreen) {
         super(frame,previousScreen);
         this.previousScreen = previousScreen;
+        scroll = new JLabel();
         setFocusable(true);
         requestFocusInWindow();
         repaint();
@@ -17,7 +19,7 @@ public class TutorialScreen extends Screen implements KeyListener {
 
     public void displayTutorial(Graphics2D g2D) {
         String[] tutorialText = {
-                "Welcome to Geocraft",
+                "Welcome to Geocraft,",
                 "",
                 "1. Select a game mode (Global, Continental or Micro-Nations)",
                 "2. Select a game type (Timed, Marathon or Exploration)",
@@ -31,8 +33,13 @@ public class TutorialScreen extends Screen implements KeyListener {
                 "In both timed and marathon mode, 2 points will be deducted if you choose to view a flag hint",
                 "4 points will be deducted if you choose to view a text hint",
                 "",
+                "In exploration, you have no time limit, lives or high score. This mode is purely for you to learn and explore.",
+                "",
+                "Click the button below to start exploration mode",
                 "Good luck and have fun!"
         };
+
+
 
         g2D.setFont(new Font("SansSerif", Font.PLAIN, 24));
         g2D.setColor(Color.BLACK);
