@@ -39,7 +39,7 @@ public class Screen extends JPanel {
     }
 
     public void setUp() {
-        loadBackgroundImage();
+        //loadBackgroundImage("wallpaper1.gif");
         settings = new JButton();
         errorMessageLabel = new JLabel();
 
@@ -91,16 +91,16 @@ public class Screen extends JPanel {
         button.addMouseListener(new ButtonMouseListener(button));
     }
 
-    private void loadBackgroundImage() {
+    public void loadBackgroundImage(String link) {
         // only works if gif is in src folder, aka class path
         //no: 3, 4 is too busy cannon, 5 cutting into geocraft,
-        URL imageURL = getClass().getClassLoader().getResource("wallpaper1.gif");
+        URL imageURL = getClass().getClassLoader().getResource(link);
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
 
         } else {
-            System.err.println("Resource not found: meow " + "wallpaper5.gif");
+            System.err.println("Resource not found: meow " + link);
         }
     }
 
@@ -137,7 +137,7 @@ public class Screen extends JPanel {
             g.drawImage(backgroundImage, x, y, this);
         }
         // remove this from
-        drawTitle((Graphics2D) g);
+        //drawTitle((Graphics2D) g);
         int width = getWidth();
         int height = getHeight();
         settings.setBounds(width - width / 15, height / 22, 50, 50);
