@@ -12,14 +12,14 @@ import java.util.concurrent.ThreadLocalRandom;
 // Actually drawing on the screen, it receives three countries, one correct and two incorrect, it receives an instance of
 // the class that called it, it has action listeners,
 public class GameplayScreen extends Screen {
+    //buttons
     private JButton choice1Button;
     private JButton choice2Button;
     private JButton choice3Button;
+    private JButton showFlagButton;
+    private JButton showHintButton;
 
-    private JLabel countryLabel, hintBoxLabel,hintLabel,highScoreLabel, flagLabel;
-    int guesses = 0;
-    int correctGuesses = 0;
-    int accuracyRate = 0;
+    private JLabel countryLabel, hintBackgroundLabel,hintLabel,highScoreLabel, flagLabel;
     int highScoreWinAmount= 5;
     int highScoreLossAmount= 5;
 
@@ -28,12 +28,12 @@ public class GameplayScreen extends Screen {
     private Country incorrect2;
     private Player user;
     protected GameTesting gameTesting;
-    private JButton showFlagButton;
-    private Image hintBoxIMG;
+    private Image hintBackgroundIMG;
     private  Timer timer;
     public  int highscore;
     int delay=5000;
-    private boolean wasClicked=false;
+    private boolean flagWasClicked =false;
+    private boolean hintWasClicked=false;
 
     public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2){
         super(gameTesting, previous);
@@ -43,26 +43,26 @@ public class GameplayScreen extends Screen {
         this.incorrect2 = incorrect2;
         this.user = player;
 
-        // Create toggle button
+        // Create buttons
         showFlagButton = new JButton("Show Flag");
         showFlagButton.addActionListener(e -> showFlag());
+        showHintButton = new JButton("Show Hints");
+        showHintButton.addActionListener(e -> showHints());
 
-        //hint
+        //hintLabel
         hintLabel = new JLabel(correctCountry.getHints().getText());
         hintLabel.setForeground(Color.BLACK);
         hintLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
-        this.add(hintLabel);
+        hintLabel.setVisible(false);
 
         //hint background
         try {
-            hintBoxIMG = ImageIO.read(new File("hintBox.png"));
+            hintBackgroundIMG = ImageIO.read(new File("hintBox.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        hintBoxLabel = new JLabel();
-        hintBoxLabel.setIcon(new ImageIcon(hintBoxIMG));
-        this.add(hintBoxLabel);
-
+        hintBackgroundLabel = new JLabel();
+        hintBackgroundLabel.setIcon(new ImageIcon(hintBackgroundIMG));
 
         flagLabel = correctCountry.getFlag();
         flagLabel.setVisible(false);
@@ -104,19 +104,21 @@ public class GameplayScreen extends Screen {
         //highScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         this.add(highScoreLabel);
         this.add(flagLabel);
+        this.add(hintLabel);
+        this.add(hintBackgroundLabel);
         this.add(countryLabel);
         this.add(choice1Button);
         this.add(choice2Button);
         this.add(choice3Button);
         this.add(showFlagButton);
+        this.add(showHintButton);
     }
-
     public void showFlag() {
         highscore = user.getHighScore();
         flagLabel.setVisible(true);
         updateButtonPositions();
         // Update toggle button text
-        if (!wasClicked) {
+        if (!flagWasClicked) {
             highscore=highscore-2;
             highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
             setTimer();
@@ -124,22 +126,38 @@ public class GameplayScreen extends Screen {
         } else {
             this.showFlagButton.setText("Show Flag");
         }
-        wasClicked=true;
+        flagWasClicked =true;
     }
-
-
+    public void showHints() {
+        highscore = user.getHighScore();
+        hintLabel.setVisible(true);
+        updateButtonPositions();
+        // Update toggle button text
+        if (!hintWasClicked) {
+            highscore=highscore-2;
+            highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
+            setTimer();
+            user.setHighScore(highscore);
+        } else {
+            this.showFlagButton.setText("Show Hints");
+        }
+        hintWasClicked =true;
+    }
     public void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
         // Positioning country panel
         countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
         //hintBox label
-        hintBoxLabel.setBounds(width/25,height/2+height/5,width/2,height/5);
+        hintBackgroundLabel.setBounds(width/25,height/2+height/5,width/3,height/5);
         // Positioning hint label
         hintLabel.setBounds(width/25,height/2+height/5,width/3,height/5);
         // Positioning flag panel
         if (flagLabel.isVisible()) {
             flagLabel.setBounds(width/2+width/4,height/2,width/6,height/6);;
+        }
+        if (hintLabel.isVisible()) {
+            hintLabel.setBounds(width/8,height/2,width/6,height/6);;
         }
         // Positioning choice buttons
         choice1Button.setBounds(width/3+width/12,height - height/3,width/6,height/12);
@@ -149,35 +167,29 @@ public class GameplayScreen extends Screen {
         highScoreLabel.setBounds(width/2+width/10,height/25,width,height/14);
         //show flag button
         showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
+        //show hint button
+        showHintButton.setBounds(width/8,height - height/4,width/6,height/12);
         revalidate();
     }
 
     public void setChoice1Button() {
         clickHandling(choice1Button);
     }
-
     public void setChoice2Button() {
         clickHandling(choice2Button);
     }
-
     public void setChoice3Button() {
         clickHandling(choice3Button);
     }
-    //doesn't take in correct values highsScore
     public void clickHandling(JButton choiceButton) {
         highscore = user.getHighScore();
-        guesses += 1;
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
-            correctGuesses += 1;
             highscore = highscore + highScoreWinAmount;
-            System.out.println(highScoreWinAmount);
-            System.out.println(highscore);
-            highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
             highScoreLabel.setText("High Score: " + highscore);
-
-            //Returns exception, this class only deals with three countries, 50 countries
+            highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
+            setTimer();
+            user.setHighScore(highscore);
             gameTesting.startNextIteration();
-            // Go back to where it was called
         } else {
             highscore = highscore - highScoreLossAmount;
             highScoreLabel.setText("High Score: " + highscore);
@@ -196,18 +208,17 @@ public class GameplayScreen extends Screen {
         timer.setRepeats(false);
         timer.start();
     }
-    public void endGame(){
-        if (guesses == 0) {
-            // Handle the case where no guesses were made
-            System.out.println("No guesses were made. Accuracy rate is 0%.");
-        } else {
-            // Calculate the accuracy rate
-            float accuracyRate = ((float) correctGuesses / guesses) * 100;
-            accuracyRate = (user.getAccuracy()*user.getNumGames()+accuracyRate)/user.getNumGames()+1;
-            user.setAccuracy(accuracyRate);
-            user.setNumGames(user.getNumGames() + 1);
-        }
-    }
+//    public void endGame(){
+//        if (guesses == 50) {
+//            // Handle the case where no guesses were made
+//            System.out.println("No guesses were made. Accuracy rate is 0%.");
+//        } else {
+//            // Calculate the accuracy rate
+//            accuracyRate = (user.getAccuracy()*user.getNumGames()+accuracyRate)/user.getNumGames()+1;
+//            user.setAccuracy(accuracyRate);
+//            user.setNumGames(user.getNumGames() + 1);
+//        }
+//    }
 
     @Override
     protected void paintComponent(Graphics g) {

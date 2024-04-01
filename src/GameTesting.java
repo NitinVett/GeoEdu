@@ -28,7 +28,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
         this.type = type;
         //Static class that loads all the countries in a specific mode
         // For global it would be 50 country objects of type global
-        this.countries = CountryList.getCountries(mode);
+        this.countries = CountryList.getCountries(mode, continent);
         this.curIndex = 0;
 
         if(type.equals("Timed")) {
@@ -56,9 +56,6 @@ public class GameTesting extends FullScreenUI implements Serializable {
 
     // Game loop
     public void startNextIterationMarathon() {
-
-
-
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
         int index;
@@ -85,13 +82,43 @@ public class GameTesting extends FullScreenUI implements Serializable {
                 random = getRandomIntWithAvoidance(totalCountries, index);
             }
             incorrectCountry2 = countries[random];
-
             randomizerStack.clear();
-
-
-
             revalidate();
+            this.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,lives));
+            curIndex++;
+        } else {
 
+        }
+    }
+    public void startNextIterationExploration() {
+        ArrayList<Integer> randomizerStack = new ArrayList<>();
+        int totalCountries = countries.length;
+        int index;
+        if (curIndex < countries.length) { // Check if there are more countries to display
+            index = randomNumber(totalCountries);
+            // loop until unique index is found
+            while (visitedIndices.contains(index)) {
+                index = randomNumber(totalCountries);
+            }
+
+            //All the countries visited, correct countries
+            visitedIndices.add(index);
+
+            // index is a rand number, so the country being chosen also random
+            correctCountry = countries[index];
+
+            // By keeping track of the random number, we can avoid duplicates and ensure randomness.
+            int random = getRandomIntWithAvoidance(totalCountries, index);
+            incorrectCountry1 = countries[random];
+            randomizerStack.add(random);
+
+            while (randomizerStack.contains(random)) {
+                random = getRandomIntWithAvoidance(totalCountries, index);
+            }
+            incorrectCountry2 = countries[random];
+            randomizerStack.clear();
+            revalidate();
+            this.setContentPane(new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
             curIndex++;
         } else {
 
@@ -163,6 +190,6 @@ public class GameTesting extends FullScreenUI implements Serializable {
     }
 
     public static void main(String[] args) throws IOException {
-        new GameTesting(null, new Player("jam","1"), "Global Mode", null,"Timed");
+        new GameTesting(null, new Player("jam","1"), "Continental Mode", "Europe","Marathon");
     }
 }

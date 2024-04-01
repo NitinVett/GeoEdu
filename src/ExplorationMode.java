@@ -25,7 +25,7 @@ public class ExplorationMode extends GameplayScreen {
     //images
     private Image hintBoxIMG;
 
-    public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2) throws IOException {
+    public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2){
         super(gameTesting, previous, user, correctCountry, incorrect1, incorrect2);
 
     }
