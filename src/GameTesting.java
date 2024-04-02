@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,39 +19,44 @@ public class GameTesting implements Serializable {
     Country incorrectCountry2;
     String type;
     FullScreenUI frame;
-
-
+    String mode;
+    GameplayScreen currentGame;
+    String continent;
     // Randomizes the countries, and feeds it to the game play class.
     //
-    public GameTesting(FullScreenUI frame, Player user, String mode, String continent,String type) throws IOException {
+    public GameTesting(FullScreenUI frame, Player user, String mode, String continent,String type) {
+        System.out.println(mode);
+        this.continent = continent;
         this.user = user;
         this.type = type;
         this.frame = frame;
+        this.mode = mode;
         //Static class that loads all the countries in a specific mode
         // For global it would be 50 country objects of type global
-        this.countries = CountryList.getCountries(mode, continent);
+        System.out.println(mode);
+        this.countries = CountryList.getCountries(mode, this.continent);
         this.curIndex = 0;
 
         if(type.equals("Timed")) {
             timer = new Timer(1000, e -> {
                 if (timeLeft > 0 && curIndex < countries.length) {
                     timeLeft--; // Decrease time left
-                    CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
+                    saveFile();
                     frame.revalidate(); // Refresh the UI
                     frame.repaint(); // Request a repaint to update the timer display
                 } else {
                     ((Timer) e.getSource()).stop(); // Stop the timer
-                    // You can add what should happen when the timer reaches 0
+                    frame.setContentPane(new StatScreen(frame,null,user));
                 }
             });
             timer.start(); // Start the countdown
         }
-        startNextIteration();
+
     }
 
 
     // Game loop
-    public void startNextIterationMarathon() {
+    public void startNextIterationMarathon(boolean load) {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
         int index=0;
@@ -66,26 +70,30 @@ public class GameTesting implements Serializable {
 
             //All the countries visited, correct countries
             visitedIndices.add(index);
+            if(!load) {
+                // index is a rand number, so the country being chosen also random
+                correctCountry = countries[index];
 
-            // index is a rand number, so the country being chosen also random
-            correctCountry = countries[index];
+                // By keeping track of the random number, we can avoid duplicates and ensure randomness.
+                int random = getRandomIntWithAvoidance(totalCountries, index);
+                incorrectCountry1 = countries[random];
+                randomizerStack.add(random);
 
-            // By keeping track of the random number, we can avoid duplicates and ensure randomness.
-            int random = getRandomIntWithAvoidance(totalCountries, index);
-            incorrectCountry1 = countries[random];
-            randomizerStack.add(random);
-
-            while (randomizerStack.contains(random)) {
-                random = getRandomIntWithAvoidance(totalCountries, index);
+                while (randomizerStack.contains(random)) {
+                    random = getRandomIntWithAvoidance(totalCountries, index);
+                }
+                incorrectCountry2 = countries[random];
+                randomizerStack.clear();
             }
-            incorrectCountry2 = countries[random];
-            randomizerStack.clear();
             frame.revalidate();
-            frame.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,lives));
+            currentGame = new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2);
+
+            frame.setContentPane(currentGame);
             curIndex++;
         }
     }
-    public void startNextIterationExploration() {
+
+    public void startNextIterationExploration(boolean load) {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
         int index=0;
@@ -99,28 +107,31 @@ public class GameTesting implements Serializable {
 
             //All the countries visited, correct countries
             visitedIndices.add(index);
+            if(!load) {
+                // index is a rand number, so the country being chosen also random
+                correctCountry = countries[index];
 
-            // index is a rand number, so the country being chosen also random
-            correctCountry = countries[index];
+                // By keeping track of the random number, we can avoid duplicates and ensure randomness.
+                int random = getRandomIntWithAvoidance(totalCountries, index);
+                incorrectCountry1 = countries[random];
+                randomizerStack.add(random);
 
-            // By keeping track of the random number, we can avoid duplicates and ensure randomness.
-            int random = getRandomIntWithAvoidance(totalCountries, index);
-            incorrectCountry1 = countries[random];
-            randomizerStack.add(random);
-
-            while (randomizerStack.contains(random)) {
-                random = getRandomIntWithAvoidance(totalCountries, index);
+                while (randomizerStack.contains(random)) {
+                    random = getRandomIntWithAvoidance(totalCountries, index);
+                }
+                incorrectCountry2 = countries[random];
+                randomizerStack.clear();
             }
-            incorrectCountry2 = countries[random];
-            randomizerStack.clear();
             frame.revalidate();
-            frame.setContentPane(new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
-            CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
+            currentGame = new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2);
+            System.out.println("heeere");
+            frame.setContentPane(currentGame);
+
             curIndex++;
         }
     }
 
-    public void startNextIterationTimed() {
+    public void startNextIterationTimed(boolean load) {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
         int index = 0;
@@ -134,21 +145,26 @@ public class GameTesting implements Serializable {
 
         //All the countries visited, correct countries
         visitedIndices.add(index);
+        if(!load) {
+            // index is a rand number, so the country being chosen also random
+            correctCountry = countries[index];
 
-        // index is a rand number, so the country being chosen also random
-        correctCountry = countries[index];
+            // By keeping track of the random number, we can avoid duplicates and ensure randomness.
+            int random = getRandomIntWithAvoidance(totalCountries, index);
+            incorrectCountry1 = countries[random];
+            randomizerStack.add(random);
 
-        // By keeping track of the random number, we can avoid duplicates and ensure randomness.
-        int random = getRandomIntWithAvoidance(totalCountries, index);
-        incorrectCountry1 = countries[random];
-        randomizerStack.add(random);
+            while (randomizerStack.contains(random)) {
+                random = getRandomIntWithAvoidance(totalCountries, index);
+            }
+            incorrectCountry2 = countries[random];
 
-        while (randomizerStack.contains(random)) {
-            random = getRandomIntWithAvoidance(totalCountries, index);
+            randomizerStack.clear();
         }
-        incorrectCountry2 = countries[random];
-        randomizerStack.clear();
-        frame.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
+        currentGame = new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft);
+        frame.setContentPane(currentGame);
+        saveFile();
+
         curIndex++;
     }
     public int getTime(){
@@ -156,6 +172,10 @@ public class GameTesting implements Serializable {
     }
     public void reduceLives(){
         lives =lives-1;
+
+    }
+    public int getLives(){
+        return lives;
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -170,21 +190,30 @@ public class GameTesting implements Serializable {
         }
 
         // Append other fields
-        sb.append(";timeLeft:").append(timeLeft)
-                .append(";lives:").append(lives)
-                .append(";type:").append(type);
+        sb.append(";type:").append(type)
+                .append(";mode:").append(mode)
+                .append(";continent:").append(continent)
+                .append(";timeLeft:").append(timeLeft)
+                .append(";lives:").append(lives);
 
         // Assuming Country has a meaningful toString() method or a unique identifier
         sb.append(";correctCountry:").append(correctCountry != null ? correctCountry.getName() : "null")
                 .append(";incorrectCountry1:").append(incorrectCountry1 != null ? incorrectCountry1.getName() : "null")
                 .append(";incorrectCountry2:").append(incorrectCountry2 != null ? incorrectCountry2.getName() : "null");
-
+        currentGame.saveVars(sb);
         return sb.toString();
     }
 
-    public void loadFile(String saveString){
+    public void saveFile(){
+        CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
+    }
+
+    public void loadFile(String saveString) {
+
         // Split the string by semicolon to get each field
         String[] keyValuePairs = saveString.split(";");
+        boolean showFlag = false;
+        boolean showHint = false;
         for (String pair : keyValuePairs) {
             // Split each pair by the first occurrence of colon to separate key and value
             String[] entry = pair.split(":", 2);
@@ -209,6 +238,9 @@ public class GameTesting implements Serializable {
                 case "type":
                     this.type = value;
                     break;
+                case "mode":
+                    this.mode = value;
+                    break;
                 case "correctCountry":
                     // Assuming you have a way to reconstruct Country objects from their string representation
                     this.correctCountry = new Country(value);
@@ -219,19 +251,42 @@ public class GameTesting implements Serializable {
                 case "incorrectCountry2":
                     this.incorrectCountry2 = new Country(value);
                     break;
+                case "showFlag":
+                    showFlag = Boolean.parseBoolean(value);
+                    break;
+                case "showHint":
+                    showHint = Boolean.parseBoolean(value);
+                    break;
                 // Add cases for other fields if necessary
             }
         }
-        frame.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
+        newGame(true);
+
+        System.out.println(showFlag + "2");
+        currentGame.flagWasClicked = showFlag;
+        if(showFlag){
+            currentGame.showFlag();
+        }
+        currentGame.hintWasClicked = showHint;
+        if(showHint){
+            currentGame.showHints();
+        }
+
+        currentGame.repaint();
+
+
+
+
 
     }
-    public void startNextIteration() {
+    public void newGame(boolean load) {
+
         switch (type) {
-            case "Exploration" -> startNextIterationExploration();
-            case "Timed" -> startNextIterationTimed();
-            case "Marathon" -> startNextIterationMarathon();
+            case "Exploration" -> startNextIterationExploration(load);
+            case "Timed" -> startNextIterationTimed(load);
+            case "Marathon" -> startNextIterationMarathon(load);
         }
-        CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
+        saveFile();
     }
 
     private int randomNumber(int max) {
@@ -248,14 +303,8 @@ public class GameTesting implements Serializable {
             randomNum = ThreadLocalRandom.current().nextInt(0, max);
         } while (randomNum == avoidValue);
         return randomNum;
+
     }
 
-    //modes are Global Mode, Continental Mode, Micro Nation Mode
-    //types are Exploration, Marathon, Timed
-    public static void main(String[] args) throws IOException {
-        Player a = new Player("jam","1");
-        String gameData = CsvHandler.getListOfCountry(a.getUsername());
-        GameTesting z = new GameTesting(new FullScreenUI(), a, "Global Mode",null,"Exploration");
-        //z.loadFile(gameData);
-    }
+
 }

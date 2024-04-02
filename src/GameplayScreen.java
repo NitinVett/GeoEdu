@@ -28,21 +28,26 @@ public class GameplayScreen extends Screen {
     public Country correctCountry;
     public Country incorrect1;
     public Country incorrect2;
-    private Player user;
+    Player user;
     public GameTesting gameTesting;
     private Image hintBackgroundIMG;
     private  Timer timer;
     public  int highscore;
-    private boolean flagWasClicked =false;
-    private boolean hintWasClicked=false;
+    boolean flagWasClicked;
+    boolean hintWasClicked;
 
     public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2){
-        super(gameTesting.frame, previous);
+
+        super(gameTesting.frame, previous,player);
+
         this.gameTesting = gameTesting;
         this.correctCountry = correctCountry;
         this.incorrect1 = incorrect1;
         this.incorrect2 = incorrect2;
         this.user = player;
+        System.out.println("hi");
+        this.flagWasClicked = false;
+        this.hintWasClicked = false;
 
         // Create buttons
         showFlagButton = new JButton("Show Flag");
@@ -67,7 +72,7 @@ public class GameplayScreen extends Screen {
 
         flagLabel = correctCountry.getFlag();
         flagLabel.setVisible(false);
-        System.out.println(correctCountry.getCountryMap());
+
         countryLabel = correctCountry.getCountryMap();
 
         // This handles randomization once the three countries have been received, otherwie the buttons would always
@@ -122,19 +127,18 @@ public class GameplayScreen extends Screen {
         updateButtonPositions();
         // Update toggle button text
         if (!flagWasClicked) {
-            highscore=highscore-2;
+            highscore = highscore - 2;
             highScoreLabel.setForeground(Color.red);
             highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
 
             setTimer();
 
             user.setHighScore(highscore);
-            showFlagButton.setEnabled(false);
-        } else {
-            this.showFlagButton.setText("Show Flag");
-        }
 
+        }
+        showFlagButton.setEnabled(false);
         flagWasClicked =true;
+        gameTesting.saveFile();
     }
     public void showHints() {
         highscore = user.getHighScore();
@@ -143,15 +147,27 @@ public class GameplayScreen extends Screen {
         // Update toggle button text
         if (!hintWasClicked) {
             highscore=highscore-2;
-            highScoreLabel.setForeground(Color.red);
+            highScoreLabel.setForeground(Color.black);
             highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
             setTimer();
             user.setHighScore(highscore);
-            showHintButton.setEnabled(false);
+
         }
+
+        showHintButton.setEnabled(false);
         hintWasClicked =true;
+        gameTesting.saveFile();
+    }
+
+    public void disableChoiceButtons(){
+        choice1Button.setEnabled(false);
+        choice2Button.setEnabled(false);
+        choice3Button.setEnabled(false);
+        showHintButton.setEnabled(false);
+        showFlagButton.setEnabled(false);
     }
     public void updateButtonPositions() {
+
         int width = getWidth();
         int height = getHeight();
         // Positioning country
@@ -178,15 +194,24 @@ public class GameplayScreen extends Screen {
         showHintButton.setBounds(width/8,height - height/4,width/6,height/12);
         revalidate();
     }
+    public void saveVars(StringBuilder sb){
 
+        sb.append(";showFlag:").append(flagWasClicked)
+                .append(";showHint:").append(hintWasClicked);
+
+
+    }
     public void setChoice1Button() {
         clickHandling(choice1Button);
+
     }
     public void setChoice2Button() {
         clickHandling(choice2Button);
+
     }
     public void setChoice3Button() {
         clickHandling(choice3Button);
+
     }
     public void clickHandling(JButton choiceButton) {
         highscore = user.getHighScore();
@@ -197,7 +222,7 @@ public class GameplayScreen extends Screen {
             highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
             user.setHighScore(highscore);
             disableChoiceButtons();
-            scoreUpdateTimer = new Timer(1000, e -> gameTesting.startNextIteration());
+            scoreUpdateTimer = new Timer(1000, e -> gameTesting.newGame(false    ));
             scoreUpdateTimer.setRepeats(false);
             scoreUpdateTimer.start();
         } else {
@@ -210,14 +235,8 @@ public class GameplayScreen extends Screen {
             user.setHighScore(highscore);
 
         }
-    }
 
-    public void disableChoiceButtons(){
-        choice1Button.setEnabled(false);
-        choice2Button.setEnabled(false);
-        choice3Button.setEnabled(false);
-        showHintButton.setEnabled(false);
-        showFlagButton.setEnabled(false);
+        gameTesting.saveFile();
     }
 
     public void setTimer(){
@@ -230,6 +249,7 @@ public class GameplayScreen extends Screen {
         });
         timer.setRepeats(false);
         timer.start();
+
     }
 //    public void endGame(){
 //        if (guesses == 50) {
@@ -249,5 +269,7 @@ public class GameplayScreen extends Screen {
         super.paintComponent(g); // Paints the background
 
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
+
+
     }
 }

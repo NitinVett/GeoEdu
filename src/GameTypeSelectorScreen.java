@@ -12,9 +12,11 @@ public class GameTypeSelectorScreen extends Screen {
     JButton esc;
     String mode;
     //JButton highScore;
-
+    String continent;
     public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode,String continent) {
         super(frame, previous,user);
+        this.continent = continent;
+        this.mode = mode;
         marathon = createCustomButton("Marathon");
         timed = createCustomButton("Timed");
         exploration = createCustomButton("Exploration");
@@ -79,25 +81,16 @@ public class GameTypeSelectorScreen extends Screen {
 
     }
     public void explorationButton() {
-        try {
-            GameTesting playExploration = new GameTesting(frame, user, "Global Mode",null,"Exploration");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        GameTesting playExploration = new GameTesting(frame, user, mode, continent,"Exploration");
+        playExploration.newGame(false);
     }
     public void marathonButton() {
-        try {
-            GameTesting playMarathon = new GameTesting(frame, user, "Global Mode",null,"Marathon");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        GameTesting playMarathon = new GameTesting(frame,user,mode, continent,"Marathon");
+        playMarathon.newGame(false);
     }
     public void timedButton() {
-        try {
-            GameTesting playTimed = new GameTesting(frame, user, "Global Mode",null,"Timed");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        GameTesting playTimed = new GameTesting(frame, user, mode, continent,"Timed");
+        playTimed.newGame(false);
     }
     public void exitButton(){
         swapScreens(prev);

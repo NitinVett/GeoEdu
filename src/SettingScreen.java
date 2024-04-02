@@ -9,13 +9,21 @@ import java.util.Objects;
 public class SettingScreen extends Screen{
     private JSlider audio;
     private JButton changePassword, debug, credits, muteButton, highContrast, exit;
-
+    GameSound sound;
     Player user;
     public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
 
+        sound = new GameSound("backgroundmusic.wav");
+        sound.play();
         prev = previous;
-        audio = new JSlider();
+
+        System.out.println("1");
+        audio = new JSlider(0,100,50);
+
+
+
+        audio.addChangeListener(e -> changeVolume());
         audio.setOpaque(false);
         changePassword = new JButton("CHANGE PASSWORD");
         debug = new JButton("DEBUG");
@@ -39,7 +47,7 @@ public class SettingScreen extends Screen{
         muteButton.addActionListener(e -> muteButton());
         highContrast.addActionListener(e -> muteButton());
         exit.addActionListener(e -> exitButton());
-
+        System.out.println(audio.getValue());
         this.add(credits);
         this.add(muteButton);
         this.add(highContrast);
@@ -48,13 +56,19 @@ public class SettingScreen extends Screen{
 
     }
 
-
+    public void changeVolume(){
+        sound.setVolume(audio.getValue());
+    }
 
     public void setPrev(Screen prev){
         this.prev = prev;
         if(Objects.nonNull(this.prev)) {
             if (!(this.prev.getClass().getName().equals("MainMenu") || this.prev.getClass().getName().equals("LoginScreen") || this.prev.getClass().getName().equals("RegisterScreen"))) {
+                this.remove(debug);
                 this.add(changePassword);
+
+            }
+            else {
                 this.add(debug);
             }
         }
@@ -100,7 +114,7 @@ public class SettingScreen extends Screen{
         changePassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
         debug.setFont(new Font("SansSerif", Font.PLAIN, 24));
         credits.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        repaint();
+
     }
     public void changePasswordButton() {
         swapScreens(new ChangePasswordScreen(frame,this,user));

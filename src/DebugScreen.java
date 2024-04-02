@@ -33,7 +33,7 @@ public class DebugScreen extends Screen{
     public void loginButton(){
         String pass = "1029384756";
         if(pass.equals(password.getText())) {
-            //swapScreens(new GameMainMenu(frame,this));
+            swapScreens(new GameMainMenu(frame,this,user));
         }else {
             displayErrorMessage("Wrong Password");
         }
@@ -44,7 +44,5 @@ public class DebugScreen extends Screen{
         Graphics2D g2D = (Graphics2D) g;
         setComponents();
         drawTitle(g2D);
-
-
     }
 }

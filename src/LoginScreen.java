@@ -12,14 +12,15 @@ import java.util.Objects;
 public class LoginScreen extends Screen {
     JTextField username;
     JPasswordField password;
-    JButton login, esc;
+    JButton loginButton, esc;
+    private Image image;
 
     public LoginScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
         esc = new JButton();
-
+        loginButton = new JButton("Login");
         // Username field setup
-// Username field setup
+        // Username field setup
         username = new JTextField("Enter Username", 16);
         username.setOpaque(false);
         username.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
@@ -44,10 +45,8 @@ public class LoginScreen extends Screen {
                 }
             }
         });
-
         // Password field setup
         password = new JPasswordField(16);
-
         password.setText("Enter Password");
         password.setEchoChar((char) 0); // Set initial echo char to 0 (no echo)
         password.setOpaque(false);
@@ -76,20 +75,15 @@ public class LoginScreen extends Screen {
                 }
             }
         });
-
-        // Login button setup
-        login = createCustomButton("Login");
-        login.addActionListener(e -> loginButton());
-
-
         // Add components to the panel
         this.add(password);
         this.add(username);
-        this.add(login);
+        this.add(loginButton);
 
         // Esc button setup
         BufferedImage escIcon = null;
         try {
+            image = ImageIO.read(new File("resources/plank.png"));
             escIcon = ImageIO.read(new File("resources/escape.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -98,30 +92,7 @@ public class LoginScreen extends Screen {
         esc.setIcon(new ImageIcon(resizedEsc));
         esc.addActionListener(e -> exitButton());
         this.add(esc);
-
         repaint();
-    }
-    private JButton createCustomButton(String text) {
-        JButton button = new JButton(text);
-        button.setContentAreaFilled(false);
-        button.setFont(loadFont("resources/Viner.ttf", 28));
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setVerticalTextPosition(SwingConstants.CENTER);
-        //setButtonBackground(button);
-        return button;
-    }
-
-    private void setButtonBackground(JButton button,int width,int height) {
-        try {
-            BufferedImage image = ImageIO.read(new File("resources/plank.png"));
-            Image scaledImage = image.getScaledInstance(width/10, height/20, Image.SCALE_SMOOTH);
-            button.setIcon(new ImageIcon(scaledImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setComponents() {
@@ -129,15 +100,13 @@ public class LoginScreen extends Screen {
         int height = getHeight();
         int mainButtonX = width / 2 - width / 10;
         int mainButtonY = height / 3;
-
+        Image scaledImage = image.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
         username.setBounds(mainButtonX, mainButtonY, width / 5, height / 20);
         password.setBounds(mainButtonX, mainButtonY + height / 10, width / 5, height / 20);
-        setButtonBackground(login,width,height);
-
-
-        login.setBounds(mainButtonX+(width/20), mainButtonY + (height / 10) * 2, width / 10, height / 20);
-
-
+        createButtons(loginButton,scaledImage,width/60);
+        loginButton.setText("Login");
+        loginButton.addActionListener(e -> loginButton());
+        loginButton.setBounds(mainButtonX+(width/20), mainButtonY + (height / 10) * 2, width / 10, height / 20);
         username.setFont(loadFont("resources/Viner.ttf", 24));
         password.setFont(loadFont("resources/Viner.ttf", 24));
         esc.setBounds(width / 30, height / 22, 50, 50);
@@ -150,26 +119,21 @@ public class LoginScreen extends Screen {
         String enteredUsername = username.getText();
         char[] enteredPassword = password.getPassword();
         String enteredPasswordString = new String(enteredPassword);
-
         String storedPassword = CsvHandler.getPassword(enteredUsername);
-
         if (Objects.nonNull(storedPassword) && storedPassword.equals(enteredPasswordString)) {
             Player user = new Player(enteredUsername, enteredPasswordString);
             swapScreens(new GameMainMenu(frame, this, user));
         } else {
             displayErrorMessage("You have entered an incorrect username or password, please try again or register an account");
         }
-
         // Clear the password field after retrieving the password
         Arrays.fill(enteredPassword, '0');
         password.setText("Enter Password");
         password.setEchoChar((char) 0);
     }
-
     public void exitButton() {
         swapScreens(prev);
     }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;

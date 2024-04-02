@@ -31,29 +31,25 @@ public class ChangePasswordScreen extends Screen{
         int height = getHeight();
         int mainButtonX = width/2 - width/10;
         int mainButtonY =  height/3;
-
-
-        oldPassword.setBounds(mainButtonX ,mainButtonY+ height/10, width/5, height/20);
-        newPassword.setBounds(mainButtonX, mainButtonY, width/5, height/20);
+        oldPassword.setBounds(mainButtonX ,mainButtonY, width/5, height/20);
+        newPassword.setBounds(mainButtonX, mainButtonY+ height/10, width/5, height/20);
         confirmPassword.setBounds(mainButtonX,mainButtonY+ (height/10)*2,width/5,height/20);
         save.setBounds(mainButtonX,mainButtonY+ (height/10)*4,width/5,height/20);
         oldPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
         newPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
         confirmPassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
         save.setFont(new Font("SansSerif", Font.PLAIN, 24));
-
         revalidate();
-
-
     }
 
 
 
     public void loginButton(){
-
-        String pass = CsvHandler.getPassword(newPassword.getText());
-        if(Objects.nonNull(pass) && pass.equals(confirmPassword.getText())) {
-            swapScreens(new GameMainMenu(frame,this,user));
+        String oldDatabasePassword = CsvHandler.getPassword(user.getUsername());
+        if(oldDatabasePassword.equals(oldPassword.getText())&& newPassword.getText().equals(confirmPassword.getText())) {
+            user.setPassword(newPassword.getText());
+            displayErrorMessage("Password Changed");
+            swapScreens(prev);
         }else {
             displayErrorMessage("Incorrect username/password");
         }

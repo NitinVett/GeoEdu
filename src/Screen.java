@@ -158,6 +158,17 @@ public class Screen extends JPanel {
         settings.setVisible(false);
     }
 
+    public void createButtons(JButton button, Image scaledImage, int fontSize){
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setVerticalTextPosition(SwingConstants.CENTER);
+        button.setFont(loadFont("resources/Viner.ttf", fontSize));
+        button.setIcon(new ImageIcon(scaledImage));
+        button.addMouseListener(new ButtonMouseListener(button));
+    }
+
     public void drawTitle(Graphics2D g) {
         // Draw background image if necessary
         // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
@@ -174,7 +185,7 @@ public class Screen extends JPanel {
         // Positioning
         int width = getWidth();
         int height = getHeight();
-        double yValue = height * 0.22;
+        double yValue = height*0.18;
 
         int xPosition = width / 2 - titleWidth / 2;
         int yPosition = (int) yValue;
@@ -182,6 +193,31 @@ public class Screen extends JPanel {
         // Draw title
         g.setFont(titleFont);
         g.drawString("GEOCRAFT", xPosition, yPosition);
+    }
+    public void drawTitle(Graphics2D g, String title) {
+        // Draw background image if necessary
+        // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+        // Set font and font metrics if not already set
+        if (titleFont == null) {
+            titleFont = loadFont("resources/Viner.ttf", 112);
+            titleFontMetrics = g.getFontMetrics(titleFont);
+        }
+
+        // Calculate title width
+        int titleWidth = titleFontMetrics.stringWidth(title);
+
+        // Positioning
+        int width = getWidth();
+        int height = getHeight();
+        double yValue = height*0.18;
+
+        int xPosition = width / 2 - titleWidth / 2;
+        int yPosition = (int) yValue;
+
+        // Draw title
+        g.setFont(titleFont);
+        g.drawString(title, xPosition, yPosition);
     }
 
     public void displayErrorMessage(String message) {

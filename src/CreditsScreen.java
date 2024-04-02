@@ -1,62 +1,55 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.util.Objects;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CreditsScreen extends Screen{
-    JTextField password, username;
-    JButton login;
+    JLabel creditText,creditBackgroundLabel, shipLabel, treasureChestLabel;
+    private BufferedImage creditBackgroundIMG, shipIMG, treasureChestIMG;
+    private Image resizedCreditBackgroundIMG, resizedShipIMG, resizedTreasureChestIMG;
     public CreditsScreen(FullScreenUI frame,Screen previous) {
         super(frame,previous);
-        password = new JTextField("Enter Password", 16);
-        username = new JTextField("Enter Username", 16);
-        login = new JButton("LOGIN");
-        this.add(password);
-        this.add(username);
-        this.add(login);
-        login.addActionListener(e -> loginButton());
-        setFocusListeners(password,"Enter Password");
-        setFocusListeners(username,"Enter Username");
+       creditText = new JLabel();
+       creditText.setText("<html><body>By:<br>Stefan Baggieri<br>Nitin Vettiankal<br>Amaan Hafeez<br>Gary Han<br>Saleh Farrukh</body></html>");
+        this.add(creditText);
+        try {
+            creditBackgroundIMG = ImageIO.read(new File("scroll.png"));
+            shipIMG= ImageIO.read(new File("ship.png"));
+            treasureChestIMG= ImageIO.read(new File("treasureChest.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        creditBackgroundLabel = new JLabel();
+        shipLabel = new JLabel();
+        treasureChestLabel = new JLabel();
         repaint();
-
     }
-
     public void setComponents(){
         int width = getWidth();
         int height = getHeight();
-        int mainButtonX = width/2 - width/10;
-        int mainButtonY =  height/3;
-
-        username.setBounds(mainButtonX, mainButtonY, width/5, height/20);
-        password.setBounds(mainButtonX,mainButtonY + height/10,width/5,height/20);
-        login.setBounds(mainButtonX,mainButtonY + (height/10)*2,width/5,height/20);
-        username.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        password.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        resizedCreditBackgroundIMG = creditBackgroundIMG.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        creditBackgroundLabel.setBounds(width/300,height/35,width,height);
+        resizedShipIMG = shipIMG.getScaledInstance(width/8, height/8, Image.SCALE_SMOOTH);
+        shipLabel.setBounds(width/5,height/4,width/2,height/2);
+        resizedTreasureChestIMG = treasureChestIMG.getScaledInstance(width/8, height/8, Image.SCALE_SMOOTH);
+        creditBackgroundLabel.setIcon(new ImageIcon(resizedCreditBackgroundIMG));
+        shipLabel.setIcon(new ImageIcon(resizedShipIMG));
+        treasureChestLabel.setIcon(new ImageIcon(resizedTreasureChestIMG));
+        treasureChestLabel.setBounds(width-width/3,height/4,width/2,height/2);
+        creditText.setBounds(width/3+width/10,height/50,width,height);
+        creditText.setFont(new Font("resources/Viner.ttf", Font.PLAIN, 30));
+        this.add(shipLabel);
+        this.add(treasureChestLabel);
+        this.add(creditBackgroundLabel);
+        repaint();
         revalidate();
-
-
     }
-
-
-
-    public void loginButton(){
-
-        String pass = CsvHandler.getPassword(username.getText());
-        if(Objects.nonNull(pass) && pass.equals(password.getText())) {
-            //swapScreens(new GameMainMenu(frame,this));
-        }else {
-            displayErrorMessage("Incorrect username/password");
-        }
-    }
-
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         setComponents();
         drawTitle(g2D);
-
-
     }
 }

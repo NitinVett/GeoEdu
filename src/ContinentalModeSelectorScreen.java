@@ -85,22 +85,18 @@ public class ContinentalModeSelectorScreen extends Screen {
     public void americasButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Americas"));
     }
-
     public void asiaButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Asia"));
     }
     public void europeButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Europe"));
     }
-
     public void escButton() {
         swapScreens(prev);
     }
     public void logOutButton() {
         frame.dispose();
     }
-
-
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();

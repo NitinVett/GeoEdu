@@ -26,5 +26,11 @@ public class Player extends User {
     public void setAccuracy(float accuracy){
         CsvHandler.changeAccuracyRate(getUsername(), Float.toString(accuracy));
     }
+    public void setGameData(String gameData){
+        CsvHandler.changeListOfCountry(getUsername(),gameData);
+    }
+    public String getGameData(){
+        return CsvHandler.getListOfCountry(getUsername());
+    }
 
 }

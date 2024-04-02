@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MarathonMode extends GameplayScreen {
-    private int numLives;
+
     private JLabel thirdHearts, secondHearts, firstHeart;
     private BufferedImage fullHeartIMG, emptyHeartIMG;
     private Image resizedFullHeartIMG, resizedEmptyHeartIMG;
 
-    public MarathonMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2, int Lives){
+    public MarathonMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2){
         super(gameTesting, previous, user, correctCountry, incorrect1, incorrect2);
-        this.numLives = Lives;
+
         //cal click handling
         try {
             fullHeartIMG = ImageIO.read(new File("fullHeart.png"));
@@ -22,6 +22,7 @@ public class MarathonMode extends GameplayScreen {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         thirdHearts = new JLabel();
         secondHearts = new JLabel();
         firstHeart = new JLabel();
@@ -30,21 +31,22 @@ public class MarathonMode extends GameplayScreen {
     public void setComponents() {
         int width = getWidth();
         int height = getHeight();
+
         resizedFullHeartIMG = fullHeartIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
         resizedEmptyHeartIMG = emptyHeartIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
-        if (numLives == 3){
+        if (gameTesting.getLives() == 3){
             thirdHearts.setIcon(new ImageIcon(resizedFullHeartIMG));
             secondHearts.setIcon(new ImageIcon(resizedFullHeartIMG));
             firstHeart.setIcon(new ImageIcon(resizedFullHeartIMG));
-        } else if (numLives == 2) {
+        } else if (gameTesting.getLives() == 2) {
             thirdHearts.setIcon(new ImageIcon(resizedEmptyHeartIMG));
             secondHearts.setIcon(new ImageIcon(resizedFullHeartIMG));
             firstHeart.setIcon(new ImageIcon(resizedFullHeartIMG));
-        } else if (numLives ==1) {
+        } else if (gameTesting.getLives() ==1) {
             thirdHearts.setIcon(new ImageIcon(resizedEmptyHeartIMG));
             secondHearts.setIcon(new ImageIcon(resizedEmptyHeartIMG));
             firstHeart.setIcon(new ImageIcon(resizedFullHeartIMG));
-        } else if (numLives ==0 ) {
+        } else if (gameTesting.getLives() ==0 ) {
             thirdHearts.setIcon(new ImageIcon(resizedEmptyHeartIMG));
             secondHearts.setIcon(new ImageIcon(resizedEmptyHeartIMG));
             firstHeart.setIcon(new ImageIcon(resizedEmptyHeartIMG));
@@ -62,12 +64,12 @@ public class MarathonMode extends GameplayScreen {
     public void clickHandling(JButton choiceButton) {
         super.clickHandling(choiceButton);
         if (!Objects.equals(choiceButton.getText(), correctCountry.getName())) {
-            numLives = numLives - 1;
             gameTesting.reduceLives();
-            if (numLives == 0) {
-                swapScreens(new StatScreen(frame, this));
+            if (gameTesting.getLives() == 0) {
+                swapScreens(new StatScreen(frame, this,user));
             }
         }
+        gameTesting.saveFile();
     }
     @Override
     protected void paintComponent(Graphics g) {
