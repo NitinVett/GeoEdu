@@ -47,16 +47,16 @@ public class TutorialScreen extends Screen implements KeyListener {
         int height = getHeight();
         explorationButton.setBounds(width/3+width/9, height-height/8, width / 9, height / 15);
         revalidate();
-
     }
     private void explorationButton() {
         GameTesting playExploration = new GameTesting(frame, user, "Global Mode",null,"Exploration");
+        playExploration.newGame(false);
     }
     public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
         Image scaledImage= plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
-        createButtons(explorationButton,scaledImage,width/60);
+        createButtons(explorationButton,scaledImage,width/90);
         resizedScroll = scrollImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         scrollLabel.setIcon(new ImageIcon(resizedScroll));
         scrollLabel.setBounds(0,height/30,width,height);
