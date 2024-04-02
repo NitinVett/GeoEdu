@@ -12,6 +12,7 @@ public class SettingScreen extends Screen{
     GameSound sound;
     Player user;
     Image plankIMG, scrollIMG;
+    boolean muted = false;
     public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
         sound = new GameSound("backgroundmusic.wav");
@@ -128,7 +129,16 @@ public class SettingScreen extends Screen{
         // mute function
     }
     public void muteButton() {
-        // mute function;
+        muted = !muted;
+        if(muted){
+            sound.setVolume(0);
+
+        } else {
+            sound.setVolume(audio.getValue());
+
+        }
+
+
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

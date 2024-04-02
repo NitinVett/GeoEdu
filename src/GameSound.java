@@ -29,6 +29,7 @@ public class GameSound {
         if (!clip.isRunning()) {
             clip.setFramePosition(0); // rewind to the beginning
             clip.start();
+            clip.loop(100);
         }
     }
 
