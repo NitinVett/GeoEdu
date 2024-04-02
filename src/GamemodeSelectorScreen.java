@@ -57,14 +57,10 @@ public class GamemodeSelectorScreen extends Screen{
         global.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         continental.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         microNations.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
-
-        //redo these bounds
-        esc.setBounds(mainButtonX/mainButtonX, mainButtonY/mainButtonY, (width / 10) - 30, height / 12);
+        esc.setBounds(1, 1, (width / 10) - 30, height / 12);
         //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
-
     }
-
     public void globalButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,"Global Mode",null));
     }

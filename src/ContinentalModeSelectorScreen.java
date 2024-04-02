@@ -29,9 +29,9 @@ public class ContinentalModeSelectorScreen extends Screen{
         europe.setText("Europe");
         europe.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
-//        esc.addActionListener(e -> escButton());
-//        esc.setText("Esc");
-//        esc.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
+        esc.addActionListener(e -> escButton());
+        esc.setText("Esc");
+        esc.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
 
         this.add(americas);
@@ -65,9 +65,10 @@ public class ContinentalModeSelectorScreen extends Screen{
     public void europeButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Europe"));
     }
-//    public void escButton() {
-//        swapScreens(new GamemodeSelectorScreen(frame,this,user,mode,null));
-//    }
+
+    public void escButton() {
+        swapScreens(prev);
+    }
     public void logOutButton() {
         frame.dispose();
     }

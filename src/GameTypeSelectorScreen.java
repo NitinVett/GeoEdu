@@ -78,6 +78,9 @@ public class GameTypeSelectorScreen extends Screen{
     public void logOutButton() {
         frame.dispose();
     }
+    public void escButton(){
+        swapScreens(prev);
+    }
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();
@@ -89,5 +92,6 @@ public class GameTypeSelectorScreen extends Screen{
         g.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
         g.drawString("Select a game type!", mainButtonX, mainButtonY);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
+        repaint();
     }
 }

@@ -57,7 +57,6 @@ public class LoginScreen extends Screen {
 
     }
 
-
     public void loginButton() {
         System.out.println(username.getText());
         String pass = CsvHandler.getPassword(username.getText());
