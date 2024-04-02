@@ -1,72 +1,61 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainMenu extends Screen {
 
-    JButton login;
-    JButton register;
-    JButton exit;
+    private JButton login;
+    private JButton register;
+    private JButton exit;
+
+    private Font buttonFont;
 
     MainMenu(FullScreenUI frame) {
         super(frame, null);
-        initializeButtons();
-//        loadCustomCursors();
+        initializeComponents();
+        //loadResources();
     }
 
+    private void initializeComponents() {
+        login = createButton("Login", e -> loginButton());
+        register = createButton("Register", e -> registerButton());
+        exit = createButton("Exit", e -> exitButton());
 
-    private void initializeButtons() {
-        //playMusic();
+        add(login);
+        add(register);
+        add(exit);
 
-//        ImageIcon icon = new ImageIcon("src/shade.png");
-        login = new JButton("Login");
-        login.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
-        login.setVerticalTextPosition(SwingConstants.CENTER);
-        login.setFont(loadFont("resources/Viner.ttf", 26));
-        //login.setForeground(Color.WHITE);
-        login.setContentAreaFilled(false);
-        login.setBorder(null);
-        login.addActionListener(e -> loginButton());
-        login.addMouseListener(new ButtonMouseListener(login));
 
-        // Make button transparent
-        register = new JButton();
-        register.addActionListener(e -> registerButton());
-        register.setText("Register");
-        register.setFont(loadFont("resources/Viner.ttf", 26));
-        register.setContentAreaFilled(false); // Make button transparent
-        register.setBorder(null);
-        register.addMouseListener(new ButtonMouseListener(register));
+    }
 
-        // Exit
-        exit = new JButton();
-        exit.addActionListener(e -> exitButton());
-        exit.setText("Exit");
-        exit.setFont(loadFont("resources/Viner.ttf", 26));
-        exit.setContentAreaFilled(false); // Make button transparent
-        exit.setBorder(null);
-        exit.addMouseListener(new ButtonMouseListener(exit));
-
-        this.add(login);
-        this.add(register);
-        this.add(exit);
+    private JButton createButton(String text, ActionListener listener) {
+        JButton button = new JButton(text);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setVerticalTextPosition(SwingConstants.CENTER);
+        button.setContentAreaFilled(false);
+        button.setBorder(null);
+        button.addActionListener(listener);
+        button.setFont(loadFont("resources/Viner.ttf", 32));
+        button.addMouseListener(new ButtonMouseListener(button));
+        return button;
     }
 
 
     private void updateButtonPositions() {
-
         int width = getWidth();
         int height = getHeight();
         int mainButtonX = width / 2 - width / 17;
-        int mainButtonY = height / 3;
+        int mainButtonY = (int) (height / 2.5);
         int mainButtonYIncrement = height / 10;
 
-        login.setBounds(mainButtonX, mainButtonY, (int) (width / 8.5), height / 13);
-        register.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, (int) (width / 8.5), height / 13);
-        exit.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, (int) (width / 8.5), height / 13);
+        setButtonBounds(login, mainButtonX, mainButtonY, width, height, mainButtonYIncrement * 0);
+        setButtonBounds(register, mainButtonX, mainButtonY, width, height, mainButtonYIncrement * 1);
+        setButtonBounds(exit, mainButtonX, mainButtonY, width, height, mainButtonYIncrement * 2);
+    }
 
-        revalidate();
-
+    private void setButtonBounds(JButton button, int x, int y, int width, int height, int yOffset) {
+        button.setBounds(x, y + yOffset, (int) (width / 8.5), height / 13);
     }
 
     public void loginButton() {
@@ -79,20 +68,14 @@ public class MainMenu extends Screen {
 
     public void exitButton() {
         swapScreens(new ExitScreen(frame, this));
-
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g); // Paints the background
         Graphics2D g2D = (Graphics2D) g;
         drawTitle(g2D);
-
-        revalidate();
         updateButtonPositions();
-        //disableSettingButton();
-    }
 
+    }
 }

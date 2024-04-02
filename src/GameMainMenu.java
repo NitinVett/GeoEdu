@@ -1,5 +1,9 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GameMainMenu extends Screen {
     JButton newGame;
@@ -11,17 +15,18 @@ public class GameMainMenu extends Screen {
 
     public GameMainMenu(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
-        newGame = new JButton();
-        continue_ = new JButton();
-        tutorial = new JButton();
-        highScores = new JButton();
-        logout = new JButton();
+        newGame = createCustomButton("New Game");
+        continue_ = createCustomButton("Continue");
+        tutorial = createCustomButton("Tutorial");
+        highScores = createCustomButton("High Scores");
+        logout = createCustomButton("Log Out");
 
 
         newGame.addActionListener(e -> newGameButton());
         newGame.setText("New Game");
 
         continue_.addActionListener(e -> continue_Button());
+
         continue_.setText("Continue");
 
         logout.addActionListener(e -> logOutButton());
@@ -32,13 +37,44 @@ public class GameMainMenu extends Screen {
 
         tutorial.addActionListener(e -> tutorialButton());
         tutorial.setText("Tutorial");
-
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("resources/plank.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Image scaledImage = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        highScores.setIcon(new ImageIcon(scaledImage));
+        logout.setIcon(new ImageIcon(scaledImage));
+        highScores.setFont(loadFont("resources/Viner.ttf", 15));
+        logout.setFont(loadFont("resources/Viner.ttf", 15));
 
         this.add(newGame);
         this.add(continue_);
         this.add(tutorial);
         this.add(highScores);
         this.add(logout);
+    }
+    private JButton createCustomButton(String text) {
+        JButton button = new JButton(text);
+        button.setContentAreaFilled(false);
+        button.setFont(loadFont("resources/Viner.ttf", 28));
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setOpaque(false);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setVerticalTextPosition(SwingConstants.CENTER);
+        setButtonBackground(button, "resources/plank.png");
+        return button;
+    }
+    private void setButtonBackground(JButton button, String imagePath) {
+        try {
+            BufferedImage image = ImageIO.read(new File(imagePath));
+            Image scaledImage = image.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+            button.setIcon(new ImageIcon(scaledImage));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateButtonPositions() {
@@ -60,6 +96,7 @@ public class GameMainMenu extends Screen {
         swapScreens(new GamemodeSelectorScreen(frame,this));
     }
 
+    //Load game state
     public void continue_Button() {
         swapScreens(new RegisterScreen(frame,this));
     }

@@ -12,11 +12,15 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Screen extends JPanel {
+    private Timer errorMessageTimer;
+    private Font titleFont;
+    private FontMetrics titleFontMetrics;
+    private boolean settingsButtonBoundsSet = false;
     FullScreenUI frame;
     JButton settings;
     private Image backgroundImage;
     private JLabel errorMessageLabel;
-    Screen prev;
+    protected Screen prev;
     Player user;
 
     Cursor defaultCursor;
@@ -39,46 +43,40 @@ public class Screen extends JPanel {
     }
 
     public void setUp() {
-        //loadBackgroundImage("wallpaper1.gif");
+        loadBackgroundImage();
         settings = new JButton();
         errorMessageLabel = new JLabel();
-
         this.add(settings);
-
-        ImageIcon imgIcon = new ImageIcon("resources/hamburger.png");
-        Image image = imgIcon.getImage();
+        Image image = new ImageIcon("resources/hamburger.png").getImage();
         Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         ImageIcon settingsIcon = new ImageIcon(newImage);
-        settings.addActionListener(e -> settingsButton());
         settings.setIcon(settingsIcon);
-        //settings.setText("SETTINGS");
-
+        settings.addActionListener(e -> settingsButton());
         this.setVisible(true);
         this.setLayout(null);
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-
-        frame.setVisible(true);
         this.requestFocusInWindow(true);
+        this.addMouseListener(new CursorMouseListener());
         setUpKeyBindings();
+        frame.setVisible(true);
         frame.revalidate();
         frame.repaint();
-        this.addMouseListener(new CursorMouseListener());
     }
 
     private void loadCustomCursors() {
+        defaultCursor = createCustomCursor("click.png");
+        customCursor = createCustomCursor("cursor.png");
+    }
+    private Cursor createCustomCursor(String resourceName) {
         try {
-            BufferedImage cursorImg = ImageIO.read(getClass().getResource("click.png"));
-            Image resizedImage1 = cursorImg.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
-            defaultCursor = Toolkit.getDefaultToolkit().createCustomCursor(resizedImage1, new Point(0, 0), "DefaultCursor");
-
-            BufferedImage cursorImg2 = ImageIO.read(getClass().getResource("cursor.png"));
-            Image resizedImage2 = cursorImg2.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
-            customCursor = Toolkit.getDefaultToolkit().createCustomCursor(resizedImage2, new Point(0, 0), "CustomCursor");
+            BufferedImage cursorImg = ImageIO.read(getClass().getResource(resourceName));
+            Image resizedImage = cursorImg.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+            return Toolkit.getDefaultToolkit().createCustomCursor(resizedImage, new Point(0, 0), resourceName);
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
-
     private void setCustomCursor() {
         frame.setCursor(customCursor);
     }
@@ -91,27 +89,33 @@ public class Screen extends JPanel {
         button.addMouseListener(new ButtonMouseListener(button));
     }
 
-    public void loadBackgroundImage(String link) {
+    private void loadBackgroundImage() {
         // only works if gif is in src folder, aka class path
         //no: 3, 4 is too busy cannon, 5 cutting into geocraft,
-        URL imageURL = getClass().getClassLoader().getResource(link);
+        URL imageURL = getClass().getClassLoader().getResource("wallpaper1.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
 
         } else {
-            System.err.println("Resource not found: meow " + link);
+            System.err.println("Resource not found: meow " + "wallpaper1.gif");
         }
     }
 
     public void setUpKeyBindings() {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESCAPE");
-        this.getActionMap().put("ESCAPE", new AbstractAction() {
+        setUpKeyBinding(KeyEvent.VK_ESCAPE, "ESCAPE", () -> {
+            if (Objects.nonNull(prev)) {
+                swapScreens(prev);
+            }
+        });
+    }
+
+    private void setUpKeyBinding(int keyCode, String actionName, Runnable action) {
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyCode, 0), actionName);
+        getActionMap().put(actionName, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Objects.nonNull(prev)) {
-                    swapScreens(prev);
-                }
+                action.run();
             }
         });
     }
@@ -131,21 +135,22 @@ public class Screen extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (backgroundImage != null) {
             int x = (getWidth() - backgroundImage.getWidth(null)) / 2;
             int y = (getHeight() - backgroundImage.getHeight(null)) / 2;
             g.drawImage(backgroundImage, x, y, this);
         }
-        // remove this from
-        //drawTitle((Graphics2D) g);
-        int width = getWidth();
-        int height = getHeight();
-        settings.setBounds(width - width / 15, height / 22, 50, 50);
-//        settings.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        settings.setBorder(BorderFactory.createEmptyBorder());
-        settings.setContentAreaFilled(false); // Make button transparent
-        settings.setVisible(true);
 
+        if (!settingsButtonBoundsSet) {
+            int width = getWidth();
+            int height = getHeight();
+            settings.setBounds(width - width / 15, height / 22, 50, 50);
+            settings.setBorder(BorderFactory.createEmptyBorder());
+            settings.setContentAreaFilled(false); // Make button transparent
+            settings.setVisible(true);
+            settingsButtonBoundsSet = true;
+        }
     }
 
     //Call this function to disable settings button where u want
@@ -154,23 +159,29 @@ public class Screen extends JPanel {
     }
 
     public void drawTitle(Graphics2D g) {
+        // Draw background image if necessary
+        // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        g.setFont(loadFont("resources/Viner.ttf", 96));
-        FontMetrics fm = g.getFontMetrics();
-        int titleWidth = fm.stringWidth("GEOCRAFT");
+        // Set font and font metrics if not already set
+        if (titleFont == null) {
+            titleFont = loadFont("resources/Viner.ttf", 112);
+            titleFontMetrics = g.getFontMetrics(titleFont);
+        }
+
+        // Calculate title width
+        int titleWidth = titleFontMetrics.stringWidth("GEOCRAFT");
+
+        // Positioning
         int width = getWidth();
         int height = getHeight();
+        double yValue = height * 0.22;
 
-        // Positioning country panel
-        double xValue = (width - 450) / 2; // Adjust this value as needed
-        double yValue = height * 0.20;
-
-
-        int xPosition = getWidth() / 2 - titleWidth / 2;
+        int xPosition = width / 2 - titleWidth / 2;
         int yPosition = (int) yValue;
-        g.drawString("GEOCRAFT", xPosition, yPosition);
 
+        // Draw title
+        g.setFont(titleFont);
+        g.drawString("GEOCRAFT", xPosition, yPosition);
     }
 
     public void displayErrorMessage(String message) {
@@ -188,14 +199,19 @@ public class Screen extends JPanel {
         revalidate();
         repaint();
 
-        int delay = 5000;
-        Timer timer = new Timer(delay, e -> {
-            errorMessageLabel.setVisible(false); // Hide the message
-            revalidate();
-            repaint();
-        });
-        timer.setRepeats(false);
-        timer.start();
+        if (errorMessageTimer == null) {
+            errorMessageTimer = new Timer(5000, e -> {
+                errorMessageLabel.setVisible(false); // Hide the message
+                this.remove(errorMessageLabel); // Remove label from component hierarchy
+                revalidate();
+                repaint();
+            });
+            errorMessageTimer.setRepeats(false);
+            errorMessageTimer.start(); // Start the timer
+        } else {
+            // Restart the timer
+            errorMessageTimer.restart();
+        }
     }
 
     public void playMusic() {

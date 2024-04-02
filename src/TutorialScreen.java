@@ -19,7 +19,7 @@ public class TutorialScreen extends Screen implements KeyListener {
         this.previousScreen = previousScreen;
         setFocusable(true);
         requestFocusInWindow();
-        loadBackgroundImage("wallpaper1.gif");
+
 
         explorationButton = new JButton();
 
