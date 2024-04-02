@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ContinentalModeSelector extends Screen {
+public class ContinentalModeSelectorScreen extends Screen {
     JButton americas;
     JButton asia;
     JButton europe;
     JButton esc;
     //JButton highScore;
 
-    public ContinentalModeSelector(FullScreenUI frame, Screen previous) {
+    public ContinentalModeSelectorScreen (FullScreenUI frame, Screen previous) {
         super(frame, previous);
         americas = createCustomButton("Americas");
         asia = createCustomButton("Asia");
@@ -83,15 +83,15 @@ public class ContinentalModeSelector extends Screen {
 
     public void americasButton() {
 
-        swapScreens(new GameTypeSelector(frame, this, "Americas"));
+        swapScreens(new GameTypeSelectorScreen(frame, this));
     }
 
     public void asiaButton() {
-        swapScreens(new GameTypeSelector(frame, this, "Asia"));
+        swapScreens(new GameTypeSelectorScreen(frame, this));
     }
 
     public void europeButton() {
-        swapScreens(new GameTypeSelector(frame, this, "Europe"));
+        swapScreens(new GameTypeSelectorScreen(frame, this));
     }
 
     public void escButton() {
