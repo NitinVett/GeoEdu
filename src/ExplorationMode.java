@@ -27,7 +27,6 @@ public class ExplorationMode extends GameplayScreen {
         hintWasClicked =true;
         gameTesting.saveFile();
     }
-
     public void setChoice1Button() {
         clickHandling(choice1Button);
     }

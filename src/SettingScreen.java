@@ -11,18 +11,13 @@ public class SettingScreen extends Screen{
     private JButton changePassword, debug, credits, muteButton, highContrast, exit;
     GameSound sound;
     Player user;
+    Image plankIMG, scrollIMG;
     public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
-
         sound = new GameSound("backgroundmusic.wav");
         sound.play();
         prev = previous;
-
-        System.out.println("1");
         audio = new JSlider(0,100,50);
-
-
-
         audio.addChangeListener(e -> changeVolume());
         audio.setOpaque(false);
         changePassword = new JButton("CHANGE PASSWORD");
@@ -34,13 +29,14 @@ public class SettingScreen extends Screen{
         BufferedImage escIcon = null;
         try {
             escIcon = ImageIO.read(new File("resources/escape.png"));
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
+            scrollIMG = ImageIO.read(new File("scroll.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         Image resizedEsc = escIcon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         exit.setIcon(new ImageIcon(resizedEsc));
-
-
         changePassword.addActionListener(e -> changePasswordButton());
         debug.addActionListener(e -> debugButton());
         credits.addActionListener(e -> creditsButton());
@@ -100,21 +96,20 @@ public class SettingScreen extends Screen{
         int textY = sliderY + (sliderHeight - textHeight) / 2 + metrics.getAscent();
 
         g.drawString("AUDIO",width/3, textY);
-
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        Image scrollIMGScaled= scrollIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(highContrast,scaledImage,width/60);
+        createButtons(changePassword,scaledImage,width/75);
+        createButtons(debug,scaledImage,width/60);
+        createButtons(credits,scrollIMGScaled,width/60);
         exit.setBounds(width / 30, height/22, 50, 50);
         exit.setBorderPainted(false);
         exit.setContentAreaFilled(false);
         muteButton.setBounds(width/2+width/15,height/3,width/10,height/12);
-        muteButton.setFont(new Font("SansSerif", Font.PLAIN, 24));
         highContrast.setBounds(width/3+width/12,height - height/4,width/6,height/12);
-        highContrast.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        changePassword.setBounds(width/3, height - height/6, width/6, height/12);
-        debug.setBounds(width-width/2,height - height/6,width/6,height/12);
+        changePassword.setBounds(width/3+width/12, height - height/6, width/6, height/12);
+        debug.setBounds(width/3+width/12,height - height/6,width/6,height/12);
         credits.setBounds(width-width/8,height - height/8,width/10,height/12);
-        changePassword.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        debug.setFont(new Font("SansSerif", Font.PLAIN, 24));
-        credits.setFont(new Font("SansSerif", Font.PLAIN, 24));
-
     }
     public void changePasswordButton() {
         swapScreens(new ChangePasswordScreen(frame,this,user));
@@ -129,24 +124,17 @@ public class SettingScreen extends Screen{
     public void exitButton() {
         swapScreens(prev);
     }
-
-
     public void audioSlider() {
         // mute function
     }
     public void muteButton() {
         // mute function;
     }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         this.remove(settings);
         Graphics2D g2D = (Graphics2D) g;
         setComponents(g2D);
         drawTitle(g2D);
-
-
-
     }
 }

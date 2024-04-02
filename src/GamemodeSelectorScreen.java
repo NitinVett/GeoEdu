@@ -10,15 +10,13 @@ public class GamemodeSelectorScreen extends Screen {
     JButton continental;
     JButton microNations;
     JButton esc;
-
+    Image plankIMG;
     public GamemodeSelectorScreen(FullScreenUI frame, Screen previous, Player user) {
         super(frame, previous,user);
-        global = createCustomButton("Global");
-        continental = createCustomButton("Continental");
-        microNations = createCustomButton("Micro-nations");
+        global = new JButton("Global");
+        continental = new JButton("Continental");
+        microNations = new JButton("Micro Nations");
         esc = new JButton();
-
-
         global.addActionListener(e -> globalButton());
         continental.addActionListener(e -> continentalButton());
         microNations.addActionListener(e -> microNationButton());
@@ -26,6 +24,7 @@ public class GamemodeSelectorScreen extends Screen {
         BufferedImage escIcon = null;
         try {
             escIcon = ImageIO.read(new File("resources/escape.png"));
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -38,35 +37,16 @@ public class GamemodeSelectorScreen extends Screen {
         this.add(esc);
     }
 
-    private JButton createCustomButton(String text) {
-        JButton button = new JButton(text);
-        button.setContentAreaFilled(false);
-        button.setFont(loadFont("resources/Viner.ttf", 28));
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setVerticalTextPosition(SwingConstants.CENTER);
-        setButtonBackground(button);
-        return button;
-    }
-
-    private void setButtonBackground(JButton button) {
-        try {
-            BufferedImage image = ImageIO.read(new File("resources/plank.png"));
-            Image scaledImage = image.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
-            button.setIcon(new ImageIcon(scaledImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
         int mainButtonX = width / 3 - width / 5;
         int mainButtonY = height / 3 + height / 11;
         int mainButtonYIncrement = height / 10;
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(global,scaledImage,width/60);
+        createButtons(continental,scaledImage,width/60);
+        createButtons(microNations,scaledImage,width/60);
         global.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         continental.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         microNations.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
