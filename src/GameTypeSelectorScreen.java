@@ -1,14 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
-public class GameTypeSelector extends Screen{
+public class GameTypeSelectorScreen extends Screen{
     JButton marathon;
     JButton timed;
     JButton exploration;
     JButton esc;
     //JButton highScore;
 
-    public GameTypeSelector(FullScreenUI frame, Screen previous) {
+    public GameTypeSelectorScreen(FullScreenUI frame, Screen previous) {
         super(frame,previous);
         marathon = new JButton();
         timed = new JButton();
