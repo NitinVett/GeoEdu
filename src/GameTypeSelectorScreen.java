@@ -10,10 +10,11 @@ public class GameTypeSelectorScreen extends Screen {
     JButton timed;
     JButton exploration;
     JButton esc;
+    String mode;
     //JButton highScore;
 
-    public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, String mode) {
-        super(frame, previous);
+    public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode,String continent) {
+        super(frame, previous,user);
         marathon = createCustomButton("Marathon");
         timed = createCustomButton("Timed");
         exploration = createCustomButton("Exploration");
@@ -77,26 +78,30 @@ public class GameTypeSelectorScreen extends Screen {
         revalidate();
 
     }
-
-    public void marathonButton() {
-        swapScreens(new LoginScreen(frame, this));
-    }
-
-    public void timedButton() {
-        swapScreens(new RegisterScreen(frame, this));
-    }
-
     public void explorationButton() {
-        TutorialScreen tutorialScreen = new TutorialScreen(frame, this,null);
-        frame.addKeyListener(tutorialScreen);
-        swapScreens(tutorialScreen);
+        try {
+            GameTesting playExploration = new GameTesting(frame, user, "Global Mode",null,"Exploration");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
-    public void exitButton() {
+    public void marathonButton() {
+        try {
+            GameTesting playMarathon = new GameTesting(frame, user, "Global Mode",null,"Marathon");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void timedButton() {
+        try {
+            GameTesting playTimed = new GameTesting(frame, user, "Global Mode",null,"Timed");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void exitButton(){
         swapScreens(prev);
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();
@@ -104,9 +109,9 @@ public class GameTypeSelectorScreen extends Screen {
         int mainButtonX = width / 2 - width / 8;
         int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
-
         g.setFont(loadFont("resources/Viner.ttf", 32));
         g.drawString("What game type will you play today!", mainButtonX, mainButtonY);
-        updateButtonPositions(); // Consider calling this elsewhere if it causes issues // Consider calling this elsewhere if it causes issues
+        updateButtonPositions(); // Consider calling this elsewhere if it causes issues
+        repaint();
     }
 }

@@ -75,20 +75,16 @@ public class GamemodeSelectorScreen extends Screen {
         esc.setContentAreaFilled(false);
         revalidate();
     }
-
     public void globalButton() {
-        swapScreens(new GameTypeSelectorScreen(frame, this,"Global"));
+        swapScreens(new GameTypeSelectorScreen(frame,this,user,"Global Mode",null));
     }
-
     public void continentalButton() {
-        swapScreens(new ContinentalModeSelectorScreen(frame, this));
+        swapScreens(new ContinentalModeSelectorScreen(frame,this,user,"Continental Mode"));
     }
-
     public void microNationButton() {
-        swapScreens(new GameTypeSelectorScreen(frame, this,"Micro Nation"));
+       swapScreens(new GameTypeSelectorScreen(frame,this,user,"Mirco Nation Mode",null));
     }
-
-    public void exitButton() {
+    public void escButton() {
         swapScreens(prev);
     }
 
