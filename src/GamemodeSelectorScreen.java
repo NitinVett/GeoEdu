@@ -8,8 +8,8 @@ public class GamemodeSelectorScreen extends Screen{
     JButton esc;
     //JButton highScore;
 
-    public GamemodeSelectorScreen(FullScreenUI frame, Screen previous) {
-        super(frame,previous);
+    public GamemodeSelectorScreen(FullScreenUI frame, Screen previous,Player user) {
+        super(frame,previous,user);
         global = new JButton();
         continental = new JButton();
         microNations = new JButton();
@@ -66,27 +66,17 @@ public class GamemodeSelectorScreen extends Screen{
     }
 
     public void globalButton() {
-        swapScreens(new LoginScreen(frame,this));
+        swapScreens(new GameTypeSelectorScreen(frame,this,user,"Global Mode",null));
     }
-
     public void continentalButton() {
-        swapScreens(new RegisterScreen(frame,this));
+        swapScreens(new ContinentalModeSelectorScreen(frame,this,user,"Continental Mode"));
     }
-
     public void microNationButton() {
-        TutorialScreen tutorialScreen = new TutorialScreen(frame, this,user);
-        frame.addKeyListener(tutorialScreen);
-        swapScreens(tutorialScreen);
+       swapScreens(new GameTypeSelectorScreen(frame,this,user,"Mirco Nation Mode",null));
     }
     public void escButton() {
-        //swapScreens(new GameMainMenu(frame,this));
+        swapScreens(prev);
     }
-
-    public void logOutButton() {
-        frame.dispose();
-    }
-
-
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();
@@ -94,7 +84,6 @@ public class GamemodeSelectorScreen extends Screen{
         int mainButtonX = width / 3 - width / 7;
         int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
-
         g.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
         g.drawString("Select a game mode!", mainButtonX, mainButtonY);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues

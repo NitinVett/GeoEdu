@@ -1,15 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
-public class GameTypeSelector extends Screen{
+public class GameTypeSelectorScreen extends Screen{
     JButton marathon;
     JButton timed;
     JButton exploration;
     JButton esc;
+    String mode;
     //JButton highScore;
 
-    public GameTypeSelector(FullScreenUI frame, Screen previous) {
-        super(frame,previous);
+    public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode, String continent) {
+        super(frame,previous,user);
+        this.mode=mode;
         marathon = new JButton();
         timed = new JButton();
         exploration = new JButton();
@@ -31,7 +34,6 @@ public class GameTypeSelector extends Screen{
         esc.setText("Esc");
         esc.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
-
         this.add(marathon);
         this.add(timed);
         this.add(exploration);
@@ -47,28 +49,44 @@ public class GameTypeSelector extends Screen{
         marathon.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         timed.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         exploration.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
-        esc.setBounds(mainButtonX/mainButtonX, mainButtonY/mainButtonY, (width / 10) - 30, height / 12);
+        esc.setBounds(1, 1, (width / 10) - 30, height / 12);
         //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
 
     }
-
-    public void marathonButton() {
-        swapScreens(new LoginScreen(frame,this));
-    }
-
-    public void timedButton() {
-        swapScreens(new RegisterScreen(frame,this));
-    }
-
     public void explorationButton() {
-        TutorialScreen tutorialScreen = new TutorialScreen(frame, this, user);
-        frame.addKeyListener(tutorialScreen);
-        swapScreens(tutorialScreen);
+        try {
+            GameTesting playExploration = new GameTesting(frame, user, "Global Mode",null,"Exploration");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+    public void marathonButton() {
+        try {
+            GameTesting playMarathon = new GameTesting(frame, user, "Global Mode",null,"Marathon");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void timedButton() {
+        try {
+            GameTesting playTimed = new GameTesting(frame, user, "Global Mode",null,"Timed");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void escButton() {
-        swapScreens(new GamemodeSelectorScreen(frame,this));
+        if (String.continent != null) {
+
+
+            swapScreens(new GamemodeSelectorScreen(frame, this, user,mode));
+        }
+        else {
+            swapScreens(new ContinentalModeSelectorScreen(frame, this, user,mode));
+
+        }
     }
 
 

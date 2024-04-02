@@ -51,7 +51,7 @@ public class TutorialScreen extends Screen implements KeyListener {
     }
     private void explorationButton() {
         try {
-            GameTesting playExploration = new GameTesting(null, user, "Global Mode",null,"Exploration");
+            GameTesting playExploration = new GameTesting(frame, user, "Global Mode",null,"Exploration");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

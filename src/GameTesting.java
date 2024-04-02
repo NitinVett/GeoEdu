@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class GameTesting extends FullScreenUI implements Serializable {
+public class GameTesting implements Serializable {
 
     private int lives = 3;
     Timer timer;
@@ -19,13 +19,15 @@ public class GameTesting extends FullScreenUI implements Serializable {
     Country incorrectCountry1;
     Country incorrectCountry2;
     String type;
+    FullScreenUI frame;
 
 
     // Randomizes the countries, and feeds it to the game play class.
     //
-    public GameTesting(Screen previous, Player user, String mode, String continent,String type) throws IOException {
+    public GameTesting(FullScreenUI frame, Player user, String mode, String continent,String type) throws IOException {
         this.user = user;
         this.type = type;
+        this.frame = frame;
         //Static class that loads all the countries in a specific mode
         // For global it would be 50 country objects of type global
         this.countries = CountryList.getCountries(mode, continent);
@@ -36,8 +38,8 @@ public class GameTesting extends FullScreenUI implements Serializable {
                 if (timeLeft > 0 && curIndex < countries.length) {
                     timeLeft--; // Decrease time left
                     CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
-                    revalidate(); // Refresh the UI
-                    repaint(); // Request a repaint to update the timer display
+                    frame.revalidate(); // Refresh the UI
+                    frame.repaint(); // Request a repaint to update the timer display
                 } else {
                     ((Timer) e.getSource()).stop(); // Stop the timer
                     // You can add what should happen when the timer reaches 0
@@ -78,8 +80,8 @@ public class GameTesting extends FullScreenUI implements Serializable {
             }
             incorrectCountry2 = countries[random];
             randomizerStack.clear();
-            revalidate();
-            this.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,lives));
+            frame.revalidate();
+            frame.setContentPane(new MarathonMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,lives));
             curIndex++;
         }
     }
@@ -111,8 +113,9 @@ public class GameTesting extends FullScreenUI implements Serializable {
             }
             incorrectCountry2 = countries[random];
             randomizerStack.clear();
-            revalidate();
-            this.setContentPane(new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
+            frame.revalidate();
+            frame.setContentPane(new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2));
+            CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
             curIndex++;
         }
     }
@@ -145,7 +148,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
         }
         incorrectCountry2 = countries[random];
         randomizerStack.clear();
-        this.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
+        frame.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
         curIndex++;
     }
     public int getTime(){
@@ -219,7 +222,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
                 // Add cases for other fields if necessary
             }
         }
-        this.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
+        frame.setContentPane(new TimedMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2,timeLeft));
 
     }
     public void startNextIteration() {
@@ -252,7 +255,7 @@ public class GameTesting extends FullScreenUI implements Serializable {
     public static void main(String[] args) throws IOException {
         Player a = new Player("jam","1");
         String gameData = CsvHandler.getListOfCountry(a.getUsername());
-        GameTesting z = new GameTesting(null, a, "Micro Nation Mode",null,"Marathon");
+        GameTesting z = new GameTesting(new FullScreenUI(), a, "Global Mode",null,"Exploration");
         //z.loadFile(gameData);
     }
 }

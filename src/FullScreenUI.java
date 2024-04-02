@@ -11,28 +11,22 @@ public class FullScreenUI extends JFrame {
     public FullScreenUI() throws IOException {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
-        this.setContentPane(new TutorialScreen(this,null,new Player("j","1")));
+        this.setContentPane(new GamemodeSelectorScreen(this,null));
         this.setVisible(true);
         this.requestFocus();
         settings = new SettingScreen(this, null, null);
-
-
-
         addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowGainedFocus(WindowEvent e) {
                 // Request focus for your panel when the window gains focus
                 getContentPane().requestFocus();
             }
-
             @Override
             public void windowLostFocus(WindowEvent e) {
                 // Handle window losing focus if necessary
             }
         });
     }
-
-
     public Screen getSettings(Screen prev, Player user) {
 
         settings.setPrev(prev);

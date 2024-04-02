@@ -37,7 +37,7 @@ public class GameplayScreen extends Screen {
     private boolean hintWasClicked=false;
 
     public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2){
-        super(gameTesting, previous);
+        super(gameTesting.frame, previous);
         this.gameTesting = gameTesting;
         this.correctCountry = correctCountry;
         this.incorrect1 = incorrect1;

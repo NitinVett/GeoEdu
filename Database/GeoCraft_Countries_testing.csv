@@ -4,98 +4,97 @@ ID,Country Name,Continent Mode,Continent Name,Global Mode,Micro Nation Mode
 3,Germany,Yes,Europe,Yes,No
 4,Japan,Yes,Asia,Yes,No
 5,India,Yes,Asia,Yes,No
-6,United Kingdom,Yes,Europe,Yes,No
-7,France,Yes,Europe,Yes,No
-8,Italy,Yes,Europe,Yes,No
-9,Brazil,Yes,Americas,Yes,No
-10,Canada,Yes,Americas,Yes,No
-11,Russia,Yes,Europe,Yes,No
-12,Mexico,Yes,Americas,Yes,No
-13,South Korea,Yes,Asia,Yes,No
-14,Australia,No,Oceania,Yes,No
-15,Spain,Yes,Europe,Yes,No
-16,Indonesia,Yes,Asia,Yes,No
-17,Turkey,Yes,Europe,Yes,No
-18,Netherlands,Yes,Europe,Yes,No
-19,Saudi Arabia,Yes,Asia,Yes,No
-20,Switzerland,Yes,Europe,Yes,No
-21,Poland,Yes,Europe,Yes,No
-22,Taiwan,Yes,Asia,Yes,No
-23,Belgium,Yes,Europe,Yes,No
-24,Argentina,Yes,Americas,Yes,No
-25,Sweden,Yes,Europe,Yes,No
-26,Ireland,Yes,Europe,Yes,No
-27,Norway,Yes,Europe,Yes,No
-28,Austria,Yes,Europe,Yes,No
-29,Thailand,Yes,Asia,Yes,No
-30,United Arab Emirates,Yes,Asia,Yes,No
-31,Singapore,Yes,Asia,Yes,Yes
-32,Bangladesh,Yes,Asia,Yes,No
-33,Philippines,Yes,Asia,Yes,No
-34,Vietnam,Yes,Asia,Yes,No
-35,Malaysia,Yes,Asia,Yes,No
-36,Denmark,Yes,Europe,Yes,No
-37,Egypt,No,Africa,Yes,No
-38,Nigeria,No,Africa,Yes,No
-39,South Africa,No,Africa,Yes,No
-40,Iran,Yes,Asia,Yes,No
-41,Colombia,Yes,Americas,Yes,No
-42,Romania,Yes,Europe,Yes,No
-43,Chile,Yes,Americas,Yes,No
-44,Pakistan,Yes,Asia,Yes,No
-45,Finland,Yes,Europe,Yes,No
-46,Iraq,Yes,Asia,Yes,No
-47,Portugal,Yes,Europe,Yes,No
-48,Kazakhstan,Yes,Asia,No,No
-49,Qatar,Yes,Asia,No,No
-50,Kuwait,Yes,Asia,No,No
-51,Oman,Yes,Asia,No,No
-52,Uzbekistan,Yes,Asia,No,No
-53,Turkmenistan,Yes,Asia,No,No
-54,Sri Lanka,Yes,Asia,No,No
-55,Greece,Yes,Europe,No,No
-56,Ukraine,Yes,Europe,No,No
-57,Hungary,Yes,Europe,No,No
-58,Slovakia,Yes,Europe,No,No
-59,Peru,Yes,Americas,No,No
-60,Ecuador,Yes,Americas,No,No
-61,Dominican Republic,Yes,Americas,No,No
-62,Puerto Rico,Yes,Americas,No,No
-63,Cuba,Yes,Americas,No,No
-64,Guatemala,Yes,Americas,No,No
-65,Panama,Yes,Americas,No,No
-66,Uruguay,Yes,Americas,No,No
-67,Costa Rica,Yes,Americas,No,No
-68,Bolivia,Yes,Americas,No,No
-69,Paraguay,Yes,Americas,No,No
-70,El Salvador,Yes,Americas,No,No
-71,Honduras,Yes,Americas,No,No
-72,Trinidad and Tobago,Yes,Americas,No,No
-73,Haiti,Yes,Americas,No,No
-74,Jamaica,Yes,Americas,No,No
-75,Nicaragua,Yes,Americas,No,No
-76,Guyana,Yes,Americas,No,No
-77,Vatican City,No,Europe,No,Yes
-78,Monaco,No,Oceania,No,Yes
-79,Nauru,No,Oceania,No,Yes
-80,Tuvalu,No,Oceania,No,Yes
-81,San Marino,No,Europe,No,Yes
-82,Liechtenstein,No,Europe,No,Yes
-83,Marshall Islands,No,Oceania,No,Yes
-84,Saint Kitts and Kevis,No,Americas,No,Yes
-85,Maldives,No,Asia,No,Yes
-86,Malta,No,Europe,No,Yes
-87,Grenada,No,Americas,No,Yes
-88,Saint Vincent and The Grenadines,No,Americas,No,Yes
-89,Barbados,No,Americas,No,Yes
-90,Antigua and Barbuda,No,Americas,No,Yes
-91,Seychelles,No,Africa,No,Yes
-92,Palau,No,Oceania,No,Yes
-93,Andorra,No,Europe,No,Yes
-94,Saint Lucia,No,Americas,No,Yes
-95,Federated States of Micronesia,No,Oceania,No,Yes
-96,Tonga,No,Oceania,No,Yes
-97,Dominica,No,Americas,No,Yes
-98,Bahrain,No,Asia,No,Yes
-99,Kiribati,No,Oceania,No,Yes
-100,Sao Tome and Principe,No,Africa,No,Yes
+6,France,Yes,Europe,Yes,No
+7,Italy,Yes,Europe,Yes,No
+8,Brazil,Yes,Americas,Yes,No
+9,Canada,Yes,Americas,Yes,No
+10,Russia,Yes,Europe,Yes,No
+11,Mexico,Yes,Americas,Yes,No
+12,South Korea,Yes,Asia,Yes,No
+13,Australia,No,Oceania,Yes,No
+14,Spain,Yes,Europe,Yes,No
+15,Indonesia,Yes,Asia,Yes,No
+16,Turkey,Yes,Europe,Yes,No
+17,Netherlands,Yes,Europe,Yes,No
+18,Saudi Arabia,Yes,Asia,Yes,No
+19,Switzerland,Yes,Europe,Yes,No
+20,Poland,Yes,Europe,Yes,No
+21,Taiwan,Yes,Asia,Yes,No
+22,Belgium,Yes,Europe,Yes,No
+23,Argentina,Yes,Americas,Yes,No
+24,Sweden,Yes,Europe,Yes,No
+25,Ireland,Yes,Europe,Yes,No
+26,Norway,Yes,Europe,Yes,No
+27,Austria,Yes,Europe,Yes,No
+28,Thailand,Yes,Asia,Yes,No
+29,United Arab Emirates,Yes,Asia,Yes,No
+30,Singapore,Yes,Asia,Yes,Yes
+31,Bangladesh,Yes,Asia,Yes,No
+32,Philippines,Yes,Asia,Yes,No
+33,Vietnam,Yes,Asia,Yes,No
+34,Malaysia,Yes,Asia,Yes,No
+35,Denmark,Yes,Europe,Yes,No
+36,Egypt,No,Africa,Yes,No
+37,Nigeria,No,Africa,Yes,No
+38,South Africa,No,Africa,Yes,No
+39,Iran,Yes,Asia,Yes,No
+40,Colombia,Yes,Americas,Yes,No
+41,Romania,Yes,Europe,Yes,No
+42,Chile,Yes,Americas,Yes,No
+43,Pakistan,Yes,Asia,Yes,No
+44,Finland,Yes,Europe,Yes,No
+45,Iraq,Yes,Asia,Yes,No
+46,Portugal,Yes,Europe,Yes,No
+47,Kazakhstan,Yes,Asia,No,No
+48,Qatar,Yes,Asia,No,No
+49,Kuwait,Yes,Asia,No,No
+50,Oman,Yes,Asia,No,No
+51,Uzbekistan,Yes,Asia,No,No
+52,Turkmenistan,Yes,Asia,No,No
+53,Sri Lanka,Yes,Asia,No,No
+54,Greece,Yes,Europe,No,No
+55,Ukraine,Yes,Europe,No,No
+56,Hungary,Yes,Europe,No,No
+57,Slovakia,Yes,Europe,No,No
+58,Peru,Yes,Americas,No,No
+59,Ecuador,Yes,Americas,No,No
+60,Dominican Republic,Yes,Americas,No,No
+61,Puerto Rico,Yes,Americas,No,No
+62,Cuba,Yes,Americas,No,No
+63,Guatemala,Yes,Americas,No,No
+64,Panama,Yes,Americas,No,No
+65,Uruguay,Yes,Americas,No,No
+66,Costa Rica,Yes,Americas,No,No
+67,Bolivia,Yes,Americas,No,No
+68,Paraguay,Yes,Americas,No,No
+69,El Salvador,Yes,Americas,No,No
+70,Honduras,Yes,Americas,No,No
+71,Trinidad and Tobago,Yes,Americas,No,No
+72,Haiti,Yes,Americas,No,No
+73,Jamaica,Yes,Americas,No,No
+74,Nicaragua,Yes,Americas,No,No
+75,Guyana,Yes,Americas,No,No
+76,Vatican City,No,Europe,No,Yes
+77,Monaco,No,Oceania,No,Yes
+78,Nauru,No,Oceania,No,Yes
+79,Tuvalu,No,Oceania,No,Yes
+80,San Marino,No,Europe,No,Yes
+81,Liechtenstein,No,Europe,No,Yes
+82,Marshall Islands,No,Oceania,No,Yes
+83,Saint Kitts and Kevis,No,Americas,No,Yes
+84,Maldives,No,Asia,No,Yes
+85,Malta,No,Europe,No,Yes
+86,Grenada,No,Americas,No,Yes
+87,Saint Vincent and The Grenadines,No,Americas,No,Yes
+88,Barbados,No,Americas,No,Yes
+89,Antigua and Barbuda,No,Americas,No,Yes
+90,Seychelles,No,Africa,No,Yes
+91,Palau,No,Oceania,No,Yes
+92,Andorra,No,Europe,No,Yes
+93,Saint Lucia,No,Americas,No,Yes
+94,Federated States of Micronesia,No,Oceania,No,Yes
+95,Tonga,No,Oceania,No,Yes
+96,Dominica,No,Americas,No,Yes
+97,Bahrain,No,Asia,No,Yes
+98,Kiribati,No,Oceania,No,Yes
+99,Sao Tome and Principe,No,Africa,No,Yes

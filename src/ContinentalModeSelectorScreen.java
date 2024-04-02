@@ -1,15 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ContinentalModeSelector extends Screen{
+public class ContinentalModeSelectorScreen extends Screen{
     JButton americas;
     JButton asia;
     JButton europe;
     JButton esc;
+    String mode;
     //JButton highScore;
 
-    public ContinentalModeSelector(FullScreenUI frame,Screen previous) {
-        super(frame,previous);
+    public ContinentalModeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode) {
+        super(frame,previous,user);
+        this.mode=mode;
         americas = new JButton();
         asia = new JButton();
         europe = new JButton();
@@ -27,9 +29,9 @@ public class ContinentalModeSelector extends Screen{
         europe.setText("Europe");
         europe.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
-        esc.addActionListener(e -> escButton());
-        esc.setText("Esc");
-        esc.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
+//        esc.addActionListener(e -> escButton());
+//        esc.setText("Esc");
+//        esc.setFont(loadFont("resources/RubikScribble-Regular.ttf", 20));
 
 
         this.add(americas);
@@ -47,30 +49,25 @@ public class ContinentalModeSelector extends Screen{
         americas.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         asia.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         europe.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
-        esc.setBounds(mainButtonX/mainButtonX, mainButtonY/mainButtonY, (width / 10) - 30, height / 12);
+        esc.setBounds(1, 1, (width / 10) - 30, height / 12);
         //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
 
     }
 
     public void americasButton() {
-
-        swapScreens(new GameTypeSelector(frame,this));
+        swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Americas"));
     }
 
     public void asiaButton() {
-        swapScreens(new GameTypeSelector(frame,this));
+        swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Asia"));
     }
-
     public void europeButton() {
-        swapScreens(new GameTypeSelector(frame,this));
+        swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Europe"));
     }
-
-    public void escButton() {
-        swapScreens(new GamemodeSelectorScreen(frame,this));
-    }
-
-
+//    public void escButton() {
+//        swapScreens(new GamemodeSelectorScreen(frame,this,user,mode,null));
+//    }
     public void logOutButton() {
         frame.dispose();
     }
