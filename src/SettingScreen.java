@@ -88,6 +88,8 @@ public class SettingScreen extends Screen{
         g.drawString("AUDIO",width/3, textY);
 
         exit.setBounds(width / 30, height/22, 50, 50);
+        exit.setBorderPainted(false);
+        exit.setContentAreaFilled(false);
         muteButton.setBounds(width/2+width/15,height/3,width/10,height/12);
         muteButton.setFont(new Font("SansSerif", Font.PLAIN, 24));
         highContrast.setBounds(width/3+width/12,height - height/4,width/6,height/12);
@@ -124,8 +126,12 @@ public class SettingScreen extends Screen{
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         this.remove(settings);
-        setComponents(g);
+        Graphics2D g2D = (Graphics2D) g;
+        setComponents(g2D);
+        drawTitle(g2D);
+
 
 
     }
