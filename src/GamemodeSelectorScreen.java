@@ -77,7 +77,7 @@ public class GamemodeSelectorScreen extends Screen {
     }
 
     public void globalButton() {
-        swapScreens(new GameTypeSelectorScreen(frame, this));
+        swapScreens(new GameTypeSelectorScreen(frame, this,"Global"));
     }
 
     public void continentalButton() {
@@ -85,7 +85,7 @@ public class GamemodeSelectorScreen extends Screen {
     }
 
     public void microNationButton() {
-        swapScreens(new GameTypeSelectorScreen(frame, this));
+        swapScreens(new GameTypeSelectorScreen(frame, this,"Micro Nation"));
     }
 
     public void exitButton() {
