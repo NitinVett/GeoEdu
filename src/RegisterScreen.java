@@ -12,10 +12,12 @@ public class RegisterScreen extends Screen {
     JTextField username;
     JPasswordField password, password_2;
     JButton register, esc;
+    Image plankIMG;
 
     public RegisterScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
         esc = new JButton();
+
 
         // Username field setup
         username = new JTextField("Enter Username", 16);
@@ -53,9 +55,6 @@ public class RegisterScreen extends Screen {
         password.setForeground(new Color(255, 255, 255));
         password.setCaretColor(Color.WHITE);
         password.setFont(loadFont("resources/Viner.ttf", 24));
-
-
-
         password_2 = new JPasswordField(16);
         password_2.setText("Re-enter Password");
         password_2.setEchoChar((char) 0); // Set initial echo char to 0 (no echo)
@@ -107,7 +106,7 @@ public class RegisterScreen extends Screen {
         });
 
         // Register button setup
-        register = createCustomButton("Register");
+        register = new JButton("Register");
         register.addActionListener(e -> registerButton());
 
         // Add components to the panel
@@ -120,6 +119,7 @@ public class RegisterScreen extends Screen {
         BufferedImage escIcon = null;
         try {
             escIcon = ImageIO.read(new File("resources/escape.png"));
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -130,28 +130,6 @@ public class RegisterScreen extends Screen {
 
         repaint();
     }
-    private JButton createCustomButton(String text) {
-        JButton button = new JButton(text);
-        button.setContentAreaFilled(false);
-        button.setFont(loadFont("resources/Viner.ttf", 28));
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setVerticalTextPosition(SwingConstants.CENTER);
-        //setButtonBackground(button);
-        return button;
-    }
-
-    private void setButtonBackground(JButton button,int width,int height) {
-        try {
-            BufferedImage image = ImageIO.read(new File("resources/plank.png"));
-            Image scaledImage = image.getScaledInstance(width/10, height/20, Image.SCALE_SMOOTH);
-            button.setIcon(new ImageIcon(scaledImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public void exitButton() {
         swapScreens(prev);
     }
@@ -161,12 +139,11 @@ public class RegisterScreen extends Screen {
         int height = getHeight();
         int mainButtonX = width / 2 - width / 10;
         int mainButtonY = height / 3;
-
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(register,scaledImage,width/60);
         username.setBounds(mainButtonX, mainButtonY, width / 5, height / 20);
         password.setBounds(mainButtonX, mainButtonY + height / 10, width / 5, height / 20);
         password_2.setBounds(mainButtonX, mainButtonY + (height / 10) * 2, width / 5, height / 20);
-        setButtonBackground(register,width,height);
-
         register.setBounds(mainButtonX+(width/20), mainButtonY + (height / 10) * 3, width / 10, height / 20);
 
         esc.setBounds(width / 30, height / 22, 50, 50);

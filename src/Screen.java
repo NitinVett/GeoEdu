@@ -22,18 +22,14 @@ public class Screen extends JPanel {
     private JLabel errorMessageLabel;
     protected Screen prev;
     Player user;
-
     Cursor defaultCursor;
     Cursor customCursor;
-
-
     public Screen(FullScreenUI frame, Screen previous) {
         this.frame = frame;
         prev = previous;
         setUp();
         loadCustomCursors();
     }
-
     public Screen(FullScreenUI frame, Screen previous, Player user) {
         this.frame = frame;
         this.prev = previous;
@@ -41,7 +37,6 @@ public class Screen extends JPanel {
         setUp();
         loadCustomCursors();
     }
-
     public void setUp() {
         loadBackgroundImage();
         settings = new JButton();

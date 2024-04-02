@@ -13,16 +13,10 @@ public class SettingScreen extends Screen{
     Player user;
     public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
-
         sound = new GameSound("backgroundmusic.wav");
         sound.play();
         prev = previous;
-
-        System.out.println("1");
         audio = new JSlider(0,100,50);
-
-
-
         audio.addChangeListener(e -> changeVolume());
         audio.setOpaque(false);
         changePassword = new JButton("CHANGE PASSWORD");
