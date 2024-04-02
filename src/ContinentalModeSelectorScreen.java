@@ -11,13 +11,14 @@ public class ContinentalModeSelectorScreen extends Screen {
     JButton europe;
     JButton esc;
     String mode;
+    Image plankIMG;
     //JButton highScore;
 
     public ContinentalModeSelectorScreen (FullScreenUI frame, Screen previous, Player user, String mode) {
         super(frame, previous);
-        americas = createCustomButton("Americas");
-        asia = createCustomButton("Asia");
-        europe = createCustomButton("Europe");
+        americas = new JButton("Americas");
+        asia = new JButton("Asia");
+        europe = new JButton("Europe");
         esc = new JButton();
         americas.addActionListener(e -> americasButton());
         asia.addActionListener(e -> asiaButton());
@@ -26,6 +27,8 @@ public class ContinentalModeSelectorScreen extends Screen {
         BufferedImage escIcon = null;
         try {
             escIcon = ImageIO.read(new File("resources/escape.png"));
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -43,45 +46,23 @@ public class ContinentalModeSelectorScreen extends Screen {
         swapScreens(prev);
     }
 
-    private JButton createCustomButton(String text) {
-        JButton button = new JButton(text);
-        button.setContentAreaFilled(false);
-        button.setFont(loadFont("resources/Viner.ttf", 28));
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setVerticalTextPosition(SwingConstants.CENTER);
-        setButtonBackground(button, "resources/plank.png");
-        return button;
-    }
-
-    private void setButtonBackground(JButton button, String imagePath) {
-        try {
-            BufferedImage image = ImageIO.read(new File(imagePath));
-            Image scaledImage = image.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
-            button.setIcon(new ImageIcon(scaledImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
         int mainButtonX = width / 2 - width / 10;
         int mainButtonY = height / 3 + height / 11;
         int mainButtonYIncrement = height / 10;
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(americas,scaledImage,width/60);
+        createButtons(asia,scaledImage,width/60);
+        createButtons(europe,scaledImage,width/60);
         americas.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         asia.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         europe.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
         esc.setBounds(width / 30, height / 22, 50, 50);
-        esc.setBorderPainted(false);
-        esc.setContentAreaFilled(false);        //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
+        //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
-
     }
-
     public void americasButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,mode,"Americas"));
     }

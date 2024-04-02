@@ -25,6 +25,8 @@ public class GameplayScreen extends Screen {
     int highScoreLossAmount= 5;
     int delay=5000;
 
+    Image plankIMG;
+
     public Country correctCountry;
     public Country incorrect1;
     public Country incorrect2;
@@ -64,6 +66,7 @@ public class GameplayScreen extends Screen {
         //hint background
         try {
             hintBackgroundIMG = ImageIO.read(new File("hintBox.png"));
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -151,9 +154,7 @@ public class GameplayScreen extends Screen {
             highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
             setTimer();
             user.setHighScore(highscore);
-
         }
-
         showHintButton.setEnabled(false);
         hintWasClicked =true;
         gameTesting.saveFile();
@@ -170,6 +171,12 @@ public class GameplayScreen extends Screen {
 
         int width = getWidth();
         int height = getHeight();
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(choice1Button,scaledImage,width/80);
+        createButtons(choice2Button,scaledImage,width/80);
+        createButtons(choice3Button,scaledImage,width/80);
+        createButtons(showHintButton,scaledImage,width/80);
+        createButtons(showFlagButton,scaledImage,width/80);
         // Positioning country
         countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
         //hintBox label
@@ -187,7 +194,7 @@ public class GameplayScreen extends Screen {
         choice2Button.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         choice3Button.setBounds(width/3+width/12,height - height/6,width/6,height/12);
         // Positioning high score
-        highScoreLabel.setBounds(width/2+width/10,height/25,width,height/14);
+        highScoreLabel.setBounds(width/4+width/2,height/25,width,height/14);
         //show flag button
         showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
         //show hint button
@@ -195,11 +202,7 @@ public class GameplayScreen extends Screen {
         revalidate();
     }
     public void saveVars(StringBuilder sb){
-
-        sb.append(";showFlag:").append(flagWasClicked)
-                .append(";showHint:").append(hintWasClicked);
-
-
+        sb.append(";showFlag:").append(flagWasClicked).append(";showHint:").append(hintWasClicked);
     }
     public void setChoice1Button() {
         clickHandling(choice1Button);
@@ -207,7 +210,6 @@ public class GameplayScreen extends Screen {
     }
     public void setChoice2Button() {
         clickHandling(choice2Button);
-
     }
     public void setChoice3Button() {
         clickHandling(choice3Button);
