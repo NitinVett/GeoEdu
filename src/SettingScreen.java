@@ -11,7 +11,8 @@ public class SettingScreen extends Screen{
     private JButton changePassword, debug, credits, muteButton, highContrast, exit;
     GameSound sound;
     Player user;
-    Image plankIMG, scrollIMG;
+    Image plankIMG, scrollIMG, resizedMutedIMG, resizedUnMutedIMG;
+    BufferedImage mutedIMG, unMutedIMG;
     boolean muted = false;
     public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
@@ -32,11 +33,15 @@ public class SettingScreen extends Screen{
             escIcon = ImageIO.read(new File("resources/escape.png"));
             plankIMG = ImageIO.read(new File("resources/plank.png"));
             scrollIMG = ImageIO.read(new File("scroll.png"));
+            mutedIMG = ImageIO.read(new File("muted.png"));
+            unMutedIMG = ImageIO.read(new File("unMuted.png"));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         Image resizedEsc = escIcon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+
         exit.setIcon(new ImageIcon(resizedEsc));
         changePassword.addActionListener(e -> changePasswordButton());
         debug.addActionListener(e -> debugButton());
@@ -44,6 +49,7 @@ public class SettingScreen extends Screen{
         muteButton.addActionListener(e -> muteButton());
         highContrast.addActionListener(e -> muteButton());
         exit.addActionListener(e -> exitButton());
+
         System.out.println(audio.getValue());
         this.add(credits);
         this.add(muteButton);
@@ -63,7 +69,6 @@ public class SettingScreen extends Screen{
             if (!(this.prev.getClass().getName().equals("MainMenu") || this.prev.getClass().getName().equals("LoginScreen") || this.prev.getClass().getName().equals("RegisterScreen"))) {
                 this.remove(debug);
                 this.add(changePassword);
-
             }
             else {
                 this.add(debug);
@@ -73,29 +78,24 @@ public class SettingScreen extends Screen{
     public void setUser(Player user){
         this.user = user;
     }
-
     public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
-
+        resizedMutedIMG = mutedIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
+        resizedUnMutedIMG = unMutedIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
+        muteButton.setIcon(new ImageIcon(resizedUnMutedIMG));
         Font font = new Font("SansSerif", Font.BOLD, 36);
         g.setFont(font);
-
         FontMetrics metrics = g.getFontMetrics(font);
         int textWidth = metrics.stringWidth("GEOCRAFT");
         int textHeight = metrics.getHeight();
-
-
         int sliderX = width/2 - width/10;
         int sliderY = height/3;
         int sliderWidth = width/3;
         int sliderHeight = height/15;
         audio.setBounds(width/3, height/2, width/3, sliderHeight);
-
-
         int textX = sliderX - textWidth;
         int textY = sliderY + (sliderHeight - textHeight) / 2 + metrics.getAscent();
-
         g.drawString("AUDIO",width/3, textY);
         Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
         Image scrollIMGScaled= scrollIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
@@ -132,13 +132,13 @@ public class SettingScreen extends Screen{
         muted = !muted;
         if(muted){
             sound.setVolume(0);
-
+            muteButton.setText("Muted");
+            muteButton.setIcon(new ImageIcon(resizedMutedIMG));
         } else {
             sound.setVolume(audio.getValue());
-
+            muteButton.setText("UnMuted");
+            muteButton.setIcon(new ImageIcon(resizedUnMutedIMG));
         }
-
-
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

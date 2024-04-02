@@ -14,7 +14,7 @@ public class TutorialScreen extends Screen implements KeyListener {
     private JLabel scrollLabel;
     private JButton explorationButton;
     private BufferedImage scrollImage;
-    private Image resizedScroll;
+    private Image resizedScroll, plankIMG;
     public TutorialScreen(FullScreenUI frame, Screen previousScreen, Player user) {
         super(frame,previousScreen, user);
         this.previousScreen = previousScreen;
@@ -30,13 +30,13 @@ public class TutorialScreen extends Screen implements KeyListener {
         scrollLabel = gameRundown();
         //scrollImage = null;
         try {
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
             scrollImage = ImageIO.read(new File("resources/scroll2.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         scrollLabel.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
         scrollLabel.setVerticalTextPosition(SwingConstants.CENTER);
-        //scrollLabel.setVerticalAlignment(SwingConstants.TOP);
         scrollLabel.setFont(new Font("Arial", Font.BOLD, 14));
         scrollLabel.setForeground(Color.BLACK);
         this.add(scrollLabel);
@@ -55,7 +55,8 @@ public class TutorialScreen extends Screen implements KeyListener {
     public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
-        //int mainButtonY = height/5;
+        Image scaledImage= plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(explorationButton,scaledImage,width/60);
         resizedScroll = scrollImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         scrollLabel.setIcon(new ImageIcon(resizedScroll));
         scrollLabel.setBounds(0,height/30,width,height);
@@ -84,7 +85,6 @@ public class TutorialScreen extends Screen implements KeyListener {
                 "\n" +
                 "Click the button below to start exploration mode\n" +
                 "Good luck and have fun!";
-
         try {
             String[] lines = textHint.split("\n");
             StringBuilder content = new StringBuilder();
