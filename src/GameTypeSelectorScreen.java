@@ -75,26 +75,9 @@ public class GameTypeSelectorScreen extends Screen{
             throw new RuntimeException(e);
         }
     }
-
-
-    public void escButton() {
-        if (String.continent != null) {
-
-
-            swapScreens(new GamemodeSelectorScreen(frame, this, user,mode));
-        }
-        else {
-            swapScreens(new ContinentalModeSelectorScreen(frame, this, user,mode));
-
-        }
-    }
-
-
     public void logOutButton() {
         frame.dispose();
     }
-
-
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();
