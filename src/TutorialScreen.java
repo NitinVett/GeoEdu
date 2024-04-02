@@ -13,73 +13,62 @@ public class TutorialScreen extends Screen implements KeyListener {
     //private JPanel scrollPanel;
     private JLabel scrollLabel;
     private JButton explorationButton;
-
-    public TutorialScreen(FullScreenUI frame, Screen previousScreen) {
-        super(frame,previousScreen);
+    private BufferedImage scrollImage;
+    private Image resizedScroll;
+    public TutorialScreen(FullScreenUI frame, Screen previousScreen, Player user) {
+        super(frame,previousScreen, user);
         this.previousScreen = previousScreen;
         setFocusable(true);
         requestFocusInWindow();
         loadBackgroundImage("wallpaper1.gif");
 
         explorationButton = new JButton();
-
         explorationButton.addActionListener(e -> explorationButton());
         explorationButton.setText("Exploration Mode");
         explorationButton.setFont(loadFont("resources/RubikScribble-Regular.ttf", 17));
-
         this.add(explorationButton);
-
-        int height = getHeight();
-        scrollLabel = getHints();
-        BufferedImage scrollImage = null;
+        scrollLabel = gameRundown();
+        //scrollImage = null;
         try {
             scrollImage = ImageIO.read(new File("resources/scroll2.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Image resizedScroll = scrollImage.getScaledInstance(1900, 1400, Image.SCALE_SMOOTH);
-        scrollLabel.setIcon(new ImageIcon(resizedScroll));
-
-
         scrollLabel.setHorizontalTextPosition(SwingConstants.CENTER); // Center the text horizontally
         scrollLabel.setVerticalTextPosition(SwingConstants.CENTER);
         //scrollLabel.setVerticalAlignment(SwingConstants.TOP);
         scrollLabel.setFont(new Font("Arial", Font.BOLD, 14));
         scrollLabel.setForeground(Color.BLACK);
         this.add(scrollLabel);
-
         repaint();
     }
-
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
-        double xValue = width / 2 - ((height/15)*2);
-        double yValue = height * 0.75;
-        explorationButton.setBounds((int) xValue, (int) yValue, width / 9, height / 15);
+        explorationButton.setBounds(width/3+width/9, height-height/8, width / 9, height / 15);
         revalidate();
 
     }
-
-    public void explorationButton() {
-        //code here
+    private void explorationButton() {
+        try {
+            GameTesting playExploration = new GameTesting(null, user, "Global Mode",null,"Exploration");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     public void setComponents(Graphics g){
         int width = getWidth();
         int height = getHeight();
         //int mainButtonY = height/5;
-
-        scrollLabel.setBounds(width/5 - width/5,height/25 - height/7,1900,1400);
-
+        resizedScroll = scrollImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        scrollLabel.setIcon(new ImageIcon(resizedScroll));
+        scrollLabel.setBounds(0,height/30,width,height);
         scrollLabel.setFont(new Font("SansSerif", Font.PLAIN, 19));
-
-
         repaint();
-
+        revalidate();
     }
 
-    private JLabel getHints(){
+    private JLabel gameRundown(){
         JLabel hints = new JLabel();
         String textHint = "Welcome to Geocraft,\n" +
                 "\n" +

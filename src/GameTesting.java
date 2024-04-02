@@ -229,7 +229,6 @@ public class GameTesting extends FullScreenUI implements Serializable {
             case "Marathon" -> startNextIterationMarathon();
         }
         CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
-        System.out.println("ji");
     }
 
     private int randomNumber(int max) {
@@ -248,12 +247,12 @@ public class GameTesting extends FullScreenUI implements Serializable {
         return randomNum;
     }
 
-    //modes are Global Mode, Continental Mode, Micro Nations Mode
+    //modes are Global Mode, Continental Mode, Micro Nation Mode
     //types are Exploration, Marathon, Timed
     public static void main(String[] args) throws IOException {
         Player a = new Player("jam","1");
         String gameData = CsvHandler.getListOfCountry(a.getUsername());
-        GameTesting z = new GameTesting(null, a, "Global Mode",null,"Exploration");
+        GameTesting z = new GameTesting(null, a, "Micro Nation Mode",null,"Marathon");
         //z.loadFile(gameData);
     }
 }

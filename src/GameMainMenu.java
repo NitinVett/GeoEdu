@@ -69,7 +69,7 @@ public class GameMainMenu extends Screen {
     }
 
     public void tutorialButton() {
-        TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
+        TutorialScreen tutorialScreen = new TutorialScreen(frame, this, user);
         frame.addKeyListener(tutorialScreen);
         swapScreens(tutorialScreen);
     }

@@ -58,6 +58,7 @@ public class ExplorationMode extends GameplayScreen {
         //show flag button
         showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
         showHintButton.setBounds(width/8,height - height/4,width/6,height/12);
+        repaint();
         revalidate();
     }
     public void setChoice1Button() {
@@ -82,6 +83,7 @@ public class ExplorationMode extends GameplayScreen {
             choiceButton.setBackground(Color.RED);
             choiceButton.setEnabled(false);
         }
+        repaint();
     }
     public void disableChoiceButtons(){
         super.disableChoiceButtons();

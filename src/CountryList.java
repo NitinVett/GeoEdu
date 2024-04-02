@@ -21,17 +21,14 @@ public class CountryList {
             return null;
         }
     }
-
     private static Country[] getGlobalOrMicroCountries(String mode) {
         Map<String, Map<String, String>> countriesWithGlobalModeYes = CountryDatabase.getCountriesWithColumnYes(mode);
         return getCountriesFromArray(countriesWithGlobalModeYes);
     }
-
     private static Country[] getContinentCountries(String continent) {
         Map<String, Map<String, String>> countriesW = CountryDatabase.getCountriesWithContinentModeAndContinent(continent);
         return getCountriesFromArray(countriesW);
     }
-
     private static Country[] getCountriesFromArray(Map<String, Map<String, String>> countriesWithGlobalModeYes) {
         int size = countriesWithGlobalModeYes.size();
         int index = 0;
@@ -43,7 +40,6 @@ public class CountryList {
         }
         return array;
     }
-
     // Example of main method to test the utility function
     public static void main(String[] args) {
         Country[] testGlobal = CountryList.getCountries("Global Mode", null);

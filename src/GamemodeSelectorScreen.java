@@ -74,7 +74,7 @@ public class GamemodeSelectorScreen extends Screen{
     }
 
     public void microNationButton() {
-        TutorialScreen tutorialScreen = new TutorialScreen(frame, this);
+        TutorialScreen tutorialScreen = new TutorialScreen(frame, this,user);
         frame.addKeyListener(tutorialScreen);
         swapScreens(tutorialScreen);
     }
