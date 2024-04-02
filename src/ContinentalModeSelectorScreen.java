@@ -13,7 +13,7 @@ public class ContinentalModeSelectorScreen extends Screen {
     String mode;
     //JButton highScore;
 
-    public ContinentalModeSelectorScreen (FullScreenUI frame, Screen previous) {
+    public ContinentalModeSelectorScreen (FullScreenUI frame, Screen previous, Player user, String mode) {
         super(frame, previous);
         americas = createCustomButton("Americas");
         asia = createCustomButton("Asia");

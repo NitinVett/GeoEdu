@@ -11,8 +11,8 @@ public class GamemodeSelectorScreen extends Screen {
     JButton microNations;
     JButton esc;
 
-    public GamemodeSelectorScreen(FullScreenUI frame, Screen previous) {
-        super(frame, previous);
+    public GamemodeSelectorScreen(FullScreenUI frame, Screen previous, Player user) {
+        super(frame, previous,user);
         global = createCustomButton("Global");
         continental = createCustomButton("Continental");
         microNations = createCustomButton("Micro-nations");
@@ -84,7 +84,7 @@ public class GamemodeSelectorScreen extends Screen {
     public void microNationButton() {
        swapScreens(new GameTypeSelectorScreen(frame,this,user,"Mirco Nation Mode",null));
     }
-    public void escButton() {
+    public void exitButton() {
         swapScreens(prev);
     }
 
