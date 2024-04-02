@@ -22,7 +22,6 @@ public class MarathonMode extends GameplayScreen {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         thirdHearts = new JLabel();
         secondHearts = new JLabel();
         firstHeart = new JLabel();

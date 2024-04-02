@@ -37,7 +37,7 @@ public class GameplayScreen extends Screen {
     private boolean hintWasClicked=false;
 
     public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2){
-        super(gameTesting, previous);
+        super(gameTesting.frame, previous);
         this.gameTesting = gameTesting;
         this.correctCountry = correctCountry;
         this.incorrect1 = incorrect1;
@@ -143,7 +143,7 @@ public class GameplayScreen extends Screen {
         // Update toggle button text
         if (!hintWasClicked) {
             highscore=highscore-2;
-            highScoreLabel.setForeground(Color.black);
+            highScoreLabel.setForeground(Color.red);
             highScoreLabel.setText("High Score: " + highscore + "  -" + 2);
             setTimer();
             user.setHighScore(highscore);
@@ -196,6 +196,7 @@ public class GameplayScreen extends Screen {
             highScoreLabel.setForeground(Color.green);
             highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
             user.setHighScore(highscore);
+            disableChoiceButtons();
             scoreUpdateTimer = new Timer(1000, e -> gameTesting.startNextIteration());
             scoreUpdateTimer.setRepeats(false);
             scoreUpdateTimer.start();
@@ -211,6 +212,14 @@ public class GameplayScreen extends Screen {
         }
     }
 
+    public void disableChoiceButtons(){
+        choice1Button.setEnabled(false);
+        choice2Button.setEnabled(false);
+        choice3Button.setEnabled(false);
+        showHintButton.setEnabled(false);
+        showFlagButton.setEnabled(false);
+    }
+
     public void setTimer(){
         delay = 2000;
         timer = new Timer(delay, e -> {
@@ -221,7 +230,6 @@ public class GameplayScreen extends Screen {
         });
         timer.setRepeats(false);
         timer.start();
-
     }
 //    public void endGame(){
 //        if (guesses == 50) {
