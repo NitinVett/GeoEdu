@@ -6,125 +6,168 @@ import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
 
 /**
- * Can use this class to make logic, login, register user, update highscore, get a list of the country IDs remaining in
- * saved game, can add more classes to this.
- * Database handler class
- * Handles everything
- * Every function possible to modify the csv file.
+ * CountryDatabase class provides methods to interact with a CSV file containing country data.
+ * It handles reading, retrieving, and filtering country information.
  */
 public class CountryDatabase {
 
     private static final String CSV_FILE_PATH = "Country Data/geocraftv2country.csv";
 
+    /**
+     * Reads the CSV file and returns a map containing country data.
+     *
+     * @return A map containing country data.
+     */
     public static Map<String, Map<String, String>> readCsvFile() {
-        Map<String, Map<String, String>> userValuesMap = new HashMap<>();
+        Map<String, Map<String, String>> countryDataMap = new HashMap<>();
 
         try {
             CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
             Map<String, String> row;
             while ((row = reader.readMap()) != null) {
-                String ID = row.get("Country Name");
+                String countryName = row.get("Country Name");
 
-
-                Map<String, String> userValues = new HashMap<>();
+                Map<String, String> countryValues = new HashMap<>();
                 for (Map.Entry<String, String> entry : row.entrySet()) {
                     if (!entry.getKey().equals("Country Name")) {
-                        userValues.put(entry.getKey(), entry.getValue());
+                        countryValues.put(entry.getKey(), entry.getValue());
                     }
                 }
 
-                userValuesMap.put(ID, userValues);
+                countryDataMap.put(countryName, countryValues);
             }
             reader.close();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        return userValuesMap;
+        return countryDataMap;
     }
 
-    public static ArrayList<String> getAllUsers() {
-        ArrayList<String> Users = new ArrayList<>();
+    /**
+     * Retrieves the IDs of all countries.
+     *
+     * @return An ArrayList containing the IDs of all countries.
+     */
+    public static ArrayList<String> getAllCountryIDs() {
+        ArrayList<String> countryIDs = new ArrayList<>();
         try {
             CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
             Map<String, String> row;
             while ((row = reader.readMap()) != null) {
-                Users.add(row.get("Country Name"));
-
+                countryIDs.add(row.get("Country Name"));
             }
         } catch (CsvValidationException | IOException e) {
             e.printStackTrace();
         }
-        return Users;
+        return countryIDs;
     }
 
+    /**
+     * Retrieves the value of the specified field for the given country.
+     *
+     * @param name      The name of the country.
+     * @param fieldName The name of the field.
+     * @return The value of the specified field for the given country.
+     */
+    public static String getField(String name, String fieldName) {
+        Map<String, String> countryValues = readCsvFile().get(name);
+        if (countryValues == null) {
+            return null;
+        }
+        return countryValues.get(fieldName);
+    }
 
+    /**
+     * Retrieves the country ID for the given country name.
+     *
+     * @param name The name of the country.
+     * @return The country ID.
+     */
     public static String getCountryID(String name) {
-
         return getField(name, "Country Name");
     }
 
+    /**
+     * Retrieves the continent mode for the given country name.
+     *
+     * @param name The name of the country.
+     * @return The continent mode.
+     */
     public static String getContinentMode(String name) {
         return getField(name, "Continent Mode");
     }
 
+    /**
+     * Retrieves the continent for the given country name.
+     *
+     * @param name The name of the country.
+     * @return The continent.
+     */
     public static String getContinent(String name) {
         return getField(name, "Continent Name");
     }
 
+    /**
+     * Retrieves the global mode for the given country name.
+     *
+     * @param name The name of the country.
+     * @return The global mode.
+     */
     public static String getGlobalMode(String name) {
         return getField(name, "Global Mode");
     }
 
+    /**
+     * Retrieves the micronation mode for the given country name.
+     *
+     * @param name The name of the country.
+     * @return The micronation mode.
+     */
     public static String getMicronationMode(String name) {
         return getField(name, "Micro Nation Mode");
     }
 
+    /**
+     * Retrieves the hints for the given country name.
+     *
+     * @param name The name of the country.
+     * @return The hints.
+     */
     public static String hints(String name) {
         return getField(name, "Hints");
     }
 
-    private static String getField(String name, String fieldName) {
-        Map<String, String> userValues = readCsvFile().get(name);
-        if (userValues == null) {
-            return null;
-        }
-        return userValues.get(fieldName);
-    }
-
-    private static int getIndex(String fieldName) {
-        String[] headers = {"Country Name", "ID", "Continent Mode", "Continent Name", "Global Mode", "Micro Nation Mode", "Hints"};
-        for (int i = 0; i < headers.length; i++) {
-            if (headers[i].equals(fieldName)) {
-                return i + 1; // Add 1 to account for the "user_name" field
-            }
-        }
-        return -1; // Field not found
-    }
-
-
+    /**
+     * Prints information about the specified country.
+     *
+     * @param name The name of the country.
+     */
     public static void printCountryInfo(String name) {
-        Map<String, String> userValues = readCsvFile().get(name);
-        if (userValues == null) {
+        Map<String, String> countryValues = readCsvFile().get(name);
+        if (countryValues == null) {
             System.out.println("Country not found");
             return;
         }
 
         System.out.println("Country Name " + name);
-        for (Map.Entry<String, String> entry : userValues.entrySet()) {
+        for (Map.Entry<String, String> entry : countryValues.entrySet()) {
             System.out.println("  " + entry.getKey() + ": " + entry.getValue());
         }
     }
 
+    /**
+     * Prints information about all countries.
+     */
     public static void printAllCountries() {
-        Map<String, Map<String, String>> userValuesMap = readCsvFile();
+        Map<String, Map<String, String>> countryDataMap = readCsvFile();
         int counter = 0;
-        for (Map.Entry<String, Map<String, String>> entry : userValuesMap.entrySet()) {
+        for (Map.Entry<String, Map<String, String>> entry : countryDataMap.entrySet()) {
             String name = entry.getKey();
-            Map<String, String> userValues = entry.getValue();
+            Map<String, String> countryValues = entry.getValue();
 
             System.out.println("Country name " + name);
-            for (Map.Entry<String, String> valueEntry : userValues.entrySet()) {
+            for (Map.Entry<String, String> valueEntry : countryValues.entrySet()) {
                 System.out.println("  " + valueEntry.getKey() + ": " + valueEntry.getValue());
             }
             counter++;
@@ -133,6 +176,12 @@ public class CountryDatabase {
         System.out.println(counter);
     }
 
+    /**
+     * Retrieves countries with the specified column value set to "Yes".
+     *
+     * @param columnName The name of the column.
+     * @return A map containing countries with the specified column value set to "Yes".
+     */
     public static Map<String, Map<String, String>> getCountriesWithColumnYes(String columnName) {
         Map<String, Map<String, String>> allCountries = readCsvFile();
         Map<String, Map<String, String>> filteredCountries = new HashMap<>();
@@ -142,7 +191,7 @@ public class CountryDatabase {
             Map<String, String> countryData = entry.getValue();
 
             String columnValue = countryData.get(columnName);
-            if (columnValue != null && ("Yes".equals(columnValue) || "yes".equals(columnValue))) {
+            if (columnValue != null && ("Yes".equalsIgnoreCase(columnValue))) {
                 filteredCountries.put(countryName, countryData);
             }
         }
@@ -150,6 +199,12 @@ public class CountryDatabase {
         return filteredCountries;
     }
 
+    /**
+     * Retrieves countries with the specified continent mode and continent name.
+     *
+     * @param continent The name of the continent.
+     * @return A map containing countries with the specified continent mode and continent name.
+     */
     public static Map<String, Map<String, String>> getCountriesWithContinentModeAndContinent(String continent) {
         Map<String, Map<String, String>> allCountries = readCsvFile();
         Map<String, Map<String, String>> filteredCountries = new HashMap<>();
@@ -160,64 +215,12 @@ public class CountryDatabase {
 
             String continentMode = countryData.get("Continent Mode");
             String countryContinent = countryData.get("Continent Name");
-//            System.out.println(countryContinent);
+
             if ("Yes".equalsIgnoreCase(continentMode) && continent.equalsIgnoreCase(countryContinent)) {
-//                System.out.println("Hi");
                 filteredCountries.put(countryName, countryData);
             }
         }
 
         return filteredCountries;
     }
-
-
-    public static void main(String[] args) {
-        // Specify the continent you want to filter by
-        String targetContinent = "Asia"; // Change this to the continent you want to filter by
-
-        // Call the method to get the filtered countries
-        Map<String, Map<String, String>> filteredCountries = getCountriesWithContinentModeAndContinent(targetContinent);
-            int count =0;
-        // Print the filtered countries
-        System.out.println("Filtered Countries:");
-        for (Map.Entry<String, Map<String, String>> entry : filteredCountries.entrySet()) {
-            String countryName = entry.getKey();
-            Map<String, String> countryData = entry.getValue();
-            System.out.println(countryName + ": " + countryData);
-            count++;
-        }
-        System.out.println(count);
-    }
-//        Map<String, Map<String, String>> countriesWithGlobalModeYes = getCountriesWithColumnYes("Micro Nation Mode");
-//        //System.out.println("Countries with Global Mode Yes:");
-//        int count = 0;
-//        for (Map.Entry<String, Map<String, String>> entry : countriesWithGlobalModeYes.entrySet()) {
-//            System.out.println(entry.getKey() + ": " + entry.getValue());
-//            count++;
-//        }
-//        System.out.println(count);
-//    }
-    //printAllUsers();
-//        System.out.println("Password for jam: " + getPassword("jam"));
-//        System.out.println("Number of games played for jam: " + getNumGamesPlayed("jam"));
-//        System.out.println("Saved game for ahafeez7: " + getSavedGame("ahafeez7"));
-//        System.out.println("Accuracy rate for ahafeez7: " + getAccuracyRate("ahafeez7"));
-//        System.out.println("List of countries for ahafeez7: " + getListOfCountry("ahafeez7"));
-//        System.out.println("High score for ahafeez7: " + getHighScore("ahafeez7"));
-//        changeHighScore("ahafeez7", "4500");
-//        changeSavedGame("ahafeez7", "Y");
-//        System.out.println("High score for ahafeez7: " + getHighScore("ahafeez7"));
-//        System.out.println("Saved game for ahafeez7: " + getSavedGame("ahafeez7"));
-    // Example usage of changing field value
-//        changePassword("ahafeez7", "newPassword");
-//        changeNumGamesPlayed("ahafeez7", "7");
-//        changeSavedGame("ahafeez7", "Y");
-//        changeAccuracyRate("ahafeez7", "60%");
-//        changeListOfCountry("ahafeez7", "[US]");
-//        changeHighScore("ahafeez7", "110");
-//        deleteUser("nitin");
-    //       printAllCountries();
-    //printCountryInfo("China");
-//        addUser("blahsssh");
 }
-

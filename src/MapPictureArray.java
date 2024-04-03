@@ -5,22 +5,26 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This class returns a buffered images array
- * To load image, simply specify the game type in string form.
- * Sample usage is in fullscreenUI java file
- * Each game type would have a folder, with n number of images, labelled from 0 to n
- * I am still working on deciding formats and stuff, so this is an experimental file.
+ * This class returns an array of buffered images.
+ * To load an image, specify the game type in string form.
+ * Sample usage is in the FullScreenUI java file.
+ * Each game type would have a folder with a number of images labeled from 0 to n.
  */
 public class MapPictureArray extends JFrame {
 
     private final BufferedImage[] backgroundImages; // Array to store background images
 
+    /**
+     * Constructs a MapPictureArray object with the specified game mode.
+     *
+     * @param gameMode The game mode specifying the type of images to load.
+     */
     public MapPictureArray(String gameMode) {
 
         int noOfImages;
         String folderPath = switch (gameMode) {
             case "Global", "Exploration" -> {
-                //Change this value to number of images in respective folder
+                // Change this value to the number of images in the respective folder
                 noOfImages = 4;
                 yield "Maps/Global";
             }
@@ -31,7 +35,7 @@ public class MapPictureArray extends JFrame {
             default -> throw new IllegalStateException("Unexpected value: " + gameMode);
         };
         backgroundImages = new BufferedImage[noOfImages];
-        for (int i = 0; i < noOfImages; i++)
+        for (int i = 0; i < noOfImages; i++) {
             try {
                 String imagePath = folderPath + "/" + i + ".png";
                 BufferedImage backgroundImage = ImageIO.read(new File(imagePath));
@@ -39,15 +43,24 @@ public class MapPictureArray extends JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
     }
 
+    /**
+     * Main method for testing the MapPictureArray class.
+     *
+     * @param args Command-line arguments (unused).
+     */
     public static void main(String[] args) {
         new MapPictureArray("Global");
     }
 
+    /**
+     * Gets the array of background images.
+     *
+     * @return The array of buffered images.
+     */
     public BufferedImage[] getBackgroundImages() {
         return backgroundImages;
     }
-
-
 }

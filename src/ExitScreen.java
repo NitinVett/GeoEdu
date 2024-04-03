@@ -5,9 +5,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * ExitScreen represents the screen displayed when the user decides to exit the application.
+ */
 public class ExitScreen extends Screen {
     JButton no, yes, esc;
 
+    /**
+     * Constructs an ExitScreen object.
+     * @param frame The FullScreenUI object.
+     * @param previous The previous Screen object.
+     */
     public ExitScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
 
@@ -33,30 +41,39 @@ public class ExitScreen extends Screen {
         repaint();
     }
 
+    /**
+     * Handles the action when the exit button is clicked.
+     */
     public void exitButton() {
         swapScreens(prev);
     }
 
+    /**
+     * Sets the components of the screen.
+     * @param g The Graphics object.
+     */
     public void setComponents(Graphics g) {
-
         int width = getWidth();
         int height = getHeight();
         int mainButtonY = height / 3;
 
-        setButtonBackground(no,width,height);
-        setButtonBackground(yes,width,height);
+        setButtonBackground(no, width, height);
+        setButtonBackground(yes, width, height);
         no.setBounds(width / 3 + width / 6, mainButtonY + (height / 10) * 4, width / 20, height / 20);
         yes.setBounds(width / 2 - width / 15, mainButtonY + (height / 10) * 4, width / 20, height / 20);
-
 
         esc.setBounds(width / 30, height / 22, 50, 50);
         esc.setBorderPainted(false);
         esc.setContentAreaFilled(false);
 
         repaint();
-
     }
 
+    /**
+     * Creates a custom button.
+     * @param text The text to display on the button.
+     * @return The created JButton object.
+     */
     private JButton createCustomButton(String text) {
         JButton button = new JButton(text);
         button.setContentAreaFilled(false);
@@ -66,11 +83,16 @@ public class ExitScreen extends Screen {
         button.setOpaque(false);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalTextPosition(SwingConstants.CENTER);
-        //setButtonBackground(button);
         return button;
     }
 
-    private void setButtonBackground(JButton button,int width,int height) {
+    /**
+     * Sets the background for the button.
+     * @param button The JButton object.
+     * @param width The width of the button.
+     * @param height The height of the button.
+     */
+    private void setButtonBackground(JButton button, int width, int height) {
         try {
             BufferedImage image = ImageIO.read(new File("resources/plank.png"));
             Image scaledImage = image.getScaledInstance(width/20, height/20, Image.SCALE_SMOOTH);
@@ -80,16 +102,24 @@ public class ExitScreen extends Screen {
         }
     }
 
+    /**
+     * Handles the action when the "No" button is clicked.
+     */
     public void noButton() {
-        //have it bring u back to previous screen
-        //swapScreens(new SettingScreen(frame,this));
         swapScreens(prev);
     }
 
+    /**
+     * Handles the action when the "Yes" button is clicked.
+     */
     public void yesButton() {
         frame.dispose();
     }
 
+    /**
+     * Paints the component.
+     * @param g The Graphics object.
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

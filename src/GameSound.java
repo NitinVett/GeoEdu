@@ -1,36 +1,50 @@
 import javax.sound.sampled.*;
 import java.io.File;
+import java.io.IOException;
 
+/**
+ * The GameSound class provides functionality for playing audio clips.
+ */
 public class GameSound {
     private Clip clip;
     private FloatControl volumeControl;
 
+    /**
+     * Constructs a GameSound object with the audio file located at the specified path.
+     * @param path The path to the audio file.
+     */
     public GameSound(String path) {
-
         try {
-            File file = new File(path); // Use the path parameter instead of hardcoding the file name.
+            File file = new File(path);
             AudioInputStream audio = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(audio);
-            // Attempt to get the volume control from the clip
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                 volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             }
             clip.start();
-        } catch (Exception e) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
         setVolume(15);
     }
 
+    /**
+     * Starts playing the audio clip.
+     * If the clip is already playing, it rewinds to the beginning and starts again.
+     */
     public void play() {
         if (!clip.isRunning()) {
-            clip.setFramePosition(0); // rewind to the beginning
+            clip.setFramePosition(0);
             clip.start();
             clip.loop(100);
         }
     }
 
+    /**
+     * Sets the volume level of the audio clip.
+     * @param volume The desired volume level, ranging from 1 to 100.
+     */
     public void setVolume(int volume) {
         if (volumeControl != null) {
             float min = volumeControl.getMinimum();

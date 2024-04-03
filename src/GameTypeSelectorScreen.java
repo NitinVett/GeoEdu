@@ -5,20 +5,34 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The GameTypeSelectorScreen class represents the user interface for selecting the game type.
+ * Users can choose between Marathon, Timed, and Exploration game modes.
+ */
 public class GameTypeSelectorScreen extends Screen {
-    JButton marathon;
-    JButton timed;
-    JButton exploration;
-    JButton esc;
-    String mode;
-    //JButton highScore;
-    String continent;
-    Image plankIMG;
-    public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode,String continent) {
-        super(frame, previous,user);
+
+    JButton marathon; // Button for Marathon mode
+    JButton timed; // Button for Timed mode
+    JButton exploration; // Button for Exploration mode
+    JButton esc; // Escape button
+    String mode; // Game mode
+    String continent; // Continent selection
+    Image plankIMG; // Background image
+
+    /**
+     * Constructs a GameTypeSelectorScreen object with the specified frame, previous screen, user, game mode, and continent.
+     *
+     * @param frame     The FullScreenUI frame that contains this screen.
+     * @param previous  The previous Screen object to return to when navigating back.
+     * @param user      The current player.
+     * @param mode      The selected game mode.
+     * @param continent The selected continent.
+     */
+    public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode, String continent) {
+        super(frame, previous, user);
         this.continent = continent;
         this.mode = mode;
-        marathon= new JButton("Marathon");
+        marathon = new JButton("Marathon");
         timed = new JButton("Timed");
         exploration = new JButton("Exploration");
         esc = new JButton();
@@ -40,41 +54,65 @@ public class GameTypeSelectorScreen extends Screen {
         this.add(exploration);
         this.add(esc);
     }
+
+    /**
+     * Updates the positions of buttons based on the current window size.
+     */
     private void updateButtonPositions() {
         int width = getWidth();
         int height = getHeight();
         int mainButtonX = width - width / 3;
         int mainButtonY = height / 3 + height / 11;
         int mainButtonYIncrement = height / 10;
-        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
-        createButtons(marathon,scaledImage,width/60);
-        createButtons(timed,scaledImage,width/60);
-        createButtons(exploration,scaledImage,width/60);
+        Image scaledImage = plankIMG.getScaledInstance(width / 5, height / 12, Image.SCALE_SMOOTH);
+        createButtons(marathon, scaledImage, width / 60);
+        createButtons(timed, scaledImage, width / 60);
+        createButtons(exploration, scaledImage, width / 60);
         marathon.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
         timed.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
         exploration.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
         esc.setBounds(width / 30, height / 22, 50, 50);
         esc.setBorderPainted(false);
         esc.setContentAreaFilled(false);
-        //logout.setBounds(mainButtonX + (width / 10) + 30, mainButtonY + (mainButtonYIncrement * 3), (width / 10) - 30, height / 12);
         revalidate();
-
     }
+
+    /**
+     * Starts the game in Exploration mode.
+     */
     public void explorationButton() {
-        GameTesting playExploration = new GameTesting(frame, user, mode, continent,"Exploration");
+        GameTesting playExploration = new GameTesting(frame, user, mode, continent, "Exploration");
         playExploration.newGame(false);
     }
+
+    /**
+     * Starts the game in Marathon mode.
+     */
     public void marathonButton() {
-        GameTesting playMarathon = new GameTesting(frame,user,mode, continent,"Marathon");
+        GameTesting playMarathon = new GameTesting(frame, user, mode, continent, "Marathon");
         playMarathon.newGame(false);
     }
+
+    /**
+     * Starts the game in Timed mode.
+     */
     public void timedButton() {
-        GameTesting playTimed = new GameTesting(frame, user, mode, continent,"Timed");
+        GameTesting playTimed = new GameTesting(frame, user, mode, continent, "Timed");
         playTimed.newGame(false);
     }
-    public void exitButton(){
+
+    /**
+     * Exits to the previous screen.
+     */
+    public void exitButton() {
         swapScreens(prev);
     }
+
+    /**
+     * Custom paint component method to draw additional UI elements, like titles or backgrounds.
+     *
+     * @param g The Graphics object to paint.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();
@@ -84,7 +122,7 @@ public class GameTypeSelectorScreen extends Screen {
         super.paintComponent(g); // Paints the background
         g.setFont(loadFont("resources/Viner.ttf", 32));
         g.drawString("What game type will you play today!", mainButtonX, mainButtonY);
-        updateButtonPositions(); // Consider calling this elsewhere if it causes issues
+        updateButtonPositions();
         repaint();
     }
 }

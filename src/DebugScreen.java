@@ -1,44 +1,59 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.util.Objects;
 
-public class DebugScreen extends Screen{
-    JTextField password, username;
+public class DebugScreen extends Screen {
+    JTextField password;
     JButton login;
-    public DebugScreen(FullScreenUI frame,Screen previous) {
+
+    /**
+     * Constructs a DebugScreen object.
+     * @param frame The FullScreenUI object.
+     * @param previous The previous Screen object.
+     */
+    public DebugScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
         password = new JTextField("Enter Password", 16);
         login = new JButton("LOGIN");
         this.add(password);
         this.add(login);
         login.addActionListener(e -> loginButton());
-        setFocusListeners(password,"Enter Password");
+        setFocusListeners(password, "Enter Password");
         repaint();
     }
-    public void setComponents(){
+
+    /**
+     * Sets the components of the screen.
+     */
+    public void setComponents() {
         int width = getWidth();
         int height = getHeight();
-        int mainButtonX = width/2 - width/10;
-        int mainButtonY =  height/3;
+        int mainButtonX = width / 2 - width / 10;
+        int mainButtonY = height / 3;
 
-        password.setBounds(mainButtonX,mainButtonY + height/10,width/5,height/20);
-        login.setBounds(mainButtonX,mainButtonY + (height/10)*2,width/5,height/20);
+        password.setBounds(mainButtonX, mainButtonY + height / 10, width / 5, height / 20);
+        login.setBounds(mainButtonX, mainButtonY + (height / 10) * 2, width / 5, height / 20);
         password.setFont(new Font("SansSerif", Font.PLAIN, 24));
         login.setFont(new Font("SansSerif", Font.PLAIN, 24));
         revalidate();
     }
-    //debugger password 1029384756
-    public void loginButton(){
+
+    /**
+     * Handles the action when the login button is clicked.
+     */
+    public void loginButton() {
         String pass = "1029384756";
-        if(pass.equals(password.getText())) {
-            swapScreens(new GameMainMenu(frame,this,user));
-        }else {
+        if (pass.equals(password.getText())) {
+            swapScreens(new GameMainMenu(frame, this, user));
+        } else {
             displayErrorMessage("Wrong Password");
         }
     }
 
+    /**
+     * Paints the component.
+     * @param g The Graphics object.
+     */
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;

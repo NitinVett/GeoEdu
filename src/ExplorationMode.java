@@ -2,40 +2,73 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
+/**
+ * ExplorationMode represents a subclass of GameplayScreen specifically designed for exploration mode.
+ */
 public class ExplorationMode extends GameplayScreen {
-    //buttons
 
-
-
-    public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2){
+    /**
+     * Constructs an ExplorationMode object.
+     * @param gameTesting The GameTesting object.
+     * @param previous The previous Screen object.
+     * @param user The Player object.
+     * @param correctCountry The correct Country object.
+     * @param incorrect1 The first incorrect Country object.
+     * @param incorrect2 The second incorrect Country object.
+     */
+    public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2) {
         super(gameTesting, previous, user, correctCountry, incorrect1, incorrect2);
-
     }
+
+    /**
+     * Displays the flag.
+     */
     @Override
-    public void showFlag(){
+    public void showFlag() {
         flagLabel.setVisible(true);
         updateButtonPositions();
         showFlagButton.setEnabled(false);
-        flagWasClicked =true;
+        flagWasClicked = true;
         gameTesting.saveFile();
     }
+
+    /**
+     * Displays the hints.
+     */
     @Override
-    public void showHints(){
+    public void showHints() {
         hintLabel.setVisible(true);
         updateButtonPositions();
         showHintButton.setEnabled(false);
-        hintWasClicked =true;
+        hintWasClicked = true;
         gameTesting.saveFile();
     }
+
+    /**
+     * Handles click events for choice 1 button.
+     */
     public void setChoice1Button() {
         clickHandling(choice1Button);
     }
+
+    /**
+     * Handles click events for choice 2 button.
+     */
     public void setChoice2Button() {
         clickHandling(choice2Button);
     }
+
+    /**
+     * Handles click events for choice 3 button.
+     */
     public void setChoice3Button() {
         clickHandling(choice3Button);
     }
+
+    /**
+     * Handles the click event for a choice button.
+     * @param choiceButton The JButton object representing the choice button.
+     */
     @Override
     public void clickHandling(JButton choiceButton) {
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
@@ -43,14 +76,18 @@ public class ExplorationMode extends GameplayScreen {
             scoreUpdateTimer = new Timer(1000, e -> gameTesting.newGame(false));
             scoreUpdateTimer.setRepeats(false);
             scoreUpdateTimer.start();
-        }
-        else {
+        } else {
             choiceButton.setBackground(Color.RED);
             choiceButton.setEnabled(false);
         }
         gameTesting.saveFile();
         repaint();
     }
+
+    /**
+     * Paints the component.
+     * @param g The Graphics object.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
