@@ -33,7 +33,7 @@ public class SettingScreen extends Screen {
         sound = new GameSound("backgroundmusic.wav");
         sound.play();
         prev = previous;
-        audio = new JSlider(0, 100, 50);
+        audio = new JSlider(0, 100, 15);
         audio.addChangeListener(e -> changeVolume());
         audio.setOpaque(false);
         changePassword = new JButton("CHANGE PASSWORD");
@@ -164,12 +164,6 @@ public class SettingScreen extends Screen {
         swapScreens(prev);
     }
 
-    /**
-     * Method to handle the action when the audio slider is adjusted.
-     */
-    public void audioSlider() {
-        // Mute function
-    }
 
     /**
      * Method to handle the action when the mute button is clicked.

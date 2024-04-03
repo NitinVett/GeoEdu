@@ -52,42 +52,68 @@ public class GameMainMenu extends Screen {
      * Updates the positions and sizes of buttons based on the current screen size.
      */
     private void updateButtonPositions() {
-        // Implementation for updating button positions
+        int width = getWidth();
+        int height = getHeight();
+        int mainButtonX = width / 2 - width / 10;
+        int mainButtonY = height / 3;
+        int mainButtonYIncrement = height / 10;
+        Image scaledImage = image.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(newGameButton, scaledImage,width/60);
+        createButtons(continueButton, scaledImage,width/60);
+        createButtons(tutorialButton, scaledImage,width/60);
+        createButtons(highScoresButton, scaledImage,width/60);
+        createButtons(logoutButton, scaledImage,width/60);
+        newGameButton.setBounds(mainButtonX, mainButtonY, width / 5, height / 12);
+        continueButton.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
+        tutorialButton.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
+        highScoresButton.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
+        logoutButton.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 4, width / 5, height / 12);
+        revalidate();
     }
 
     /**
      * Handles the action when the New Game button is clicked.
      */
     public void newGameButton() {
-        // Implementation for handling new game button click
+        swapScreens(new GamemodeSelectorScreen(frame,this,user));
     }
 
     /**
      * Handles the action when the Continue button is clicked.
      */
     public void continue_Button() {
-        // Implementation for handling continue button click
+        if(!user.getGameData().equals("None")) {
+            String type = user.getGameData().split(";")[1].split(":")[1];
+            String mode = user.getGameData().split(";")[2].split(":")[1];
+            String continent = user.getGameData().split(";")[3].split(":")[1];
+
+            GameTesting game = new GameTesting(frame, user, mode, continent, type);
+            game.loadFile(user.getGameData());
+        }
+        else {
+            this.displayErrorMessage("You have no saved game available");
+        }
     }
 
     /**
      * Handles the action when the High Scores button is clicked.
      */
     public void highScoreButton() {
-        // Implementation for handling high scores button click
+        swapScreens(new HighScoreScreen(frame,0,this));
     }
 
     /**
      * Handles the action when the Tutorial button is clicked.
      */
     public void tutorialButton() {
-        // Implementation for handling tutorial button click
+        swapScreens(new TutorialScreen(frame, this, user));
     }
 
     /**
      * Handles the action when the Log Out button is clicked.
      */
     public void logOutButton() {
-        // Implementation for handling log out button click
+        frame.dispose();
     }
 
     @Override

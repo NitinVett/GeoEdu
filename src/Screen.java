@@ -317,13 +317,7 @@ public class Screen extends JPanel {
         }
     }
 
-    /**
-     * Plays the music.
-     */
-    public void playMusic() {
-        GameSound gsound = new GameSound(null);
-        gsound.play();
-    }
+
 
     /**
      * Sets focus listeners for text fields.

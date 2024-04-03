@@ -183,7 +183,38 @@ public class GameplayScreen extends Screen {
      * Updates the positions and sizes of components based on the current screen size.
      */
     public void updateButtonPositions() {
-        // Implementation for updating button positions
+
+        int width = getWidth();
+        int height = getHeight();
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(choice1Button,scaledImage,width/80);
+        createButtons(choice2Button,scaledImage,width/80);
+        createButtons(choice3Button,scaledImage,width/80);
+        createButtons(showHintButton,scaledImage,width/80);
+        createButtons(showFlagButton,scaledImage,width/80);
+        // Positioning country
+        countryLabel.setBounds(width/4+width/12,height/6,width/3,height/2);
+        //hintBox label
+        // Positioning hint label
+        // Positioning flag
+        if (flagLabel.isVisible()) {
+            flagLabel.setBounds(width/2+width/4,height/2,width/6,height/6);;
+        }
+        if (hintLabel.isVisible()) {
+            hintBackgroundLabel.setBounds(width/8,height/2,width/6,height/6);
+            hintLabel.setBounds(width/8,height/2,width/6,height/6);;
+        }
+        // Positioning choice buttons
+        choice1Button.setBounds(width/3+width/12,height - height/3,width/6,height/12);
+        choice2Button.setBounds(width/3+width/12,height - height/4,width/6,height/12);
+        choice3Button.setBounds(width/3+width/12,height - height/6,width/6,height/12);
+        // Positioning high score
+        highScoreLabel.setBounds(width/4+width/2,height/25,width,height/14);
+        //show flag button
+        showFlagButton.setBounds(width/4+width/2,height - height/4,width/6,height/12);
+        //show hint button
+        showHintButton.setBounds(width/8,height - height/4,width/6,height/12);
+        revalidate();
     }
 
     /**
@@ -220,7 +251,32 @@ public class GameplayScreen extends Screen {
      * @param choiceButton The choice button that was clicked.
      */
     public void clickHandling(JButton choiceButton) {
-        // Implementation for handling button clicks
+        highscore = user.getHighScore();
+        if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
+            gameTesting.setCorrectGuesses(gameTesting.getCorrectGuesses()+1);
+            choiceButton.setBackground(Color.GREEN);
+            highscore = highscore + highScoreWinAmount;
+            highScoreLabel.setForeground(Color.green);
+            highScoreLabel.setText("High Score: " + highscore + "  +" + highScoreWinAmount);
+            user.setHighScore(highscore);
+            disableChoiceButtons();
+            scoreUpdateTimer = new Timer(1000, e -> gameTesting.newGame(false    ));
+            scoreUpdateTimer.setRepeats(false);
+            scoreUpdateTimer.start();
+        } else {
+            choiceButton.setBackground(Color.RED);
+            highscore = highscore - highScoreLossAmount;
+            highScoreLabel.setForeground(Color.red);
+            highScoreLabel.setText("High Score: " + highscore + "  -" + highScoreLossAmount);
+            choiceButton.setEnabled(false);
+            setTimer();
+            user.setHighScore(highscore);
+
+        }
+
+        gameTesting.setNumGuesses(gameTesting.getNumGuesses()+1);
+
+        gameTesting.saveFile();
     }
 
     /**

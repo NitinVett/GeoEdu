@@ -52,35 +52,58 @@ public class GamemodeSelectorScreen extends Screen {
      * Updates the positions and sizes of buttons based on the current screen size.
      */
     private void updateButtonPositions() {
-        // Implementation for updating button positions
+        int width = getWidth();
+        int height = getHeight();
+        int mainButtonX = width / 3 - width / 5;
+        int mainButtonY = height / 3 + height / 11;
+        int mainButtonYIncrement = height / 10;
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(global,scaledImage,width/60);
+        createButtons(continental,scaledImage,width/60);
+        createButtons(microNations,scaledImage,width/60);
+        global.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement, width / 5, height / 12);
+        continental.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 2, width / 5, height / 12);
+        microNations.setBounds(mainButtonX, mainButtonY + mainButtonYIncrement * 3, width / 5, height / 12);
+        esc.setBounds(width / 30, height / 22, 50, 50);
+        esc.setBorderPainted(false);
+        esc.setContentAreaFilled(false);
+        revalidate();
     }
 
     /**
      * Handles the action when the Global button is clicked.
      */
     public void globalButton() {
-        // Implementation for handling global button click
+        swapScreens(new GameTypeSelectorScreen(frame,this,user,"Global Mode",null));
     }
 
     /**
      * Handles the action when the Continental button is clicked.
      */
     public void continentalButton() {
-        // Implementation for handling continental button click
+        if(user.getHighScore() >= 25 || user.getUsername().equals("Debugger")) {
+            swapScreens(new ContinentalModeSelectorScreen(frame, this, user, "Continental Mode"));
+        } else {
+            this.displayErrorMessage("You need a high score of 25 to play this gamemode, gain more score to unlock this mode!");
+        }
     }
 
     /**
      * Handles the action when the Micro Nations button is clicked.
      */
     public void microNationButton() {
-        // Implementation for handling micro nations button click
+        if(user.getHighScore() >= 100|| user.getUsername().equals("Debugger")) {
+            swapScreens(new GameTypeSelectorScreen(frame, this, user, "Micro Nation Mode", null));
+        }else {
+            this.displayErrorMessage("You need a high score of 100 to play this gamemode, gain more score to unlock this mode!");
+        }
     }
 
     /**
      * Handles the action when the Exit button is clicked.
      */
     public void exitButton() {
-        // Implementation for handling exit button click
+        swapScreens(prev);
     }
 
     @Override
