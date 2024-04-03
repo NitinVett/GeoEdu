@@ -67,13 +67,17 @@ public class GameMainMenu extends Screen {
     }
     //Load game state
     public void continue_Button() {
-        String type = user.getGameData().split(";")[1].split(":")[1];
-        String mode = user.getGameData().split(";")[2].split(":")[1];
-        String continent = user.getGameData().split(";")[3].split(":")[1];
+        if(!user.getGameData().equals("None")) {
+            String type = user.getGameData().split(";")[1].split(":")[1];
+            String mode = user.getGameData().split(";")[2].split(":")[1];
+            String continent = user.getGameData().split(";")[3].split(":")[1];
 
-
-        GameTesting game = new GameTesting(frame,user,mode,continent,type);
-        game.loadFile(user.getGameData());
+            GameTesting game = new GameTesting(frame, user, mode, continent, type);
+            game.loadFile(user.getGameData());
+        }
+        else {
+            this.displayErrorMessage("You have no saved game available");
+        }
     }
     public void highScoreButton() {
         swapScreens(new HighScoreScreen(frame,0,this));

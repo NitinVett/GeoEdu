@@ -41,9 +41,6 @@ public class ChangePasswordScreen extends Screen{
         save.setFont(new Font("SansSerif", Font.PLAIN, 24));
         revalidate();
     }
-
-
-
     public void loginButton(){
         String oldDatabasePassword = CsvHandler.getPassword(user.getUsername());
         if(oldDatabasePassword.equals(oldPassword.getText())&& newPassword.getText().equals(confirmPassword.getText())) {

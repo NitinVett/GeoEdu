@@ -3,6 +3,7 @@ public class Player extends User {
 
     public Player(String username, String password) {
         super(username, password);
+        System.out.println(CsvHandler.addUser(username,password));
 
     }
 
@@ -21,7 +22,9 @@ public class Player extends User {
         CsvHandler.changeNumGamesPlayed(getUsername(), Integer.toString(numGames));
     }
     public void setHighScore(int highScore){
-        CsvHandler.changeHighScore(getUsername(), Integer.toString(highScore));
+        if(highScore>=0) {
+            CsvHandler.changeHighScore(getUsername(), Integer.toString(highScore));
+        }
     }
     public void setAccuracy(float accuracy){
         CsvHandler.changeAccuracyRate(getUsername(), Float.toString(accuracy));

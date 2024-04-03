@@ -16,6 +16,8 @@ public class ContinentalModeSelectorScreen extends Screen {
 
     public ContinentalModeSelectorScreen (FullScreenUI frame, Screen previous, Player user, String mode) {
         super(frame, previous);
+        this.user=user;
+        this.mode=mode;
         americas = new JButton("Americas");
         asia = new JButton("Asia");
         europe = new JButton("Europe");

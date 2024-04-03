@@ -18,9 +18,10 @@ public class User {
      * @param username username of the user
      * @param password password of the user
      */
-    public User(String username, String password){
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
+        CsvHandler.addUser(username, password);
     }
 
     /**
@@ -31,7 +32,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
     /**
      * Mutator method to set the password of the user
      * @param password password of the user

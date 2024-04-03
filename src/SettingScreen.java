@@ -4,15 +4,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class SettingScreen extends Screen{
     private JSlider audio;
-    private JButton changePassword, debug, credits, muteButton, highContrast, exit;
+    private JButton changePassword, debug, credits, muteButton, exit;
     GameSound sound;
     Player user;
     Image plankIMG, scrollIMG, resizedMutedIMG, resizedUnMutedIMG;
     BufferedImage mutedIMG, unMutedIMG;
+    public Image backgroundImage;
     boolean muted = false;
     public SettingScreen(FullScreenUI frame,Screen previous,Player user) {
         super(frame,previous,user);
@@ -25,8 +27,7 @@ public class SettingScreen extends Screen{
         changePassword = new JButton("CHANGE PASSWORD");
         debug = new JButton("DEBUG");
         credits = new JButton("CREDITS");
-        muteButton = new JButton("MUTE");
-        highContrast = new JButton("High Contrast");
+        muteButton = new JButton();
         exit = new JButton();
         BufferedImage escIcon = null;
         try {
@@ -35,7 +36,6 @@ public class SettingScreen extends Screen{
             scrollIMG = ImageIO.read(new File("scroll.png"));
             mutedIMG = ImageIO.read(new File("muted.png"));
             unMutedIMG = ImageIO.read(new File("unMuted.png"));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -45,13 +45,9 @@ public class SettingScreen extends Screen{
         debug.addActionListener(e -> debugButton());
         credits.addActionListener(e -> creditsButton());
         muteButton.addActionListener(e -> muteButton());
-        highContrast.addActionListener(e -> muteButton());
         exit.addActionListener(e -> exitButton());
-
-        System.out.println(audio.getValue());
         this.add(credits);
         this.add(muteButton);
-        this.add(highContrast);
         this.add(exit);
         this.add(audio);
     }
@@ -80,7 +76,8 @@ public class SettingScreen extends Screen{
         int height = getHeight();
         resizedMutedIMG = mutedIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
         resizedUnMutedIMG = unMutedIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
-        muteButton.setIcon(new ImageIcon(resizedUnMutedIMG));
+        muteButton.setContentAreaFilled(false);
+        muteButton.setBorderPainted(false);
         Font font = new Font("SansSerif", Font.BOLD, 36);
         g.setFont(font);
         FontMetrics metrics = g.getFontMetrics(font);
@@ -96,7 +93,6 @@ public class SettingScreen extends Screen{
         g.drawString("AUDIO",width/3, textY);
         Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
         Image scrollIMGScaled= scrollIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
-        createButtons(highContrast,scaledImage,width/60);
         createButtons(changePassword,scaledImage,width/75);
         createButtons(debug,scaledImage,width/60);
         createButtons(credits,scrollIMGScaled,width/60);
@@ -104,16 +100,14 @@ public class SettingScreen extends Screen{
         exit.setBorderPainted(false);
         exit.setContentAreaFilled(false);
         muteButton.setBounds(width/2+width/15,height/3,width/10,height/12);
-        highContrast.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         changePassword.setBounds(width/3+width/12, height - height/6, width/6, height/12);
-        debug.setBounds(width/3+width/12,height - height/6,width/6,height/12);
+        debug.setBounds(width/3+width/12,height - height/4,width/6,height/12);
         credits.setBounds(width-width/8,height - height/8,width/10,height/12);
     }
     public void changePasswordButton() {
         swapScreens(new ChangePasswordScreen(frame,this,user));
     }
     public void debugButton() {
-
         swapScreens(new DebugScreen(frame,this));
     }
     public void creditsButton() {
@@ -127,21 +121,20 @@ public class SettingScreen extends Screen{
     }
     public void muteButton() {
         muted = !muted;
-        if(muted){
-            sound.setVolume(0);
-            muteButton.setText("Muted");
-            muteButton.setIcon(new ImageIcon(resizedMutedIMG));
-        } else {
-            sound.setVolume(audio.getValue());
-            muteButton.setText("UnMuted");
-            muteButton.setIcon(new ImageIcon(resizedUnMutedIMG));
-        }
+        muteButton.setContentAreaFilled(false);
+        muteButton.setBorderPainted(false);
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        this.remove(settings);
         Graphics2D g2D = (Graphics2D) g;
         setComponents(g2D);
+        if(muted){
+            sound.setVolume(0);
+            muteButton.setIcon(new ImageIcon(resizedMutedIMG));
+        } else {
+            sound.setVolume(audio.getValue());
+            muteButton.setIcon(new ImageIcon(resizedUnMutedIMG));
+        }
         drawTitle(g2D);
     }
 }

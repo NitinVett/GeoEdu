@@ -146,7 +146,7 @@ public class GameplayScreen extends Screen {
     public void showHints() {
         highscore = user.getHighScore();
         hintLabel.setVisible(true);
-        updateButtonPositions();
+
         // Update toggle button text
         if (!hintWasClicked) {
             highscore=highscore-2;
@@ -206,6 +206,7 @@ public class GameplayScreen extends Screen {
     }
     public void setChoice1Button() {
         clickHandling(choice1Button);
+
     }
     public void setChoice2Button() {
         clickHandling(choice2Button);
@@ -217,6 +218,7 @@ public class GameplayScreen extends Screen {
     public void clickHandling(JButton choiceButton) {
         highscore = user.getHighScore();
         if (Objects.equals(choiceButton.getText(), correctCountry.getName())) {
+            gameTesting.setCorrectGuesses(gameTesting.getCorrectGuesses()+1);
             choiceButton.setBackground(Color.GREEN);
             highscore = highscore + highScoreWinAmount;
             highScoreLabel.setForeground(Color.green);
@@ -234,7 +236,11 @@ public class GameplayScreen extends Screen {
             choiceButton.setEnabled(false);
             setTimer();
             user.setHighScore(highscore);
+
         }
+
+        gameTesting.setNumGuesses(gameTesting.getNumGuesses()+1);
+
         gameTesting.saveFile();
     }
 
@@ -250,18 +256,6 @@ public class GameplayScreen extends Screen {
         timer.start();
 
     }
-//    public void endGame(){
-//        if (guesses == 50) {
-//            // Handle the case where no guesses were made
-//            System.out.println("No guesses were made. Accuracy rate is 0%.");
-//        } else {
-//            // Calculate the accuracy rate
-//            accuracyRate = (user.getAccuracy()*user.getNumGames()+accuracyRate)/user.getNumGames()+1;
-//            user.setAccuracy(accuracyRate);
-//            user.setNumGames(user.getNumGames() + 1);
-//        }
-//    }
-
     @Override
     protected void paintComponent(Graphics g) {
 

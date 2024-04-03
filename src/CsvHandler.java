@@ -219,6 +219,18 @@ public class CsvHandler {
         }
         return false; // User does not exist
     }
+    public static String credentialChecker(String userName, String password) {
+        if (isDuplicateUser(userName)) {
+            return "User already exists.";
+        }
+        if ((userName.length() > 16 || userName.length() < 4) || (password.length() > 16 || password.length() < 4)) {
+            System.out.println(userName.isEmpty());
+            return "password and username must be between 4-16 characters";
+        } else if (!userName.matches("^[a-zA-Z0-9]+$")) {
+            return "password and username must only contain alphanumeric characters";
+        }
+        return "ok";
+    }
 
     public static String addUser(String userName, String password) {
         if (isDuplicateUser(userName)) {

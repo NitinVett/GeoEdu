@@ -8,20 +8,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class TutorialScreen extends Screen implements KeyListener {
-
     private final Screen previousScreen;
     //private JPanel scrollPanel;
     private JLabel scrollLabel;
     private JButton explorationButton;
     private BufferedImage scrollImage;
-    private Image resizedScroll, plankIMG;
+    private Image resizedScroll, plankIMG,backgroundImage;
     public TutorialScreen(FullScreenUI frame, Screen previousScreen, Player user) {
         super(frame,previousScreen, user);
         this.previousScreen = previousScreen;
         setFocusable(true);
         requestFocusInWindow();
-
-
         explorationButton = new JButton();
         explorationButton.addActionListener(e -> explorationButton());
         explorationButton.setText("Exploration Mode");
@@ -64,7 +61,6 @@ public class TutorialScreen extends Screen implements KeyListener {
         repaint();
         revalidate();
     }
-
     private JLabel gameRundown(){
         JLabel hints = new JLabel();
         String textHint = "Welcome to Geocraft,\n" +
@@ -83,12 +79,13 @@ public class TutorialScreen extends Screen implements KeyListener {
                 "\n" +
                 "In exploration, you have no time limit, lives or high score. This mode is purely for you to learn and explore.\n" +
                 "\n" +
+                "If you ever want to go back screens try clicking the escape button on your keyboard.\n"+
+                "\n"+
                 "Click the button below to start exploration mode\n" +
                 "Good luck and have fun!";
         try {
             String[] lines = textHint.split("\n");
             StringBuilder content = new StringBuilder();
-
             for (String line : lines) {
                 content.append(line).append("<br>");
             }
@@ -96,10 +93,8 @@ public class TutorialScreen extends Screen implements KeyListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return hints;
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
         // Listen for key press event
@@ -119,13 +114,7 @@ public class TutorialScreen extends Screen implements KeyListener {
     }
     private void switchToPreviousScreen() {
         swapScreens(prev);
-//        JFrame mainFrame = previousScreen.frame;
-//        mainFrame.getContentPane().removeAll();
-//        mainFrame.getContentPane().add(previousScreen);
-//        mainFrame.getContentPane().revalidate();
-//        mainFrame.getContentPane().repaint();
     }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

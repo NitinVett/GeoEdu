@@ -20,7 +20,7 @@ public class GameSound {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        setVolume(15);
     }
 
     public void play() {

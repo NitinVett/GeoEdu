@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HighScoreScreen extends Screen {
@@ -9,6 +12,7 @@ public class HighScoreScreen extends Screen {
     ArrayList<JLabel> playerList;
     int page;
     Screen prev;
+    Image plankIMG;
     public HighScoreScreen(FullScreenUI frame,int page,Screen previous) {
         super(frame,previous);
         this.prev = previous;
@@ -20,7 +24,11 @@ public class HighScoreScreen extends Screen {
                 playerList.add(new JLabel(users.get(i)));
             }
         }
-
+        try {
+            plankIMG = ImageIO.read(new File("resources/plank.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setComponents(){
@@ -30,6 +38,11 @@ public class HighScoreScreen extends Screen {
         int mainButtonY = height / 4;
         int mainButtonYIncrement = height / 10;
         int mainButtonXIncrement = width / 4;
+        JButton previous = new JButton("Previous");
+        JButton next = new JButton("Next");
+        Image scaledImage = plankIMG.getScaledInstance(width/5, height/12, Image.SCALE_SMOOTH);
+        createButtons(previous,scaledImage,width/60);
+        createButtons(next,scaledImage,width/60);
 
         JLabel highScore = new JLabel("HIGHSCORE");
         JLabel rank = new JLabel("RANK");
@@ -43,8 +56,7 @@ public class HighScoreScreen extends Screen {
         highScore.setBounds(mainButtonX + mainButtonXIncrement, mainButtonY - mainButtonYIncrement, width / 5, height / 12);
         rank.setBounds(mainButtonX - mainButtonXIncrement / 2, mainButtonY - mainButtonYIncrement, width / 5, height / 12);
 
-        JButton previous = new JButton("Previous");
-        JButton next = new JButton("Next");
+
 
 
         int buttonWidth = width / 12;

@@ -22,8 +22,7 @@ public class GameTesting implements Serializable {
     String mode;
     GameplayScreen currentGame;
     String continent;
-    // Randomizes the countries, and feeds it to the game play class.
-    //
+    private int numGuesses, correctGuesses = 0;
     public GameTesting(FullScreenUI frame, Player user, String mode, String continent,String type) {
         System.out.println(mode);
         this.continent = continent;
@@ -54,6 +53,20 @@ public class GameTesting implements Serializable {
 
     }
 
+    public void setNumGuesses(int numGuesses) {
+        this.numGuesses = numGuesses;
+    }
+
+    public int getNumGuesses() {
+        return numGuesses;
+    }
+
+    public void setCorrectGuesses(int correctGuesses){
+        this.correctGuesses += correctGuesses;
+    }
+    public int getCorrectGuesses() {
+        return correctGuesses;
+    }
 
     // Game loop
     public void startNextIterationMarathon(boolean load) {
@@ -198,7 +211,9 @@ public class GameTesting implements Serializable {
                 .append(";mode:").append(mode)
                 .append(";continent:").append(continent)
                 .append(";timeLeft:").append(timeLeft)
-                .append(";lives:").append(lives);
+                .append(";lives:").append(lives)
+                .append(";numGuesses:").append(numGuesses)
+                .append(";correctGuesses:").append(correctGuesses);
 
         // Assuming Country has a meaningful toString() method or a unique identifier
         sb.append(";correctCountry:").append(correctCountry != null ? correctCountry.getName() : "null")
@@ -261,7 +276,11 @@ public class GameTesting implements Serializable {
                 case "showHint":
                     showHint = Boolean.parseBoolean(value);
                     break;
-                // Add cases for other fields if necessary
+                case "numGuesses":
+                    numGuesses = Integer.parseInt(value);
+                case "correctGuesses":
+                    correctGuesses = Integer.parseInt(value);
+                    // Add cases for other fields if necessary
             }
         }
         newGame(true);
@@ -295,8 +314,19 @@ public class GameTesting implements Serializable {
 
     public void endGame(){
         user.setGameData("None");
+        float numRight;
+        if(numGuesses != 0) {
+            numRight = ((user.getAccuracy() / 100.0f * user.getNumGames()) + (float) correctGuesses / (float) numGuesses);
+        }else {
+            numRight = (user.getAccuracy() / 100.0f * user.getNumGames());
+        }
 
-        frame.setContentPane(new StatScreen(frame,null,user));
+        user.setAccuracy((numRight / (float) (user.getNumGames() + 1)) * 100.0f);
+
+        user.setNumGames(user.getNumGames() + 1);
+
+
+        frame.setContentPane(new StatScreen(frame, null, user));
     }
 
     private int randomNumber(int max) {

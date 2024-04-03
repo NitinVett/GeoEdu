@@ -59,10 +59,18 @@ public class GamemodeSelectorScreen extends Screen {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,"Global Mode",null));
     }
     public void continentalButton() {
-        swapScreens(new ContinentalModeSelectorScreen(frame,this,user,"Continental Mode"));
+        if(user.getHighScore() >= 25 || user.getUsername().equals("Debugger")) {
+            swapScreens(new ContinentalModeSelectorScreen(frame, this, user, "Continental Mode"));
+        } else {
+            this.displayErrorMessage("You need a high score of 25 to play this gamemode, gain more score to unlock this mode!");
+        }
     }
     public void microNationButton() {
-       swapScreens(new GameTypeSelectorScreen(frame,this,user,"Micro Nation Mode",null));
+        if(user.getHighScore() >= 100|| user.getUsername().equals("Debugger")) {
+            swapScreens(new GameTypeSelectorScreen(frame, this, user, "Micro Nation Mode", null));
+        }else {
+            this.displayErrorMessage("You need a high score of 100 to play this gamemode, gain more score to unlock this mode!");
+        }
     }
     public void exitButton() {
         swapScreens(prev);

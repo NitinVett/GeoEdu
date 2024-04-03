@@ -50,6 +50,7 @@ public class CreditsScreen extends Screen{
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         setComponents();
+        remove(settings);
         drawTitle(g2D);
     }
 }
