@@ -49,7 +49,6 @@ public class StatScreen extends Screen {
         g2d.drawString(Integer.toString(user.getHighScore()), width/3  + width/5, height/2 );
         g2d.drawString(user.getAccuracy() + "%", width/3 + width/5, height/2+ height/10);
         setComponents();
-
     }
 
 

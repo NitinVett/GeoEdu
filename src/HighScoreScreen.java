@@ -18,8 +18,6 @@ public class HighScoreScreen extends Screen {
         for (int i = this.page*7;i<(this.page+1)*7;i++){
             if(!(i>=users.size())){
                 playerList.add(new JLabel(users.get(i)));
-
-
             }
         }
 
@@ -79,8 +77,8 @@ public class HighScoreScreen extends Screen {
             playerList.get(i).setFont(new Font("SansSerif", Font.BOLD, 24));
             highScore.setFont(new Font("SansSerif", Font.BOLD, 24));
             rank.setFont(new Font("SansSerif", Font.BOLD, 24));
-            highScore.setForeground(Color.red);
-            playerList.get(i).setForeground(Color.PINK);
+            highScore.setForeground(Color.BLACK);
+            playerList.get(i).setForeground(Color.BLACK);
             this.add(rank);
             this.add(highScore);
             this.add(playerList.get(i));
@@ -93,7 +91,6 @@ public class HighScoreScreen extends Screen {
     public void previous(){
         swapScreens(new HighScoreScreen(frame,this.page-1,prev));
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

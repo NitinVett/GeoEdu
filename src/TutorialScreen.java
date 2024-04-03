@@ -103,7 +103,6 @@ public class TutorialScreen extends Screen implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // Listen for key press event
-        System.out.println("testing if click");
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_ENTER || key == KeyEvent.VK_ESCAPE) {
             // Return to the previous screen when Enter or Escape is pressed
@@ -119,11 +118,12 @@ public class TutorialScreen extends Screen implements KeyListener {
         // Unused
     }
     private void switchToPreviousScreen() {
-        JFrame mainFrame = previousScreen.frame;
-        mainFrame.getContentPane().removeAll();
-        mainFrame.getContentPane().add(previousScreen);
-        mainFrame.getContentPane().revalidate();
-        mainFrame.getContentPane().repaint();
+        swapScreens(prev);
+//        JFrame mainFrame = previousScreen.frame;
+//        mainFrame.getContentPane().removeAll();
+//        mainFrame.getContentPane().add(previousScreen);
+//        mainFrame.getContentPane().revalidate();
+//        mainFrame.getContentPane().repaint();
     }
 
     @Override

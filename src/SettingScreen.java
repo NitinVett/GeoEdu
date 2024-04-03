@@ -40,8 +40,6 @@ public class SettingScreen extends Screen{
             throw new RuntimeException(e);
         }
         Image resizedEsc = escIcon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-
-
         exit.setIcon(new ImageIcon(resizedEsc));
         changePassword.addActionListener(e -> changePasswordButton());
         debug.addActionListener(e -> debugButton());
@@ -56,7 +54,6 @@ public class SettingScreen extends Screen{
         this.add(highContrast);
         this.add(exit);
         this.add(audio);
-
     }
 
     public void changeVolume(){

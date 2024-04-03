@@ -52,7 +52,7 @@ public class CsvHandler {
                 Users.add(row.get("user_name"));
 
             }
-            } catch (CsvValidationException | IOException e) {
+        } catch (CsvValidationException | IOException e) {
             e.printStackTrace();
         }
         return Users;
@@ -233,20 +233,17 @@ public class CsvHandler {
             return "password and username must only contain alphanumeric characters";
         }
         else {
-
             try {
                 FileWriter writer = new FileWriter(CSV_FILE_PATH, true); // Append mode to add new entry
                 CSVWriter csvWriter = new CSVWriter(writer);
-
                 String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
                 newUser[0] = userName; // Set the username
                 newUser[1] = password;
                 newUser[2] = "0";
                 newUser[3] = "N";
-                newUser[4] = "100%";
+                newUser[4] = "100";
+                newUser[5] = "None";
                 newUser[6] = "0";
-
-
                 csvWriter.writeNext(newUser);
                 csvWriter.close();
                 return "APPROVED";
@@ -256,28 +253,9 @@ public class CsvHandler {
             }
         }
     }
-
     public static void main(String[] args) {
-          //printAllUsers();
-           System.out.println("Password for jam: " + getPassword("jam"));
+        //printAllUsers();
+        System.out.println("Password for jam: " + getPassword("jam"));
         System.out.println("Number of games played for jam: " + getNumGamesPlayed("jam"));
-//        System.out.println("Saved game for ahafeez7: " + getSavedGame("ahafeez7"));
-//        System.out.println("Accuracy rate for ahafeez7: " + getAccuracyRate("ahafeez7"));
-//        System.out.println("List of countries for ahafeez7: " + getListOfCountry("ahafeez7"));
-//        System.out.println("High score for ahafeez7: " + getHighScore("ahafeez7"));
-//        changeHighScore("ahafeez7", "4500");
-//        changeSavedGame("ahafeez7", "Y");
-//        System.out.println("High score for ahafeez7: " + getHighScore("ahafeez7"));
-//        System.out.println("Saved game for ahafeez7: " + getSavedGame("ahafeez7"));
-        // Example usage of changing field value
-//        changePassword("ahafeez7", "newPassword");
-//        changeNumGamesPlayed("ahafeez7", "7");
-//        changeSavedGame("ahafeez7", "Y");
-//        changeAccuracyRate("ahafeez7", "60%");
-//        changeListOfCountry("ahafeez7", "[US]");
-//        changeHighScore("ahafeez7", "110");
-//        deleteUser("nitin");
-//        printAllUsers();
-//        addUser("blahsssh");
     }
 }

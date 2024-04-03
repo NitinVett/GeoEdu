@@ -127,7 +127,7 @@ public class GameplayScreen extends Screen {
     public void showFlag() {
         highscore = user.getHighScore();
         flagLabel.setVisible(true);
-        updateButtonPositions();
+
         // Update toggle button text
         if (!flagWasClicked) {
             highscore = highscore - 2;
@@ -206,7 +206,6 @@ public class GameplayScreen extends Screen {
     }
     public void setChoice1Button() {
         clickHandling(choice1Button);
-
     }
     public void setChoice2Button() {
         clickHandling(choice2Button);
@@ -235,9 +234,7 @@ public class GameplayScreen extends Screen {
             choiceButton.setEnabled(false);
             setTimer();
             user.setHighScore(highscore);
-
         }
-
         gameTesting.saveFile();
     }
 
