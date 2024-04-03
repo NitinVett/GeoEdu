@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-
 public class Screen extends JPanel {
     private Timer errorMessageTimer;
     private Font titleFont;
@@ -57,7 +56,6 @@ public class Screen extends JPanel {
         frame.revalidate();
         frame.repaint();
     }
-
     private void loadCustomCursors() {
         defaultCursor = createCustomCursor("click.png");
         customCursor = createCustomCursor("cursor.png");
@@ -75,15 +73,12 @@ public class Screen extends JPanel {
     private void setCustomCursor() {
         frame.setCursor(customCursor);
     }
-
     private void setDefaultCursor() {
         frame.setCursor(defaultCursor);
     }
-
     private void addMouseListeners(JButton button) {
         button.addMouseListener(new ButtonMouseListener(button));
     }
-
     private void loadBackgroundImage() {
         // only works if gif is in src folder, aka class path
         //no: 3, 4 is too busy cannon, 5 cutting into geocraft,
@@ -91,12 +86,10 @@ public class Screen extends JPanel {
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             backgroundImage = icon.getImage();
-
         } else {
             System.err.println("Resource not found: meow " + "wallpaper1.gif");
         }
     }
-
     public void setUpKeyBindings() {
         setUpKeyBinding(KeyEvent.VK_ESCAPE, "ESCAPE", () -> {
             if (Objects.nonNull(prev)) {
@@ -104,7 +97,6 @@ public class Screen extends JPanel {
             }
         });
     }
-
     private void setUpKeyBinding(int keyCode, String actionName, Runnable action) {
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyCode, 0), actionName);
         getActionMap().put(actionName, new AbstractAction() {
@@ -114,22 +106,18 @@ public class Screen extends JPanel {
             }
         });
     }
-
     public void swapScreens(JPanel panel) {
         frame.setContentPane(panel);
         frame.setVisible(true);
         frame.requestFocus();
     }
-
     //add functionality for setting button
     public void settingsButton() {
         swapScreens(frame.getSettings(this, user));
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         if (backgroundImage != null) {
             int x = (getWidth() - backgroundImage.getWidth(null)) / 2;
             int y = (getHeight() - backgroundImage.getHeight(null)) / 2;
@@ -172,18 +160,14 @@ public class Screen extends JPanel {
             titleFont = loadFont("resources/Viner.ttf", 112);
             titleFontMetrics = g.getFontMetrics(titleFont);
         }
-
         // Calculate title width
         int titleWidth = titleFontMetrics.stringWidth("GEOCRAFT");
-
         // Positioning
         int width = getWidth();
         int height = getHeight();
         double yValue = height*0.18;
-
         int xPosition = width / 2 - titleWidth / 2;
         int yPosition = (int) yValue;
-
         // Draw title
         g.setFont(titleFont);
         g.drawString("GEOCRAFT", xPosition, yPosition);
@@ -191,29 +175,23 @@ public class Screen extends JPanel {
     public void drawTitle(Graphics2D g, String title) {
         // Draw background image if necessary
         // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-
         // Set font and font metrics if not already set
         if (titleFont == null) {
             titleFont = loadFont("resources/Viner.ttf", 112);
             titleFontMetrics = g.getFontMetrics(titleFont);
         }
-
         // Calculate title width
         int titleWidth = titleFontMetrics.stringWidth(title);
-
         // Positioning
         int width = getWidth();
         int height = getHeight();
         double yValue = height*0.18;
-
         int xPosition = width / 2 - titleWidth / 2;
         int yPosition = (int) yValue;
-
         // Draw title
         g.setFont(titleFont);
         g.drawString(title, xPosition, yPosition);
     }
-
     public void displayErrorMessage(String message) {
         int width = getWidth();
         int messageHeight = 30;
@@ -228,7 +206,6 @@ public class Screen extends JPanel {
         this.add(errorMessageLabel);
         revalidate();
         repaint();
-
         if (errorMessageTimer == null) {
             errorMessageTimer = new Timer(5000, e -> {
                 errorMessageLabel.setVisible(false); // Hide the message
@@ -243,12 +220,10 @@ public class Screen extends JPanel {
             errorMessageTimer.restart();
         }
     }
-
     public void playMusic() {
         GameSound gsound = new GameSound(null);
         gsound.play();
     }
-
     public void setFocusListeners(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {
             @Override
@@ -257,7 +232,6 @@ public class Screen extends JPanel {
                     textField.setText("");
                 }
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 if (textField.getText().isEmpty()) {
@@ -266,7 +240,6 @@ public class Screen extends JPanel {
             }
         });
     }
-
     public Font loadFont(String link, float size) {
         Font font = null;
         try {
@@ -277,24 +250,20 @@ public class Screen extends JPanel {
         }
         return font;
     }
-
     // Inner class to handle cursor change
     private class CursorMouseListener extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             setCustomCursor();
         }
-
         @Override
         public void mouseExited(MouseEvent e) {
             setDefaultCursor();
         }
     }
-
     // Inner class to handle button mouse events
     class ButtonMouseListener extends MouseAdapter {
         private JButton button;
-
         ButtonMouseListener(JButton button) {
             this.button = button;
         }

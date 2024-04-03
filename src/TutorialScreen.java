@@ -25,13 +25,13 @@ public class TutorialScreen extends Screen implements KeyListener {
         explorationButton = new JButton();
         explorationButton.addActionListener(e -> explorationButton());
         explorationButton.setText("Exploration Mode");
-        explorationButton.setFont(loadFont("resources/RubikScribble-Regular.ttf", 17));
+        explorationButton.setFont(loadFont("resources/Viner.ttf", 17));
         this.add(explorationButton);
         scrollLabel = gameRundown();
         //scrollImage = null;
         try {
             plankIMG = ImageIO.read(new File("resources/plank.png"));
-            scrollImage = ImageIO.read(new File("resources/scroll2.png"));
+            scrollImage = ImageIO.read(new File("scroll.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

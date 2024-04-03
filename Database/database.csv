@@ -2,7 +2,7 @@
 "123","1","0","N","100%","listOfCountry","10"
 "1234","1","0","N","100%","listOfCountry","11"
 "jam","1","0","N","100%","visitedIndices:21;timeLeft:60;lives:3;type:Exploration;correctCountry:Germany;incorrectCountry1:Turkey;incorrectCountry2:Denmark","896"
-"j","1","0","N","100%","visitedIndices:45;type:Marathon;mode:Global Mode;continent:null;timeLeft:60;lives:2;correctCountry:Denmark;incorrectCountry1:Indonesia;incorrectCountry2:Germany;showFlag:true;showHint:false","-13"
+"j","1","0","N","100%","visitedIndices:35-47-42;type:Timed;mode:Global Mode;continent:null;timeLeft:42;lives:3;correctCountry:Venezuela;incorrectCountry1:Taiwan;incorrectCountry2:Switzerland;showFlag:true;showHint:false","-19"
 "boba","jaja","0","N","100%","listOfCountry","0"
 "bobb","aaaa","0","N","100%","listOfCountry","0"
 "aaaabbbbccccddd","aaaaa$","0","N","100%","listOfCountry","0"
@@ -15,3 +15,4 @@
 "than66","1111","0","N","100%","listOfCountry","0"
 "meowman","123456","0","N","100%","listOfCountry","0"
 "ghjjjgh","1234","0","N","100%","listOfCountry","0"
+"adam1","12345","0","N","100%","visitedIndices:40-28-3-33-27;type:Exploration;mode:Global Mode;continent:null;timeLeft:60;lives:3;correctCountry:Saudi Arabia;incorrectCountry1:India;incorrectCountry2:Taiwan;showFlag:false;showHint:false","0"
