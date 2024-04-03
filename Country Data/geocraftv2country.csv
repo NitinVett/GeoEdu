@@ -20,9 +20,9 @@ A literary goldmine, the birthplace of Shakespeare and modern English."
 France,6,Yes,Europe,Yes,No,"The Louvre Museum holds the world-renowned Mona Lisa painting.
 French cuisine is celebrated globally, from fine wines to delicate pastries.
 Paris, the city of love, is famed for fashion, art, and the Eiffel Tower."
-Italy,7,Yes,Europe,Yes,No,"The Louvre Museum holds the world-renowned Mona Lisa painting.
-French cuisine is celebrated globally, from fine wines to delicate pastries.
-Paris, the city of love, is famed for fashion, art, and the Eiffel Tower."
+Italy,7,Yes,Europe,Yes,No,"Home of the ancient Roman Empire and masterpieces of Renaissance art.
+Culinary heartland famous for pasta, pizza, and rich regional diversity.
+Venice's romantic canals and the historic Colosseum in Rome draw millions."
 Brazil,8,Yes,Americas,Yes,No,"The Amazon Rainforest breathes life as the planet's lungs.
 Celebrated for the spirited carnival and the iconic Christ the Redeemer.
 Football is a way of life, producing many of the world's best players."
@@ -37,10 +37,10 @@ Vibrant traditions, Dia de los Muertos, and spicy street food.
 Cancun's beaches and the bustling metropolis of Mexico City captivate tourists."
 South Korea,12,Yes,Asia,Yes,No,"A tech-savvy nation known for K-pop, Samsung, and skincare innovations.
 The demilitarized zone stands as a reminder of a country divided.
-Traditional Hanok villages contrast with Seoul’s futuristic skyline."
+Traditional Hanok villages contrast with Seoulï¿½s futuristic skyline."
 Australia,13,No,Oceania,Yes,No,"The Outback's red deserts contrast with the Great Barrier Reef's blue waters.
 Unique wildlife includes kangaroos, koalas, and venomous species.
-Indigenous Aboriginal culture weaves a rich tapestry of the country’s heritage."
+Indigenous Aboriginal culture weaves a rich tapestry of the countryï¿½s heritage."
 Spain,14,Yes,Europe,Yes,No,"Flamenco music and dance embody the vibrant Spanish culture.
 Home to historical cities like Barcelona and Madrid, rich in art and life.
 Culinary treats from paella to tapas are integral to social life."
@@ -177,7 +177,7 @@ Folk traditions thrive in villages, with vibrant costumes and wooden churches."
 Peru,59,Yes,Americas,No,No,"The Inca Empire's legacy is enshrined in Machu Picchu's mystic ruins.
 A culinary powerhouse with dishes like ceviche reflecting a fusion of cultures.
 The Amazon basin's biodiversity contrasts with the Andean highlands."
-Ecuador,60,Yes,Americas,No,No,"The Galápagos Islands, where Darwin's theory of evolution took shape.
+Ecuador,60,Yes,Americas,No,No,"The Galï¿½pagos Islands, where Darwin's theory of evolution took shape.
 Straddling the equator, it boasts diverse ecosystems from the Andes to the Amazon.
 Quito and Cuenca, cities rich in colonial history and indigenous cultures.
 "
@@ -205,13 +205,13 @@ A haven for ecotourism, inviting exploration of its rich ecosystems."
 Bolivia,68,Yes,Americas,No,No,"The Uyuni Salt Flats offer an otherworldly landscape like no other.
 Indigenous cultures thrive, from the Andes to the Amazon.
 The political and cultural capital La Paz sits high in the mountains."
-Paraguay,69,Yes,Americas,No,No,"Landlocked yet water-rich, with the Paraguay and Paraná rivers shaping its land.
+Paraguay,69,Yes,Americas,No,No,"Landlocked yet water-rich, with the Paraguay and Paranï¿½ rivers shaping its land.
 Jesuit missions and Guarani culture blend in a unique historical tapestry.
 The Chaco, a vast wilderness, challenges the adventurous at heart."
 El Salvador,70,Yes,Americas,No,No,"Known as the Land of Volcanoes, with a landscape sculpted by seismic forces.
 A turbulent history gives way to surf beaches and coffee plantations.
 The smallest Central American country with a heart full of culture and resilience."
-Honduras,71,Yes,Americas,No,No,"The ancient Copán ruins stand as a testament to the Maya civilization.
+Honduras,71,Yes,Americas,No,No,"The ancient Copï¿½n ruins stand as a testament to the Maya civilization.
 Lush rainforests and the Mesoamerican Barrier Reef beckon nature lovers.
 A blend of indigenous, African, and Spanish influences in its people and traditions."
 Trinidad and Tobago,72,Yes,Americas,No,No,"The birthplace of steelpan and calypso music, echoing through the Caribbean.
@@ -219,7 +219,7 @@ A dual-island nation where diverse ecosystems meet vibrant cultural festivals.
 Tobago offers serene beaches and coral reefs, a stark contrast to Trinidad's energy."
 Haiti,73,Yes,Americas,No,No,"A resilient spirit defines the first black republic and the second oldest in the Americas.
 Rich in history and art, despite facing significant challenges.
-The Citadelle Laferrière stands as a symbol of freedom and endurance."
+The Citadelle Laferriï¿½re stands as a symbol of freedom and endurance."
 Jamaica,74,Yes,Americas,No,No,"The homeland of reggae music, Bob Marley, and a rich Rastafarian heritage.
 Stunning beaches, Blue Mountains, and vibrant Afro-Caribbean culture.
 Known for its athletic prowess, especially in sprinting and track events."
@@ -264,7 +264,7 @@ Grenada,87,No,Americas,No,Yes,"Known as the ""Island of Spice,"" Grenada is one 
 The underwater sculpture park in Molinere Bay is a unique snorkeling and diving site.
 The island's lush interior is home to rainforests, waterfalls, and rare wildlife."
 Saint Vincent and The Grenadines,88,No,Americas,No,Yes,"An archipelago known for its sailing destinations, volcanic landscapes, and vibrant marine ecosystems.
-La Soufrière volcano is a dramatic feature and popular hiking destination.
+La Soufriï¿½re volcano is a dramatic feature and popular hiking destination.
 The culture is a vibrant mix of African, Carib, and European influences."
 Barbados,89,No,Americas,No,Yes,"Renowned for its pristine beaches, rum distilleries, and vibrant crop over festival.
 The birthplace of Rihanna, it has a rich musical tradition including calypso and soca.
@@ -273,7 +273,7 @@ Antigua and Barbuda,90,No,Americas,No,Yes,"Known for 365 beaches, ""one for ever
 Sailing Week is a premier event, attracting yachts from around the globe.
 The twin islands boast a rich history and stunning coral reefs"
 Seychelles,91,No,Africa,No,Yes,"An archipelago of 115 islands, known for its pristine beaches and rare wildlife.
-The Vallée de Mai Nature Reserve is thought to be the original Garden of Eden.
+The Vallï¿½e de Mai Nature Reserve is thought to be the original Garden of Eden.
 Conservation efforts focus on protecting its unique flora and fauna."
 Palau,92,No,Oceania,No,Yes,"Renowned for its marine biodiversity, including the famous Jellyfish Lake.
 Rock Islands Southern Lagoon is a UNESCO World Heritage site, known for its mushroom-shaped islets.
@@ -295,7 +295,7 @@ Boiling Lake is one of the world's largest hot springs, nestled amidst an active
 A commitment to becoming the world's first climate-resilient nation after Hurricane Maria's impact."
 Bahrain,98,No,Asia,No,Yes,"A financial hub in the Middle East, known for its pearl diving heritage.
 The Bahrain Grand Prix is a highlight in the Formula 1 calendar.
-A rich history dating back to ancient Dilmun, with UNESCO sites like Qal’at al-Bahrain."
+A rich history dating back to ancient Dilmun, with UNESCO sites like Qalï¿½at al-Bahrain."
 Kiribati,99,No,Oceania,No,Yes,"Consists of 33 atolls spread over a vast area in the central Pacific.
 Known for its significant WWII history, particularly on Tarawa Atoll.
 Faces existential threats from climate change and rising sea levels."

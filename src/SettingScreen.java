@@ -13,7 +13,7 @@ import java.util.Objects;
 public class SettingScreen extends Screen {
 
     private JSlider audio;
-    private JButton changePassword, debug, credits, muteButton, exit;
+    private JButton changePassword, debug, credits, muteButton, exit, logout;
     private GameSound sound;
     private Player user;
     private Image plankIMG, scrollIMG, resizedMutedIMG, resizedUnMutedIMG;
@@ -30,6 +30,7 @@ public class SettingScreen extends Screen {
      */
     public SettingScreen(FullScreenUI frame, Screen previous, Player user) {
         super(frame, previous, user);
+
         sound = new GameSound("backgroundmusic.wav");
         sound.play();
         prev = previous;
@@ -41,6 +42,8 @@ public class SettingScreen extends Screen {
         credits = new JButton("CREDITS");
         muteButton = new JButton();
         exit = new JButton();
+        logout = new JButton("EXIT");
+        disableSettingButton();
         BufferedImage escIcon = null;
         try {
             escIcon = ImageIO.read(new File("resources/escape.png"));
@@ -58,19 +61,19 @@ public class SettingScreen extends Screen {
         credits.addActionListener(e -> creditsButton());
         muteButton.addActionListener(e -> muteButton());
         exit.addActionListener(e -> exitButton());
+        logout.addActionListener(e -> logoutButton());
         this.add(credits);
         this.add(muteButton);
         this.add(exit);
+        this.add(logout);
         this.add(audio);
     }
-
     /**
      * Method to change the volume based on the slider value.
      */
     public void changeVolume() {
         sound.setVolume(audio.getValue());
     }
-
     /**
      * Method to set the previous screen.
      *
@@ -87,7 +90,6 @@ public class SettingScreen extends Screen {
             }
         }
     }
-
     /**
      * Method to set the user.
      *
@@ -96,7 +98,6 @@ public class SettingScreen extends Screen {
     public void setUser(Player user) {
         this.user = user;
     }
-
     /**
      * Method to set the components such as buttons.
      *
@@ -128,6 +129,8 @@ public class SettingScreen extends Screen {
         createButtons(changePassword, scaledImage, width / 75);
         createButtons(debug, scaledImage, width / 60);
         createButtons(credits, scrollIMGScaled, width / 60);
+        createButtons(logout,scaledImage,width/60);
+        logout.setBounds(width/30, height - height / 8, width / 10, height / 12);
         exit.setBounds(width / 30, height / 22, 50, 50);
         exit.setBorderPainted(false);
         exit.setContentAreaFilled(false);
@@ -136,36 +139,36 @@ public class SettingScreen extends Screen {
         debug.setBounds(width / 3 + width / 12, height - height / 4, width / 6, height / 12);
         credits.setBounds(width - width / 8, height - height / 8, width / 10, height / 12);
     }
-
     /**
      * Method to handle the action when the change password button is clicked.
      */
     public void changePasswordButton() {
         swapScreens(new ChangePasswordScreen(frame, this, user));
     }
-
     /**
      * Method to handle the action when the debug button is clicked.
      */
     public void debugButton() {
         swapScreens(new DebugScreen(frame, this));
     }
-
     /**
      * Method to handle the action when the credits button is clicked.
      */
     public void creditsButton() {
         swapScreens(new CreditsScreen(frame, this));
     }
-
     /**
      * Method to handle the action when the exit button is clicked.
      */
     public void exitButton() {
         swapScreens(prev);
     }
-
-
+    /**
+     * Method to handle the action when the logout button is clicked.
+     */
+    public void logoutButton(){
+        frame.dispose();
+    }
     /**
      * Method to handle the action when the mute button is clicked.
      */

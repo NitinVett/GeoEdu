@@ -62,7 +62,7 @@ public class GameTesting implements Serializable {
     }
 
     public void setCorrectGuesses(int correctGuesses){
-        this.correctGuesses += correctGuesses;
+        this.correctGuesses = correctGuesses;
     }
     public int getCorrectGuesses() {
         return correctGuesses;
@@ -314,15 +314,16 @@ public class GameTesting implements Serializable {
 
     public void endGame(){
         user.setGameData("None");
-        float numRight;
-
+        System.out.println(correctGuesses);
+        System.out.println(numGuesses);
+        float totalPercentage = 0;
         if(numGuesses != 0) {
-            float totalPercentage = ;
-        }else {
-            numRight = (user.getAccuracy() / 100.0f * user.getNumGames());
+            totalPercentage = (float) correctGuesses/(float) numGuesses;
         }
 
-        user.setAccuracy((numRight / (float) (user.getNumGames() + 1)) * 100.0f);
+        totalPercentage += user.getNumGames() * user.getAccuracy();
+
+        user.setAccuracy((totalPercentage/ (user.getNumGames()+1))*100);
 
         user.setNumGames(user.getNumGames() + 1);
 
