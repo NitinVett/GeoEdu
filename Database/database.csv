@@ -2,7 +2,7 @@
 "123","1","0","N","100","listOfCountry","10"
 "1234","1","0","N","100","listOfCountry","11"
 "jam","1","0","N","100","visitedIndices:21;timeLeft:60;lives:3;type:Exploration;correctCountry:Germany;incorrectCountry1:Turkey;incorrectCountry2:Denmark","100"
-"j","1","0","N","100","visitedIndices:45-20;type:Marathon;mode:Global Mode;continent:null;timeLeft:60;lives:3;numGuesses:1;correctGuesses:1;correctCountry:Italy;incorrectCountry1:Vietnam;incorrectCountry2:Norway;showFlag:false;showHint:false","992"
+"j","1","1","N","25.0","None","987"
 "boba","jaja","0","N","100","listOfCountry","0"
 "bobb","aaaa","0","N","100","listOfCountry","0"
 "aaaabbbbccccddd","aaaaa$","0","N","100","listOfCountry","0"

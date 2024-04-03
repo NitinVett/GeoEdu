@@ -139,7 +139,7 @@ public class GameTesting implements Serializable {
             }
             frame.revalidate();
             currentGame = new ExplorationMode(this, null, user, correctCountry, incorrectCountry1, incorrectCountry2);
-            System.out.println("heeere");
+
             frame.setContentPane(currentGame);
 
             curIndex++;
@@ -285,7 +285,7 @@ public class GameTesting implements Serializable {
         }
         newGame(true);
 
-        System.out.println(showFlag + "2");
+
         currentGame.flagWasClicked = showFlag;
         if(showFlag){
             currentGame.showFlag();
@@ -315,8 +315,9 @@ public class GameTesting implements Serializable {
     public void endGame(){
         user.setGameData("None");
         float numRight;
+
         if(numGuesses != 0) {
-            numRight = ((user.getAccuracy() / 100.0f * user.getNumGames()) + (float) correctGuesses / (float) numGuesses);
+            float totalPercentage = ;
         }else {
             numRight = (user.getAccuracy() / 100.0f * user.getNumGames());
         }
