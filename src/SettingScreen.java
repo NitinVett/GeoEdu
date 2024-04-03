@@ -105,6 +105,7 @@ public class SettingScreen extends Screen {
     public void setComponents(Graphics g) {
         int width = getWidth();
         int height = getHeight();
+        disableSettingButton();
         resizedMutedIMG = mutedIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
         resizedUnMutedIMG = unMutedIMG.getScaledInstance(width / 20, height / 20, Image.SCALE_SMOOTH);
         muteButton.setContentAreaFilled(false);
