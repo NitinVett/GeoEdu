@@ -46,7 +46,7 @@ public class GameTesting implements Serializable {
                     frame.repaint(); // Request a repaint to update the timer display
                 } else {
                     ((Timer) e.getSource()).stop(); // Stop the timer
-                    frame.setContentPane(new StatScreen(frame,null,user));
+                    endGame();
                 }
             });
             timer.start(); // Start the countdown
@@ -90,6 +90,8 @@ public class GameTesting implements Serializable {
 
             frame.setContentPane(currentGame);
             curIndex++;
+        }else {
+            endGame();
         }
     }
 
@@ -128,6 +130,8 @@ public class GameTesting implements Serializable {
             frame.setContentPane(currentGame);
 
             curIndex++;
+        }else {
+            endGame();
         }
     }
 
@@ -287,6 +291,12 @@ public class GameTesting implements Serializable {
             case "Marathon" -> startNextIterationMarathon(load);
         }
         saveFile();
+    }
+
+    public void endGame(){
+        user.setGameData("None");
+
+        frame.setContentPane(new StatScreen(frame,null,user));
     }
 
     private int randomNumber(int max) {

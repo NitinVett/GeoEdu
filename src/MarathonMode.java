@@ -66,10 +66,11 @@ public class MarathonMode extends GameplayScreen {
         if (!Objects.equals(choiceButton.getText(), correctCountry.getName())) {
             gameTesting.reduceLives();
             if (gameTesting.getLives() == 0) {
-                swapScreens(new StatScreen(frame, this,user));
+                gameTesting.endGame();
+            }else {
+                gameTesting.saveFile();
             }
         }
-        gameTesting.saveFile();
     }
     @Override
     protected void paintComponent(Graphics g) {

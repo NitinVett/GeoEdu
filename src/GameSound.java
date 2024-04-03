@@ -12,12 +12,10 @@ public class GameSound {
             AudioInputStream audio = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(audio);
-
             // Attempt to get the volume control from the clip
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                 volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             }
-
             clip.start();
         } catch (Exception e) {
             e.printStackTrace();
