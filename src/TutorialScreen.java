@@ -34,7 +34,7 @@ public class TutorialScreen extends Screen implements KeyListener {
         explorationButton = new JButton();
         explorationButton.addActionListener(e -> explorationButton());
         explorationButton.setText("Exploration Mode");
-        explorationButton.setFont(loadFont("resources/Viner.ttf", 17));
+        explorationButton.setFont(loadFont("/Viner.ttf", 17));
         this.add(explorationButton);
         scrollLabel = gameRundown();
         try {

@@ -138,7 +138,7 @@ public class ContinentalModeSelectorScreen extends Screen {
         super.paintComponent(g); // Paints the background
 
         // Draw the text on the screen
-        g.setFont(loadFont("resources/Viner.ttf", 32));
+        g.setFont(loadFont("/Viner.ttf", 32));
         g.drawString("Select a continent to explore!", mainButtonX, mainButtonY);
 
         // Update button positions

@@ -120,7 +120,7 @@ public class GameTypeSelectorScreen extends Screen {
         int mainButtonX = width / 2 - width / 8;
         int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
-        g.setFont(loadFont("resources/Viner.ttf", 32));
+        g.setFont(loadFont("/Viner.ttf", 32));
         g.drawString("What game type will you play today!", mainButtonX, mainButtonY);
         updateButtonPositions();
         repaint();

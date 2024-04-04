@@ -114,7 +114,7 @@ public class GamemodeSelectorScreen extends Screen {
         int mainButtonY = height / 3 + height / 8;
         super.paintComponent(g); // Paints the background
 
-        g.setFont(loadFont("resources/Viner.ttf", 32));
+        g.setFont(loadFont("/Viner.ttf", 32));
         g.drawString("Select a mode to explore!", mainButtonX, mainButtonY);
         updateButtonPositions(); // Consider calling this elsewhere if it causes issues
     }

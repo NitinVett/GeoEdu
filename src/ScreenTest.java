@@ -76,7 +76,7 @@ public class ScreenTest {
 
     @Test
     void testLoadFont() {
-        Font font = screen.loadFont("resources/Viner Hand ITC.ttf", 24f);
+        Font font = screen.loadFont("/Viner.ttf", 24f);
         assertNotNull(font);
     }
 

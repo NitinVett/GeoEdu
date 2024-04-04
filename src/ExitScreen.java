@@ -78,7 +78,7 @@ public class ExitScreen extends Screen {
     private JButton createCustomButton(String text) {
         JButton button = new JButton(text);
         button.setContentAreaFilled(false);
-        button.setFont(loadFont("resources/Viner.ttf", 28));
+        button.setFont(loadFont("/Viner.ttf", 28));
         button.setBorderPainted(false);
         button.setFocusPainted(false);
         button.setOpaque(false);
