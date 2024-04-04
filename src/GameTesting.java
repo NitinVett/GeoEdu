@@ -24,7 +24,7 @@ public class GameTesting implements Serializable {
     String continent;
     private int numGuesses, correctGuesses = 0;
     public GameTesting(FullScreenUI frame, Player user, String mode, String continent,String type) {
-        System.out.println(mode);
+
         this.continent = continent;
         this.user = user;
         this.type = type;
@@ -32,7 +32,7 @@ public class GameTesting implements Serializable {
         this.mode = mode;
         //Static class that loads all the countries in a specific mode
         // For global it would be 50 country objects of type global
-        System.out.println(mode);
+
         this.countries = CountryList.getCountries(mode, this.continent);
         this.curIndex = 0;
 
@@ -314,16 +314,15 @@ public class GameTesting implements Serializable {
 
     public void endGame(){
         user.setGameData("None");
-        System.out.println(correctGuesses);
-        System.out.println(numGuesses);
+
         float totalPercentage = 0;
         if(numGuesses != 0) {
-            totalPercentage = (float) correctGuesses/(float) numGuesses;
+            totalPercentage = ((float) correctGuesses/(float) numGuesses)*100;
         }
 
-        totalPercentage += user.getNumGames() * user.getAccuracy();
+        totalPercentage += user.getNumGames() * (user.getAccuracy());
 
-        user.setAccuracy((totalPercentage/ (user.getNumGames()+1))*100);
+        user.setAccuracy((totalPercentage/ (user.getNumGames()+1)));
 
         user.setNumGames(user.getNumGames() + 1);
 

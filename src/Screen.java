@@ -21,7 +21,7 @@ public class Screen extends JPanel {
     private boolean settingsButtonBoundsSet = false;
     FullScreenUI frame;
     JButton settings;
-    private Image backgroundImage;
+    Image backgroundImage;
     private JLabel errorMessageLabel;
     protected Screen prev;
     Player user;
@@ -108,14 +108,14 @@ public class Screen extends JPanel {
     /**
      * Sets the custom cursor.
      */
-    private void setCustomCursor() {
+    public void setCustomCursor() {
         frame.setCursor(customCursor);
     }
 
     /**
      * Sets the default cursor.
      */
-    private void setDefaultCursor() {
+    public void setDefaultCursor() {
         frame.setCursor(defaultCursor);
     }
 
@@ -174,7 +174,7 @@ public class Screen extends JPanel {
      *
      * @param panel The panel to swap to.
      */
-    public void swapScreens(JPanel panel) {
+    public void swapScreens(Screen panel) {
         frame.setContentPane(panel);
         frame.setVisible(true);
         frame.requestFocus();

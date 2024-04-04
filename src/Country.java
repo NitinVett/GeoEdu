@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Country class represents a country entity with its name, flag, hints, and country map.
@@ -86,7 +87,11 @@ public class Country {
         JLabel hintsLabel = new JLabel();
         String hintString = CountryDatabase.hints(name);
         System.out.println(hintString);
+        if(Objects.isNull(hintString)){
+            return hintsLabel;
+        }
         try {
+
             String[] lines = hintString.split("\n");
             StringBuilder content = new StringBuilder();
             int lineCount = 0;

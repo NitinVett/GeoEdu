@@ -223,4 +223,51 @@ public class CountryDatabase {
 
         return filteredCountries;
     }
+    /**
+     * Reads a CSV file specified by the {@code CSV_FILE_PATH} constant and extracts the "Country Name" from each row.
+     * The method assumes that the CSV file has a header row and that one of the columns is named "Country Name".
+     *
+     * @return An {@link ArrayList} containing the "Country Name" from each row of the CSV file. If an error occurs
+     *         during reading the file, the stack trace is printed, and an empty list is returned.
+     *
+     * @throws CsvValidationException If the CSV content does not match the expected format or if there are issues
+     *                                with the CSV structure that prevent it from being read correctly.
+     * @throws IOException If an I/O error occurs when opening or reading the file.
+     */
+    public static ArrayList<String> getAllUsers() {
+        ArrayList<String> Users = new ArrayList<>();
+        try {
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            Map<String, String> row;
+            while ((row = reader.readMap()) != null) {
+                Users.add(row.get("Country Name"));
+
+            }
+        } catch (CsvValidationException | IOException e) {
+            e.printStackTrace();
+        }
+        return Users;
+    }
+    /**
+     * Retrieves the index of a specified field name from a predefined list of headers. This method is useful for
+     * identifying the position of a field within a CSV file or similar structured data, given that the headers
+     * represent the fields in the data structure.
+     *
+     * The headers are as follows: "Country Name", "ID", "Continent Mode", "Continent Name", "Global Mode",
+     * "Micro Nation Mode", and "Hints".
+     *
+     * @param fieldName The name of the field for which the index is to be retrieved. This is case-sensitive.
+     * @return The 1-based index of the field within the predefined headers. If the field is found, its index
+     *         (adjusted by 1) is returned. If the field is not found, -1 is returned to indicate the absence
+     *         of the field within the headers.
+     */
+    public static int getIndex(String fieldName) {
+        String[] headers = {"Country Name", "ID", "Continent Mode", "Continent Name", "Global Mode", "Micro Nation Mode", "Hints"};
+        for (int i = 0; i < headers.length; i++) {
+            if (headers[i].equals(fieldName)) {
+                return i + 1; // Add 1 to account for the "user_name" field
+            }
+        }
+        return -1; // Field not found
+    }
 }

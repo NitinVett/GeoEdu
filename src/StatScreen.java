@@ -74,7 +74,8 @@ public class StatScreen extends Screen {
         g2d.drawString("Accuracy:", width / 3, height / 2 + height / 120);
         // Draw stat values with some spacing from labels
         g2d.drawString(Integer.toString(user.getHighScore()), width / 3 + width / 5, height / 2 - height / 20);
-        g2d.drawString(user.getAccuracy() + "%", width / 3 + width / 5, height / 2 + height / 120);
+        String accuracy = String.format("%.2f", user.getAccuracy()) + "%";
+        g2d.drawString(accuracy, width / 3 + width / 5, height / 2 + height / 120);
         setComponents();
     }
 }

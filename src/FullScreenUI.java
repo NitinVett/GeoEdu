@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.IOException;
@@ -20,15 +21,11 @@ public class FullScreenUI extends JFrame {
         this.setVisible(true);
         this.requestFocus();
         settings = new SettingScreen(this, null, null);
-        addWindowFocusListener(new WindowFocusListener() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowGainedFocus(WindowEvent e) {
-                // Request focus for your panel when the window gains focus
-                getContentPane().requestFocus();
-            }
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                // Handle window losing focus if necessary
+            public void windowClosing(WindowEvent e) {
+                // Perform any shutdown processes here
+                System.exit(0);
             }
         });
     }
