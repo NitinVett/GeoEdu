@@ -38,7 +38,7 @@ public class RegisterScreen extends Screen {
         username.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
         username.setForeground(new Color(255, 255, 255));
         username.setCaretColor(Color.WHITE);
-        username.setFont(loadFont("resources/Viner.ttf", 24));
+        username.setFont(loadFont("/Viner.ttf", 24));
 
         // Add a focus listener to handle placeholder text behavior
         username.addFocusListener(new FocusAdapter() {
@@ -68,7 +68,7 @@ public class RegisterScreen extends Screen {
         password.setForeground(new Color(255, 255, 255));
         password.setCaretColor(Color.WHITE);
 
-        password.setFont(loadFont("resources/Viner.ttf", 24));
+        password.setFont(loadFont("/Viner.ttf", 24));
 
 
         password_2 = new JPasswordField(16);
@@ -78,7 +78,7 @@ public class RegisterScreen extends Screen {
         password_2.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK)); // Remove border
         password_2.setForeground(new Color(255, 255, 255));
         password_2.setCaretColor(Color.WHITE);
-        password_2.setFont(loadFont("resources/Viner.ttf", 24));
+        password_2.setFont(loadFont("/Viner.ttf", 24));
         // Add focus listeners to handle placeholder text behavior for password fields
         password.addFocusListener(new FocusAdapter() {
             @Override
@@ -133,8 +133,8 @@ public class RegisterScreen extends Screen {
         // Esc button setup
         BufferedImage escIcon = null;
         try {
-            escIcon = ImageIO.read(new File("resources/escape.png"));
-            plankIMG = ImageIO.read(new File("resources/plank.png"));
+            escIcon = ImageIO.read(getClass().getResourceAsStream("/escape"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

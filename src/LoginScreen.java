@@ -121,8 +121,8 @@ public class LoginScreen extends Screen {
         loginButton.setText("Login");
         loginButton.addActionListener(e -> loginButton());
         loginButton.setBounds(mainButtonX + (width / 20), height / 3 + (height / 10) * 2, width / 10, height / 20);
-        username.setFont(loadFont("resources/Viner.ttf", 24));
-        password.setFont(loadFont("resources/Viner.ttf", 24));
+        username.setFont(loadFont("/Viner.ttf", 24));
+        password.setFont(loadFont("/Viner.ttf", 24));
         esc.setBounds(width / 30, height / 22, 50, 50);
         esc.setBorderPainted(false);
         esc.setContentAreaFilled(false);
