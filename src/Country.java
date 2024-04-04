@@ -33,9 +33,10 @@ public class Country {
     public JLabel getFlag() {
         BufferedImage flagImage = null;
         try {
-            String folderPath = "Country Data/Flags";
-            String imagePath = folderPath + "/" + this.getName() + ".png";
-            flagImage = ImageIO.read(new File(imagePath));
+
+            String imagePath = "/" + this.getName() + ".png";
+            flagImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
