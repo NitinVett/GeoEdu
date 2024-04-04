@@ -38,8 +38,8 @@ public class TutorialScreen extends Screen implements KeyListener {
         this.add(explorationButton);
         scrollLabel = gameRundown();
         try {
-            plankIMG = ImageIO.read(new File("resources/plank.png"));
-            scrollImage = ImageIO.read(new File("scroll.png"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
+            scrollImage = ImageIO.read(getClass().getResourceAsStream("/scroll.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

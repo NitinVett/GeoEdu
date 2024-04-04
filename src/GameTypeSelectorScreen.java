@@ -41,8 +41,8 @@ public class GameTypeSelectorScreen extends Screen {
         exploration.addActionListener(e -> explorationButton());
         BufferedImage escIcon = null;
         try {
-            escIcon = ImageIO.read(new File("resources/escape.png"));
-            plankIMG = ImageIO.read(new File("resources/plank.png"));
+            escIcon = ImageIO.read(  getClass().getResourceAsStream("/escape.png"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

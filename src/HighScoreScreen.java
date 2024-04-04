@@ -37,7 +37,7 @@ public class HighScoreScreen extends Screen {
             }
         }
         try {
-            plankIMG = ImageIO.read(new File("resources/plank.png"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

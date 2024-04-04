@@ -71,8 +71,8 @@ public class GameplayScreen extends Screen {
 
         //hint background
         try {
-            hintBackgroundIMG = ImageIO.read(new File("hintBox.png"));
-            plankIMG = ImageIO.read(new File("resources/plank.png"));
+            hintBackgroundIMG = ImageIO.read(getClass().getResourceAsStream("/hintBox.png"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

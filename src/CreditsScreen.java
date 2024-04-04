@@ -26,9 +26,10 @@ public class CreditsScreen extends Screen {
         creditText.setText("<html><body>By:<br>Stefan Baggieri<br>Nitin Vettiankal<br>Amaan Hafeez<br>Gary Han<br>Saleh Farrukh</body></html>");
         this.add(creditText);
         try {
-            creditBackgroundIMG = ImageIO.read(new File("scroll.png"));
-            shipIMG = ImageIO.read(new File("ship.png"));
-            treasureChestIMG = ImageIO.read(new File("treasureChest.png"));
+            creditBackgroundIMG = ImageIO.read(getClass().getResourceAsStream("/scroll.png"));
+            shipIMG = ImageIO.read(getClass().getResourceAsStream("/ship.png"));
+            treasureChestIMG = ImageIO.read(getClass().getResourceAsStream("/treasureChest.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
