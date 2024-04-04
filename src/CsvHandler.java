@@ -226,8 +226,13 @@ public class CsvHandler {
             List<String[]> lines = reader.readAll();
             reader.close();
 
+
+            if(!Files.exists(filePath)) {
+                newFile(filePath);
+            }
+
             // Open the CSV file in write mode
-            FileWriter writer = new FileWriter(CSV_FILE_PATH, false);
+            FileWriter writer = new FileWriter(filePath.toString(), false);
             CSVWriter csvWriter = new CSVWriter(writer);
 
             // Iterate over each line in the CSV file
@@ -306,8 +311,12 @@ public class CsvHandler {
             List<String[]> lines = reader.readAll();
             reader.close();
 
+
+            if(!Files.exists(filePath)) {
+                newFile(filePath);
+            }
             // Open the CSV file in write mode
-            FileWriter writer = new FileWriter(CSV_FILE_PATH, false);
+            FileWriter writer = new FileWriter(filePath.toString(), false);
             CSVWriter csvWriter = new CSVWriter(writer);
 
             // Iterate over each line in the CSV file
@@ -394,7 +403,9 @@ public class CsvHandler {
         else {
             try {
                 // Open the CSV file in append mode to add a new entry
-                Path filePath = Paths.get(CSV_FILE_PATH);
+
+
+
                 if(!Files.exists(filePath)) {
                     newFile(filePath);
                 }
@@ -425,7 +436,7 @@ public class CsvHandler {
 
     public static void newFile(Path filePath) throws IOException {
 
-        Files.createFile(filePath);
+
         FileWriter writer = new FileWriter(filePath.toString(), true);
 
         CSVWriter csvWriter = new CSVWriter(writer);
