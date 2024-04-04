@@ -64,7 +64,7 @@ public class Screen extends JPanel {
         settings = new JButton();
         errorMessageLabel = new JLabel();
         this.add(settings);
-        Image image = new ImageIcon("resources/hamburger.png").getImage();
+        Image image = new ImageIcon(String.valueOf(getClass().getResourceAsStream("/hamburger.png"))).getImage();
         Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         ImageIcon settingsIcon = new ImageIcon(newImage);
         settings.setIcon(settingsIcon);
@@ -132,6 +132,7 @@ public class Screen extends JPanel {
      * Loads the background image.
      */
     private void loadBackgroundImage() {
+
         URL imageURL = getClass().getClassLoader().getResource("wallpaper1.gif");
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
@@ -233,7 +234,7 @@ public class Screen extends JPanel {
         button.setFocusPainted(false);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalTextPosition(SwingConstants.CENTER);
-        button.setFont(loadFont("resources/Viner.ttf", fontSize));
+        button.setFont(loadFont("/Viner.ttf", fontSize));
         button.setIcon(new ImageIcon(scaledImage));
         button.addMouseListener(new ButtonMouseListener(button));
     }
@@ -245,7 +246,7 @@ public class Screen extends JPanel {
      */
     public void drawTitle(Graphics2D g) {
         if (titleFont == null) {
-            titleFont = loadFont("resources/Viner.ttf", 112);
+            titleFont = loadFont("/Viner.ttf", 112);
             titleFontMetrics = g.getFontMetrics(titleFont);
         }
 
@@ -268,7 +269,7 @@ public class Screen extends JPanel {
      */
     public void drawTitle(Graphics2D g, String title) {
         if (titleFont == null) {
-            titleFont = loadFont("resources/Viner.ttf", 112);
+            titleFont = loadFont("/Viner.ttf", 112);
             titleFontMetrics = g.getFontMetrics(titleFont);
         }
 
@@ -353,8 +354,8 @@ public class Screen extends JPanel {
     public Font loadFont(String link, float size) {
         Font font = null;
         try {
-            File fontStyle = new File(link);
-            font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(size);
+
+            font = Font.createFont(Font.TRUETYPE_FONT,getClass().getResourceAsStream(link) ).deriveFont(size);
         } catch (Exception e) {
             e.printStackTrace();
         }

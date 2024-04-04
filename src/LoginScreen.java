@@ -37,7 +37,7 @@ public class LoginScreen extends Screen {
         username.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
         username.setForeground(new Color(255, 255, 255));
         username.setCaretColor(Color.WHITE);
-        username.setFont(loadFont("resources/pirate.ttf", 24));
+        username.setFont(loadFont("/pirate.ttf", 24));
 
         // Add a focus listener to handle placeholder text behavior
         username.addFocusListener(new FocusAdapter() {
@@ -64,7 +64,7 @@ public class LoginScreen extends Screen {
         password.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
         password.setForeground(new Color(255, 255, 255));
         password.setCaretColor(Color.WHITE);
-        password.setFont(loadFont("resources/pirate.ttf", 24));
+        password.setFont(loadFont("/pirate.ttf", 24));
 
         // Add a focus listener to handle placeholder text behavior for the password field
         password.addFocusListener(new FocusAdapter() {
@@ -93,8 +93,10 @@ public class LoginScreen extends Screen {
         // Esc button setup
         BufferedImage escIcon = null;
         try {
-            image = ImageIO.read(new File("resources/plank.png"));
-            escIcon = ImageIO.read(new File("resources/escape.png"));
+
+
+            image = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
+            escIcon = ImageIO.read(getClass().getResourceAsStream("/escape.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

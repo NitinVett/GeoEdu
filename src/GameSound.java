@@ -11,12 +11,12 @@ public class GameSound {
 
     /**
      * Constructs a GameSound object with the audio file located at the specified path.
-     * @param path The path to the audio file.
+     * @param path The path to the audio file
      */
     public GameSound(String path) {
         try {
-            File file = new File(path);
-            AudioInputStream audio = AudioSystem.getAudioInputStream(file);
+
+            AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResource(path));
             clip = AudioSystem.getClip();
             clip.open(audio);
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {

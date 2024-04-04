@@ -46,11 +46,12 @@ public class SettingScreen extends Screen {
         disableSettingButton();
         BufferedImage escIcon = null;
         try {
-            escIcon = ImageIO.read(new File("resources/escape.png"));
-            plankIMG = ImageIO.read(new File("resources/plank.png"));
-            scrollIMG = ImageIO.read(new File("scroll.png"));
-            mutedIMG = ImageIO.read(new File("muted.png"));
-            unMutedIMG = ImageIO.read(new File("unMuted.png"));
+
+            escIcon = ImageIO.read(  getClass().getResourceAsStream("/escape.png"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
+            scrollIMG = ImageIO.read(getClass().getResourceAsStream("/scroll.png"));
+            mutedIMG = ImageIO.read(getClass().getResourceAsStream("/muted.png"));
+            unMutedIMG = ImageIO.read(getClass().getResourceAsStream("/unMuted.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
