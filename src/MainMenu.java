@@ -28,7 +28,7 @@ public class MainMenu extends Screen {
     MainMenu(FullScreenUI frame) {
         super(frame, null);
         try {
-            pirateIMG = ImageIO.read(new File("pirate.png"));
+            pirateIMG = ImageIO.read(new File("resources/pirate.png"));
             backgroundImg = ImageIO.read(new File("resources/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
