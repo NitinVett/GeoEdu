@@ -12,11 +12,38 @@ import java.util.ArrayList;
  */
 public class HighScoreScreen extends Screen {
 
-    ArrayList<String> users; // List of usernames
-    ArrayList<JLabel> playerList; // List of JLabels for displaying player information
-    int page; // Current page number
-    Screen prev; // Previous screen
-    Image plankIMG; // Background image
+    /**
+     * A list of user identifiers or names. This ArrayList is used to store the names
+     * or unique identifiers of all players relevant to the current context or screen.
+     */
+    ArrayList<String> users;
+
+    /**
+     * A list of JLabel components, each representing a player in the UI.
+     * This allows for dynamic representation of player information on the screen,
+     * such as names or statuses, in a visually structured format.
+     */
+    ArrayList<JLabel> playerList;
+
+    /**
+     * Tracks the current page number in a paginated display. This is particularly useful
+     * in screens that list players or other content that exceeds the space available for display,
+     * necessitating navigation through multiple 'pages' or views.
+     */
+    int page;
+
+    /**
+     * A reference to the previous screen in the navigation hierarchy. This Screen object
+     * allows for easy navigation back to the prior state or screen within the application's UI flow.
+     */
+    Screen prev;
+
+    /**
+     * Background image used throughout the current screen or application. This image could serve
+     * to enhance the aesthetic appeal or maintain consistency in the visual theme of the UI.
+     */
+    Image plankIMG;
+
 
     /**
      * Constructs a HighScoreScreen object with the specified frame, page number, and previous screen.

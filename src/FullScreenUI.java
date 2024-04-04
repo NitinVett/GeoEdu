@@ -8,6 +8,9 @@ import java.io.IOException;
  * The FullScreenUI class represents the main frame of the application, which is displayed in full screen mode.
  */
 public class FullScreenUI extends JFrame {
+    /**
+     * setting screen object
+     */
     SettingScreen settings;
 
     /**

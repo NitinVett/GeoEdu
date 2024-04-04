@@ -10,10 +10,25 @@ import java.util.Objects;
  * Country class represents a country entity with its name, flag, hints, and country map.
  */
 public class Country {
+    /**
+     * JLabel for flag of countries
+     */
     private JLabel flag;
+    /**
+     * name of countries
+     */
     private String name;
+    /**
+     * JLabel for hints of countries
+     */
     private JLabel hints;
+    /**
+     * JLabel for map of countries
+     */
     private JLabel countryMap;
+    /**
+     * integer ID of countries
+     */
     private int ID;
 
     /**

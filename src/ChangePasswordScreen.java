@@ -7,9 +7,21 @@ import java.util.Objects;
  * ChangePasswordScreen represents the screen for changing the user's password.
  */
 public class ChangePasswordScreen extends Screen {
+    /**
+     * text field for oldPassword
+     */
     private JTextField oldPassword;
+    /**
+     * text field for newPassword
+     */
     private JTextField newPassword;
+    /**
+     * text field for confirmPassord
+     */
     private JTextField confirmPassword;
+    /**
+     * JButton for save button
+     */
     private JButton save;
     /**
      * Constructs a ChangePasswordScreen object.

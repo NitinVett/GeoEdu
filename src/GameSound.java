@@ -6,7 +6,13 @@ import java.io.IOException;
  * The GameSound class provides functionality for playing audio clips.
  */
 public class GameSound {
+    /**
+     * clip of game music
+     */
     private Clip clip;
+    /**
+     * volume control of game music
+     */
     private FloatControl volumeControl;
 
     /**

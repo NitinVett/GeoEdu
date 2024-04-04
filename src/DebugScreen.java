@@ -1,14 +1,27 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A specialized screen for debugging purposes within the application. It offers a login interface,
+ * allowing access to debugging functionalities upon successful password entry. This screen is part
+ * of a larger GUI framework, presumably for a game or an application that requires debug access.
+ */
 public class DebugScreen extends Screen {
+    /**
+     * text field for password
+     */
     JTextField password;
+    /**
+     * JButton for login button
+     */
     JButton login;
 
     /**
-     * Constructs a DebugScreen object.
-     * @param frame The FullScreenUI object.
-     * @param previous The previous Screen object.
+     * Constructs a DebugScreen instance with UI components for debug login.
+     *
+     * @param frame    The main frame of the application, expected to be an instance of FullScreenUI
+     *                 or a similar custom frame class that contains the application's screen management logic.
+     * @param previous The screen that was displayed before the DebugScreen, used for navigation purposes.
      */
     public DebugScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
@@ -22,7 +35,9 @@ public class DebugScreen extends Screen {
     }
 
     /**
-     * Sets the components of the screen.
+     * Sets up the layout and positions the components on the screen. This method adjusts
+     * the positions and sizes of the password field and login button based on the current
+     * dimensions of the screen.
      */
     public void setComponents() {
         int width = getWidth();
@@ -38,7 +53,9 @@ public class DebugScreen extends Screen {
     }
 
     /**
-     * Handles the action when the login button is clicked.
+     * Executes the logic associated with clicking the login button. It checks the entered
+     * password against a predefined value and either proceeds to the next screen upon success
+     * or displays an error message.
      */
     public void loginButton() {
         String pass = "1029384756";
@@ -51,8 +68,11 @@ public class DebugScreen extends Screen {
     }
 
     /**
-     * Paints the component.
-     * @param g The Graphics object.
+     * Custom painting method for DebugScreen. This method is called by the Swing framework
+     * to render the screen. It calls setComponents to ensure components are correctly positioned
+     * before painting.
+     *
+     * @param g The Graphics object used for drawing operations.
      */
     @Override
     public void paintComponent(Graphics g) {

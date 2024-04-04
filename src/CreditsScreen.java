@@ -6,19 +6,33 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * CreditsScreen class displays credits and images of ship and treasure chest.
- * Extends Screen class.
+ * The CreditsScreen class extends the Screen class to display a custom credits page within the application.
+ * It features a decorative background, images of a ship and a treasure chest, and a list of names to credit
+ * the contributors of the project. This screen is intended to visually enrich the application by acknowledging
+ * contributions in a visually engaging way.
  */
 public class CreditsScreen extends Screen {
+    /**
+     * JLabels for creditText, creditBackgroundLabel, shipLabel, treasureChestLabel
+     */
     JLabel creditText, creditBackgroundLabel, shipLabel, treasureChestLabel;
+    /**
+     * BufferedImages for creditBackgroundIMG, shipIMG, treasureChestIMG
+     */
     private BufferedImage creditBackgroundIMG, shipIMG, treasureChestIMG;
+    /**
+     * Images for resizedCreditBackgroundIMG, resizedShipIMG, resizedTreasureChestIMG
+     */
     private Image resizedCreditBackgroundIMG, resizedShipIMG, resizedTreasureChestIMG;
 
     /**
-     * Constructor for CreditsScreen.
+     * Constructs a new CreditsScreen instance. It loads the necessary images and sets up the labels
+     * for displaying credits and decorative elements.
      *
-     * @param frame    FullScreenUI object.
-     * @param previous Previous Screen object.
+     * @param frame    The FullScreenUI object that the CreditsScreen is part of, providing the frame
+     *                 for displaying the UI components.
+     * @param previous The Screen object that was displayed before transitioning to the CreditsScreen,
+     *                 allowing for navigation back to the previous state.
      */
     public CreditsScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
@@ -40,7 +54,8 @@ public class CreditsScreen extends Screen {
     }
 
     /**
-     * Sets the components for CreditsScreen.
+     * Sets up and positions the components on the CreditsScreen, including scaling images to fit the
+     * screen size and arranging text and images for an aesthetically pleasing layout.
      */
     public void setComponents() {
         int width = getWidth();
@@ -64,9 +79,11 @@ public class CreditsScreen extends Screen {
     }
 
     /**
-     * Overrides the paintComponent method to paint components on the screen.
+     * Custom painting method for the CreditsScreen. It is responsible for rendering the screen's
+     * components, including background, text, and images. This method ensures that the components
+     * are correctly positioned and displayed on the screen.
      *
-     * @param g Graphics object.
+     * @param g The Graphics object used for drawing operations.
      */
     @Override
     public void paintComponent(Graphics g) {

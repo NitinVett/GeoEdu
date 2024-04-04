@@ -8,12 +8,33 @@ import java.io.IOException;
  * The GameMainMenu class represents the main menu screen of the game.
  */
 public class GameMainMenu extends Screen {
+    /**
+     * JButton for newGameButton
+     */
     JButton newGameButton;
+    /**
+     * JButton for continueButton
+     */
     JButton continueButton;
+    /**
+     * JButton for tutorialButton
+     */
     JButton tutorialButton;
+    /**
+     * image
+     */
     Image image;
+    /**
+     * JButton for highScoresButton
+     */
     JButton highScoresButton;
+    /**
+     * JButton for logoutButton
+     */
     JButton logoutButton;
+    /**
+     * plank image path
+     */
     String imagePath= "resources/plank.png";
 
     /**

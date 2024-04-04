@@ -3,19 +3,25 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- * ExplorationMode represents a subclass of GameplayScreen specifically designed for exploration mode.
+ * The ExplorationMode class extends GameplayScreen to provide a specific gameplay experience
+ * focused on exploring and learning about different countries. It includes mechanisms to display
+ * flags, hints, and manage user interactions with multiple-choice questions.
  */
 public class ExplorationMode extends GameplayScreen {
 
+    /**
+     * JButton for exit button
+     */
     private JButton exitButton;
     /**
-     * Constructs an ExplorationMode object.
-     * @param gameTesting The GameTesting object.
-     * @param previous The previous Screen object.
-     * @param user The Player object.
-     * @param correctCountry The correct Country object.
-     * @param incorrect1 The first incorrect Country object.
-     * @param incorrect2 The second incorrect Country object.
+     * Constructs an ExplorationMode object with the necessary gameplay elements and initial setup.
+     *
+     * @param gameTesting    The main game testing object that controls the flow of the game.
+     * @param previous       The previous screen from which the user navigated to ExplorationMode.
+     * @param user           The current player object containing user data.
+     * @param correctCountry The correct country option for the current question.
+     * @param incorrect1     The first incorrect country option.
+     * @param incorrect2     The second incorrect country option.
      */
     public ExplorationMode(GameTesting gameTesting, Screen previous, Player user, Country correctCountry, Country incorrect1, Country incorrect2) {
         super(gameTesting, previous, user, correctCountry, incorrect1, incorrect2);
@@ -23,7 +29,8 @@ public class ExplorationMode extends GameplayScreen {
     }
 
     /**
-     * Displays the flag.
+     * Displays the country's flag to the user as part of the exploration mode. Overrides
+     * the showFlag method from the parent class to include additional logic specific to this mode.
      */
     @Override
     public void showFlag() {
@@ -35,7 +42,8 @@ public class ExplorationMode extends GameplayScreen {
     }
 
     /**
-     * Displays the hints.
+     * Displays hints related to the correct country option. This method enhances user
+     * engagement by providing clues and supports the educational aspect of the gameplay.
      */
     @Override
     public void showHints() {
@@ -67,9 +75,15 @@ public class ExplorationMode extends GameplayScreen {
         clickHandling(choice3Button);
     }
 
+    // Method comments for setChoice1Button, setChoice2Button, and setChoice3Button
+    // can follow a similar pattern, noting that they setup click handlers for each choice.
+
     /**
-     * Handles the click event for a choice button.
-     * @param choiceButton The JButton object representing the choice button.
+     * Handles the logic for when a user selects a choice. It checks whether the choice is correct
+     * and updates the UI to reflect the result. Correct choices proceed to a new game, while incorrect
+     * choices disable the button and mark it as wrong.
+     *
+     * @param choiceButton The JButton object representing the user-selected choice.
      */
     @Override
     public void clickHandling(JButton choiceButton) {
@@ -87,8 +101,10 @@ public class ExplorationMode extends GameplayScreen {
     }
 
     /**
-     * Paints the component.
-     * @param g The Graphics object.
+     * Custom painting method for the ExplorationMode screen. It is responsible for drawing the exit
+     * button and positioning it on the screen, in addition to invoking the superclass's painting logic.
+     *
+     * @param g The Graphics object used for drawing operations.
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -110,6 +126,11 @@ public class ExplorationMode extends GameplayScreen {
         // Add the exit button to the panel
         add(exitButton);
     }
+
+    /**
+     * Defines the action taken when the user decides to exit exploration mode. This typically involves
+     * navigating back to the main game menu or a different screen within the application.
+     */
     public void exitExploration(){
         swapScreens(new GameMainMenu(frame,this,user));
     }

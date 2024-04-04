@@ -11,14 +11,49 @@ import java.io.IOException;
  */
 public class MainMenu extends Screen {
 
+    /**
+     * Button that triggers the login process, verifying user credentials against stored data
+     * and granting access to the application's main features upon successful authentication.
+     */
     private JButton loginButton;
+
+    /**
+     * Button that navigates to the registration screen, allowing new users to create an account
+     * and gain access to the application's features.
+     */
     private JButton registerButton;
+
+    /**
+     * Button that closes the application or returns the user to the previous screen,
+     * providing an exit point from the current interface.
+     */
     private JButton exitButton;
+
+    /**
+     * Label that displays a graphical representation or icon, in this context, a pirate.
+     * Used to add thematic elements or visual identity to the screen.
+     */
     private JLabel pirateLabel;
+
+    /**
+     * An image containing the original pirate graphic. This BufferedImage is typically loaded
+     * from an external source and serves as the basis for any scaling or manipulation.
+     */
     private BufferedImage pirateIMG;
+
+    /**
+     * A scaled version of the pirate image, resized to fit specific layout requirements or
+     * design preferences on the screen.
+     */
     private Image resizedPirateIMG;
+
+    /**
+     * An image used as the background for the screen, setting the visual theme and providing
+     * a cohesive aesthetic appearance. This might cover the entire screen or specific areas.
+     */
     private Image backgroundImg;
-    private Font buttonFont;
+
+
 
     /**
      * Constructs a MainMenu object with the specified FullScreenUI frame.

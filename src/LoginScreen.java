@@ -15,10 +15,37 @@ import java.util.Objects;
  * and an escape button for additional functionality or navigation.
  */
 public class LoginScreen extends Screen {
+    /**
+     * A text field for the user to enter their username. This field typically accompanies
+     * a label indicating its purpose to the user.
+     */
     JTextField username;
+
+    /**
+     * A password field that obscures the user's input, enhancing security by preventing
+     * password visibility. This field is for entering a password associated with the user account.
+     */
     JPasswordField password;
-    JButton loginButton, esc;
+
+    /**
+     * A button that initiates the login process. Clicking this button typically triggers
+     * validation of the user's credentials against stored data and, if successful, proceeds
+     * to the next relevant screen or application section.
+     */
+    JButton loginButton;
+
+    /**
+     * An escape or back button that allows users to cancel the login process or navigate back
+     * to a previous screen. This provides an exit path from the login screen without completing the login.
+     */
+    JButton esc;
+
+    /**
+     * An image used for background or decorative purposes on the login screen. This might be a logo,
+     * a thematic illustration, or any other visual element intended to enhance the interface's appearance.
+     */
     private Image image;
+
 
     /**
      * Constructs a LoginScreen with input fields for username and password, and buttons for login and escape.

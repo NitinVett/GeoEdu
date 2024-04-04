@@ -6,11 +6,18 @@ import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
 
 /**
- * CountryDatabase class provides methods to interact with a CSV file containing country data.
- * It handles reading, retrieving, and filtering country information.
+ * Reads the CSV file specified by the {@code CSV_FILE_PATH} constant and retrieves the "Country Name" from each row.
+ *
+ * @throws CsvValidationException If the CSV content does not match the expected format or if there are issues
+ * with the CSV structure that prevent it from being read correctly.
+ * @throws IOException If an I/O error occurs when opening or reading the file.
+ * @return An {@link ArrayList} containing the "Country Name" from each row of the CSV file.
  */
 public class CountryDatabase {
 
+    /**
+     * path of country data csv file
+     */
     private static final String CSV_FILE_PATH = "Country Data/geocraftv2country.csv";
 
     /**
@@ -234,7 +241,7 @@ public class CountryDatabase {
      *                                with the CSV structure that prevent it from being read correctly.
      * @throws IOException If an I/O error occurs when opening or reading the file.
      */
-    public static ArrayList<String> getAllUsers() {
+    public static ArrayList<String> getAllUsers() throws CsvValidationException{
         ArrayList<String> Users = new ArrayList<>();
         try {
             CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));

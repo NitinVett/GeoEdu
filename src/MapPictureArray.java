@@ -12,7 +12,13 @@ import java.io.IOException;
  */
 public class MapPictureArray extends JFrame {
 
-    private final BufferedImage[] backgroundImages; // Array to store background images
+    /**
+     * An array of BufferedImage objects used to store various background images. These images can be used
+     * to dynamically change the background of a screen or to cycle through different backgrounds in response
+     * to specific user actions or events within the application. Being final, this array must be initialized
+     * at the time of declaration or within the constructor of the class.
+     */
+    private final BufferedImage[] backgroundImages;
 
     /**
      * Constructs a MapPictureArray object with the specified game mode.

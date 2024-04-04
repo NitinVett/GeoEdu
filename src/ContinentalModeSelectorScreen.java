@@ -9,12 +9,31 @@ import java.io.IOException;
  * ContinentalModeSelectorScreen represents the screen for selecting a continent in the game mode selection.
  */
 public class ContinentalModeSelectorScreen extends Screen {
+    /**
+     * JButton for americas button
+     */
     private JButton americas;
+    /**
+     * JButton for asia button
+     */
     private JButton asia;
+    /**
+     * JButton for europe button
+     */
     private JButton europe;
+    /**
+     * JButton for esc button
+     */
     private JButton esc;
+    /**
+     * JButton for mode button
+     */
     private String mode;
+    /**
+     * plank image
+     */
     private Image plankIMG;
+
 
     /**
      * Constructs a ContinentalModeSelectorScreen object.

@@ -15,18 +15,78 @@ import java.awt.image.BufferedImage;
  */
 public class Screen extends JPanel {
 
+    /**
+     * A timer used for managing the display duration of error messages on the screen.
+     * After a predefined interval, the timer can hide or remove the error message from the user's view.
+     */
     private Timer errorMessageTimer;
+
+    /**
+     * The font used for displaying titles on the screen. This custom font can enhance
+     * the visual appeal and thematic consistency of titles and headings.
+     */
     private Font titleFont;
+
+    /**
+     * Metrics for the {@code titleFont}, providing information such as its size and spacing.
+     * Useful for precisely positioning text on the screen based on its dimensions.
+     */
     private FontMetrics titleFontMetrics;
+
+    /**
+     * A flag indicating whether the bounds for the settings button have been set.
+     * Ensures that the button is correctly positioned and sized before being displayed.
+     */
     private boolean settingsButtonBoundsSet = false;
+
+    /**
+     * The main application window, providing the frame in which the UI is displayed.
+     * Acts as the container for all screen elements and manages transitions between screens.
+     */
     FullScreenUI frame;
+
+    /**
+     * A button that allows users to access the settings menu. Provides a mechanism for
+     * adjusting application preferences and configurations.
+     */
     JButton settings;
+
+    /**
+     * An image used as the background for the current screen. Enhances the visual appeal
+     * and thematic ambiance of the user interface.
+     */
     Image backgroundImage;
+
+    /**
+     * A label used to display error messages to the user. This label can be dynamically
+     * updated to reflect various error states or validation feedback.
+     */
     private JLabel errorMessageLabel;
+
+    /**
+     * A reference to the previous screen in the application's navigation hierarchy.
+     * Allows for easy backward navigation and state management.
+     */
     protected Screen prev;
+
+    /**
+     * The current player or user interacting with the application. This object may hold
+     * user-specific data, preferences, and game states.
+     */
     Player user;
+
+    /**
+     * The default cursor used in the application. Can be set to a standard cursor to ensure
+     * consistent user experience across different screens.
+     */
     Cursor defaultCursor;
+
+    /**
+     * A custom cursor designed to enhance the thematic elements of the application. This cursor
+     * can be used to replace the default cursor in specific contexts or screens for visual appeal.
+     */
     Cursor customCursor;
+
 
     /**
      * Constructor for Screen without player object.
@@ -381,6 +441,10 @@ public class Screen extends JPanel {
      * Inner class to handle button mouse events.
      */
     class ButtonMouseListener extends MouseAdapter {
+
+        /**
+         * JButton for buttons
+         */
         private JButton button;
 
         ButtonMouseListener(JButton button) {

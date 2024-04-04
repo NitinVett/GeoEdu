@@ -14,10 +14,45 @@ import java.util.Arrays;
  * and an escape button for additional functionality or navigation.
  */
 public class RegisterScreen extends Screen {
+    /**
+     * A text field allowing the user to enter a username. This field is typically accompanied
+     * by a label indicating its purpose. The entered username is used as part of the registration process.
+     */
     JTextField username;
-    JPasswordField password, password_2;
-    JButton register, esc;
+
+    /**
+     * A password field where the user can enter their chosen password. This field obscures the entered
+     * characters for security. The password entered here is to be matched with the one entered in the
+     * {@code password_2} field as part of the registration validation process.
+     */
+    JPasswordField password;
+
+    /**
+     * A second password field for confirming the user's chosen password. It serves as a verification step
+     * to ensure that the user has correctly entered their intended password without any typographical errors.
+     * The contents of this field should match those of the {@code password} field to successfully complete registration.
+     */
+    JPasswordField password_2;
+
+    /**
+     * A button that initiates the registration process. Clicking this button typically triggers
+     * validation of the input fields ({@code username}, {@code password}, and {@code password_2})
+     * and, if successful, creates a new user account with the entered credentials.
+     */
+    JButton register;
+
+    /**
+     * A button that allows users to cancel the registration process or navigate back
+     * to a previous screen. This provides a way to exit the registration screen without completing the process.
+     */
+    JButton esc;
+
+    /**
+     * An image used as the background for the registration screen. This image can enhance
+     * the visual appeal of the screen and contribute to the overall theme of the user interface.
+     */
     Image plankIMG;
+
 
     /**
      * Constructs a RegisterScreen with input fields for registration and buttons for submitting the registration or exiting the screen.
@@ -147,6 +182,9 @@ public class RegisterScreen extends Screen {
         repaint();
     }
 
+    /**
+     * exit button linkage
+     */
     public void exitButton() {
         swapScreens(prev);
     }

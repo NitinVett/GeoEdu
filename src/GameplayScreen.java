@@ -8,43 +8,98 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * The GameplayScreen class represents the screen where gameplay occurs, displaying country information and buttons for player interaction.
+ * The GameplayScreen class is designed to manage and display the gameplay interface
+ * where players interact with the game. It presents information about different countries
+ * and allows the player to make choices through buttons. The class supports showing hints,
+ * displaying the country flag, and updating the player's score based on their choices.
  */
 public class GameplayScreen extends Screen {
-    //buttons
+
+    /** Timer for scheduling score updates and transitions between questions. */
     public Timer scoreUpdateTimer;
+
+    /** Button for the first choice in the multiple-choice question. */
     JButton choice1Button;
+
+    /** Button for the second choice in the multiple-choice question. */
     JButton choice2Button;
+
+    /** Button for the third choice in the multiple-choice question. */
     JButton choice3Button;
+
+    /** Button that, when clicked, reveals the flag associated with the correct country. */
     JButton showFlagButton;
+
+    /** Button that, when clicked, provides hints to help identify the correct country. */
     JButton showHintButton;
 
-    JLabel countryLabel, hintBackgroundLabel, hintLabel, highScoreLabel, flagLabel;
+    /** Label displaying the country information or question related to the current game round. */
+    JLabel countryLabel;
+
+    /** Label used as a background for hint text, enhancing UI aesthetics. */
+    JLabel hintBackgroundLabel;
+
+    /** Label for displaying hints about the correct country, aimed at assisting the player. */
+    JLabel hintLabel;
+
+    /** Label showing the player's current high score. */
+    JLabel highScoreLabel;
+
+    /** Label used to display the flag of the correct country upon player request. */
+    JLabel flagLabel;
+
+    /** The amount of points added to the player's score for a correct answer. */
     int highScoreWinAmount = 5;
+
+    /** The amount of points deducted from the player's score for an incorrect answer. */
     int highScoreLossAmount = 5;
+
+    /** Delay in milliseconds before executing certain actions, like updating the score or showing the next question. */
     int delay = 5000;
 
+    /** Image used for button backgrounds or other decorative elements within the game. */
     Image plankIMG;
 
+    /** The country that is the correct answer for the current question. */
     public Country correctCountry;
+
+    /** The first incorrect country option for the current question. */
     public Country incorrect1;
+
+    /** The second incorrect country option for the current question. */
     public Country incorrect2;
+
+    /** The player object, containing information such as the player's name and score. */
     Player user;
+
+    /** The game controller handling game logic, transitions between screens, and saving game progress. */
     public GameTesting gameTesting;
+
+    /** Background image for displaying hints, usually a stylized box or area where hint text appears. */
     private Image hintBackgroundIMG;
+
+    /** A secondary timer used for UI updates, like resetting the high score label color after a change. */
     private Timer timer;
+
+    /** The current score of the player, updated throughout the game based on correct or incorrect answers. */
     public int highscore;
+
+    /** Flag indicating whether the flag of the correct country has been revealed to the player. */
     boolean flagWasClicked;
+
+    /** Flag indicating whether hints for identifying the correct country have been shown to the player. */
     boolean hintWasClicked;
 
+
     /**
-     * Constructs a GameplayScreen object with the specified parameters.
-     * @param gameTesting The GameTesting object.
-     * @param previous The previous Screen object.
-     * @param player The Player object.
-     * @param correctCountry The correct Country object.
-     * @param incorrect1 The first incorrect Country object.
-     * @param incorrect2 The second incorrect Country object.
+     * Constructs a GameplayScreen with specified game elements and initial settings.
+     *
+     * @param gameTesting The main controller for the game logic and progression.
+     * @param previous The screen that was displayed before transitioning to the GameplayScreen.
+     * @param player The player object representing the current game user.
+     * @param correctCountry The country that is the correct choice for the current game question.
+     * @param incorrect1 The first incorrect country choice.
+     * @param incorrect2 The second incorrect country choice.
      */
     public GameplayScreen(GameTesting gameTesting, Screen previous, Player player, Country correctCountry, Country incorrect1, Country incorrect2) {
         super(gameTesting.frame, previous, player);
@@ -129,7 +184,7 @@ public class GameplayScreen extends Screen {
     }
 
     /**
-     * Displays the flag of the correct country and updates the high score accordingly.
+     * Shows the flag of the correct country and updates the player's high score based on this action.
      */
     public void showFlag() {
         highscore = user.getHighScore();
@@ -149,7 +204,7 @@ public class GameplayScreen extends Screen {
     }
 
     /**
-     * Displays hints about the correct country and updates the high score accordingly.
+     * Displays hints related to the correct country and adjusts the player's high score accordingly.
      */
     public void showHints() {
         highscore = user.getHighScore();
@@ -169,7 +224,7 @@ public class GameplayScreen extends Screen {
     }
 
     /**
-     * Disables choice buttons to prevent further interaction during game resolution.
+     * Disables the choice buttons to prevent further actions after a choice has been made.
      */
     public void disableChoiceButtons() {
         choice1Button.setEnabled(false);
@@ -180,7 +235,7 @@ public class GameplayScreen extends Screen {
     }
 
     /**
-     * Updates the positions and sizes of components based on the current screen size.
+     * Updates the positions and sizes of UI components based on the screen size.
      */
     public void updateButtonPositions() {
 
@@ -247,8 +302,9 @@ public class GameplayScreen extends Screen {
     }
 
     /**
-     * Handles the action when any choice button is clicked.
-     * @param choiceButton The choice button that was clicked.
+     * Handles the logic for when a choice button is selected by the player.
+     *
+     * @param choiceButton The JButton representing the selected choice.
      */
     public void clickHandling(JButton choiceButton) {
         highscore = user.getHighScore();
@@ -294,6 +350,12 @@ public class GameplayScreen extends Screen {
         timer.start();
     }
 
+    /**
+     * Custom painting method for the GameplayScreen. Calls the superclass's paintComponent to ensure
+     * background rendering and updates component positions dynamically.
+     *
+     * @param g The Graphics object used for drawing operations.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Paints the background

@@ -11,22 +11,38 @@ import java.io.IOException;
  */
 public class GameTypeSelectorScreen extends Screen {
 
-    JButton marathon; // Button for Marathon mode
-    JButton timed; // Button for Timed mode
-    JButton exploration; // Button for Exploration mode
-    JButton esc; // Escape button
-    String mode; // Game mode
-    String continent; // Continent selection
-    Image plankIMG; // Background image
+    /** Button to select the Marathon game mode. This mode might involve continuous play until a failure condition is met. */
+    JButton marathon;
+
+    /** Button to select the Timed game mode. In this mode, players are likely to be challenged to achieve something within a set time limit. */
+    JButton timed;
+
+    /** Button to select the Exploration game mode. This mode may encourage players to explore content at their own pace with less focus on scoring or time limits. */
+    JButton exploration;
+
+    /** Button to exit the game type selection screen and return to the previous screen. */
+    JButton esc;
+
+    /** The currently selected game mode, determining which type of game the player will engage with. */
+    String mode;
+
+    /** The continent selection, applicable in certain game modes where geographic or regional specificity is relevant. */
+    String continent;
+
+    /** Background image used for the game type selection screen, possibly to enhance visual appeal or theme consistency. */
+    Image plankIMG;
+
 
     /**
-     * Constructs a GameTypeSelectorScreen object with the specified frame, previous screen, user, game mode, and continent.
+     * Constructs a GameTypeSelectorScreen object. This screen allows the user to select a game mode
+     * (Marathon, Timed, Exploration) and sets up the UI elements accordingly. It initializes buttons
+     * for each game mode and an escape button, associating actions with each button to handle user selection.
      *
-     * @param frame     The FullScreenUI frame that contains this screen.
-     * @param previous  The previous Screen object to return to when navigating back.
-     * @param user      The current player.
-     * @param mode      The selected game mode.
-     * @param continent The selected continent.
+     * @param frame The FullScreenUI frame that contains this screen, providing context for screen transitions.
+     * @param previous The previous screen object, allowing for navigation back to the prior state.
+     * @param user The Player object representing the current user, used for game state initialization.
+     * @param mode The selected game mode, affecting which game logic is applied.
+     * @param continent The selected continent, relevant in certain game modes for filtering content.
      */
     public GameTypeSelectorScreen(FullScreenUI frame, Screen previous, Player user, String mode, String continent) {
         super(frame, previous, user);
@@ -56,7 +72,9 @@ public class GameTypeSelectorScreen extends Screen {
     }
 
     /**
-     * Updates the positions of buttons based on the current window size.
+     * Dynamically updates the positions and sizes of the game mode selection buttons and the escape button
+     * based on the current dimensions of the window. This ensures that the UI elements are appropriately
+     * scaled and positioned regardless of window size.
      */
     private void updateButtonPositions() {
         int width = getWidth();
@@ -78,7 +96,8 @@ public class GameTypeSelectorScreen extends Screen {
     }
 
     /**
-     * Starts the game in Exploration mode.
+     * Initiates the game in Exploration mode by creating a new GameTesting instance with the specified mode
+     * and transitioning to the gameplay screen. This method is triggered when the Exploration button is clicked.
      */
     public void explorationButton() {
         GameTesting playExploration = new GameTesting(frame, user, mode, continent, "Exploration");
@@ -86,7 +105,8 @@ public class GameTypeSelectorScreen extends Screen {
     }
 
     /**
-     * Starts the game in Marathon mode.
+     * Initiates the game in Marathon mode by creating a new GameTesting instance with the specified mode
+     * and transitioning to the gameplay screen. This method is triggered when the Marathon button is clicked.
      */
     public void marathonButton() {
         GameTesting playMarathon = new GameTesting(frame, user, mode, continent, "Marathon");
@@ -94,7 +114,8 @@ public class GameTypeSelectorScreen extends Screen {
     }
 
     /**
-     * Starts the game in Timed mode.
+     * Initiates the game in Timed mode by creating a new GameTesting instance with the specified mode
+     * and transitioning to the gameplay screen. This method is triggered when the Timed button is clicked.
      */
     public void timedButton() {
         GameTesting playTimed = new GameTesting(frame, user, mode, continent, "Timed");
@@ -102,16 +123,18 @@ public class GameTypeSelectorScreen extends Screen {
     }
 
     /**
-     * Exits to the previous screen.
+     * Handles the action to exit the game type selection screen and return to the previous screen.
+     * This method is triggered when the escape button is clicked.
      */
     public void exitButton() {
         swapScreens(prev);
     }
 
     /**
-     * Custom paint component method to draw additional UI elements, like titles or backgrounds.
+     * Custom painting method for drawing UI elements specific to the GameTypeSelectorScreen.
+     * This includes any text, images, or backgrounds that are part of the screen's design.
      *
-     * @param g The Graphics object to paint.
+     * @param g The Graphics object used for drawing operations.
      */
     @Override
     protected void paintComponent(Graphics g) {

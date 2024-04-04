@@ -12,9 +12,38 @@ import java.util.Objects;
  */
 public class MarathonMode extends GameplayScreen {
 
+    /**
+     * Labels used to display heart icons representing the player's remaining lives or health points.
+     * 'thirdHearts' might represent the last heart in a three-heart system, 'secondHearts' the second,
+     * and 'firstHeart' the first or initial heart. The ordering suggests a visual representation of health
+     * from left to right or another logical sequence.
+     */
     private JLabel thirdHearts, secondHearts, firstHeart;
-    private BufferedImage fullHeartIMG, emptyHeartIMG;
-    private Image resizedFullHeartIMG, resizedEmptyHeartIMG;
+
+    /**
+     * A BufferedImage for a full heart icon, indicating an available life or full health point.
+     * This image is used in the game's UI to visually represent the player's current state of health.
+     */
+    private BufferedImage fullHeartIMG;
+
+    /**
+     * A BufferedImage for an empty heart icon, indicating a lost life or depleted health point.
+     * This visual cue helps players quickly assess their remaining chances or health status in the game.
+     */
+    private BufferedImage emptyHeartIMG;
+
+    /**
+     * A resized version of the full heart icon, adjusted to fit specific UI layout requirements
+     * or design preferences. This ensures that the heart icon is displayed correctly in various screen resolutions.
+     */
+    private Image resizedFullHeartIMG;
+
+    /**
+     * A resized version of the empty heart icon, similarly adjusted for consistency in appearance
+     * across different parts of the UI. This adaptation is crucial for maintaining a uniform look and feel.
+     */
+    private Image resizedEmptyHeartIMG;
+
 
     /**
      * Constructs a MarathonMode object with the specified parameters.

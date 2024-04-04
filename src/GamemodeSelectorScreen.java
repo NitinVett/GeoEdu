@@ -6,20 +6,39 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The GamemodeSelectorScreen class represents the screen where the player can select different game modes.
+ * The GamemodeSelectorScreen class provides a GUI for selecting different game modes within the application.
+ * It allows the player to choose between global, continental, or micro nations modes, enforcing certain
+ * requirements for mode access based on the player's high score.
  */
 public class GamemodeSelectorScreen extends Screen {
+    /**
+     * JButton for global Button
+     */
     JButton global;
+    /**
+     * JButton for continental Button
+     */
     JButton continental;
+    /**
+     * JButton for microNations Button
+     */
     JButton microNations;
+    /**
+     * JButton for esc Button
+     */
     JButton esc;
+    /**
+     * plank image
+     */
     Image plankIMG;
 
     /**
-     * Constructs a GamemodeSelectorScreen object with the specified parameters.
-     * @param frame The FullScreenUI object.
-     * @param previous The previous Screen object.
-     * @param user The Player object.
+     * Constructs a GamemodeSelectorScreen with buttons for each game mode and an escape button.
+     * Initializes buttons and loads necessary images.
+     *
+     * @param frame    The FullScreenUI object to which this screen belongs.
+     * @param previous The previous screen from which the user navigated to this screen.
+     * @param user     The Player object representing the current user.
      */
     public GamemodeSelectorScreen(FullScreenUI frame, Screen previous, Player user) {
         super(frame, previous, user);
@@ -49,7 +68,8 @@ public class GamemodeSelectorScreen extends Screen {
     }
 
     /**
-     * Updates the positions and sizes of buttons based on the current screen size.
+     * Dynamically updates the positions and appearances of the mode selection and escape buttons
+     * based on the current screen dimensions. Uses the plank image for button backgrounds.
      */
     private void updateButtonPositions() {
         int width = getWidth();
@@ -71,14 +91,15 @@ public class GamemodeSelectorScreen extends Screen {
     }
 
     /**
-     * Handles the action when the Global button is clicked.
+     * Triggers the transition to the global game mode screen when the global mode button is clicked.
      */
     public void globalButton() {
         swapScreens(new GameTypeSelectorScreen(frame,this,user,"Global Mode",null));
     }
 
     /**
-     * Handles the action when the Continental button is clicked.
+     * Triggers the transition to the continental game mode selection screen when the continental button is clicked.
+     * Access is restricted based on the player's high score or if the player is a debugger.
      */
     public void continentalButton() {
         if(user.getHighScore() >= 25 || user.getUsername().equals("Debugger")) {
@@ -89,7 +110,8 @@ public class GamemodeSelectorScreen extends Screen {
     }
 
     /**
-     * Handles the action when the Micro Nations button is clicked.
+     * Triggers the transition to the micro nations game mode screen when the micro nations button is clicked.
+     * Access is restricted based on the player's high score or if the player is a debugger.
      */
     public void microNationButton() {
         if(user.getHighScore() >= 100|| user.getUsername().equals("Debugger")) {
@@ -100,12 +122,18 @@ public class GamemodeSelectorScreen extends Screen {
     }
 
     /**
-     * Handles the action when the Exit button is clicked.
+     * Handles the action when the Exit (esc) button is clicked, returning the user to the previous screen.
      */
     public void exitButton() {
         swapScreens(prev);
     }
 
+    /**
+     * Custom painting method for the GamemodeSelectorScreen. Draws the screen's title and updates the
+     * button positions. Overrides the paintComponent method from the superclass.
+     *
+     * @param g The Graphics object used for drawing operations.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         int width = getWidth();

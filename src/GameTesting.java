@@ -4,25 +4,76 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 
+/**
+ * Represents and manages the core gameplay logic, including handling different game modes,
+ * tracking player progress, and managing game states. It supports timed, exploration, and marathon
+ * modes, among potentially others, by coordinating between various screen states and game data.
+ */
 public class GameTesting implements Serializable {
 
+    /** The number of lives a player has during the game session. */
     private int lives = 3;
+
+    /** A timer for timed gameplay, decreasing the time left and updating the UI accordingly. */
     Timer timer;
+
+    /** The current player participating in the game session. */
     private Player user;
+
+    /** An array holding all the country objects relevant to the current game mode. */
     private Country[] countries;
+
+    /** The current index within the countries array, indicating the next country to be used. */
     private int curIndex;
+
+    /** The amount of time left in seconds for timed game modes. */
     int timeLeft = 60;
+
+    /** A list of indices from the countries array that have already been visited/used. */
     private ArrayList<Integer> visitedIndices = new ArrayList<>();
+
+    /** A temporary stack used for randomizing country selection without repetition. */
     private ArrayList<Integer> randomizerStack = new ArrayList<>();
+
+    /** The country object representing the correct answer for the current question. */
     Country correctCountry;
+
+    /** The first incorrect country option. */
     Country incorrectCountry1;
+
+    /** The second incorrect country option. */
     Country incorrectCountry2;
+
+    /** The type of the current game (e.g., "Timed", "Exploration"). */
     String type;
+
+    /** The main application window. */
     FullScreenUI frame;
+
+    /** The mode of the game, affecting which countries are loaded (e.g., "Global", "Continental"). */
     String mode;
+
+    /** The current gameplay screen being displayed. */
     GameplayScreen currentGame;
+
+    /** The specific continent selected for the game, applicable in continental mode. */
     String continent;
-    private int numGuesses, correctGuesses = 0;
+
+    /** The total number of guesses made by the player in the current game. */
+    private int numGuesses;
+
+    /** The total number of correct guesses made by the player in the current game. */
+    private int correctGuesses = 0;
+
+    /**
+     * Initializes a new GameTesting instance with specified game parameters and settings.
+     *
+     * @param frame The main application window.
+     * @param user The current player.
+     * @param mode The game mode ("Global", "Continental", etc.).
+     * @param continent The selected continent for the game, if applicable.
+     * @param type The type of game (e.g., "Timed", "Marathon").
+     */
     public GameTesting(FullScreenUI frame, Player user, String mode, String continent,String type) {
 
         this.continent = continent;
@@ -52,23 +103,58 @@ public class GameTesting implements Serializable {
         }
 
     }
+    // Additional methods such as startNextIterationMarathon, startNextIterationExploration, etc.,
+    // handle the logic for progressing through the game, loading new questions, and transitioning between screens based on the game state.
 
+    /**
+     * Sets the total number of guesses made by the player.
+     * This method updates the count of guesses a player has made, which can be used
+     * for tracking player performance and potentially adjusting game difficulty or providing feedback.
+     *
+     * @param numGuesses The new total number of guesses made by the player.
+     */
     public void setNumGuesses(int numGuesses) {
         this.numGuesses = numGuesses;
     }
 
+    /**
+     * Gets the total number of guesses made by the player in the current game session.
+     * This can be used to evaluate player performance or for statistical purposes, among other uses.
+     *
+     * @return The total number of guesses made by the player.
+     */
     public int getNumGuesses() {
         return numGuesses;
     }
 
+    /**
+     * Sets the number of correct guesses made by the player.
+     * This is particularly useful for tracking the player's success rate and can be used
+     * to adjust game mechanics or provide feedback on performance.
+     *
+     * @param correctGuesses The new total number of correct guesses made by the player.
+     */
     public void setCorrectGuesses(int correctGuesses){
         this.correctGuesses = correctGuesses;
     }
+
+    /**
+     * Retrieves the number of correct guesses made by the player in the current game session.
+     * This information can be valuable for evaluating the player's knowledge or skill level
+     * in the context of the game.
+     *
+     * @return The total number of correct guesses made by the player.
+     */
     public int getCorrectGuesses() {
         return correctGuesses;
     }
 
     // Game loop
+    /**
+     * Initiates the next iteration of the marathon game mode, loading new countries and updating the game state.
+     *
+     * @param load Indicates whether to load an existing game state or start fresh.
+     */
     public void startNextIterationMarathon(boolean load) {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
@@ -108,6 +194,11 @@ public class GameTesting implements Serializable {
         }
     }
 
+    /**
+     * Initiates the next iteration of the exploration game mode, with similar functionality tailored for exploration.
+     *
+     * @param load Indicates whether to load an existing game state or start fresh.
+     */
     public void startNextIterationExploration(boolean load) {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
@@ -148,6 +239,11 @@ public class GameTesting implements Serializable {
         }
     }
 
+    /**
+     * Initiates the next iteration of the timed game mode, applying specific logic for timed gameplay.
+     *
+     * @param load Indicates whether to load an existing game state or start fresh.
+     */
     public void startNextIterationTimed(boolean load) {
         ArrayList<Integer> randomizerStack = new ArrayList<>();
         int totalCountries = countries.length;
@@ -184,16 +280,38 @@ public class GameTesting implements Serializable {
 
         curIndex++;
     }
+
+    /**
+     * Returns the remaining time in the timed game mode.
+     *
+     * @return The time left in seconds.
+     */
     public int getTime(){
         return timeLeft;
     }
+
+    /**
+     * Reduces the player's lives by one, applicable in game modes where lives are used.
+     */
     public void reduceLives(){
         lives =lives-1;
 
     }
+
+    /**
+     * Returns the number of lives the player has left.
+     *
+     * @return The current number of lives.
+     */
     public int getLives(){
         return lives;
     }
+
+    /**
+     * Converts the current game state to a string representation for saving.
+     *
+     * @return A string representing the current game state.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         // Convert visitedIndices list to a string representation
@@ -223,10 +341,18 @@ public class GameTesting implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Saves the current game state to a file or persistent storage.
+     */
     public void saveFile(){
         CsvHandler.changeListOfCountry(user.getUsername(),this.toString());
     }
 
+    /**
+     * Loads a game state from a given string representation, updating the current state.
+     *
+     * @param saveString The string representation of a saved game state.
+     */
     public void loadFile(String saveString) {
 
         // Split the string by semicolon to get each field
@@ -302,6 +428,13 @@ public class GameTesting implements Serializable {
 
 
     }
+
+    /**
+     * Initiates a new game round based on the current game type (Exploration, Timed, Marathon).
+     * This method decides which iteration method to call based on the game type and whether it's loading a game.
+     *
+     * @param load A boolean indicating whether the game is being loaded from a saved state.
+     */
     public void newGame(boolean load) {
 
         switch (type) {
@@ -312,6 +445,10 @@ public class GameTesting implements Serializable {
         saveFile();
     }
 
+    /**
+     * Ends the current game session, performing any necessary cleanup, saving final stats,
+     * and transitioning to the game over or statistics screen.
+     */
     public void endGame(){
         user.setGameData("None");
 
@@ -330,9 +467,26 @@ public class GameTesting implements Serializable {
         frame.setContentPane(new StatScreen(frame, null, user));
     }
 
+    /**
+     * Generates a random number within a specified range (0 to max), exclusive of max.
+     * This utility method is used to select random countries from the available list.
+     *
+     * @param max The upper bound for the random number generation.
+     * @return A randomly generated integer within the specified range.
+     */
     private int randomNumber(int max) {
         return ThreadLocalRandom.current().nextInt(0, max);
     }
+
+    /**
+     * Generates a random integer within a specified range, excluding a specific value.
+     * This method ensures that the random number generated is not equal to the value to avoid,
+     * which is useful for selecting incorrect country options without repetition.
+     *
+     * @param max The upper bound for the random number generation.
+     * @param avoidValue The value to be excluded from the random number generation.
+     * @return A randomly generated integer within the specified range, not equal to avoidValue.
+     */
 
     private int getRandomIntWithAvoidance(int max, int avoidValue) {
         if (0 > max) {

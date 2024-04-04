@@ -6,15 +6,23 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * ExitScreen represents the screen displayed when the user decides to exit the application.
+ * The ExitScreen class extends the Screen class to present a user interface
+ * for confirming the application's exit intention. It displays options to either
+ * exit or remain in the application, enhancing user experience by preventing
+ * accidental closures.
  */
 public class ExitScreen extends Screen {
+    /**
+     * JButton for no, yes and esc button
+     */
     JButton no, yes, esc;
 
     /**
-     * Constructs an ExitScreen object.
-     * @param frame The FullScreenUI object.
-     * @param previous The previous Screen object.
+     * Constructs an ExitScreen with Yes, No, and Escape buttons.
+     *
+     * @param frame    The main application window, encapsulated within a FullScreenUI object,
+     *                 that manages the transition between different screens.
+     * @param previous The screen from which the user navigated to the ExitScreen.
      */
     public ExitScreen(FullScreenUI frame, Screen previous) {
         super(frame, previous);
@@ -43,15 +51,19 @@ public class ExitScreen extends Screen {
     }
 
     /**
-     * Handles the action when the exit button is clicked.
+     * Defines the action to be taken when the exit button (Esc) is clicked.
+     * Typically, this would revert to the previous screen, allowing the user
+     * to cancel the exit process.
      */
     public void exitButton() {
         swapScreens(prev);
     }
 
     /**
-     * Sets the components of the screen.
-     * @param g The Graphics object.
+     * Sets up and positions the components on the screen. Adjusts the position
+     * and appearance of the Yes, No, and Escape buttons.
+     *
+     * @param g The Graphics object used for drawing.
      */
     public void setComponents(Graphics g) {
         int width = getWidth();
@@ -71,9 +83,11 @@ public class ExitScreen extends Screen {
     }
 
     /**
-     * Creates a custom button.
+     * Creates a customized JButton with specified text. The appearance of the button
+     * is tailored to fit the theme of the ExitScreen, including font and transparency settings.
+     *
      * @param text The text to display on the button.
-     * @return The created JButton object.
+     * @return A JButton object customized according to the ExitScreen's theme.
      */
     private JButton createCustomButton(String text) {
         JButton button = new JButton(text);
@@ -88,9 +102,11 @@ public class ExitScreen extends Screen {
     }
 
     /**
-     * Sets the background for the button.
-     * @param button The JButton object.
-     * @param width The width of the button.
+     * Applies a background image to a JButton, resizing it to fit the button's dimensions.
+     * This method enhances the visual appeal of buttons by adding texture or imagery.
+     *
+     * @param button The JButton object to which the background image is applied.
+     * @param width  The width of the button.
      * @param height The height of the button.
      */
     private void setButtonBackground(JButton button, int width, int height) {
@@ -104,22 +120,26 @@ public class ExitScreen extends Screen {
     }
 
     /**
-     * Handles the action when the "No" button is clicked.
+     * Executes when the "No" button is clicked, typically reverting to the previous screen,
+     * allowing the user to continue using the application.
      */
     public void noButton() {
         swapScreens(prev);
     }
 
     /**
-     * Handles the action when the "Yes" button is clicked.
+     * Executes when the "Yes" button is clicked, closing the application frame and thus,
+     * exiting the application.
      */
     public void yesButton() {
         frame.dispose();
     }
 
     /**
-     * Paints the component.
-     * @param g The Graphics object.
+     * Overrides the paintComponent method to perform custom drawing, including setting
+     * up the components and drawing the title.
+     *
+     * @param g The Graphics object for drawing operations.
      */
     @Override
     public void paintComponent(Graphics g) {
