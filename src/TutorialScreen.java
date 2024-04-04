@@ -13,11 +13,44 @@ import java.io.IOException;
  */
 public class TutorialScreen extends Screen implements KeyListener {
 
+    /**
+     * A reference to the previous screen within the application's navigation hierarchy.
+     * This variable is marked as final, indicating that the reference to the previous screen
+     * is set once upon creation and does not change throughout the lifecycle of this object.
+     */
     private final Screen previousScreen;
+
+    /**
+     * A JLabel used to display a scroll image or text within the UI. This label can serve
+     * as a decorative element or as a container for textual information presented on a scroll-like background.
+     */
     private JLabel scrollLabel;
+
+    /**
+     * A JButton that, when clicked, initiates the exploration game mode. This button provides
+     * users with the option to start or resume an exploration-based gameplay experience.
+     */
     private JButton explorationButton;
+
+    /**
+     * A BufferedImage object representing the scroll image. This image can be used as a background
+     * for text or other UI elements to enhance the thematic design of the screen.
+     */
     private BufferedImage scrollImage;
-    private Image resizedScroll, plankIMG;
+
+    /**
+     * A resized version of the scroll image adapted for specific UI requirements. This image is derived
+     * from the original scrollImage to fit different screen sizes or design layouts while maintaining
+     * the intended aesthetic.
+     */
+    private Image resizedScroll;
+
+    /**
+     * An Image object representing a plank-themed background or decorative element. Similar to the scroll image,
+     * this can be used to augment the visual theme of the screen, possibly as a background for buttons or text fields.
+     */
+    private Image plankIMG;
+
 
     /**
      * Constructor for TutorialScreen.
