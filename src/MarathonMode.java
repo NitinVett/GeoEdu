@@ -30,8 +30,8 @@ public class MarathonMode extends GameplayScreen {
         super(gameTesting, previous, user, correctCountry, incorrect1, incorrect2);
 
         try {
-            fullHeartIMG = ImageIO.read(new File("fullHeart.png"));
-            emptyHeartIMG = ImageIO.read(new File("emptyHeart.png"));
+            fullHeartIMG = ImageIO.read(getClass().getResourceAsStream("/fullHeart.png"));
+            emptyHeartIMG = ImageIO.read(getClass().getResourceAsStream("/emptyHeart.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

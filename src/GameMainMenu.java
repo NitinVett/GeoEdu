@@ -37,7 +37,7 @@ public class GameMainMenu extends Screen {
         highScoresButton.addActionListener(e -> highScoreButton());
         tutorialButton.addActionListener(e -> tutorialButton());
         try {
-            image = ImageIO.read(new File("resources/plank.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
