@@ -1,4 +1,7 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import com.opencsv.*;
@@ -18,8 +21,8 @@ public class CountryDatabase {
     /**
      * path of country data csv file
      */
-    private static final String CSV_FILE_PATH = "Country Data/geocraftv2country.csv";
-
+    private static final String CSV_FILE_PATH = "geocraftv2country.csv";
+    static Path filePath = Paths.get(CSV_FILE_PATH);
     /**
      * Reads the CSV file and returns a map containing country data.
      *
@@ -29,7 +32,10 @@ public class CountryDatabase {
         Map<String, Map<String, String>> countryDataMap = new HashMap<>();
 
         try {
-            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            InputStream inputStream = CountryDatabase.class.getClassLoader().getResourceAsStream("geocraftv2country.csv");
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(inputStream));
+
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(reader1);
             Map<String, String> row;
             while ((row = reader.readMap()) != null) {
                 String countryName = row.get("Country Name");
@@ -59,7 +65,11 @@ public class CountryDatabase {
     public static ArrayList<String> getAllCountryIDs() {
         ArrayList<String> countryIDs = new ArrayList<>();
         try {
-            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+
+            InputStream inputStream = CountryDatabase.class.getClassLoader().getResourceAsStream("geocraftv2country.csv");
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(inputStream));
+
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(reader1);
             Map<String, String> row;
             while ((row = reader.readMap()) != null) {
                 countryIDs.add(row.get("Country Name"));
@@ -244,7 +254,10 @@ public class CountryDatabase {
     public static ArrayList<String> getAllUsers() throws CsvValidationException{
         ArrayList<String> Users = new ArrayList<>();
         try {
-            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            InputStream inputStream = CountryDatabase.class.getClassLoader().getResourceAsStream("geocraftv2country.csv");
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(inputStream));
+
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(reader1);
             Map<String, String> row;
             while ((row = reader.readMap()) != null) {
                 Users.add(row.get("Country Name"));

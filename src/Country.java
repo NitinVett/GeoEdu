@@ -49,7 +49,7 @@ public class Country {
         BufferedImage flagImage = null;
         try {
 
-            String imagePath = "/" + this.getName() + ".png";
+            String imagePath = "Flags/" + this.getName() + ".png";
             flagImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
 
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class Country {
     public JLabel getCountryMap() {
         BufferedImage mapImage = null;
         try {
-            String imagePath = "/" + this.getName() + ".png";
+            String imagePath = "Maps/" + this.getName() + ".png";
             mapImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
         } catch (IOException e) {
             e.printStackTrace();

@@ -35,7 +35,7 @@ public class GameMainMenu extends Screen {
     /**
      * plank image path
      */
-    String imagePath= "resources/plank.png";
+
 
     /**
      * Constructs a GameMainMenu object with the specified parameters.

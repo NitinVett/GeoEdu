@@ -110,15 +110,16 @@ public class ExplorationMode extends GameplayScreen {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         exitButton = new JButton("Exit Exploration");
-        createButtons(exitButton,new ImageIcon("resources/plank.png").getImage(),getWidth()/100);
+        Image image = new ImageIcon(getClass().getResource("/plank.png")).getImage();
+        createButtons(exitButton,image,getWidth()/100);
         exitButton.addActionListener(e -> exitExploration()); // Placeholder for the actual exit logic
 
         // Set button size and position
-        exitButton.setSize(200, 50); // You might need to adjust the size based on your UI design
+        exitButton.setSize(getWidth()/10, getHeight()/20);
 
         // Calculate position for left middle alignment
-        int xPosition = this.getWidth()/10; // 10 pixels from the left edge, adjust as needed
-        int yPosition = (this.getHeight() - exitButton.getHeight()) / 4 ; // Middle of the component
+        int xPosition = this.getWidth()/20; // 10 pixels from the left edge, adjust as needed
+        int yPosition = (this.getHeight() - exitButton.getHeight()) / 8 ; // Middle of the component
 
         exitButton.setLocation(xPosition, yPosition);
 

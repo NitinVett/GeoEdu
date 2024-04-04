@@ -70,7 +70,7 @@ public class CreditsScreen extends Screen {
         treasureChestLabel.setIcon(new ImageIcon(resizedTreasureChestIMG));
         treasureChestLabel.setBounds(width - width / 3, height / 4, width / 2, height / 2);
         creditText.setBounds(width / 3 + width / 10, height / 50, width, height);
-        creditText.setFont(new Font("resources/Viner.ttf", Font.PLAIN, 30));
+        creditText.setFont(loadFont("/Viner.ttf", 30));
         this.add(shipLabel);
         this.add(treasureChestLabel);
         this.add(creditBackgroundLabel);

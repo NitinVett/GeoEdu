@@ -124,7 +124,7 @@ public class Screen extends JPanel {
         settings = new JButton();
         errorMessageLabel = new JLabel();
         this.add(settings);
-        Image image = new ImageIcon(String.valueOf(getClass().getResourceAsStream("/hamburger.png"))).getImage();
+        Image image = new ImageIcon(getClass().getResource("/hamburger.png")).getImage();
         Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         ImageIcon settingsIcon = new ImageIcon(newImage);
         settings.setIcon(settingsIcon);

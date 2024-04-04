@@ -32,7 +32,7 @@ public class CsvHandler {
 
         try {
             // Read the CSV file using OpenCSV library
-            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filePath.toString()));
             Map<String, String> row;
             // Iterate over each row in the CSV file
             while ((row = reader.readMap()) != null) {
@@ -66,7 +66,7 @@ public class CsvHandler {
         ArrayList<String> Users = new ArrayList<>();
         try {
             // Read the CSV file using OpenCSV library
-            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(CSV_FILE_PATH));
+            CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filePath.toString()));
             Map<String, String> row;
             // Iterate over each row in the CSV file
             while ((row = reader.readMap()) != null) {
@@ -225,7 +225,7 @@ public class CsvHandler {
     private static void changeFieldValue(String userName, String fieldName, String newValue) {
         try {
             // Read all lines from the CSV file
-            CSVReader reader = new CSVReader(new FileReader(CSV_FILE_PATH));
+            CSVReader reader = new CSVReader(new FileReader(filePath.toString()));
             List<String[]> lines = reader.readAll();
             reader.close();
 
@@ -310,7 +310,7 @@ public class CsvHandler {
     public static void deleteUser(String userName) {
         try {
             // Read all lines from the CSV file
-            CSVReader reader = new CSVReader(new FileReader(CSV_FILE_PATH));
+            CSVReader reader = new CSVReader(new FileReader(filePath.toString()));
             List<String[]> lines = reader.readAll();
             reader.close();
 
