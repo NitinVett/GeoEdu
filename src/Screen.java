@@ -444,9 +444,12 @@ public class Screen extends JPanel {
 
         /**
          * JButton for buttons
-         */
-        private JButton button;
+         */private JButton button;
 
+        /**
+         * this button is a mouse listener
+         * @param button input
+         */
         ButtonMouseListener(JButton button) {
             this.button = button;
         }

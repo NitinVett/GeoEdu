@@ -17,6 +17,9 @@ public class CsvHandler {
 
     /** The file path of the CSV file storing user data. */
     private static final String CSV_FILE_PATH = "database.csv";
+    /**
+     * getting the file path
+     */
     static Path filePath = Paths.get(CSV_FILE_PATH);
     /**
      * Reads the CSV file and returns a map containing user data.
@@ -423,6 +426,14 @@ public class CsvHandler {
         }
     }
 
+    /**
+     * Creates a new file at the specified {@code filePath} with predefined CSV header and closes the writer.
+     * The CSV header includes fields for user information such as username, password, number of games played,
+     * saved game indicator, accuracy rate, list of countries, and high score.
+     *
+     * @param filePath The path where the new file will be created.
+     * @throws IOException If an I/O error occurs while creating the file or writing the header.
+     */
     public static void newFile(Path filePath) throws IOException {
 
         Files.createFile(filePath);
