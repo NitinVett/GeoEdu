@@ -14,15 +14,15 @@ Culinary excellence symbolized by sushi and meticulous food preparation."
 India,4,Yes,Asia,Yes,No,"The Taj Mahal in Agra is a monument of enduring love.
 A vast nation where Bollywood movies and spicy cuisine thrive.
 Rich in diversity, from the Himalayas to the Indian Ocean coastlines."
-United Kindom,5,Yes,Europe,Yes,No,"The British monarchy captivates many with centuries of royal history.
+United Kingdom,5,Yes,Europe,Yes,No,"The British monarchy captivates many with centuries of royal history.
 Iconic double-decker buses and the Big Ben clock are London staples.
 A literary goldmine, the birthplace of Shakespeare and modern English."
 France,6,Yes,Europe,Yes,No,"The Louvre Museum holds the world-renowned Mona Lisa painting.
 French cuisine is celebrated globally, from fine wines to delicate pastries.
 Paris, the city of love, is famed for fashion, art, and the Eiffel Tower."
-Italy,7,Yes,Europe,Yes,No,"Home of the ancient Roman Empire and masterpieces of Renaissance art.
-Culinary heartland famous for pasta, pizza, and rich regional diversity.
-Venice's romantic canals and the historic Colosseum in Rome draw millions."
+Italy,7,Yes,Europe,Yes,No,"The Louvre Museum holds the world-renowned Mona Lisa painting.
+French cuisine is celebrated globally, from fine wines to delicate pastries.
+Paris, the city of love, is famed for fashion, art, and the Eiffel Tower."
 Brazil,8,Yes,Americas,Yes,No,"The Amazon Rainforest breathes life as the planet's lungs.
 Celebrated for the spirited carnival and the iconic Christ the Redeemer.
 Football is a way of life, producing many of the world's best players."
@@ -147,7 +147,7 @@ Economic powerhouse of Central Asia, rich in minerals and oil."
 Qatar,49,Yes,Asia,No,No,"Wealth built on oil and natural gas funds its futuristic skyline in Doha.
 A cultural hub in the Gulf with the Museum of Islamic Art and Al Jazeera.
 Preparing for the global stage as host of the 2022 FIFA World Cup."
-Kuwait,50,Yes,Asia,No,No,"Known for its significant oil reserves and modern architecture.
+Kuwait,50,No,Asia,No,No,"Known for its significant oil reserves and modern architecture.
 A cultural oasis with the Grand Mosque and Kuwait Towers.
 Despite the desert climate, it boasts beautiful seaside promenades."
 Oman,51,Yes,Asia,No,No,"A sultanate with diverse terrain from deserts to maritime cliffs.
@@ -168,10 +168,10 @@ Islands like Santorini and Mykonos offer stunning vistas and sunsets."
 Ukraine,56,Yes,Europe,No,No,"A country defined by its resilient spirit and rich agricultural lands.
 Chernobyl's ghost town and the Black Sea's beaches tell diverse tales.
 Kyiv's golden-domed churches reflect a deep Orthodox Christian heritage."
-Hungary,57,Yes,Europe,No,No,"Budapest, the Danube's pearl, with its historic thermal baths and castles.
+Hungary,57,No,Europe,No,No,"Budapest, the Danube's pearl, with its historic thermal baths and castles.
 The Magyar spirit alive in traditional music, horseback archery, and paprika.
 The Great Plain and Lake Balaton showcase Hungary's natural beauty."
-Slovakia,58,Yes,Europe,No,No,"The High Tatras mountains offer breathtaking hikes and alpine vistas.
+Slovakia,58,No,Europe,No,No,"The High Tatras mountains offer breathtaking hikes and alpine vistas.
 Bratislava's charming old town and castles tell tales of a crossroads of empires.
 Folk traditions thrive in villages, with vibrant costumes and wooden churches."
 Peru,59,Yes,Americas,No,No,"The Inca Empire's legacy is enshrined in Machu Picchu's mystic ruins.
@@ -229,7 +229,7 @@ Rich biodiversity from the Pacific to the Caribbean, with lush rainforests in be
 Guyana,76,Yes,Americas,No,No,"An English-speaking country in South America, with a Caribbean vibe.
 Vast rainforests are home to Kaieteur Falls, one of the world's most powerful waterfalls.
 A melting pot of East Indian, African, and indigenous cultures."
-Vatican City,77,No,Europe,No,Yes,"The spiritual and administrative center of the Roman Catholic Church.
+Vatican City,77,No,Europe,No,No,"The spiritual and administrative center of the Roman Catholic Church.
 St. Peter's Basilica and the Sistine Chapel are masterpieces of Renaissance art.
 A city-state enclaved within Rome, it's the smallest independent state in the world by both area and population."
 Monaco,78,No,Europe,No,Yes,"A haven for the wealthy, known for its upscale casinos, yacht-lined harbor, and the prestigious Grand Prix.
@@ -251,12 +251,10 @@ A haven for outdoor enthusiasts with its hiking trails and winter sports."
 Marshall Islands,83,No,Oceania,No,Yes,"Comprised of atolls and islands, it's known for its marine life and WWII history.
 The Bikini Atoll's nuclear tests left a legacy of environmental and health impacts.
 Navigational traditions of the Marshallese are recognized as a UNESCO Intangible Cultural Heritage."
-Saint Kitts and Kevis,84,No,Americas,No,Yes,"Known for its sugar plantation history and scenic railway tours.
+Saint Kitts and Kevis,84,No,Americas,No,No,"Known for its sugar plantation history and scenic railway tours.
 The federation is the smallest sovereign state in the Western Hemisphere in both area and population.
 Brimstone Hill Fortress is a UNESCO World Heritage Site, showcasing British military engineering."
-Maldives,85,No,Asia,No,Yes,"Known for its sugar plantation history and scenic railway tours.
-The federation is the smallest sovereign state in the Western Hemisphere in both area and population.
-Brimstone Hill Fortress is a UNESCO World Heritage Site, showcasing British military engineering."
+Maldives,85,No,Asia,No,Yes,"Starts with M"
 Malta,86,No,Europe,No,Yes,"Rich in history, from Neolithic temples to the Knights of Saint John.
 A strategic naval base throughout history, due to its central Mediterranean location.
 Maltese cuisine reflects Sicilian and Middle Eastern influences, with unique dishes and flavors."
@@ -284,7 +282,7 @@ A history of neutrality and a haven for hikers in the summer."
 Saint Lucia,94,No,Americas,No,Yes,"Iconic for the Pitons, two volcanic spires rising side by side from the sea.
 A blend of French and British influences, reflected in its cuisine and cultural festivals.
 The Sulphur Springs Park, known as the ""world's only drive-in volcano."""
-Federated States of Micronesia,95,No,Oceania,No,Yes,"Consists of over 600 islands scattered across the Western Pacific Ocean.
+Micronesia,95,No,Oceania,No,Yes,"Consists of over 600 islands scattered across the Western Pacific Ocean.
 Known for its ancient stone cities, like Nan Madol, and traditional navigation.
 The diverse cultures and languages reflect a complex history of settlement and trade."
 Tonga,96,No,Oceania,No,Yes,"Consists of over 600 islands scattered across the Western Pacific Ocean.
@@ -299,6 +297,6 @@ A rich history dating back to ancient Dilmun, with UNESCO sites like Qal�at al
 Kiribati,99,No,Oceania,No,Yes,"Consists of 33 atolls spread over a vast area in the central Pacific.
 Known for its significant WWII history, particularly on Tarawa Atoll.
 Faces existential threats from climate change and rising sea levels."
-Sao Tome and Principe,100,No,Africa,No,Yes,"A small island nation off the west coast of Africa, known for cocoa production.
+Sao Tome and Principe,100,No,Africa,No,No,"A small island nation off the west coast of Africa, known for cocoa production.
 The Obo National Park offers lush rainforests and diverse ecosystems.
 A peaceful country with a laid-back lifestyle and Portuguese colonial heritage."
