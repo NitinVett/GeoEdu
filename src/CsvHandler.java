@@ -1,5 +1,8 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import com.opencsv.*;
@@ -13,8 +16,8 @@ import com.opencsv.exceptions.CsvValidationException;
 public class CsvHandler {
 
     /** The file path of the CSV file storing user data. */
-    private static final String CSV_FILE_PATH = "/database.csv";
-
+    private static final String CSV_FILE_PATH = "database.csv";
+    static Path filePath = Paths.get(CSV_FILE_PATH);
     /**
      * Reads the CSV file and returns a map containing user data.
      * The map's keys are usernames, and the values are maps of user attributes.
@@ -327,10 +330,15 @@ public class CsvHandler {
      */
     public static boolean isDuplicateUser(String userName) {
         try {
+
             // Read all lines from the CSV file
-            InputStreamReader isr = new InputStreamReader(
-                    CsvHandler.class.getResourceAsStream(CSV_FILE_PATH), StandardCharsets.UTF_8);
-            CSVReader reader = new CSVReader(isr);
+            if(!Files.exists(filePath)) {
+                newFile(filePath);
+            }
+            BufferedReader reader1 = new BufferedReader(new FileReader(filePath.toString()));
+//            InputStreamReader isr = new InputStreamReader(
+//                    filePath, StandardCharsets.UTF_8);
+            CSVReader reader = new CSVReader(reader1);
             List<String[]> lines = reader.readAll();
             reader.close();
 
@@ -386,8 +394,14 @@ public class CsvHandler {
         else {
             try {
                 // Open the CSV file in append mode to add a new entry
-                FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
+                Path filePath = Paths.get(CSV_FILE_PATH);
+                if(!Files.exists(filePath)) {
+                    newFile(filePath);
+                }
+                FileWriter writer = new FileWriter(filePath.toString(), true);
+
                 CSVWriter csvWriter = new CSVWriter(writer);
+
                 // Create an array for the new user's data
                 String[] newUser = new String[]{"user_name", "password", "num_games_played", "saved_game?", "accuracy_rate", "listOfCountry", "highScore"};
                 // Set the username, password, and default values for other attributes
@@ -407,6 +421,18 @@ public class CsvHandler {
                 return "Unknown error occurred";
             }
         }
+    }
+
+    public static void newFile(Path filePath) throws IOException {
+
+        Files.createFile(filePath);
+        FileWriter writer = new FileWriter(filePath.toString(), true);
+
+        CSVWriter csvWriter = new CSVWriter(writer);
+        String[] firstLine = {"user_name","password","num_games_played","saved_game?","accuracy_rate","listOfCountry","highScore"};
+        csvWriter.writeNext(firstLine);
+        writer.close();
+
     }
 
     /**
