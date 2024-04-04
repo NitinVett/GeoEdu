@@ -10,8 +10,20 @@ import java.awt.*;
  */
 public class TimedMode extends GameplayScreen {
 
+    /**
+     * The amount of time remaining for the current game or level, expressed in seconds.
+     * This final variable is set at the start of the game or level and typically counts down to zero,
+     * indicating the end of the current session or the need to complete certain objectives within this timeframe.
+     */
     private final int timeLeft;
+
+    /**
+     * A reference to the current GameTesting instance. This object manages the gameplay logic,
+     * including starting new games, tracking game states, and handling user interactions.
+     * It is crucial for linking the game's UI components with the underlying game mechanics.
+     */
     private GameTesting game;
+
 
     /**
      * Constructor for TimedMode.

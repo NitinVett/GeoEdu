@@ -10,8 +10,19 @@ import java.io.IOException;
  */
 public class StatScreen extends Screen {
 
+    /**
+     * Button that, when clicked, returns the user to the previous screen. It is commonly used
+     * in various interfaces to navigate back in the application's screen hierarchy.
+     */
     JButton backButton;
+
+    /**
+     * An image used as a decorative background element or for button icons within the interface.
+     * The plank image is typically used to add thematic consistency or enhance the visual appeal
+     * of the screen.
+     */
     Image plankIMG;
+
 
     /**
      * Constructor for StatScreen.

@@ -12,14 +12,71 @@ import java.util.Objects;
  */
 public class SettingScreen extends Screen {
 
+    /**
+     * Slider for adjusting the game's audio volume. Users can slide to increase or decrease the volume.
+     */
     private JSlider audio;
-    private JButton changePassword, debug, credits, muteButton, exit, logout;
+
+    /**
+     * Button to navigate to the change password screen, allowing users to update their account password.
+     */
+    private JButton changePassword;
+
+    /**
+     * Button for accessing the debug features of the game, typically used for troubleshooting or testing.
+     */
+    private JButton debug;
+
+    /**
+     * Button to view the game's credits, acknowledging the creators and contributors.
+     */
+    private JButton credits;
+
+    /**
+     * Button to toggle the game's audio between mute and unmute states.
+     */
+    private JButton muteButton;
+
+    /**
+     * Button to exit from the current settings screen and return to the previous screen or menu.
+     */
+    private JButton exit;
+
+    /**
+     * Button for logging out of the user's account and returning to the login screen.
+     */
+    private JButton logout;
+
+    /**
+     * Manages playback of game sounds and music, including volume control and muting functionality.
+     */
     private GameSound sound;
+
+    /**
+     * Represents the current player, holding data such as preferences and gameplay statistics.
+     */
     private Player user;
+
+    /**
+     * Images used for the settings screen's aesthetic elements, like backgrounds or thematic icons.
+     */
     private Image plankIMG, scrollIMG, resizedMutedIMG, resizedUnMutedIMG;
+
+    /**
+     * Buffered images for the mute and unmute icons, used alongside the mute toggle button.
+     */
     private BufferedImage mutedIMG, unMutedIMG;
+
+    /**
+     * The main background image for the settings screen, enhancing the visual appeal.
+     */
     public Image backgroundImage;
+
+    /**
+     * Indicates whether the game's sound is currently muted, toggled via the mute button.
+     */
     private boolean muted = false;
+
 
     /**
      * Constructor for SettingScreen.
