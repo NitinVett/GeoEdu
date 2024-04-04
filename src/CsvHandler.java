@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import com.opencsv.*;
@@ -12,7 +13,7 @@ import com.opencsv.exceptions.CsvValidationException;
 public class CsvHandler {
 
     /** The file path of the CSV file storing user data. */
-    private static final String CSV_FILE_PATH = "Database/database.csv";
+    private static final String CSV_FILE_PATH = "/database.csv";
 
     /**
      * Reads the CSV file and returns a map containing user data.
@@ -327,7 +328,9 @@ public class CsvHandler {
     public static boolean isDuplicateUser(String userName) {
         try {
             // Read all lines from the CSV file
-            CSVReader reader = new CSVReader(new FileReader(CSV_FILE_PATH));
+            InputStreamReader isr = new InputStreamReader(
+                    CsvHandler.class.getResourceAsStream(CSV_FILE_PATH), StandardCharsets.UTF_8);
+            CSVReader reader = new CSVReader(isr);
             List<String[]> lines = reader.readAll();
             reader.close();
 

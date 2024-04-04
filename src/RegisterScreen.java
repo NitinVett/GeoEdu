@@ -133,8 +133,9 @@ public class RegisterScreen extends Screen {
         // Esc button setup
         BufferedImage escIcon = null;
         try {
-            escIcon = ImageIO.read(getClass().getResourceAsStream("/escape"));
-            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank"));
+            plankIMG = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
+            escIcon = ImageIO.read(getClass().getResourceAsStream("/escape.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
