@@ -11,10 +11,9 @@ import com.opencsv.exceptions.CsvValidationException;
 /**
  * Reads the CSV file specified by the {@code CSV_FILE_PATH} constant and retrieves the "Country Name" from each row.
  *
- * @throws CsvValidationException If the CSV content does not match the expected format or if there are issues
  * with the CSV structure that prevent it from being read correctly.
- * @throws IOException If an I/O error occurs when opening or reading the file.
- * @return An {@link ArrayList} containing the "Country Name" from each row of the CSV file.
+ * IOException If an I/O error occurs when opening or reading the file.
+ * An {@link ArrayList} containing the "Country Name" from each row of the CSV file.
  */
 public class CountryDatabase {
 
@@ -25,8 +24,7 @@ public class CountryDatabase {
     static Path filePath = Paths.get(CSV_FILE_PATH);
     /**
      * Reads the CSV file and returns a map containing country data.
-     *
-     * @return A map containing country data.
+     * @return An {@link ArrayList} containing the "Country Name" from each row of the CSV file.
      */
     public static Map<String, Map<String, String>> readCsvFile() {
         Map<String, Map<String, String>> countryDataMap = new HashMap<>();
@@ -249,7 +247,6 @@ public class CountryDatabase {
      *
      * @throws CsvValidationException If the CSV content does not match the expected format or if there are issues
      *                                with the CSV structure that prevent it from being read correctly.
-     * @throws IOException If an I/O error occurs when opening or reading the file.
      */
     public static ArrayList<String> getAllUsers() throws CsvValidationException{
         ArrayList<String> Users = new ArrayList<>();
