@@ -31,6 +31,7 @@ public class ExitScreen extends Screen {
         BufferedImage escIcon = null;
         try {
             escIcon = ImageIO.read(getClass().getResourceAsStream("/escape.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +95,7 @@ public class ExitScreen extends Screen {
      */
     private void setButtonBackground(JButton button, int width, int height) {
         try {
-            BufferedImage image = ImageIO.read(new File("resources/plank.png"));
+            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/plank.png"));
             Image scaledImage = image.getScaledInstance(width/20, height/20, Image.SCALE_SMOOTH);
             button.setIcon(new ImageIcon(scaledImage));
         } catch (IOException e) {

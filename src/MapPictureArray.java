@@ -37,8 +37,8 @@ public class MapPictureArray extends JFrame {
         backgroundImages = new BufferedImage[noOfImages];
         for (int i = 0; i < noOfImages; i++) {
             try {
-                String imagePath = folderPath + "/" + i + ".png";
-                BufferedImage backgroundImage = ImageIO.read(new File(imagePath));
+                String imagePath = "/" + i + ".png";
+                BufferedImage backgroundImage = ImageIO.read(getClass().getResource(imagePath));
                 backgroundImages[i] = backgroundImage;
             } catch (IOException e) {
                 e.printStackTrace();
