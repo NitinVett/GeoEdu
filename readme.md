@@ -1,5 +1,7 @@
 Title: Geocraft
 
+Youtube link: https://youtu.be/l1y5gxV6hdI?si=y5QnY3dqidGtHCEG
+
 #A short description of your software and what it does.
 GeoCraft is a map based guessing game where you have to guess the name of the country based on the image of it on the map and try to get the most score to add to your total highscore.
 
@@ -15,5 +17,5 @@ A default account is username:j, and password: 1
 #You must also include details on how to access your teacher mode and steps to build/install it if it is a separate program.
 To access teacher mode which in our case is called tutorial mode login to an account then click the tutorial button it will then teach you how to play the game and let you play exploration mode which is a practice mode.
 
-#Anything else that would be helpful for the TA marking your project to know.
+#Debug Mode
 To access debug mode open settings before logging into an account and click the debug button, then enter the password which is "1029384756", by doing so you have all the game modes unlocked and playable.
